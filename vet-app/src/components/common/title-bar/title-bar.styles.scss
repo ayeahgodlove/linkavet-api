@@ -1,0 +1,15 @@
+.button__text {
+    display: none;
+}
+
+.button__text,
+.custom__button span {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .button__text,
+    .custom__button span {
+        display: inline-block;
+    }
+}

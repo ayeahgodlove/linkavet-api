@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/static/css/main.836607cc.css",
+    "main.js": "/static/js/main.0d756a40.js",
+    "index.html": "/index.html",
+    "main.836607cc.css.map": "/static/css/main.836607cc.css.map",
+    "main.0d756a40.js.map": "/static/js/main.0d756a40.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.836607cc.css",
+    "static/js/main.0d756a40.js"
+  ]
+}

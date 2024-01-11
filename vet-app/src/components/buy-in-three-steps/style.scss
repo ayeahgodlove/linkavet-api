@@ -1,0 +1,20 @@
+.image {
+    width: 200px;
+    height: 200px;
+    position: absolute;
+
+    & > img {
+        max-width: 200px;
+        height: 200px;
+        border-radius: 50%;
+    }
+}
+.image-card-1 {
+    top: -50px;
+    right: 150px;
+
+}
+.image-card-2 {
+    top: 300px;
+    left: 100px;
+}
