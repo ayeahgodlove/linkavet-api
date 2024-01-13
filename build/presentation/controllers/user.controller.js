@@ -61,7 +61,7 @@ class UsersController {
                     roles: rolesDTO,
                 };
                 const activationToken = createActivationToken(user);
-                const activationUrl = `http://localhost:3000/activation/${activationToken}`;
+                const activationUrl = `${process.env.APP_URL}/activation/${activationToken}`;
                 await (0, email_1.sendRegistrationMail)(user.email, activationUrl);
                 res.status(201).json({
                     data: {
