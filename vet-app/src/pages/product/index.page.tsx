@@ -24,7 +24,7 @@ const ProductPage: React.FC = () => {
   
   const getProducts = useCallback(async (): Promise<IProduct[]> => {
     setLoading(true);
-    const response = await fetch("/api/product");
+    const response = await fetch("/api/products");
     const { data } = await response.json();
     return data;
   }, []);

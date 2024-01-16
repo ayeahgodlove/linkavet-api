@@ -24,6 +24,7 @@ import {
 import {
   BiCategoryAlt,
   BiHealth,
+  BiLogIn,
   BiMoneyWithdraw,
   BiPen,
   BiSolidDashboard,
@@ -36,6 +37,7 @@ import {
   FiHome,
   FiPhoneCall,
   FiDatabase,
+  FiInfo,
 } from "react-icons/fi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
@@ -215,15 +217,6 @@ export const useAppShellMenus = () => {
           key: "courses",
           icon: <MdOutlineLibraryBooks size={21} color="#08a30a" />,
         },
-        // {
-        //   label: (
-        //     <Link to="/admin/lessons" style={{ padding: 0 }}>
-        //       Lessons
-        //     </Link>
-        //   ),
-        //   key: "lessons",
-        //   icon: <MdPlayLesson size={21} color="#08a30a" />,
-        // },
         {
           label: (
             <Link to="/admin/enrollments" style={{ padding: 0 }}>
@@ -233,15 +226,6 @@ export const useAppShellMenus = () => {
           key: "enrollments",
           icon: <TbPlugConnected size={21} color="#08a30a" />,
         },
-        // {
-        //   label: (
-        //     <Link to="/admin/quizes" style={{ padding: 0 }}>
-        //       Quizes
-        //     </Link>
-        //   ),
-        //   key: "quizes",
-        //   icon: <MdOutlineQuiz size={21} color="#08a30a" />,
-        // },
       ],
     },
     // configurations
@@ -290,7 +274,7 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "home",
-      icon: <FiHome size={21} color="#f77908" />,
+      icon: <FiHome size={21} color="#08a30a" />,
     },
     {
       label: (
@@ -299,7 +283,7 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "products",
-      icon: <MdOutlineProductionQuantityLimits size={21} color="#f77908" />,
+      icon: <MdOutlineProductionQuantityLimits size={21} color="#08a30a" />,
     },
 
     {
@@ -309,7 +293,7 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "posts",
-      icon: <MdOutlineArticle size={21} color="#f77908" />,
+      icon: <MdOutlineArticle size={21} color="#08a30a" />,
     },
     {
       label: (
@@ -318,7 +302,16 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "courses",
-      icon: <MdOutlineLibraryBooks size={21} color="#f77908" />,
+      icon: <MdOutlineLibraryBooks size={21} color="#08a30a" />,
+    },
+    {
+      label: (
+        <NavLink to="/about-us" style={{ padding: 0 }}>
+          About Us
+        </NavLink>
+      ),
+      key: "about-us",
+      icon: <FiInfo size={21} color="#08a30a" />,
     },
     {
       label: (
@@ -327,7 +320,16 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "contact-us",
-      icon: <FiPhoneCall size={21} color="#f77908" />,
+      icon: <FiPhoneCall size={21} color="#08a30a" />,
+    },
+    {
+      label: (
+        <NavLink to="/auth/login" style={{ padding: 0 }}>
+          Sign in
+        </NavLink>
+      ),
+      key: "login",
+      icon: <BiLogIn size={21} color="#08a30a" />,
     },
   ];
 
@@ -364,6 +366,14 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "courses",
+    },
+    {
+      label: (
+        <NavLink to="/about-us" style={{ padding: 0 }}>
+          About Us
+        </NavLink>
+      ),
+      key: "about-us",
     },
     {
       label: (

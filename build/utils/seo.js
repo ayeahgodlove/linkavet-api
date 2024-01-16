@@ -4,8 +4,8 @@ exports.seo = void 0;
 exports.seo = [
     {
         path: "/",
-        title: "Comprehensive Veterinary Services and Premium Vet Products for Your Furry Friends",
-        description: "Discover top-notch veterinary care and a curated selection of high-quality vet products at Linkavet. Our dedicated team of experienced veterinary doctors is committed to providing exceptional services for your beloved pets. From routine check-ups to specialized treatments, we prioritize the health and happiness of your furry companions. Additionally, explore our online store for a wide range of vet products, including nutrition, grooming essentials, and wellness items. Trust Linkavet for all your veterinary needs – where compassion meets excellence in pet care.",
+        title: "Comprehensive Veterinary Services and Premium Vet Products for Your Furry Friends and Farms",
+        description: "Discover top-notch veterinary care and a curated selection of high-quality vet products at Linkavet. Our dedicated team of experienced veterinary doctors is committed to providing exceptional services for your beloved pets. From routine check-ups to specialized treatments, we prioritize the health and happiness of your furry companions and farm. Additionally, explore our online store for a wide range of vet products, including nutrition, grooming essentials, and wellness items. Trust Linkavet for all your veterinary needs – where compassion meets excellence in pet care.",
     },
     {
         path: "/products",

@@ -17,13 +17,9 @@ const PostPage: React.FC = () => {
     <GeneralAppShell>
       {/* Dummy banner */}
       <PageBannerComponent
-        title="Get excellent articles by professionals"
-        description="Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Exercitationem corrupti mollitia quam dolorum nostrum natus?
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-              Temporibus ab illo libero quibusdam ipsa sapiente nobis, dicta
-              quam inventore rerum!"
-        linkCmd="Browse Course"
+        title="Informed Pet Parenting: Read Our Latest Veterinary Insights and Tips"
+        description="Stay informed and connected with the latest trends, insights, and valuable tips in pet care. Our blog at Linkavet is a trusted resource for pet parents, filled with expert advice from our experienced veterinary team. Explore a variety of topics, from health and nutrition to behavior and training. Empower yourself with knowledge and become a proactive and knowledgeable pet owner. For the love of your furry friends, Linkavet is your go-to destination for insightful pet-related content"
+        linkCmd="Browse Articles"
       />
       {/* post list */}
       <Row style={{ marginTop: 50, padding: "0 3rem" }}>

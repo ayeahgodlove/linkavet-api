@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Card,
-  Col,
-  ConfigProvider,
-  Row,
-  Space,
-} from "antd";
+import { Button, Card, Col, ConfigProvider, Row, Space } from "antd";
 import "./home-banner.style.scss";
 import "rc-texty/assets/index.css";
 import TweenOne from "rc-tween-one";
@@ -17,8 +10,8 @@ import { useTween } from "hooks/shared/tween.hook";
 export const HomeBanner: React.FC = () => {
   const [show, setShow] = useState(true);
 
-  const { getEnter, getInterval} = useTween();
-  const getSplit = (props:any) => {
+  const { getEnter, getInterval } = useTween();
+  const getSplit = (props: any) => {
     const t = props.split(" ");
     const c: React.ReactElement[] = [];
     t.forEach((str, i) => {
@@ -134,7 +127,8 @@ export const HomeBanner: React.FC = () => {
                 }}
                 // mode="sync"
               >
-                LinkaVet
+                Comprehensive Veterinary Services and Premium Vet Products for
+                Your Furry Friends and Farms
               </Texty>
               <TweenOne
                 className="combined-bar"
@@ -154,8 +148,16 @@ export const HomeBanner: React.FC = () => {
                 delay={2200}
                 interval={30}
               >
-                Link to a Veterinary professional within and without the
-                national territory.
+                Discover top-notch veterinary care and a curated selection of
+                high-quality vet products at Linkavet. Our dedicated team of
+                experienced veterinary doctors is committed to providing
+                exceptional services for your beloved pets. From routine
+                check-ups to specialized treatments, we prioritize the health
+                and happiness of your furry companions. Additionally, explore
+                our online store for a wide range of vet products, including
+                nutrition, grooming essentials, and wellness items. Trust
+                Linkavet for all your veterinary needs – where compassion meets
+                excellence in pet care.
               </Texty>
             </div>
           )}
@@ -193,7 +195,7 @@ export const HomeBanner: React.FC = () => {
                   }}
                 >
                   <div style={{ fontSize: 18, marginBottom: 10 }}>
-                    Get Started
+                    Book an appointment
                   </div>{" "}
                   <div>
                     <FiChevronRight size={25} />
