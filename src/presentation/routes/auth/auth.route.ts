@@ -10,7 +10,7 @@ import { SECRET_KEY, header } from "../../../shared/middlewares/authz.middleware
 const roleMapper = new RoleMapper();
 const authRoutes = Router();
 
-authRoutes.post("/auth/login", async (req, res) => {
+authRoutes.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });

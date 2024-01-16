@@ -62,7 +62,6 @@ db.connection()
     // inside public directory.
     app.use(express.static("public"));
     app.use(express.static(path.join(__dirname, "public")));
-    // app.use('/uploads/avatars', express.static('avatars'));
 
     // enable the use of request body parsing middleware
     app
@@ -96,12 +95,8 @@ db.connection()
     app.use(errorHandler);
 
     // authentication
-    app.use("/", authRoutes);
+    app.use("/auth", authRoutes);
 
-    // route  endpoints
-    // app.get("/", (req: Request, res: Response) => {
-    //   res.send("Welcome to Rent Kojo REST API");
-    // });
     app.get("/api", (req: Request, res: Response) => {
       res.send("Express + TypeScript Server");
     });

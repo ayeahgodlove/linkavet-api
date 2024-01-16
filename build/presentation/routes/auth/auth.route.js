@@ -14,7 +14,7 @@ const authz_middleware_1 = require("../../../shared/middlewares/authz.middleware
 const roleMapper = new mapper_1.RoleMapper();
 const authRoutes = (0, express_1.Router)();
 exports.authRoutes = authRoutes;
-authRoutes.post("/auth/login", async (req, res) => {
+authRoutes.post("/login", async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await user_1.User.findOne({ where: { email } });
