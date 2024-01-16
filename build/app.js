@@ -81,6 +81,7 @@ db.connection()
     // inside public directory.
     app.use(express_1.default.static("public"));
     app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
+    app.use(express_1.default.static(path_1.default.join(__dirname, "vet-app/build")));
     // app.use('/uploads/avatars', express.static('avatars'));
     // enable the use of request body parsing middleware
     app
@@ -105,12 +106,12 @@ db.connection()
         .use(authz_middleware_1.default.authenticate("session"))
         .use(authz_middleware_1.default.session());
     app.use(error_middleware_1.errorHandler);
-    // authentication
-    app.use("/", auth_route_1.authRoutes);
     // route  endpoints
     app.get("/", (req, res) => {
-        res.send("Welcome to Rent Kojo REST API");
+        res.sendFile(path_1.default.join(__dirname, "vet-app/build", "index.html"));
     });
+    // authentication
+    app.use("/", auth_route_1.authRoutes);
     app.get("/api", (req, res) => {
         res.send("Express + TypeScript Server");
     });

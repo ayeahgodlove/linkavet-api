@@ -9,7 +9,6 @@ const apiHeaders = {
 } 
 
 const apiConfig = () => {
-  console.log("token: ", user.token);
   apiHeaders.headers['Authorization'] = `Bearer ${user.token}`
   return apiHeaders
 }

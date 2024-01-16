@@ -99,9 +99,9 @@ db.connection()
     app.use("/", authRoutes);
 
     // route  endpoints
-    app.get("/", (req: Request, res: Response) => {
-      res.send("Welcome to Rent Kojo REST API");
-    });
+    // app.get("/", (req: Request, res: Response) => {
+    //   res.send("Welcome to Rent Kojo REST API");
+    // });
     app.get("/api", (req: Request, res: Response) => {
       res.send("Express + TypeScript Server");
     });
@@ -136,6 +136,16 @@ db.connection()
     // health
     app.use("/api/appointments", appointmentRouter);
     app.use("/api/consultations", consultationRouter);
+
+    app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
+
+    // Handle other routes by serving the frontend's main HTML file
+    app.get("*", (req, res) => {
+      res.sendFile(
+        path.join(__dirname, "..", "vet-app", "build", "index.html")
+      );
+    });
+
     // middleware interceptions
     app.use(notFoundHandler);
 
