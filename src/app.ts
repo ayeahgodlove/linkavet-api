@@ -37,6 +37,8 @@ import productReviewRouter from "./presentation/routes/product-review.route";
 import lessonReviewRouter from "./presentation/routes/lesson-review.route";
 import appointmentRouter from "./presentation/routes/health/appointment.route";
 import consultationRouter from "./presentation/routes/health/consultation.route";
+import { seo } from "./utils/seo";
+import fs from "fs";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -136,6 +138,18 @@ db.connection()
 
     // Handle other routes by serving the frontend's main HTML file
     app.get("*", (req, res) => {
+      let pathname = req.path || req.originalUrl;
+      let page = seo.find((item) => item.path === pathname);
+
+      if (page) {
+        let html = fs.readFileSync(path.join(__dirname, "build", "index.html"));
+        let htmlWithSeo = html
+          .toString()
+          .replace("__SEO_TITLE__", page.title)
+          .replace("__SEO_DESCRIPTION__", page.description);
+        return res.send(htmlWithSeo);
+      }
+
       res.sendFile(
         path.join(__dirname, "..", "vet-app", "build", "index.html")
       );

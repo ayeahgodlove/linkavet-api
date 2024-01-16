@@ -62,6 +62,8 @@ const product_review_route_1 = __importDefault(require("./presentation/routes/pr
 const lesson_review_route_1 = __importDefault(require("./presentation/routes/lesson-review.route"));
 const appointment_route_1 = __importDefault(require("./presentation/routes/health/appointment.route"));
 const consultation_route_1 = __importDefault(require("./presentation/routes/health/consultation.route"));
+const seo_1 = require("./utils/seo");
+const fs_1 = __importDefault(require("fs"));
 dotenv.config();
 const db = new db_postgres_config_1.PostgresDbConfig();
 /**
@@ -139,6 +141,16 @@ db.connection()
     app.use(express_1.default.static(path_1.default.join(__dirname, "..", "vet-app", "build")));
     // Handle other routes by serving the frontend's main HTML file
     app.get("*", (req, res) => {
+        let pathname = req.path || req.originalUrl;
+        let page = seo_1.seo.find((item) => item.path === pathname);
+        if (page) {
+            let html = fs_1.default.readFileSync(path_1.default.join(__dirname, "build", "index.html"));
+            let htmlWithSeo = html
+                .toString()
+                .replace("__SEO_TITLE__", page.title)
+                .replace("__SEO_DESCRIPTION__", page.description);
+            return res.send(htmlWithSeo);
+        }
         res.sendFile(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"));
     });
     // middleware interceptions
