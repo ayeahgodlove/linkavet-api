@@ -7,7 +7,7 @@
   box-shadow: 0 0 30px #f3f1f1;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
   min-height: 70px;
   overflow: hidden;
 }

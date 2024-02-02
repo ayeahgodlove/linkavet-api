@@ -37,7 +37,6 @@ const Navbar: React.FC<IProps> = ({ showMenuIcon = false, handleShow }) => {
           zIndex: 1,
           width: "100%",
           display: "flex",
-          alignItems: "center",
         }}
         className="menuBar header-box-shadow"
       >

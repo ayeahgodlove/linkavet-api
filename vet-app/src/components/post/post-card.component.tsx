@@ -6,6 +6,7 @@ import RaterComponent from "components/shared/rate.component";
 import { IPost } from "models/post";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
+import { API_URL_UPLOADS_POSTS } from "config/constant";
 
 const { Meta } = Card;
 interface IProp {
@@ -26,7 +27,7 @@ const PostCard: React.FC<IProp> = ({ post, onPostClick }) => {
         cover={
           <img
             alt={post.title}
-            src={`https://linkavet-api.onrender.com/uploads/posts/${post.imageUrl}`}
+            src={`${API_URL_UPLOADS_POSTS}/${post.imageUrl}`}
           />
         }
         className="post-card"

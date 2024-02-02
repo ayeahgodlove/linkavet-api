@@ -3,6 +3,7 @@ import CommentComponent from "components/comment/comment.component";
 import BackButton from "components/shared/back-button.component";
 import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
 import { SpinnerComponent } from "components/shared/spinner";
+import { API_URL_UPLOADS_POSTS } from "config/constant";
 import { useCategory } from "hooks/category.hook";
 import { useComment } from "hooks/comment.hook";
 import { usePost } from "hooks/post.hook";
@@ -77,7 +78,7 @@ const postDetailPage: React.FC = () => {
             <div style={{ display: "flex", justifyContent: "flex-start" }}>
               <img
                 alt={post.title}
-                src={`https://linkavet-api.onrender.com/uploads/posts/${post.imageUrl}`}
+                src={`${API_URL_UPLOADS_POSTS}/${post.imageUrl}`}
                 style={{
                   width: "100%",
                   maxHeight: "65vh",
