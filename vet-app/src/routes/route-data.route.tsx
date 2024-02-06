@@ -22,6 +22,8 @@ import CourseEnrollmentPage from "pages/course/course-enrollment.page";
 import { adminRoutes } from "./admin.route";
 import { authRoutes } from "./auth.route";
 import FaqsPage from "pages/faqs/index.page";
+import ContactUsPage from "pages/contact-us/index.page";
+import AboutUsPages from "pages/about-us/index.page";
 
 export const routes: IRoute[] = [
 
@@ -121,6 +123,18 @@ export const routes: IRoute[] = [
     private: false,
     exact: true,
     component: <FaqsPage />,
+  },
+  {
+    path: "/contact-us",
+    private: false,
+    exact: true,
+    component: <ContactUsPage />
+  },
+  {
+    path:"/about-us",
+    private: false,
+    exact: true,
+    component: <AboutUsPages />
   },
   /**
    * dashboard route
