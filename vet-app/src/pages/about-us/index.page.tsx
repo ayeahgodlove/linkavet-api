@@ -7,6 +7,13 @@ import { CarouselProvider, Slide, Slider } from "pure-react-carousel";
 import React, { useEffect } from "react";
 import theme from "utils/themeConfig";
 import "pure-react-carousel/dist/react-carousel.es.css";
+import {
+  BiChart,
+  BiDevices,
+  BiLocationPlus,
+  BiSolidUser,
+  BiUserCircle,
+} from "react-icons/bi";
 
 const AboutUsPages = () => {
   // const [banners, setBanners] = useState<IBanner[]>([]);
@@ -85,6 +92,101 @@ const AboutUsPages = () => {
                 </Card>
               )}
             </Col>
+
+            <Col xs={22} md={5}>
+              <Card bordered={false}>
+                <BiChart size={25} />
+                <Typography.Title level={5}>
+                  Strategy Solutions
+                </Typography.Title>
+                <Typography.Text>
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </Typography.Text>
+              </Card>
+            </Col>
+
+            <Col xs={22} md={5}>
+              <Card bordered={false}>
+                <BiUserCircle size={25} />
+                <Typography.Title level={5}>Dedicated Support</Typography.Title>
+                <Typography.Text>
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </Typography.Text>
+              </Card>
+            </Col>
+
+            <Col xs={22} md={5}>
+              <Card bordered={false}>
+                <BiDevices size={25} />
+                <Typography.Title level={5}>Digital Design</Typography.Title>
+                <Typography.Text>
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </Typography.Text>
+              </Card>
+            </Col>
+
+            <Col xs={22} md={5}>
+              <Card bordered={false}>
+                <BiLocationPlus size={25} />
+                <Typography.Title level={5}>
+                  Strategy Solutions
+                </Typography.Title>
+                <Typography.Text>
+                  It is a long established fact that a reader will be distracted
+                  by the readable content of a page when looking at its layout.
+                </Typography.Text>
+              </Card>
+            </Col>
+
+            {/* <Col xs={24} md={22}>
+              <CarouselProvider
+                naturalSlideWidth={10}
+                naturalSlideHeight={6}
+                totalSlides={3}
+              >
+                <Slider>
+                  <Slide index={0}>
+                    <Card
+                      bordered={false}
+                      cover={
+                        <img
+                          src="images/banner.png"
+                          alt="doctors standing with pets"
+                        />
+                      }
+                    >
+                      <Typography.Title level={5}>
+                        Strategy Solutions
+                      </Typography.Title>
+                      <Typography.Text>
+                        It is a long established fact that a reader will be
+                      </Typography.Text>
+                    </Card>
+                  </Slide>
+                  <Slide index={1}>
+                    <Card
+                      bordered={false}
+                      cover={
+                        <img
+                          src="images/bg-1.png"
+                          alt="doctors standing with pets"
+                        />
+                      }
+                    >
+                      <Typography.Title level={5}>
+                        Strategy Solutions
+                      </Typography.Title>
+                      <Typography.Text>
+                        It is a long established fact that a reader will be
+                      </Typography.Text>
+                    </Card>
+                  </Slide>
+                </Slider>
+              </CarouselProvider>
+            </Col> */}
           </Row>
         </div>
       </ConfigProvider>
