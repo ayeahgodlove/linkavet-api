@@ -8,6 +8,7 @@ import { API_URL_UPLOADS_BANNERS } from "config/constant";
 import { bannerService } from "services/banner.service";
 import { IBanner } from "models/banner";
 import "./page-banner.scss";
+import useWindowSize from "hooks/shared/window-resize.hook";
 
 type Props = {
   title: string;
@@ -22,6 +23,7 @@ const PageBannerComponent: React.FC<Props> = ({
   const { Title, Paragraph } = Typography;
   const { getEnter, getInterval } = useTween();
   const [banners, setBanners] = useState<IBanner[]>([]);
+  const { width } = useWindowSize();
 
   const getSplit = (props: any) => {
     const t = props.split(" ");
@@ -55,7 +57,6 @@ const PageBannerComponent: React.FC<Props> = ({
         >
           <Title
             style={{
-              color: "#f4f4f4",
               textShadow: "0px 5px 10px 0px rgba(177, 202, 215, 0.8)",
               marginBottom: 0,
             }}
@@ -109,40 +110,45 @@ const PageBannerComponent: React.FC<Props> = ({
             </Texty>
           </Paragraph>
 
-          <Button type="link" htmlType="button">
+          <Button type="primary" shape="round"  htmlType="button">
             <Space align="center">
-              <FiSearch size={23} style={{ marginTop: 5 }} />
+              <FiSearch size={18} />
               <span>{linkCmd}</span>
             </Space>
           </Button>
         </Card>
       </Col>
-      <Col xs={24} md={8} className="page-column">
-        <Carousel autoplay className="page-banner-carousel">
-          {banners.map((image) => (
-            <div
-              key={image.id}
-              style={{ display: "block", background: "none" }}
-              className="page-banner-photo"
-            >
-              <div>
-                <div className="box">
-                  <img
-                    style={{
-                      backgroundRepeat: "no-repeat",
-                      backgroundSize: "cover",
-                      backgroundPosition: "center center",
-                      width: "100%",
-                    }}
-                    alt={image.title}
-                    src={`${API_URL_UPLOADS_BANNERS}/${image.image}`}
-                  />
+
+      {width < 767 ? (
+        <></>
+      ) : (
+        <Col xs={24} md={8} className="page-column">
+          <Carousel autoplay className="page-banner-carousel">
+            {banners.map((image) => (
+              <div
+                key={image.id}
+                style={{ display: "block", background: "none" }}
+                className="page-banner-photo"
+              >
+                <div>
+                  <div className="box">
+                    <img
+                      style={{
+                        backgroundRepeat: "no-repeat",
+                        backgroundSize: "cover",
+                        backgroundPosition: "center center",
+                        width: "100%",
+                      }}
+                      alt={image.title}
+                      src={`${API_URL_UPLOADS_BANNERS}/${image.image}`}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </Carousel>
-      </Col>
+            ))}
+          </Carousel>
+        </Col>
+      )}
     </Row>
   );
 };

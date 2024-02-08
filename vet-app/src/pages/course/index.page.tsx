@@ -17,8 +17,8 @@ const CoursePage: React.FC = () => {
     <GeneralAppShell>
       {/* Dummy banner */}
       <PageBannerComponent
-        title="Empower Yourself with Knowledge: Veterinary Courses Tailored for Pet Enthusiasts"
-        description="Embark on a learning journey with our specialized veterinary courses at Linkavet. Designed for pet enthusiasts and aspiring veterinary professionals, our courses cover a range of topics, from basic pet care to advanced veterinary techniques. Led by our experienced team of veterinarians, these courses provide valuable insights, hands-on learning, and a deeper understanding of pet health and wellness. Whether you're a pet parent or looking to build a career in veterinary care, Linkavet courses are crafted to empower you on your pet care journey."
+        title="Veterinary Courses Tailored for Pet Enthusiasts"
+        description="Embark on a learning journey with our specialized veterinary courses at Linkavet. Designed for pet enthusiasts and aspiring veterinary professionals, our courses cover a range of topics, from basic pet care to advanced veterinary techniques."
         linkCmd="Browse Course"
       />
       {/* course list */}

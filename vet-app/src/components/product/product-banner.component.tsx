@@ -22,11 +22,13 @@ import { useTween } from "hooks/shared/tween.hook";
 import { FiSearch } from "react-icons/fi";
 import ProductFilterComponent from "./product-filter.component";
 import { useProduct } from "hooks/product.hook";
+import useWindowSize from "hooks/shared/window-resize.hook";
 
 const { Title, Paragraph } = Typography;
 const ProductBannerComponent = () => {
   const [banners, setBanners] = useState<IBanner[]>([]);
   const { getEnter, getInterval } = useTween();
+  const { width } = useWindowSize();
 
   const getSplit = (props: any) => {
     const t = props.split(" ");
@@ -60,7 +62,6 @@ const ProductBannerComponent = () => {
           >
             <Title
               style={{
-                color: "#f4f4f4",
                 textShadow: "0px 5px 10px 0px rgba(177, 202, 215, 0.8)",
                 marginBottom: 0,
               }}
@@ -98,8 +99,7 @@ const ProductBannerComponent = () => {
                   ],
                 }}
               >
-                Explore Premium Vet Products - Your Pet's Wellbeing, Our
-                Priority
+                Explore Premium Vet Products
               </Texty>
             </Title>
 
@@ -112,57 +112,59 @@ const ProductBannerComponent = () => {
                 interval={30}
               >
                 Browse through a carefully curated collection of vet-approved
-                products at Linkavet. Elevate your pet's lifestyle with our
-                premium range of nutrition, grooming essentials, toys, and
-                wellness products. Each item is selected with your pet's health
-                and happiness in mind. Shop confidently for top-quality products
+                products at Linkavet. Shop confidently for top-quality products
                 that complement our commitment to excellence in veterinary care.
                 Enhance your pet's life today with Linkavet.
               </Texty>
             </Paragraph>
 
-            <Button type="link" htmlType="button">
+            <Button type="primary" shape="round">
               <Space align="center">
-                <FiSearch size={23} style={{ marginTop: 5 }} />
+                <FiSearch size={18} />
                 <span>Browse products</span>
               </Space>
             </Button>
           </Card>
         </Col>
-        <Col xs={24} md={8} className="product-column">
-          <Carousel autoplay className="product-banner-carousel">
-            {banners.map((image) => (
-              <div
-                key={image.id}
-                style={{
-                  display: "block",
-                  background: "none",
-                }}
-                className="product-banner-photo"
-              >
-                <div>
-                  <div className="box">
-                    <img
-                      style={{
-                        // objectFit: "cover",
-                        backgroundRepeat: "no-repeat",
-                        backgroundSize: "cover",
-                        backgroundPosition: "center center",
-                        width: "100%",
-                      }}
-                      alt={image.title}
-                      src={`${API_URL_UPLOADS_BANNERS}/${image.image}`}
-                    />
+
+        {width < 767 ? (
+          <></>
+        ) : (
+          <Col xs={24} md={8} className="product-column">
+            <Carousel autoplay className="product-banner-carousel">
+              {banners.map((image) => (
+                <div
+                  key={image.id}
+                  style={{
+                    display: "block",
+                    background: "none",
+                  }}
+                  className="product-banner-photo"
+                >
+                  <div>
+                    <div className="box">
+                      <img
+                        style={{
+                          // objectFit: "cover",
+                          backgroundRepeat: "no-repeat",
+                          backgroundSize: "cover",
+                          backgroundPosition: "center center",
+                          width: "100%",
+                        }}
+                        alt={image.title}
+                        src={`${API_URL_UPLOADS_BANNERS}/${image.image}`}
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </Carousel>
-        </Col>
+              ))}
+            </Carousel>
+          </Col>
+        )}
       </Row>
 
       {/* search component */}
-      <ProductFilterComponent />
+      {/* <ProductFilterComponent /> */}
     </div>
   );
 };
