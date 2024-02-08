@@ -118,6 +118,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
               // padding: 24,
               margin: 0,
               minHeight: 400,
+              background: "#fafffa"
             }}
           >
             {children}

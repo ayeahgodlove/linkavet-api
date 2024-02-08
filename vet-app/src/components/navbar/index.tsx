@@ -40,7 +40,14 @@ const Navbar: React.FC<IProps> = ({ showMenuIcon = false, handleShow }) => {
         }}
         className="menuBar header-box-shadow"
       >
-        <div className="logo">
+        <div
+          className="logo"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <Link to="/">
             <img
               src="/logo/logo-2-removebg-preview.png"

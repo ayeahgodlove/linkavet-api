@@ -27,7 +27,7 @@
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 
   &:first-child {
-    background: linear-gradient(7deg, rgba(8, 163, 10, 1), transparent);
+    background: linear-gradient(7deg, rgb(133, 246, 135), transparent);
     box-shadow:1px 3px 8px !important;
   }
 
@@ -35,22 +35,22 @@
     background: linear-gradient(
       7deg,
       rgb(124, 208, 126) 0%,
-      rgba(151, 81, 11, 1) 100%
+      rgb(244, 195, 145) 100%
     );
   }
 
   &:nth-child(3) {
     background: linear-gradient(
       7deg,
-      rgb(43, 60, 71) 0%,
-      rgba(39, 174, 96, 1) 100%
+      rgb(186, 222, 246) 0%,
+      rgb(156, 253, 197) 100%
     );
   }
   &:nth-child(4) {
     background: linear-gradient(
       7deg,
-      rgb(73, 76, 78) 0%,
-      rgba(151, 81, 11, 1) 100%
+      rgb(217, 232, 242) 0%,
+      rgb(248, 212, 175) 100%
     );
   }
 }

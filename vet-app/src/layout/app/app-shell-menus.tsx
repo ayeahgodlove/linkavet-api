@@ -27,6 +27,7 @@ import {
   BiLogIn,
   BiMoneyWithdraw,
   BiPen,
+  BiQuestionMark,
   BiSolidDashboard,
 } from "react-icons/bi";
 import {
@@ -269,7 +270,7 @@ export const useAppShellMenus = () => {
   const GeneralMenuItemsWithIcons: MenuProps["items"] = [
     {
       label: (
-        <NavLink to="/home" style={{ padding: 0 }}>
+        <NavLink to="/" style={{ padding: 0 }}>
           Home
         </NavLink>
       ),
@@ -321,6 +322,15 @@ export const useAppShellMenus = () => {
       ),
       key: "contact-us",
       icon: <FiPhoneCall size={21} color="#08a30a" />,
+    },
+    {
+      label: (
+        <NavLink to="/faqs" style={{ padding: 0 }}>
+          Faqs
+        </NavLink>
+      ),
+      key: "faqs",
+      icon: <BiQuestionMark size={21} color="#08a30a" />
     },
     {
       label: (
@@ -382,6 +392,14 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "contact-us",
+    },
+    {
+      label: (
+        <NavLink to="/faqs" style={{ padding: 0 }}>
+          Faqs
+        </NavLink>
+      ),
+      key: "faqs",
     },
   ];
 

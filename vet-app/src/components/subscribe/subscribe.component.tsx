@@ -1,9 +1,7 @@
-import { green } from "@ant-design/colors";
 import {
   Button,
   Card,
   Col,
-  ConfigProvider,
   Form,
   Input,
   Row,
@@ -22,7 +20,7 @@ const Subscribe = () => {
     <Card
       bordered={false}
       style={{
-        background: "linear-gradient(7deg, rgba(8, 163, 10, 1), transparent)",
+        background: "linear-gradient(7deg, rgba(184, 246, 185, 1), transparent)",
         borderRadius: 0,
       }}
     >

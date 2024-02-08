@@ -8,15 +8,11 @@ import {
   Input,
   Row,
   Space,
+  Typography,
 } from "antd";
 import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
-import {
-  BiLocationPlus,
-  BiMailSend,
-  BiPhone,
-  BiPhoneCall,
-} from "react-icons/bi";
+import { BiLocationPlus, BiMailSend, BiPhone } from "react-icons/bi";
 import theme from "utils/themeConfig";
 
 const ContactUsPage = () => {
@@ -31,13 +27,13 @@ const ContactUsPage = () => {
         <div style={{ margin: "3rem 0" }}>
           <Row gutter={[16, 16]} justify={"center"}>
             <Col xs={22} md={20}>
-              <Card bordered={false}>
-                <h2>Looking for us? Contact us.</h2>
-                <p>
-                  Can't find your answer here? Call us at +237673687549 or email
-                  us at linkavet.support@gmail.com
-                </p>
-              </Card>
+              <Typography.Title level={1} style={{ marginBottom: 0 }}>
+                Contact Us
+              </Typography.Title>
+              <Typography.Paragraph>
+                If you have any questions or inquiries, please fill out the form
+                below to contact us.
+              </Typography.Paragraph>
             </Col>
 
             <Col xs={22} md={20}>
@@ -98,10 +94,18 @@ const ContactUsPage = () => {
                       </Form.Item>
 
                       <Space>
-                        <Button type="primary" htmlType="submit">
-                          Save
-                        </Button>
-                        {/* <Button htmlType="reset">Reset</Button> */}
+                        <ConfigProvider
+                          theme={{
+                            token: {
+                              colorPrimary: "#49a91c",
+                              colorLink: "#2980b9",
+                            },
+                          }}
+                        >
+                          <Button type="primary" htmlType="submit">
+                            Save
+                          </Button>
+                        </ConfigProvider>
                       </Space>
                     </Form>
                   </Col>
@@ -117,18 +121,18 @@ const ContactUsPage = () => {
                     />
 
                     <Alert
-                      style={{ marginBottom: 10}}
+                      style={{ marginBottom: 10 }}
                       showIcon={true}
                       type="success"
                       icon={<BiPhone />}
-                      description={<>(120) 456-789-123</>}
+                      description={<>+(237) 673-687-549</>}
                     />
 
                     <Alert
                       type="success"
                       showIcon={true}
                       icon={<BiMailSend />}
-                      description={<>support@yourmail.com</>}
+                      description={<>linkavet.support@gmail.com</>}
                     />
                   </Col>
                 </Row>

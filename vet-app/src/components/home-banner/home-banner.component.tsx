@@ -6,9 +6,11 @@ import TweenOne from "rc-tween-one";
 import Texty from "rc-texty";
 import { FiChevronRight } from "react-icons/fi";
 import { useTween } from "hooks/shared/tween.hook";
+import { useNavigate } from "react-router-dom";
 
 export const HomeBanner: React.FC = () => {
   const [show, setShow] = useState(true);
+  const router = useNavigate();
 
   const { getEnter, getInterval } = useTween();
   const getSplit = (props: any) => {
@@ -125,10 +127,8 @@ export const HomeBanner: React.FC = () => {
                     },
                   ],
                 }}
-                // mode="sync"
               >
-                Comprehensive Veterinary Services and Premium Vet Products for
-                Your Furry Friends and Farms
+                Trust Linkavet for compassionate and excellent pet care.
               </Texty>
               <TweenOne
                 className="combined-bar"
@@ -148,16 +148,9 @@ export const HomeBanner: React.FC = () => {
                 delay={2200}
                 interval={30}
               >
-                Discover top-notch veterinary care and a curated selection of
-                high-quality vet products at Linkavet. Our dedicated team of
-                experienced veterinary doctors is committed to providing
-                exceptional services for your beloved pets. From routine
-                check-ups to specialized treatments, we prioritize the health
-                and happiness of your furry companions. Additionally, explore
-                our online store for a wide range of vet products, including
-                nutrition, grooming essentials, and wellness items. Trust
-                Linkavet for all your veterinary needs – where compassion meets
-                excellence in pet care.
+                Explore our curated selection of high-quality vet products
+                online, including nutrition, grooming essentials, and wellness
+                items.
               </Texty>
             </div>
           )}
@@ -172,7 +165,7 @@ export const HomeBanner: React.FC = () => {
             <ConfigProvider
               theme={{
                 token: {
-                  colorPrimary: "#317610",
+                  colorPrimary: "#49a91c",
                   colorLink: "#2980b9",
                 },
               }}
@@ -186,6 +179,8 @@ export const HomeBanner: React.FC = () => {
                   fontSize: 18,
                   borderRadius: 50,
                 }}
+                onClick={() => router("/products")
+                }
               >
                 <div
                   style={{
@@ -195,7 +190,7 @@ export const HomeBanner: React.FC = () => {
                   }}
                 >
                   <div style={{ fontSize: 18, marginBottom: 10 }}>
-                    Book an appointment
+                    Browse Catalogue
                   </div>{" "}
                   <div>
                     <FiChevronRight size={25} />

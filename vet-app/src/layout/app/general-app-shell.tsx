@@ -100,7 +100,7 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                 padding: 0,
                 margin: 0,
                 minHeight: 280,
-                background: "transparent",
+                background: "#fafffa",
               }}
             >
               {children}
@@ -141,11 +141,7 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                   ],
                 },
                 {
-                  title: (
-                    <strong>
-                      Browse by Categories
-                    </strong>
-                  ),
+                  title: <strong>Browse by Categories</strong>,
                   items: [
                     ...categories.map((c) => {
                       return {
@@ -156,11 +152,7 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                   ],
                 },
                 {
-                  title: (
-                    <strong>
-                      Browse by Tags
-                    </strong>
-                  ),
+                  title: <strong>Browse by Tags</strong>,
                   items: [
                     ...tags.map((c) => {
                       return {
@@ -171,9 +163,7 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                   ],
                 },
                 {
-                  title: (
-                    <strong>About Us</strong>
-                  ),
+                  title: <strong>About Us</strong>,
                   items: [
                     {
                       title: "Privacy Policy",
@@ -203,6 +193,9 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                   <Typography.Paragraph style={{ textAlign: "center" }}>
                     Made by Cumi <Link to={"/dashboard"}>Admin Area</Link>
                   </Typography.Paragraph>
+                  <p style={{ color: "#333"}}>
+                    Your Trusted Source for Premium Veterinary Care & Products.
+                  </p>
                 </>
               }
             />
