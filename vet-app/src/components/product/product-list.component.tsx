@@ -19,7 +19,7 @@ const ProductList: React.FC = () => {
   const [view, setView] = useState("grid");
 
   const { width } = useWindowSize();
- 
+
   const onChange = (query: any) => {
     setQuery(query.target.value);
   };
@@ -62,13 +62,17 @@ const ProductList: React.FC = () => {
               {width >= 768 && (
                 <Space>
                   {width >= 768 ? (
-                    <span>Showing 1- 40 products of 1,000</span>
+                    <span>
+                      Total in catalogue:
+                      {products.length > 0 ? products.length : 0}
+                    </span>
                   ) : (
                     <>
                       {" "}
                       <Typography.Title level={5}>Products</Typography.Title>
                       <Typography.Text>
-                        (Showing 1- 40 products of 1,000)
+                        Total in catalogue:
+                        {products.length > 0 ? products.length : 0}
                       </Typography.Text>
                     </>
                   )}
