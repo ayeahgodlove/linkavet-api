@@ -325,15 +325,6 @@ export const useAppShellMenus = () => {
     },
     {
       label: (
-        <NavLink to="/faqs" style={{ padding: 0 }}>
-          Faqs
-        </NavLink>
-      ),
-      key: "faqs",
-      icon: <BiQuestionMark size={21} color="#08a30a" />
-    },
-    {
-      label: (
         <NavLink to="/auth/login" style={{ padding: 0 }}>
           Sign in
         </NavLink>
@@ -392,14 +383,6 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "contact-us",
-    },
-    {
-      label: (
-        <NavLink to="/faqs" style={{ padding: 0 }}>
-          Faqs
-        </NavLink>
-      ),
-      key: "faqs",
     },
   ];
 

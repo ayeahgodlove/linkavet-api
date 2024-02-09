@@ -128,7 +128,7 @@ export const HomeBanner: React.FC = () => {
                   ],
                 }}
               >
-                Trust Linkavet for compassionate and excellent pet care.
+                Compassionate and excellent pet care.
               </Texty>
               <TweenOne
                 className="combined-bar"

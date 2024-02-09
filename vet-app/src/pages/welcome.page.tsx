@@ -4,9 +4,14 @@ import Review from "components/review/review.component";
 import Subscribe from "components/subscribe/subscribe.component";
 import { WhyLinkaVet } from "components/why-honeyman/why-linkavet.component";
 import GeneralAppShell from "layout/app/general-app-shell";
-import React from "react";
+import React, { useEffect } from "react";
+import { getConfiguration } from "redux/action/initial.action";
 
 const WelcomePage: React.FC = () => {
+  useEffect(() => {
+    // debugger
+    getConfiguration()
+  }, [])
   return (
     <GeneralAppShell>
       {/* Banner */}

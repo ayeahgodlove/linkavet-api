@@ -22,7 +22,6 @@ interface IProps {
   children: any;
 }
 const GeneralAppShell: React.FC<IProps> = ({ children }) => {
-  const [collapsed, setCollapsed] = useState(false);
   const [show, setShow] = useState(false);
   const { isDarkMode } = useTheme();
   const [categories, setCategories] = useState<ICategory[]>([]);
@@ -34,9 +33,6 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
     setShow(true);
   };
 
-  const handleCollapse = () => {
-    setCollapsed(!collapsed);
-  };
   const onClose = () => {
     setShow(false);
   };
@@ -120,23 +116,23 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                   items: [
                     {
                       title: "Discount",
-                      url: "/fags/discount",
+                      url: "/fags",
                     },
                     {
                       title: "Wish list",
-                      url: "/fags/wish-list",
+                      url: "/fagsx",
                     },
                     {
                       title: "How to buy",
-                      url: "/fags/how-to-buy",
+                      url: "/fags",
                     },
                     {
                       title: "Contact us",
-                      url: "/fags/contact-us",
+                      url: "/fagsx",
                     },
                     {
                       title: "Purchase fees",
-                      url: "/fags/purchase-fees",
+                      url: "/fags",
                     },
                   ],
                 },
