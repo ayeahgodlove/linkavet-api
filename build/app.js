@@ -37,6 +37,7 @@ const error_middleware_1 = require("./shared/middlewares/error.middleware");
 const not_found_middleware_1 = require("./shared/middlewares/not-found.middleware");
 const category_route_1 = __importDefault(require("./presentation/routes/category.route"));
 const role_route_1 = __importDefault(require("./presentation/routes/role.route"));
+const lesson_review_route_1 = __importDefault(require("./presentation/routes/lesson-review.route"));
 const auth_route_1 = require("./presentation/routes/auth/auth.route");
 const user_route_1 = __importDefault(require("./presentation/routes/user.route"));
 const user_doc_route_1 = __importDefault(require("./presentation/routes/user-doc.route"));
@@ -59,7 +60,7 @@ const lesson_route_1 = __importDefault(require("./presentation/routes/lms/lesson
 const enrollment_route_1 = __importDefault(require("./presentation/routes/lms/enrollment.route"));
 const quiz_route_1 = __importDefault(require("./presentation/routes/lms/quiz.route"));
 const product_review_route_1 = __importDefault(require("./presentation/routes/product-review.route"));
-const lesson_review_route_1 = __importDefault(require("./presentation/routes/lesson-review.route"));
+const lesson_review_route_2 = __importDefault(require("./presentation/routes/lesson-review.route"));
 const appointment_route_1 = __importDefault(require("./presentation/routes/health/appointment.route"));
 const consultation_route_1 = __importDefault(require("./presentation/routes/health/consultation.route"));
 const seo_1 = require("./utils/seo");
@@ -120,7 +121,7 @@ db.connection()
     app.use("/api/roles", role_route_1.default);
     app.use("/api/user-documents", user_doc_route_1.default);
     app.use("/api/product-reviews", product_review_route_1.default);
-    app.use("/api/lesson-reviews", lesson_review_route_1.default);
+    app.use("/api/lesson-reviews", lesson_review_route_2.default);
     app.use("/api/users", user_route_1.default);
     app.use("/api/products", product_route_1.default);
     app.use("/api/stores", store_route_1.default);
@@ -138,6 +139,7 @@ db.connection()
     // health
     app.use("/api/appointments", appointment_route_1.default);
     app.use("/api/consultations", consultation_route_1.default);
+    app.use("/api/reviews", lesson_review_route_1.default);
     app.use(express_1.default.static(path_1.default.join(__dirname, "..", "vet-app", "build")));
     // Handle other routes by serving the frontend's main HTML file
     app.get("*", (req, res) => {

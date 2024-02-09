@@ -35,6 +35,7 @@ import { Enrollment } from "../../../data/entities/lms/enrollment";
 import { Quiz } from "../../../data/entities/lms/quiz";
 import { Appointment } from "../../../data/entities/health/appointment";
 import { Consultation } from "../../../data/entities/health/consultation";
+import { Review } from "../../../data/entities/review";
 
 dotenv.config();
 
@@ -81,7 +82,10 @@ export class PostgresDbConfig {
         LessonReview,
         // health
         Appointment,
-        Consultation
+        Consultation,
+
+        // reviews
+        Review
       ],
       logging: false,
       pool: {

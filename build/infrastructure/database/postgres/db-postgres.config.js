@@ -59,6 +59,7 @@ const enrollment_1 = require("../../../data/entities/lms/enrollment");
 const quiz_1 = require("../../../data/entities/lms/quiz");
 const appointment_1 = require("../../../data/entities/health/appointment");
 const consultation_1 = require("../../../data/entities/health/consultation");
+const review_1 = require("../../../data/entities/review");
 dotenv.config();
 class PostgresDbConfig {
     _sequelize;
@@ -103,7 +104,9 @@ class PostgresDbConfig {
                 lesson_review_1.LessonReview,
                 // health
                 appointment_1.Appointment,
-                consultation_1.Consultation
+                consultation_1.Consultation,
+                // reviews
+                review_1.Review
             ],
             logging: false,
             pool: {

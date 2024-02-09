@@ -134,6 +134,8 @@ db.connection()
     app.use("/api/appointments", appointmentRouter);
     app.use("/api/consultations", consultationRouter);
 
+    app.use("/api/reviews", reviewRouter);
+
     app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
 
     // Handle other routes by serving the frontend's main HTML file

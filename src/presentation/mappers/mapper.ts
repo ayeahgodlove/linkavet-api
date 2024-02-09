@@ -46,6 +46,8 @@ import { Appointment } from "../../data/entities/health/appointment";
 import { IAppointment } from "../../domain/models/health/appointment";
 import { Consultation } from "../../data/entities/health/consultation";
 import { IConsultation } from "../../domain/models/health/consultation";
+import { Review } from "../../data/entities/review";
+import { IReview } from "../../domain/models/review";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -172,6 +174,20 @@ export class BranchMapper {
       return entity;
     });
     return _branches;
+  }
+}
+
+export class ReviewMapper {
+  toDTO(review: Review): IReview {
+    const entity = review.toJSON<IReview>();
+    return entity;
+  }
+  toDTOs(reviewes: Review[]): IReview[] {
+    const _reviews = reviewes.map((review) => {
+      const entity = review.toJSON<IReview>();
+      return entity;
+    });
+    return _reviews;
   }
 }
 
