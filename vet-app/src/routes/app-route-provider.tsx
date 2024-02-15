@@ -9,13 +9,14 @@ const AppRouteProvider: React.FC = () => {
       <Router>
         <Routes>
           {routes.map((route, index) => {
+            console.log("route roles: ", route.roles)
             if (!route.private) {
               return (
                 <Route
                   path={`${route.path}`}
                   element={route.component}
                   key={index}
-                />
+                /> 
               );
             }
             return (
@@ -23,7 +24,7 @@ const AppRouteProvider: React.FC = () => {
                 path={`${route.path}`}
                 element={<AppShell>{route.component}</AppShell>}
                 key={index}
-              />
+             />
             );
           })}
         </Routes>

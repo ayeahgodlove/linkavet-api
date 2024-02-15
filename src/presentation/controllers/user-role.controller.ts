@@ -1,27 +1,27 @@
 import { Request, Response } from "express";
 import {
-  ITag,
-  ITagResponse,
-  emptyTag,
-} from "../../domain/models/tag";
-import { TagUseCase } from "../../domain/usecases/tag.usecase";
-import { TagRepository } from "../../data/repositories/impl/tag.repository";
-import { TagMapper } from "../mappers/mapper";
-import { TagRequestDto } from "../dtos/tag-request.dto";
+  IUserRole,
+  IUserRoleResponse,
+  emptyUserRole,
+} from "../../domain/models/user-role";
+import { UserRoleUseCase } from "../../domain/usecases/user-role.usecase";
+import { UserRoleRepository } from "../../data/repositories/impl/user-role.repository";
+import { UserRoleMapper } from "../mappers/mapper";
+import { UserRoleRequestDto } from "../dtos/user-role-request.dto";
 import { validate } from "class-validator";
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 
-const tagRepository = new TagRepository();
-const tagUseCase = new TagUseCase(tagRepository);
-const tagMapper = new TagMapper();
+const userRoleRepository = new UserRoleRepository();
+const userRoleUseCase = new UserRoleUseCase(userRoleRepository);
+const userRoleMapper = new UserRoleMapper();
 
-export class TagsController {
-  async createTag(
+export class UserRolesController {
+  async createUserRole(
     req: Request,
-    res: Response<ITagResponse>
+    res: Response<IUserRoleResponse>
   ): Promise<void> {
-    const dto = new TagRequestDto(req.body);
+    const dto = new UserRoleRequestDto(req.body);
     const validationErrors = await validate(dto);
 
     if (validationErrors.length > 0) {
@@ -33,13 +33,13 @@ export class TagsController {
       });
     } else {
       try {
-        const tagResponse = await tagUseCase.createTag(
+        const userRoleResponse = await userRoleUseCase.createUserRole(
           dto.toData()
         );
 
         res.status(201).json({
-          data: tagResponse.toJSON<ITag>(),
-          message: "Tag created Successfully!",
+          data: userRoleResponse.toJSON<IUserRole>(),
+          message: "UserRole created Successfully!",
           validationErrors: [],
           success: true,
         });
@@ -56,11 +56,11 @@ export class TagsController {
 
   async getAll(req: Request, res: Response<any>): Promise<void> {
     try {
-      const tags = await tagUseCase.getAll();
-      const tagsDTO = tagMapper.toDTOs(tags);
+      const userRoles = await userRoleUseCase.getAll();
+      const userRolesDTO = userRoleMapper.toDTOs(userRoles);
 
       res.json({
-        data: tagsDTO,
+        data: userRolesDTO,
         message: "Success",
         validationErrors: [],
         success: true,
@@ -75,20 +75,20 @@ export class TagsController {
     }
   }
 
-  async getTagById(
+  async getUserRoleById(
     req: Request,
-    res: Response<ITagResponse>
+    res: Response<IUserRoleResponse>
   ): Promise<void> {
     try {
       const id = req.params.id;
 
-      const tag = await tagUseCase.getTagById(id);
-      if (!tag) {
-        throw new NotFoundException("Tag", id);
+      const userRole = await userRoleUseCase.getUserRoleById(id);
+      if (!userRole) {
+        throw new NotFoundException("UserRole", id);
       }
-      const tagDTO = tagMapper.toDTO(tag);
+      const userRoleDTO = userRoleMapper.toDTO(userRole);
       res.json({
-        data: tagDTO,
+        data: userRoleDTO,
         message: "Success",
         validationErrors: [],
         success: true,
@@ -103,11 +103,11 @@ export class TagsController {
     }
   }
 
-  async updateTag(
+  async updateUserRole(
     req: Request,
-    res: Response<ITagResponse>
+    res: Response<IUserRoleResponse>
   ): Promise<void> {
-    const dto = new TagRequestDto(req.body);
+    const dto = new UserRoleRequestDto(req.body);
     const validationErrors = await validate(dto);
 
     if (validationErrors.length > 0) {
@@ -121,17 +121,17 @@ export class TagsController {
       try {
         const id = req.params.id;
 
-        const obj: ITag = {
-          ...emptyTag,
+        const obj: IUserRole = {
+          ...emptyUserRole,
           ...req.body,
           id: id,
         };
-        const updatedTag = await tagUseCase.updateTag(obj);
-        const tagDto = tagMapper.toDTO(updatedTag);
+        const updatedUserRole = await userRoleUseCase.updateUserRole(obj);
+        const userRoleDto = userRoleMapper.toDTO(updatedUserRole);
 
         res.json({
-          data: tagDto,
-          message: "Tag Updated Successfully!",
+          data: userRoleDto,
+          message: "UserRole Updated Successfully!",
           validationErrors: [],
           success: true,
         });
@@ -146,14 +146,14 @@ export class TagsController {
     }
   }
 
-  async deleteTag(
+  async deleteUserRole(
     req: Request,
-    res: Response<ITagResponse>
+    res: Response<IUserRoleResponse>
   ): Promise<void> {
     try {
       const id = req.params.id;
 
-      await tagUseCase.deleteTag(id);
+      await userRoleUseCase.deleteUserRole(id);
 
       res.status(204).json({
         message: `Operation successfully completed!`,

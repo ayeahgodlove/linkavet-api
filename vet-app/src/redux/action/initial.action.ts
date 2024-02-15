@@ -6,6 +6,7 @@ import { fetchProductsAsync } from "redux/product.slice";
 import { fetchReviewsAsync } from "redux/review.slice";
 import { AppThunk } from "redux/store";
 import { fetchTagsAsync } from "redux/tag.slice";
+import { fetchUserRolesAsync } from "redux/user-role.slice";
 import { fetchUsersAsync } from "redux/user.slice";
 
 export const initialDataAsync = (): AppThunk => async (dispatch) => {
@@ -18,6 +19,7 @@ export const initialDataAsync = (): AppThunk => async (dispatch) => {
     dispatch(fetchPostsAsync());
     dispatch(fetchUsersAsync());
     dispatch(fetchDocumentsAsync());
+    dispatch(fetchUserRolesAsync())
   } catch (error) {
     console.log(error);
   }

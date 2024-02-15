@@ -1,5 +1,5 @@
-import { TagForm } from "components/admin/tag/tag-form.component";
-import TagTable from "components/admin/tag/tag-table.component";
+import { UserRoleForm } from "components/admin/user-role/user-role-form.component";
+import UserRoleTable from "components/admin/user-role/user-role-table.component";
 import TitleBar from "components/common/title-bar/title-bar.component";
 import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
 import { useModalContext } from "context/app-modal.context";
@@ -8,41 +8,41 @@ import { UpdateMode } from "models/shared/update-mode.enum";
 import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { fetchTagsAsync } from "redux/tag.slice";
+import { fetchUserRolesAsync } from "redux/user-role.slice";
 
-const AdminTagPage: React.FC = () => {
+const AdminUserRolePage: React.FC = () => {
   const { isLoading } = useAuth();
   useEffect(() => {}, [isLoading]);
   const { setContent, setTitle, setShow } = useModalContext();
   const dispatch = useDispatch();
 
 
-  const createTag = () => {
-    setContent(<TagForm formMode={UpdateMode.ADD} />);
-    setTitle("Create new tag");
+  const createUserRole = () => {
+    setContent(<UserRoleForm formMode={UpdateMode.ADD} />);
+    setTitle("Create new User Role");
     setShow(true);
   };
 
   useEffect(() => {
-    dispatch(fetchTagsAsync() as any);
+    dispatch(fetchUserRolesAsync() as any);
   }, []);
 
   return (
     <>
       <div style={{ margin: "1rem" }}>
-        <PageBreadCrumbs items={["Configurations", "Tag"]} />
+        <PageBreadCrumbs items={["Configurations", "User Role"]} />
         <TitleBar
-          title={"Tags"}
-          subTitle={"View and Create Tags"}
+          title={"User Roles"}
+          subTitle={"View and Create User Roles"}
           showButton={true}
           buttonLabel={"Add Record"}
-          handleShow={createTag}
+          handleShow={createUserRole}
           icon={<FiPlus />}
         />
-        <TagTable />
+        <UserRoleTable />
       </div>
     </>
   );
 };
 
-export default AdminTagPage;
+export default AdminUserRolePage;

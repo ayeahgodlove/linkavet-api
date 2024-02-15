@@ -48,6 +48,8 @@ import { Consultation } from "../../data/entities/health/consultation";
 import { IConsultation } from "../../domain/models/health/consultation";
 import { Review } from "../../data/entities/review";
 import { IReview } from "../../domain/models/review";
+import { UserRole } from "../../data/entities/user-role";
+import { IUserRole } from "../../domain/models/user-role";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -116,6 +118,20 @@ export class UserMapper {
       return entity;
     });
     return _users;
+  }
+}
+
+export class UserRoleMapper {
+  toDTO(userRole: UserRole): IUserRole {
+    const entity = userRole.toJSON<IUserRole>();
+    return entity;
+  }
+  toDTOs(userRoles: UserRole[]): IUserRole[] {
+    const _userRoles = userRoles.map((userRole) => {
+      const entity = userRole.toJSON<IUserRole>();
+      return entity;
+    });
+    return _userRoles;
   }
 }
 

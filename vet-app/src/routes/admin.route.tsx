@@ -36,6 +36,10 @@ import AdminConsultationPage from "pages/admin/health/consultation/consultation.
 import AdminConsultationDetailPage from "pages/admin/health/consultation/consultation-detail.page";
 import AdminAppointmentPage from "pages/admin/health/appointment/appointment.page";
 import AdminAppointmentDetailPage from "pages/admin/health/appointment/appointment-detail.page";
+import AdminRolePage from "pages/admin/role/role.page";
+import AdminRoleDetailPage from "pages/admin/role/role-detail.page";
+import AdminUserRolePage from "pages/admin/user-role/user-role.page";
+import AdminUserRoleDetailPage from "pages/admin/user-role/user-role-detail.page";
 
 export const adminRoutes = [
   // admin section
@@ -269,5 +273,29 @@ export const adminRoutes = [
     private: true,
     exact: true,
     component: <AdminUserDetailPage />,
+  },
+  {
+    path: "/admin/roles",
+    private: true,
+    exact: true,
+    component: <AdminRolePage />,
+  },
+  {
+    path: "/admin/roles/:id",
+    private: true,
+    exact: true,
+    component: <AdminRoleDetailPage />,
+  },
+  {
+    path: "/admin/user-roles",
+    private: true,
+    exact: true,
+    component: <AdminUserRolePage />,
+  },
+  {
+    path: "/admin/user-roles/:id",
+    private: true,
+    exact: true,
+    component: <AdminUserRoleDetailPage />,
   },
 ];

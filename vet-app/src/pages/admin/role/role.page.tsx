@@ -1,5 +1,5 @@
-import { TagForm } from "components/admin/tag/tag-form.component";
-import TagTable from "components/admin/tag/tag-table.component";
+import { RoleForm } from "components/admin/role/role-form.component";
+import RoleTable from "components/admin/role/role-table.component";
 import TitleBar from "components/common/title-bar/title-bar.component";
 import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
 import { useModalContext } from "context/app-modal.context";
@@ -8,41 +8,41 @@ import { UpdateMode } from "models/shared/update-mode.enum";
 import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { fetchTagsAsync } from "redux/tag.slice";
+import { fetchRolesAsync } from "redux/role.slice";
 
-const AdminTagPage: React.FC = () => {
+const AdminRolePage: React.FC = () => {
   const { isLoading } = useAuth();
   useEffect(() => {}, [isLoading]);
   const { setContent, setTitle, setShow } = useModalContext();
   const dispatch = useDispatch();
 
 
-  const createTag = () => {
-    setContent(<TagForm formMode={UpdateMode.ADD} />);
-    setTitle("Create new tag");
+  const createRole = () => {
+    setContent(<RoleForm formMode={UpdateMode.ADD} />);
+    setTitle("Create new role");
     setShow(true);
   };
 
   useEffect(() => {
-    dispatch(fetchTagsAsync() as any);
+    dispatch(fetchRolesAsync() as any);
   }, []);
 
   return (
     <>
       <div style={{ margin: "1rem" }}>
-        <PageBreadCrumbs items={["Configurations", "Tag"]} />
+        <PageBreadCrumbs items={["Configurations", "Role"]} />
         <TitleBar
-          title={"Tags"}
-          subTitle={"View and Create Tags"}
+          title={"Roles"}
+          subTitle={"View and Create Roles"}
           showButton={true}
           buttonLabel={"Add Record"}
-          handleShow={createTag}
+          handleShow={createRole}
           icon={<FiPlus />}
         />
-        <TagTable />
+        <RoleTable />
       </div>
     </>
   );
 };
 
-export default AdminTagPage;
+export default AdminRolePage;

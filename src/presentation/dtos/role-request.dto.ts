@@ -1,13 +1,12 @@
 // src/presentation/dtos/role-request.dto.ts
 
-import { IsNotEmpty, IsString, Length } from "class-validator";
+import { IsNotEmpty, IsString } from "class-validator";
 import { IRole, emptyRole } from "../../domain/models/role";
 import { nanoid } from "nanoid";
 
 export class RoleRequestDto {
   @IsNotEmpty()
   @IsString()
-  @Length(4, 10)
   name: string;
 
   constructor(data: IRole) {

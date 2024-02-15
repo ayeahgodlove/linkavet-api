@@ -5,4 +5,5 @@ export interface IRoute {
     private: boolean;
     exact: boolean;
     component: React.ReactNode;
+    roles?: string[]
 }

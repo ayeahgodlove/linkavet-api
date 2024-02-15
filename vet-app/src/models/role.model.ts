@@ -1,3 +1,4 @@
+import { IBaseState } from "./base-state.model";
 import { IResponseBase } from "./response-base.model";
 
 export interface IRole {
@@ -10,6 +11,15 @@ export const emptyRole: IRole = {
   name: "",
 };
 
-export interface IOrderResponse extends IResponseBase {
+export interface IRoleState extends IBaseState {
+  readonly roles: IRole[];
+  readonly role: IRole;
+}
+
+export interface IRoleResponse extends IResponseBase {
   data: IRole;
+}
+
+export interface IRoleResponses extends IResponseBase {
+  data: IRole[];
 }

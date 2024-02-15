@@ -36,6 +36,8 @@ import { quizReducer } from "./lms/quiz.slice";
 import { consultationReducer } from "./health/consultation.slice";
 import { appointmentReducer } from "./health/appointment.slice";
 import { sessionReducer } from "./shared/session.slice";
+import { userRoleReducer } from "./user-role.slice";
+import { roleReducer } from "./role.slice";
 
 const middlewares: [any] = [thunkMiddleware];
 
@@ -67,7 +69,11 @@ export const rootReducer = combineReducers({
   quiz: quizReducer,
   // health
   consultation: consultationReducer,
-  appointment: appointmentReducer
+  appointment: appointmentReducer,
+
+  // roles
+  userRole: userRoleReducer,
+  role: roleReducer
 });
 
 const persistConfig = {
@@ -95,6 +101,8 @@ const persistConfig = {
     "lesson",
     "enrollment",
     "quiz",
+    "role",
+    "userRole"
   ], // Specify the reducers you want to persist
 };
 

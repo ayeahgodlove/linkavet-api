@@ -39,6 +39,7 @@ import appointmentRouter from "./presentation/routes/health/appointment.route";
 import consultationRouter from "./presentation/routes/health/consultation.route";
 import { seo } from "./utils/seo";
 import fs from "fs";
+import userRoleRouter from "./presentation/routes/user-role.route";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -135,6 +136,7 @@ db.connection()
     app.use("/api/consultations", consultationRouter);
 
     app.use("/api/reviews", reviewRouter);
+    app.use("/api/user-roles", userRoleRouter);
 
     app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
 

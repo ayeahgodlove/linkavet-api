@@ -45,11 +45,6 @@ const LoginPage: React.FC = () => {
         justify={"center"}
         align="middle"
         className="form__container"
-        // style={{
-        //   background: "url(./images/bg-1-removebg-preview.png)",
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundPosition: "left",
-        // }}
       >
         {session.title.length > 0 ? (
           <Col span={24}>

@@ -28,3 +28,11 @@ export const modules = {
     },
   };
   
+
+  export const ROLES = {
+    ADMIN: "ADMIN", // post products
+    DOCTOR: "DOCTOR", //review appointments
+    CREATOR: "CREATOR", //posting articles, 
+    PETOWNER: "PETOWNER", //or USERS make appointments
+    TRAINER: "TRAINER",
+  }

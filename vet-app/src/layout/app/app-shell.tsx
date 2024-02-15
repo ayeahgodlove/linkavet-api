@@ -10,6 +10,7 @@ import { useAuth } from "hooks/auth/auth.hook";
 import { useDispatch } from "react-redux";
 import { initialDataAsync } from "redux/action/initial.action";
 import { useAppShellMenus } from "./app-shell-menus";
+import { ROLES } from "config/constant";
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 
@@ -23,8 +24,13 @@ const AppShell: React.FC<IProps> = ({ children }) => {
   const [show, setShow] = useState(false);
   const { isDarkMode } = useTheme();
   const { isAuthenticated, user } = useAuth();
-  const { items2 } = useAppShellMenus();
+  const { items2, filterMenuItemsByRole } = useAppShellMenus();
   const dispatch = useDispatch();
+
+  //sidebar access
+  const hasAccess =
+    user.roles.map((r) => r.name).includes(ROLES.ADMIN) ||
+    user.roles.map((r) => r.name).includes(ROLES.CREATOR);
 
   const handleShow = () => {
     setShow(true);
@@ -60,9 +66,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
         <Layout>
           {
             //Display Sidebar when it's admin
-            user &&
-            user.roles &&
-            user.roles.map((r) => r.name).includes("doctor") ? (
+            hasAccess ? (
               <>
                 <Sider
                   width={200}
@@ -77,7 +81,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
                   <Menu
                     mode="inline"
                     style={{ height: "100vh", borderRight: 0 }}
-                    items={items2}
+                    items={filterMenuItemsByRole(items2, user.roles.map(ur => ur.name))}
                   />
                 </Sider>
                 <Drawer
@@ -118,7 +122,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
               // padding: 24,
               margin: 0,
               minHeight: 400,
-              background: "#fafffa"
+              background: "#fafffa",
             }}
           >
             {children}

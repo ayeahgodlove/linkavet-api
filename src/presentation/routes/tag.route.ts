@@ -1,9 +1,9 @@
 // src/infrastructure/routes/tag-routes.ts
 import { Router } from "express";
-import { CategoriesController } from "../controllers/tag.controller";
+import { TagsController } from "../controllers/tag.controller";
 import { isAuthenticatedMiddleware } from "../../shared/middlewares/is-authenticated.middleware";
 
-const tagController = new CategoriesController();
+const tagController = new TagsController();
 
 const tagRouter = Router();
 

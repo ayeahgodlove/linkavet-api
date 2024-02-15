@@ -24,9 +24,9 @@ import { authRoutes } from "./auth.route";
 import FaqsPage from "pages/faqs/index.page";
 import ContactUsPage from "pages/contact-us/index.page";
 import AboutUsPages from "pages/about-us/index.page";
+import UnAuthorizedPage from "pages/unauthorized.page";
 
 export const routes: IRoute[] = [
-
   /**
    * callback route
    */
@@ -128,13 +128,13 @@ export const routes: IRoute[] = [
     path: "/contact-us",
     private: false,
     exact: true,
-    component: <ContactUsPage />
+    component: <ContactUsPage />,
   },
   {
-    path:"/about-us",
+    path: "/about-us",
     private: false,
     exact: true,
-    component: <AboutUsPages />
+    component: <AboutUsPages />,
   },
   /**
    * dashboard route
@@ -145,9 +145,13 @@ export const routes: IRoute[] = [
     exact: true,
     component: <DashboardPage />,
   },
-
- 
   ...adminRoutes,
+  {
+    path: "/unauthorized",
+    private: false,
+    exact: true,
+    component: <UnAuthorizedPage />,
+  },
   {
     // default not found route
     path: "*",

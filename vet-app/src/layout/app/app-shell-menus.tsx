@@ -39,6 +39,8 @@ import {
   FiPhoneCall,
   FiDatabase,
   FiInfo,
+  FiPenTool,
+  FiUserX,
 } from "react-icons/fi";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import {
@@ -54,6 +56,7 @@ import { useTheme } from "hooks/shared/theme.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
 import { useAuth } from "hooks/auth/auth.hook";
 import { GrScheduleNew } from "react-icons/gr";
+import { ROLES } from "config/constant";
 
 export const useAppShellMenus = () => {
   const [language, setLanguage] = useState("en");
@@ -71,11 +74,38 @@ export const useAppShellMenus = () => {
   };
   const { logoutUserFunction, isAuthenticated, user } = useAuth();
 
-  const items2: MenuProps["items"] = [
+  // roles.some(role => user.roles.map(ur => ur.name).includes(role))
+  function filterMenuItemsByRole(items: any["items"], userRoles: string[]) {
+    return items
+      .filter((item: any) => item.roles.some((r) => userRoles.includes(r)))
+      .map((item) => {
+        if (item.children) {
+          return {
+            ...item,
+            children: filterMenuItemsByRole(item.children, userRoles),
+          };
+        }
+        return item;
+      });
+  }
+  // interface MenuPropsExtend
+  // const items2: MenuProps["items"] = [
+  const items2: any["items"] = [
     {
-      label: "Dashboard",
+      label: (
+        <Link to="/dashboard" style={{ padding: 0 }}>
+          Dashboard
+        </Link>
+      ),
       key: "dashboard",
       icon: <FiDatabase size={21} color="#023202" />,
+      roles: [
+        ROLES.ADMIN,
+        ROLES.PETOWNER,
+        ROLES.DOCTOR,
+        ROLES.TRAINER,
+        ROLES.CREATOR,
+      ],
     },
     // blog
     {
@@ -91,6 +121,7 @@ export const useAppShellMenus = () => {
           ),
           key: "posts",
           icon: <FaBlog size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.CREATOR],
         },
         {
           label: (
@@ -100,8 +131,10 @@ export const useAppShellMenus = () => {
           ),
           key: "documents",
           icon: <TiDocumentText size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.CREATOR],
         },
       ],
+      roles: [ROLES.ADMIN, ROLES.CREATOR],
     },
     {
       label: "Health",
@@ -116,6 +149,7 @@ export const useAppShellMenus = () => {
           ),
           key: "consultations",
           icon: <FaBlog size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.DOCTOR],
         },
         {
           label: (
@@ -125,8 +159,10 @@ export const useAppShellMenus = () => {
           ),
           key: "appointments",
           icon: <GrScheduleNew size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.DOCTOR],
         },
       ],
+      roles: [ROLES.ADMIN, ROLES.DOCTOR],
     },
     // end blog
 
@@ -144,6 +180,7 @@ export const useAppShellMenus = () => {
           ),
           key: "products",
           icon: <MdOutlineProductionQuantityLimits size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
         },
         {
           label: (
@@ -153,6 +190,7 @@ export const useAppShellMenus = () => {
           ),
           key: "stores",
           icon: <FiShoppingCart size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
         },
         {
           label: (
@@ -162,6 +200,7 @@ export const useAppShellMenus = () => {
           ),
           key: "payments",
           icon: <TbPigMoney size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
         }, // remember to pass the key prop
         {
           label: (
@@ -171,8 +210,10 @@ export const useAppShellMenus = () => {
           ),
           key: "orders",
           icon: <AiOutlineShoppingCart size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
         }, // remember to pass the key prop
       ],
+      roles: [ROLES.ADMIN],
     },
 
     // settings
@@ -189,6 +230,7 @@ export const useAppShellMenus = () => {
           ),
           key: "users",
           icon: <FiUsers size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
         }, // remember to pass the key prop
         {
           label: (
@@ -198,8 +240,30 @@ export const useAppShellMenus = () => {
           ),
           key: "reviews",
           icon: <FaRegComments size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
+        },
+        {
+          label: (
+            <Link to="/admin/roles" style={{ padding: 0 }}>
+              Roles
+            </Link>
+          ),
+          key: "roles",
+          icon: <FiPenTool size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
+        },
+        {
+          label: (
+            <Link to="/admin/user-roles" style={{ padding: 0 }}>
+              User-roles
+            </Link>
+          ),
+          key: "user-roles",
+          icon: <FiUserX size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
         },
       ],
+      roles: [ROLES.ADMIN],
     }, // remember to pass the key prop
     // end settings
 
@@ -217,6 +281,7 @@ export const useAppShellMenus = () => {
           ),
           key: "courses",
           icon: <MdOutlineLibraryBooks size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.TRAINER],
         },
         {
           label: (
@@ -226,8 +291,10 @@ export const useAppShellMenus = () => {
           ),
           key: "enrollments",
           icon: <TbPlugConnected size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.TRAINER],
         },
       ],
+      roles: [ROLES.ADMIN, ROLES.TRAINER],
     },
     // configurations
     {
@@ -243,6 +310,7 @@ export const useAppShellMenus = () => {
           ),
           key: "categories",
           icon: <BiCategoryAlt size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.CREATOR, ROLES.TRAINER],
         },
         {
           label: (
@@ -252,6 +320,7 @@ export const useAppShellMenus = () => {
           ),
           key: "tags",
           icon: <FiTag size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.CREATOR, ROLES.TRAINER],
         },
         {
           label: (
@@ -261,8 +330,10 @@ export const useAppShellMenus = () => {
           ),
           key: "banners",
           icon: <TfiGallery size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.CREATOR, ROLES.TRAINER],
         },
       ],
+      roles: [ROLES.ADMIN, ROLES.CREATOR, ROLES.TRAINER],
     },
     // end configurations
   ];
@@ -580,9 +651,11 @@ export const useAppShellMenus = () => {
           type: "group",
           children: [
             {
-              label: <Link to="/dashboard" onClick={() => {
-                
-              }}>Admin</Link>,
+              label: (
+                <Link to="/dashboard" onClick={() => {}}>
+                  Admin
+                </Link>
+              ),
               key: "dashboard",
             },
             {
@@ -627,5 +700,6 @@ export const useAppShellMenus = () => {
     GeneralMenuItemsWithoutIcons,
     GeneralMenuItemsWithIcons,
     rightMenus,
+    filterMenuItemsByRole,
   };
 };
