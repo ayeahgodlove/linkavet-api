@@ -1,5 +1,5 @@
 "use strict";
-// src/presentation/dtos/role-request.dto.ts
+// src/presentation/dtos/userRole-request.dto.ts
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,26 +10,27 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RoleRequestDto = void 0;
+exports.UserRoleRequestDto = void 0;
 const class_validator_1 = require("class-validator");
-const role_1 = require("../../domain/models/role");
-const nanoid_1 = require("nanoid");
-class RoleRequestDto {
-    name;
+const user_role_1 = require("../../domain/models/user-role");
+class UserRoleRequestDto {
+    userId;
+    roleId;
     constructor(data) {
-        this.name = data.name;
+        this.userId = data.userId;
+        this.roleId = data.roleId;
     }
     toData() {
         return {
-            ...role_1.emptyRole,
-            id: (0, nanoid_1.nanoid)(10),
-            name: this.name,
+            ...user_role_1.emptyUserRole,
+            userId: this.userId,
+            roleId: this.roleId,
         };
     }
     toUpdateData(data) {
         return {
-            id: data.id,
-            name: data.name,
+            userId: data.userId,
+            roleId: data.roleId,
         };
     }
 }
@@ -37,5 +38,10 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], RoleRequestDto.prototype, "name", void 0);
-exports.RoleRequestDto = RoleRequestDto;
+], UserRoleRequestDto.prototype, "userId", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UserRoleRequestDto.prototype, "roleId", void 0);
+exports.UserRoleRequestDto = UserRoleRequestDto;

@@ -1,20 +1,20 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TagsController = void 0;
-const tag_1 = require("../../domain/models/tag");
-const tag_usecase_1 = require("../../domain/usecases/tag.usecase");
-const tag_repository_1 = require("../../data/repositories/impl/tag.repository");
+exports.UserRolesController = void 0;
+const user_role_1 = require("../../domain/models/user-role");
+const user_role_usecase_1 = require("../../domain/usecases/user-role.usecase");
+const user_role_repository_1 = require("../../data/repositories/impl/user-role.repository");
 const mapper_1 = require("../mappers/mapper");
-const tag_request_dto_1 = require("../dtos/tag-request.dto");
+const user_role_request_dto_1 = require("../dtos/user-role-request.dto");
 const class_validator_1 = require("class-validator");
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
-const tagRepository = new tag_repository_1.TagRepository();
-const tagUseCase = new tag_usecase_1.TagUseCase(tagRepository);
-const tagMapper = new mapper_1.TagMapper();
-class TagsController {
-    async createTag(req, res) {
-        const dto = new tag_request_dto_1.TagRequestDto(req.body);
+const userRoleRepository = new user_role_repository_1.UserRoleRepository();
+const userRoleUseCase = new user_role_usecase_1.UserRoleUseCase(userRoleRepository);
+const userRoleMapper = new mapper_1.UserRoleMapper();
+class UserRolesController {
+    async createUserRole(req, res) {
+        const dto = new user_role_request_dto_1.UserRoleRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         if (validationErrors.length > 0) {
             res.status(400).json({
@@ -26,10 +26,10 @@ class TagsController {
         }
         else {
             try {
-                const tagResponse = await tagUseCase.createTag(dto.toData());
+                const userRoleResponse = await userRoleUseCase.createUserRole(dto.toData());
                 res.status(201).json({
-                    data: tagResponse.toJSON(),
-                    message: "Tag created Successfully!",
+                    data: userRoleResponse.toJSON(),
+                    message: "UserRole created Successfully!",
                     validationErrors: [],
                     success: true,
                 });
@@ -46,10 +46,10 @@ class TagsController {
     }
     async getAll(req, res) {
         try {
-            const tags = await tagUseCase.getAll();
-            const tagsDTO = tagMapper.toDTOs(tags);
+            const userRoles = await userRoleUseCase.getAll();
+            const userRolesDTO = userRoleMapper.toDTOs(userRoles);
             res.json({
-                data: tagsDTO,
+                data: userRolesDTO,
                 message: "Success",
                 validationErrors: [],
                 success: true,
@@ -64,16 +64,16 @@ class TagsController {
             });
         }
     }
-    async getTagById(req, res) {
+    async getUserRoleById(req, res) {
         try {
             const id = req.params.id;
-            const tag = await tagUseCase.getTagById(id);
-            if (!tag) {
-                throw new not_found_exception_1.NotFoundException("Tag", id);
+            const userRole = await userRoleUseCase.getUserRoleById(id);
+            if (!userRole) {
+                throw new not_found_exception_1.NotFoundException("UserRole", id);
             }
-            const tagDTO = tagMapper.toDTO(tag);
+            const userRoleDTO = userRoleMapper.toDTO(userRole);
             res.json({
-                data: tagDTO,
+                data: userRoleDTO,
                 message: "Success",
                 validationErrors: [],
                 success: true,
@@ -88,8 +88,8 @@ class TagsController {
             });
         }
     }
-    async updateTag(req, res) {
-        const dto = new tag_request_dto_1.TagRequestDto(req.body);
+    async updateUserRole(req, res) {
+        const dto = new user_role_request_dto_1.UserRoleRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         if (validationErrors.length > 0) {
             res.status(400).json({
@@ -103,15 +103,15 @@ class TagsController {
             try {
                 const id = req.params.id;
                 const obj = {
-                    ...tag_1.emptyTag,
+                    ...user_role_1.emptyUserRole,
                     ...req.body,
                     id: id,
                 };
-                const updatedTag = await tagUseCase.updateTag(obj);
-                const tagDto = tagMapper.toDTO(updatedTag);
+                const updatedUserRole = await userRoleUseCase.updateUserRole(obj);
+                const userRoleDto = userRoleMapper.toDTO(updatedUserRole);
                 res.json({
-                    data: tagDto,
-                    message: "Tag Updated Successfully!",
+                    data: userRoleDto,
+                    message: "UserRole Updated Successfully!",
                     validationErrors: [],
                     success: true,
                 });
@@ -126,10 +126,10 @@ class TagsController {
             }
         }
     }
-    async deleteTag(req, res) {
+    async deleteUserRole(req, res) {
         try {
             const id = req.params.id;
-            await tagUseCase.deleteTag(id);
+            await userRoleUseCase.deleteUserRole(id);
             res.status(204).json({
                 message: `Operation successfully completed!`,
                 validationErrors: [],
@@ -147,4 +147,4 @@ class TagsController {
         }
     }
 }
-exports.TagsController = TagsController;
+exports.UserRolesController = UserRolesController;

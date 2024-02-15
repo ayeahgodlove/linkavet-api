@@ -1,7 +1,7 @@
 "use strict";
 // src/presentation/mappers/category-mapper.ts
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.LessonReviewMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.CategoryMapper = void 0;
+exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.LessonReviewMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.CategoryMapper = void 0;
 class CategoryMapper {
     toDTO(category) {
         const entity = category.toJSON();
@@ -72,6 +72,20 @@ class UserMapper {
     }
 }
 exports.UserMapper = UserMapper;
+class UserRoleMapper {
+    toDTO(userRole) {
+        const entity = userRole.toJSON();
+        return entity;
+    }
+    toDTOs(userRoles) {
+        const _userRoles = userRoles.map((userRole) => {
+            const entity = userRole.toJSON();
+            return entity;
+        });
+        return _userRoles;
+    }
+}
+exports.UserRoleMapper = UserRoleMapper;
 class CommentMapper {
     toDTO(comment) {
         const entity = comment.toJSON();

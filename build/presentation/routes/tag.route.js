@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const tag_controller_1 = require("../controllers/tag.controller");
 const is_authenticated_middleware_1 = require("../../shared/middlewares/is-authenticated.middleware");
-const tagController = new tag_controller_1.CategoriesController();
+const tagController = new tag_controller_1.TagsController();
 const tagRouter = (0, express_1.Router)();
 tagRouter.get("", tagController.getAll);
 tagRouter.get("/:id", tagController.getTagById);

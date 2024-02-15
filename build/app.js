@@ -65,6 +65,7 @@ const appointment_route_1 = __importDefault(require("./presentation/routes/healt
 const consultation_route_1 = __importDefault(require("./presentation/routes/health/consultation.route"));
 const seo_1 = require("./utils/seo");
 const fs_1 = __importDefault(require("fs"));
+const user_role_route_1 = __importDefault(require("./presentation/routes/user-role.route"));
 dotenv.config();
 const db = new db_postgres_config_1.PostgresDbConfig();
 /**
@@ -140,6 +141,7 @@ db.connection()
     app.use("/api/appointments", appointment_route_1.default);
     app.use("/api/consultations", consultation_route_1.default);
     app.use("/api/reviews", lesson_review_route_1.default);
+    app.use("/api/user-roles", user_role_route_1.default);
     app.use(express_1.default.static(path_1.default.join(__dirname, "..", "vet-app", "build")));
     // Handle other routes by serving the frontend's main HTML file
     app.get("*", (req, res) => {
