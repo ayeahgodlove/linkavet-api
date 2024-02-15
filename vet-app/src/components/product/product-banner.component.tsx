@@ -175,31 +175,22 @@ export const ProductBanner = () => {
   const { product } = useProduct();
 
   return (
-    <Row
-      justify={"center"}
-      align={"middle"}
-      style={{ marginTop: 10, marginBottom: 10 }}
+    <Card
+      bordered={false}
+      style={{ boxShadow: "none" }}
+      className="product-banner-2"
     >
-      <Col xs={23} md={23.5}>
-        <Card
-          bordered={false}
-          style={{ boxShadow: "none" }}
-          bodyStyle={{ padding: 0 }}
-          className="product-banner-2"
-        >
-          <Carousel autoplay dotPosition={"right"}>
-            {product.productImages.map((image) => (
-              <div key={image.id}>
-                <img
-                  alt={image.title}
-                  src={`${API_URL_UPLOADS_PRODUCTS}/${image.imageUrl}`}
-                />
-              </div>
-            ))}
-          </Carousel>
-          <div className="overlay"></div>
-        </Card>
-      </Col>
-    </Row>
+      <Carousel autoplay dotPosition={"right"}>
+        {product.productImages.map((image) => (
+          <div key={image.id}>
+            <img
+              alt={image.title}
+              src={`${API_URL_UPLOADS_PRODUCTS}/${image.imageUrl}`}
+            />
+          </div>
+        ))}
+      </Carousel>
+      <div className="overlay"></div>
+    </Card>
   );
 };

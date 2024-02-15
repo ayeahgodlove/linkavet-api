@@ -19,21 +19,21 @@ const ProductDetailPage: React.FC = () => {
   const { cartQuantity } = useShoppingCart();
   const router = useNavigate();
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchUsersAsync() as any);
   }, []);
   return (
-    <GeneralAppShell> 
-      <ProductBanner />
+    <GeneralAppShell>
+      {/* <ProductBanner /> */}
       <Row justify={"center"} align={"middle"}>
-        <Col span={23}>
+        <Col xs={23} md={20} style={{ marginTop: 10 }}>
           <PageBreadCrumbs items={["Pages", "Products", "Details"]} />
           <BackButton title="Products" />
         </Col>
       </Row>
       <Row justify={"center"} align={"middle"}>
-        <Col span={23}>
+        <Col xs={24} md={20} style={{ margin: "1.5rem 0" }}>
           <ProductDetail />
         </Col>
       </Row>

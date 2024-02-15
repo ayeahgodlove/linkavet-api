@@ -1,5 +1,6 @@
 .product-banner {
   background: linear-gradient(135deg, #98f19a 860%, #a4d2ea 1%);
+  
   position: relative;
   width: 100%;
   min-height: 70vh;
@@ -12,7 +13,7 @@
   }
   .product-banner-text {
     text-align: center;
-  }
+  } 
   .product-column {
     order: -1;
   }
@@ -62,7 +63,8 @@
   overflow: hidden; /* Ensure the image doesn't overflow the card */
   border-radius: 0 !important;
   border: 15px solid #fff;
-  background: linear-gradient(135deg, #08a30a 1%, #607d8b 100%);
+  // background: linear-gradient(135deg, #08a30a 1%, #607d8b 100%);
+  background: linear-gradient(135deg, #98f19a 860%, #a4d2ea 1%);
 }
 
 .product-banner-2 img {

@@ -37,7 +37,7 @@ export class ProductsController {
     const productImagesStrArr: string[] = productImages.map(
       (p: Express.Multer.File) => p.filename
     );
-    
+
     if (validationErrors.length > 0) {
       res.status(400).json({
         validationErrors: displayValidationErrors(validationErrors) as any,

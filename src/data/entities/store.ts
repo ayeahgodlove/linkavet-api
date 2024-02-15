@@ -55,8 +55,8 @@ export class Store extends Model<IStore> {
   imageBannerUrl!: string;
 
   // relationships
-  @HasMany(() => Product)
-  products!: Product[];
+  // @HasMany(() => Product)
+  // products!: Product[];
 
   @HasMany(() => Branch)
   branches!: Branch[];

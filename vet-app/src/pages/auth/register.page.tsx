@@ -1,5 +1,5 @@
 import GeneralAppShell from "layout/app/general-app-shell";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LockOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
 import {
   Alert,
@@ -16,17 +16,27 @@ import {
 import "../../styles/login.style.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
-import { useUser } from "hooks/user.hook";
 import { IUser, emptyUser } from "models/user.model";
 import { useAuth } from "hooks/auth/auth.hook";
+import { useDispatch } from "react-redux";
+import { fetchRolesAsync } from "redux/role.slice";
+import { useRole } from "hooks/role.hook";
+import { ROLES } from "config/constant";
 
 const RegisterPage: React.FC = () => {
   const { registerUserFunction } = useAuth();
   const [form] = Form.useForm();
   const router = useNavigate();
+  const dispatch = useDispatch();
+  const { roles } = useRole();
+
   const [isSubmitting, setSubmitting] = useState(false);
-  const [value, setValue] = useState("pet-owner");
+  const [value, setValue] = useState("PETOWNER");
   const [success, setSuccess] = useState(false);
+
+  const allowedRoles = roles.filter((role) =>
+    [ROLES.PETOWNER, ROLES.DOCTOR].includes(role.name.toUpperCase())
+  );
 
   const onFinish = async (values: any) => {
     setSubmitting(true);
@@ -57,6 +67,9 @@ const RegisterPage: React.FC = () => {
     setValue(e.target.value);
   };
 
+  useEffect(() => {
+    dispatch(fetchRolesAsync() as any);
+  }, []);
   return (
     <GeneralAppShell>
       <Row
@@ -175,13 +188,16 @@ const RegisterPage: React.FC = () => {
             >
               <>
                 <p style={{ marginBottom: 2 }}>what is your role?</p>
-                <Radio.Group onChange={onChange} value={value}>
-                  <Radio value={"pet-owner"}>Pet Owner</Radio>
-                  <Radio value={"farmer"}>Famer</Radio>
-                  <Radio value={"doctor"}>Doctor</Radio>
-                  <Radio value={"student"}>Student</Radio>
-                  <Radio value={"researcher"}>Researcher</Radio>
-                </Radio.Group>
+                <Radio.Group
+                  onChange={onChange}
+                  value={value}
+                  options={allowedRoles.map((r) => {
+                    return {
+                      label: r.name,
+                      value: r.id,
+                    };
+                  })}
+                />
               </>
             </Form.Item>
 

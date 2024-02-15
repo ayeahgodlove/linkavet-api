@@ -66,7 +66,7 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
     // });
     formData.append("amount", values.amount.toString());
     formData.append("qtty", values.qtty.toString());
-    formData.append("storeId", `${getUserStore()?.id}`);
+    // formData.append("storeId", `${getUserStore()?.id}`);
 
     // Append the selected file(s) to the FormData object
     fileList.forEach((file: any) => {

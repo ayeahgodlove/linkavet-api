@@ -12,6 +12,7 @@ import { FloatButton } from "antd";
 import { CommentOutlined } from "@ant-design/icons";
 import useWindowSize from "hooks/shared/window-resize.hook";
 import { useMessageContext } from "context/session.context";
+import UploadResourceComponent from "components/user-docs/upload-resource.component";
 
 const contentStyle: React.CSSProperties = {
   height: "75vh",
@@ -79,7 +80,9 @@ const useTabHeaders = (width: number) => {
           <p style={{ fontSize: 12, color: "#333" }}>Resources</p>
         </div>
       ),
-      children: `Content of Tab Pane 3`,
+      children: <>
+      <UploadResourceComponent />
+      </>,
     },
     {
       key: "4",

@@ -8,7 +8,7 @@ export interface IProduct {
   amount: number;
   description: string;
   categoryId: string;
-  storeId: string;
+  // storeId: string;
   shortDescription: string;
   productImages: any[];
   qtty: number;
@@ -27,7 +27,7 @@ export const emptyProduct: IProduct = {
   amount: 0,
   description: "",
   categoryId: "",
-  storeId: "",
+  // storeId: "",
   shortDescription: "",
   productImages: [],
   qtty: 0,

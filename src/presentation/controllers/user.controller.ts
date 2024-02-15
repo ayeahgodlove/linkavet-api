@@ -10,8 +10,6 @@ import { User } from "../../data/entities/user";
 import { Role } from "../../data/entities/role";
 import { RoleRepository } from "../../data/repositories/impl/role.repository";
 import { RoleUseCase } from "../../domain/usecases/role.usecase";
-import { RoleRequestDto } from "../dtos/role-request.dto";
-import { emptyRole } from "../../domain/models/role";
 import jwt from "jsonwebtoken";
 import { SECRET_KEY, header } from "../../shared/middlewares/authz.middleware";
 import { sendRegistrationMail } from "../../utils/email";
@@ -31,10 +29,7 @@ export class UsersController {
     next: any
   ): Promise<void> {
     const { userRole } = req.body;
-    const roleDto = new RoleRequestDto({
-      ...emptyRole,
-      name: userRole,
-    });
+
     const dto = new UserRequestDto(req.body);
     const validationErrors = await validate(dto);
 
@@ -48,13 +43,10 @@ export class UsersController {
     } else {
       try {
         const userResponse = await userUseCase.createUser(dto.toData());
-        const [response, bool] = await Role.findOrCreate({
-          where: { id: roleDto.toData().id, name: roleDto.toData().name },
-        });
-        // const roleRespone = await roleUseCase.createRole(roleDto.toData());
+        const roleResponse = await roleUseCase.getRoleById(userRole);
 
         // Associate roles with the user
-        await userResponse.$add("roles", [response]);
+        await userResponse.$add("roles", [roleResponse!]);
 
         // Retrieve user roles
         const userRoles = await userResponse.$get("roles");
