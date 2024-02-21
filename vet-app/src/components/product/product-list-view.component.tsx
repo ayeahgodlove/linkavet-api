@@ -141,7 +141,7 @@ const ListViewProduct: React.FC<IProp> = ({
           </Typography.Title>
           <div
             dangerouslySetInnerHTML={{
-              __html: product.description,
+              __html: product.shortDescription,
             }}
           />
           <Row justify={"center"} align={"top"}>
