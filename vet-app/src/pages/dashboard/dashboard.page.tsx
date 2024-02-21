@@ -1,4 +1,4 @@
-import { Card, Carousel, TabsProps } from "antd";
+import { Card, Carousel, Col, Row, Segmented, TabsProps } from "antd";
 import React from "react";
 import "./dashboard.style.scss";
 import { FaHospitalUser } from "react-icons/fa";
@@ -80,9 +80,11 @@ const useTabHeaders = (width: number) => {
           <p style={{ fontSize: 12, color: "#333" }}>Resources</p>
         </div>
       ),
-      children: <>
-      <UploadResourceComponent />
-      </>,
+      children: (
+        <>
+          <UploadResourceComponent />
+        </>
+      ),
     },
     {
       key: "4",
@@ -140,28 +142,54 @@ const DashboardPage: React.FC = () => {
           />
         </div>
       </Carousel>
-      <div className="carousel-caption">
-        <h1 className="header-1">efficient & convenient</h1>
-        <h2 className="header-2">Pet Care</h2>
-      </div>
 
-      <Card
-        bordered={false}
-        size="default"
-        style={{
-          margin: width > 768 ? "0 13.5rem" : "0 .5rem",
-          top: "-200px",
-        }}
-      >
-        <Tabs
-          centered
-          size="small"
-          defaultActiveKey="1"
-          items={items}
-          onChange={onChange}
-          style={{ padding: 0 }}
-        />
-      </Card>
+      <Row justify={"center"} align={"middle"}>
+        <Col xs={22} md={18}>
+          <Card
+            bordered={false}
+            title={
+              <>
+                <Segmented
+                  options={[
+                    "Daily",
+                    "Weekly",
+                    "Monthly",
+                    "Quarterly",
+                    "Yearly",
+                  ]}
+                  onChange={(value) => {
+                    console.log(value); // string
+                  }}
+                />
+              </>
+            }
+            style={{
+              top: "-400px",
+              marginBottom: 25
+            }}
+          ></Card>
+        </Col>
+
+        <Col xs={22} md={18}>
+          <Card
+            bordered={false}
+            size="default"
+            style={{
+              top: "-400px",
+            }}
+          >
+            <Tabs
+              centered
+              size="small"
+              defaultActiveKey="1"
+              items={items}
+              onChange={onChange}
+              style={{ padding: 0 }}
+            />
+          </Card>
+        </Col>
+      </Row>
+
       <FloatButton icon={<CommentOutlined />} />
     </>
   );
