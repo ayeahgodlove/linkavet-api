@@ -60,7 +60,7 @@ const GeneralMenuItemsWithIcons: MenuProps["items"] = [
 const GeneralMenuItemsWithoutIcons: MenuProps["items"] = [
   {
     label: (
-      <NavLink to="/" style={{ padding: 0 }}>
+      <NavLink to="/welcome" style={{ padding: 0 }}>
         Home
       </NavLink>
     ),

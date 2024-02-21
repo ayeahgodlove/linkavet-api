@@ -48,7 +48,7 @@ const Navbar: React.FC<IProps> = ({ showMenuIcon = false, handleShow }) => {
             alignItems: "center",
           }}
         >
-          <Link to="/">
+          <Link to="/welcome">
             <img
               src="/logo/logo-2-removebg-preview.png"
               height={width > 768 ? 100 : 90}
