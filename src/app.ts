@@ -140,7 +140,7 @@ db.connection()
 
     app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
 
-    app.get("/welcome", (req, res) => {
+    app.get("/", (req, res) => {
       const html = fs.readFileSync(
         path.join(__dirname, "..", "vet-app", "build", "index.html"),
         "utf8"

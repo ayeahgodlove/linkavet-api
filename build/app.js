@@ -143,7 +143,7 @@ db.connection()
     app.use("/api/reviews", lesson_review_route_1.default);
     app.use("/api/user-roles", user_role_route_1.default);
     app.use(express_1.default.static(path_1.default.join(__dirname, "..", "vet-app", "build")));
-    app.get("/welcome", (req, res) => {
+    app.get("/", (req, res) => {
         const html = fs_1.default.readFileSync(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"), "utf8");
         // res.send(html);
         let htmWithSeo = html
