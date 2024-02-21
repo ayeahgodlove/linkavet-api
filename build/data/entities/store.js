@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Store = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-const product_1 = require("./product");
 const branch_1 = require("./branch");
 const user_1 = require("./user");
 const user_store_1 = require("./user-store");
@@ -21,7 +20,8 @@ let Store = class Store extends sequelize_typescript_1.Model {
     location;
     imageBannerUrl;
     // relationships
-    products;
+    // @HasMany(() => Product)
+    // products!: Product[];
     branches;
     users;
 };
@@ -66,10 +66,6 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Store.prototype, "imageBannerUrl", void 0);
-__decorate([
-    (0, sequelize_typescript_1.HasMany)(() => product_1.Product),
-    __metadata("design:type", Array)
-], Store.prototype, "products", void 0);
 __decorate([
     (0, sequelize_typescript_1.HasMany)(() => branch_1.Branch),
     __metadata("design:type", Array)

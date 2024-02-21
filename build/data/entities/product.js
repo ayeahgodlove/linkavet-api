@@ -11,14 +11,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-const store_1 = require("./store");
+// import { Store } from "./store";
 const category_1 = require("./category");
 const product_review_1 = require("./product-review");
 const order_1 = require("./order");
 const product_order_1 = require("./product-order");
 let Product = class Product extends sequelize_typescript_1.Model {
     categoryId;
-    storeId;
+    // @ForeignKey(() => Store) // foreign key
+    // @Column
+    // storeId!: string;
     name;
     amount;
     shortDescription;
@@ -28,7 +30,8 @@ let Product = class Product extends sequelize_typescript_1.Model {
     tags;
     productReviews;
     // relationships
-    store;
+    // @BelongsTo(() => Store, "storeId")
+    // store!: Store;
     // one-to-one relationships
     category;
     orders;
@@ -53,12 +56,6 @@ __decorate([
     (0, sequelize_typescript_1.ForeignKey)(() => category_1.Category),
     __metadata("design:type", String)
 ], Product.prototype, "categoryId", void 0);
-__decorate([
-    (0, sequelize_typescript_1.ForeignKey)(() => store_1.Store) // foreign key
-    ,
-    sequelize_typescript_1.Column,
-    __metadata("design:type", String)
-], Product.prototype, "storeId", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING(128),
@@ -114,10 +111,6 @@ __decorate([
     (0, sequelize_typescript_1.HasMany)(() => product_review_1.ProductReview),
     __metadata("design:type", Array)
 ], Product.prototype, "productReviews", void 0);
-__decorate([
-    (0, sequelize_typescript_1.BelongsTo)(() => store_1.Store, "storeId"),
-    __metadata("design:type", store_1.Store)
-], Product.prototype, "store", void 0);
 __decorate([
     (0, sequelize_typescript_1.BelongsTo)(() => category_1.Category),
     __metadata("design:type", category_1.Category)

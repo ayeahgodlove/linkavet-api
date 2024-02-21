@@ -15,8 +15,6 @@ const user_2 = require("../../data/entities/user");
 const role_1 = require("../../data/entities/role");
 const role_repository_1 = require("../../data/repositories/impl/role.repository");
 const role_usecase_1 = require("../../domain/usecases/role.usecase");
-const role_request_dto_1 = require("../dtos/role-request.dto");
-const role_2 = require("../../domain/models/role");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const authz_middleware_1 = require("../../shared/middlewares/authz.middleware");
 const email_1 = require("../../utils/email");
@@ -30,10 +28,6 @@ const roleMapper = new mapper_1.RoleMapper();
 class UsersController {
     async createUser(req, res, next) {
         const { userRole } = req.body;
-        const roleDto = new role_request_dto_1.RoleRequestDto({
-            ...role_2.emptyRole,
-            name: userRole,
-        });
         const dto = new user_request_dto_1.UserRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         if (validationErrors.length > 0) {
@@ -47,12 +41,9 @@ class UsersController {
         else {
             try {
                 const userResponse = await userUseCase.createUser(dto.toData());
-                const [response, bool] = await role_1.Role.findOrCreate({
-                    where: { id: roleDto.toData().id, name: roleDto.toData().name },
-                });
-                // const roleRespone = await roleUseCase.createRole(roleDto.toData());
+                const roleResponse = await roleUseCase.getRoleById(userRole);
                 // Associate roles with the user
-                await userResponse.$add("roles", [response]);
+                await userResponse.$add("roles", [roleResponse]);
                 // Retrieve user roles
                 const userRoles = await userResponse.$get("roles");
                 const rolesDTO = roleMapper.toDTOs(userRoles);
