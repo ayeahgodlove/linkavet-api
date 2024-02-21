@@ -25,6 +25,7 @@ import FaqsPage from "pages/faqs/index.page";
 import ContactUsPage from "pages/contact-us/index.page";
 import AboutUsPages from "pages/about-us/index.page";
 import UnAuthorizedPage from "pages/unauthorized.page";
+import { Navigate } from "react-router-dom";
 
 export const routes: IRoute[] = [
   /**
@@ -40,6 +41,12 @@ export const routes: IRoute[] = [
   /**
    * Welcome
    */
+   {
+    path: "/",
+    private: false,
+    exact: true,
+    component: <Navigate replace to="/welcome" />,
+  },
   {
     path: "/welcome",
     private: false,
