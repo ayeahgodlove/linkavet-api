@@ -1,6 +1,6 @@
 export const seo = [
   {
-    path: "/",
+    path: "/welcome",
     title:
       "Comprehensive Veterinary Services and Premium Vet Products for Your Furry Friends and Farms",
     description:

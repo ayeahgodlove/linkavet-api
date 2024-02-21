@@ -143,18 +143,29 @@ db.connection()
     app.use("/api/reviews", lesson_review_route_1.default);
     app.use("/api/user-roles", user_role_route_1.default);
     app.use(express_1.default.static(path_1.default.join(__dirname, "..", "vet-app", "build")));
+    app.get("/welcome", (req, res) => {
+        const html = fs_1.default.readFileSync(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"), "utf8");
+        // res.send(html);
+        let htmWithSeo = html
+            .replace("__SEO_TITLE__", seo_1.seo[0].title)
+            .replace("__SEO_DESCRIPTION__", seo_1.seo[0].description);
+        res.send(htmWithSeo);
+    });
     // Handle other routes by serving the frontend's main HTML file
     app.get("*", (req, res) => {
         let pathname = req.path || req.originalUrl;
         let page = seo_1.seo.find((item) => item.path === pathname);
+        let html = fs_1.default.readFileSync(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"), "utf8");
         if (page) {
-            let html = fs_1.default.readFileSync(path_1.default.join(__dirname, "build", "index.html"));
             let htmlWithSeo = html
-                .toString()
                 .replace("__SEO_TITLE__", page.title)
                 .replace("__SEO_DESCRIPTION__", page.description);
             return res.send(htmlWithSeo);
         }
+        // let htmWithSEO2 = html
+        //   .replace("__SEO_TITLE__", seo[0].title)
+        //   .replace("__SEO_DESCRIPTION__", seo[0].description);
+        // res.send(htmWithSEO2);
         res.sendFile(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"));
     });
     // middleware interceptions

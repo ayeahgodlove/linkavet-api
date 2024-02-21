@@ -140,20 +140,38 @@ db.connection()
 
     app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
 
+    app.get("/welcome", (req, res) => {
+      const html = fs.readFileSync(
+        path.join(__dirname, "..", "vet-app", "build", "index.html"),
+        "utf8"
+      );
+      // res.send(html);
+      let htmWithSeo = html
+        .replace("__SEO_TITLE__", seo[0].title)
+        .replace("__SEO_DESCRIPTION__", seo[0].description);
+      res.send(htmWithSeo);
+    });
+
     // Handle other routes by serving the frontend's main HTML file
     app.get("*", (req, res) => {
       let pathname = req.path || req.originalUrl;
       let page = seo.find((item) => item.path === pathname);
 
+      let html = fs.readFileSync(
+        path.join(__dirname, "..", "vet-app", "build", "index.html"),
+        "utf8"
+      );
       if (page) {
-        let html = fs.readFileSync(path.join(__dirname, "build", "index.html"));
         let htmlWithSeo = html
-          .toString()
           .replace("__SEO_TITLE__", page.title)
           .replace("__SEO_DESCRIPTION__", page.description);
         return res.send(htmlWithSeo);
       }
 
+      // let htmWithSEO2 = html
+      //   .replace("__SEO_TITLE__", seo[0].title)
+      //   .replace("__SEO_DESCRIPTION__", seo[0].description);
+      // res.send(htmWithSEO2);
       res.sendFile(
         path.join(__dirname, "..", "vet-app", "build", "index.html")
       );

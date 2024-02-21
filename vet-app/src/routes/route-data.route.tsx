@@ -41,7 +41,7 @@ export const routes: IRoute[] = [
    * Welcome
    */
   {
-    path: "/",
+    path: "/welcome",
     private: false,
     exact: true,
     component: <WelcomePage />,
