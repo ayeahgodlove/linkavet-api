@@ -144,6 +144,7 @@ const PaymentFeedbackPage = () => {
 
   const completePayment = async () => {
     setLoading(true);
+    console.log("payResp.data.status: ", payResp.data.status);
     switch (payResp.data.status) {
       case TRANSACTION_STATUS.PENDING:
         setTimeout(() => {
