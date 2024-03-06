@@ -9,7 +9,6 @@ const AppRouteProvider: React.FC = () => {
       <Router>
         <Routes>
           {routes.map((route, index) => {
-            console.log("route roles: ", route.roles)
             if (!route.private) {
               return (
                 <Route

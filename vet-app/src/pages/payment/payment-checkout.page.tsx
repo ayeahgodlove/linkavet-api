@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Card,
   Col,
@@ -23,6 +24,7 @@ import BackButton from "components/shared/back-button.component";
 import CheckoutSummaryComponent from "components/product/checkout-summary.component";
 import { useNavigate } from "react-router-dom";
 import { useInitTransaction } from "hooks/shopping-cart/init-transaction.hook";
+import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
 
 export const PageCheckoutPage = () => {
   const [form] = Form.useForm();
@@ -33,12 +35,12 @@ export const PageCheckoutPage = () => {
 
   const navigate = useNavigate();
   const { setInitTransaction, setActiveInitPayment } = useInitTransaction();
+  const { totalAmount } = useShoppingCart();
 
   const onFinish = async (values: any) => {
     setLoading(true);
     const obj: IInitPayment = {
-      // amount: `${totalAmount}`,
-      amount: `5`,
+      amount: `${totalAmount}`,
       operator: mode,
       telephone: values.telephone,
       name: values.name,
@@ -51,18 +53,20 @@ export const PageCheckoutPage = () => {
         return true;
       })
       .catch((error) => {
-        console.log("error: ", error);
-        setError(error);
+        const { data, status } = error.response;
+        setError(data);
+        message.error(`${status}:${data.message}`);
         return false;
       });
 
     setActiveInitPayment(obj);
 
     if (feedback) {
-      message.success("Payment Successful!");
+      message.info("Payment Initiated!");
       navigate("/payment-feedback");
     } else {
-      message.error(`Error: ${error.message}`);
+      // console.log("error: ", error)
+      message.error(`Error`);
     }
     setLoading(false);
   };
@@ -238,7 +242,20 @@ export const PageCheckoutPage = () => {
         <Col xs={24} md={10} className="checkout-summary">
           <Typography.Title level={3}>Order details summary</Typography.Title>
           {/* summary details */}
-          <CheckoutSummaryComponent />
+          {error && (
+            <Alert
+              type="error"
+              banner
+              description={error.message}
+              showIcon
+              style={{ marginBottom: 20 }}
+            />
+          )}
+
+          <Alert
+            type="info"
+            description={<CheckoutSummaryComponent />}
+          />
         </Col>
       </Row>
     </GeneralAppShell>

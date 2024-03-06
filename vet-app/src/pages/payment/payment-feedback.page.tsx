@@ -1,4 +1,14 @@
-import { Alert, Button, Card, Col, List, Row, Typography, message } from "antd";
+import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  List,
+  Row,
+  Space,
+  Typography,
+  message,
+} from "antd";
 import BackButton from "components/shared/back-button.component";
 import { useInitTransaction } from "hooks/shopping-cart/init-transaction.hook";
 import GeneralAppShell from "layout/app/general-app-shell";
@@ -33,10 +43,12 @@ const PaymentFeedbackPage = () => {
   const { setPayment } = usePayment();
   const { order, setOrder } = useOrder();
   const { products } = useProduct();
-  const { cartItems, findMatchingProducts } = useShoppingCart();
+  const { cartItems, findMatchingProducts, totalAmount, totalQtty } =
+    useShoppingCart();
   const matchingProducts = findMatchingProducts(products, cartItems);
   const [loading, setLoading] = useState(false);
   const [disable, setDisable] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const processTransaction = useCallback(async (reference: string) => {
     try {
@@ -55,10 +67,16 @@ const PaymentFeedbackPage = () => {
       const orderResponse = await OrderService.create({
         ...emptyOrder,
         orderNo: generateOrderNumber(),
-        products: matchingProducts.map((m) => m.id),
+        products: matchingProducts.map((mp) => {
+          return {
+            productId: mp.id,
+            qtty: mp.qtty,
+            amount: mp.amount,
+          };
+        }),
         status: "PAID",
-        totalAmount: matchingProducts.reduce((a, b) => a + b.amount, 0),
-        totalQtty: matchingProducts.reduce((a, b) => a + b.qtty, 0),
+        totalAmount: totalAmount,
+        totalQtty: totalQtty,
         address: initPayment.address,
         cellPhone: initPayment.telephone,
         email: initPayment.email,
@@ -97,9 +115,11 @@ const PaymentFeedbackPage = () => {
 
   const handlePaymentStatus = (paymentResponse: IPaymentResponse) => {
     if (paymentResponse.success) {
+      setSuccess(true);
       message.success("Payment successful!");
     } else {
-      message.error("Payment failed!");
+      setSuccess(false);
+      message.error(`Payment failed! ${paymentResponse.message}`);
     }
   };
 
@@ -124,24 +144,46 @@ const PaymentFeedbackPage = () => {
 
   const completePayment = async () => {
     setLoading(true);
-    if (payResp.data.status === TRANSACTION_STATUS.PENDING) {
-      setTimeout(() => {
-        getTransactionStatus(initTransaction.reference);
-      }, 3000); // Retry after 3 seconds if status is still pending
-    } else {
-      const orderData = await createOrder();
-      const paymentResponse = await createPayment(orderData);
+    switch (payResp.data.status) {
+      case TRANSACTION_STATUS.PENDING:
+        setTimeout(() => {
+          getTransactionStatus(initTransaction.reference);
+        }, 3000); // Retry after 3 seconds if status is still pending
+        break;
 
-      handlePaymentStatus(paymentResponse);
+      // Assuming you have other statuses to handle, add them here
+      case TRANSACTION_STATUS.SUCCESSFUL:
+        const orderData = await createOrder();
+        const paymentResponse = await createPayment(orderData);
+        setSuccess(true);
+        message.success("Payment successful!");
+        handlePaymentStatus(paymentResponse);
+        // Handle success case
+        break;
+      case TRANSACTION_STATUS.FAILED:
+        // Handle failure case
+        setSuccess(false);
+        message.error(`Payment failed! ${payResp.message}`);
+        break;
     }
     setLoading(false);
     setDisable(true);
   };
 
+  const cancelPayment = async () => {
+    setLoading(true);
+    setTimeout(() => {
+      getTransactionStatus(initTransaction.reference);
+    }, 3000); // Retry after 3 seconds if status is still pending
+
+    setLoading(false);
+    setDisable(true);
+  };
   useEffect(() => {
     processTransaction(initTransaction.reference);
   }, []);
 
+  console.log(initPayment);
   return (
     <GeneralAppShell>
       <Row
@@ -159,8 +201,17 @@ const PaymentFeedbackPage = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              flexDirection: "column",
             }}
           >
+            {error && (
+              <Alert
+                type="warning"
+                description={error.message}
+                style={{ marginBottom: 10, width: "100%" }}
+              />
+            )}
+
             <Card title={"Order details"} style={{ width: "100%" }}>
               <Typography.Title level={5}>
                 {payResp.data.reference}
@@ -209,12 +260,17 @@ const PaymentFeedbackPage = () => {
                   />
                 </List.Item>
               </List>
-              {error && <Alert message={error.message} />}
             </Card>
           </div>
         </Col>
         <Col xs={24} md={9}>
           <Card title={"Instructions"} style={{ width: "100%" }}>
+            {success && (
+              <Alert
+                type="success"
+                description={"We've received your payment successfully!"}
+              />
+            )}
             <List itemLayout="horizontal">
               <List.Item>
                 <List.Item.Meta
@@ -232,16 +288,26 @@ const PaymentFeedbackPage = () => {
               </List.Item>
               <List.Item>
                 <List.Item.Meta
-                  title={"Validate"}
                   description={
-                    <Button
-                      type="primary"
-                      onClick={completePayment}
-                      loading={loading}
-                      disabled={disable}
-                    >
-                      Complete Payment
-                    </Button>
+                    <Space size={"small"}>
+                      <Button
+                        type="primary"
+                        onClick={completePayment}
+                        loading={loading}
+                        disabled={disable}
+                      >
+                        Complete Payment
+                      </Button>
+
+                      <Button
+                        type="default"
+                        onClick={cancelPayment}
+                        loading={loading}
+                        disabled={disable}
+                      >
+                        Cancel Payment
+                      </Button>
+                    </Space>
                   }
                 />
               </List.Item>

@@ -1,14 +1,11 @@
 import { Typography } from "antd";
-import { useProduct } from "hooks/product.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
 import React from "react";
 import { PiEqualsLight } from "react-icons/pi";
 import { TiTimes } from "react-icons/ti";
 
 const CheckoutSummaryComponent: React.FC = () => {
-  const { products } = useProduct();
-  const { cartItems, findMatchingProducts, cartQuantity } = useShoppingCart();
-  const matchingProducts = findMatchingProducts(products, cartItems);
+  const { cartQuantity, matchingProducts, totalAmount } = useShoppingCart();
 
   return (
     <>
@@ -25,7 +22,7 @@ const CheckoutSummaryComponent: React.FC = () => {
               key={prod.id}
               style={{ display: "flex", alignItems: "center" }}
             >
-              <span>Unit Price ({prod.name})</span> <PiEqualsLight />{" "}
+              <span>{prod.name} {prod.qtty > 1 ? ("(s)") : ("")}</span> <PiEqualsLight />{" "}
               <span>{prod.amount + "XAF"}</span>
             </Typography.Paragraph>
           ))}
@@ -70,9 +67,7 @@ const CheckoutSummaryComponent: React.FC = () => {
         >
           <PiEqualsLight />{" "}
           <span>
-            {matchingProducts.map((p) => p.amount).reduce((a, b) => a + b) *
-              cartQuantity || 0}{" "}
-            {" XAF"}
+            {totalAmount || 0} {" XAF"}
           </span>
         </Typography.Title>
       </div>

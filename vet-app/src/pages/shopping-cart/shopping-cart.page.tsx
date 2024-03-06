@@ -7,8 +7,7 @@ import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
 import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { PiEqualsLight } from "react-icons/pi";
-import { TiTimes } from "react-icons/ti";
+
 import CheckoutSummaryComponent from "components/product/checkout-summary.component";
 
 const ShoppingCartPage: React.FC = () => {
@@ -17,7 +16,7 @@ const ShoppingCartPage: React.FC = () => {
   const router = useNavigate();
 
   const matchingProducts = findMatchingProducts(products, cartItems);
-
+ 
   console.log(matchingProducts);
   const handleCheckout = () => {
     router("/payment/checkout");

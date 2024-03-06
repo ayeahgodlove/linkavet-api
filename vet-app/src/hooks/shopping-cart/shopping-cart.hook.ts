@@ -9,11 +9,17 @@ import {
 import { IRootState } from "redux/store";
 
 const useShoppingCart = () => {
-  const isOpen = useSelector<IRootState, boolean>((state) => state.shoppingCart.isOpen);
-  const cartItems = useSelector<IRootState, CartItem[]>((state) => state.shoppingCart.cartItems);
+  const isOpen = useSelector<IRootState, boolean>(
+    (state) => state.shoppingCart.isOpen
+  );
+  const cartItems = useSelector<IRootState, CartItem[]>(
+    (state) => state.shoppingCart.cartItems
+  );
   const cartQuantity = useSelector<IRootState, number>(
     (state) => state.shoppingCart.cartQuantity
   );
+
+  const { products } = useProduct();
 
   const dispatch = useDispatch();
 
@@ -36,23 +42,35 @@ const useShoppingCart = () => {
   const removeFromCart = (id: string) =>
     dispatch(shoppingCartActions.removeFromCart(id));
 
-    function findMatchingProducts(array1: IProduct[], array2: CartItem[]) {
-      const matchingProducts: IProduct[] = [];
+  function findMatchingProducts(array1: IProduct[], array2: CartItem[]) {
+    const matchingProducts: IProduct[] = [];
 
-      if (array1.length === 0 || array2.length === 0) {
-        matchingProducts.push({
-          ...emptyProduct
-        })
-        return matchingProducts;
-      }
-      for (const product of array1) {
-        if (array2.find(item => item.id === product.id)) {
-          matchingProducts.push(product);
-        }
-      }
-    
+    if (array1.length === 0 || array2.length === 0) {
+      matchingProducts.push({
+        ...emptyProduct,
+      });
       return matchingProducts;
     }
+    for (const product of array1) {
+      const found = array2.find((item) => item.id === product.id);
+      if (found) {
+        matchingProducts.push({
+          ...product,
+          qtty: found.quantity,
+          amount: found.quantity * product.amount,
+        });
+      }
+    }
+
+    return matchingProducts;
+  }
+
+  const matchingProducts = findMatchingProducts(products, cartItems);
+  const totalAmount =
+    matchingProducts.map((p) => p.amount).reduce((a, b) => a + b) *
+    cartQuantity;
+    console.log("matchingProducts: ", matchingProducts)
+  const totalQtty = matchingProducts.reduce((a, b) => a + b.qtty, 0);
 
   return {
     isOpen,
@@ -64,7 +82,10 @@ const useShoppingCart = () => {
     increaseCartQuantity,
     decreaseCartQuantity,
     removeFromCart,
-    findMatchingProducts
+    findMatchingProducts,
+    matchingProducts,
+    totalAmount,
+    totalQtty,
   };
 };
 

@@ -114,7 +114,7 @@ const store = configureStore({
     getDefaultMiddleware({ serializableCheck: false })
       .concat(loggerMiddleware)
       .concat(middlewares),
-  devTools: true, //change when deploying
+  // devTools: false, //change when deploying
 });
 
 export type IRootState = ReturnType<typeof rootReducer>;
