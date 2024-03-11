@@ -28,7 +28,7 @@ const LessonQuizePage = () => {
             {getLessonQuizes(lesson.id).length > 0 ? (
               getLessonQuizes(lesson.id).map((acc) => {
                 return (
-                  <Card title="Title">
+                  <Card>
                     <Typography.Title level={3} style={{ marginTop: "16px" }}>
                       {acc.question}
                     </Typography.Title>

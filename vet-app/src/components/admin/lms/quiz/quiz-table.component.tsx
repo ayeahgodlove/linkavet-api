@@ -11,14 +11,15 @@ import { SpinnerComponent } from "components/shared/spinner";
 import { useQuiz } from "hooks/lms/quiz.hook";
 import { IQuiz } from "models/lms/quiz";
 import { fetchquizSuccess } from "redux/lms/quiz.slice";
+import { useLesson } from "hooks/lms/lesson.hook";
 
 const { Search } = Input;
 
 const QuizTable: React.FC = () => {
-  const { quizs, setQuiz, initialFetch } = useQuiz();
+  const { lesson } = useLesson()
+  const { quizs, setQuiz, getLessonQuizes } = useQuiz();
   const { quizTableColumns } = useQuizColumns();
   const { setContent, setShow, setTitle, setWidth } = useModalContext();
-
   const [query, setQuery] = useState<string>("");
   const [isLoading, setLoading] = useState(false);
 
@@ -42,7 +43,7 @@ const QuizTable: React.FC = () => {
     return data;
   }, []);
 
-  const resultQuizs: IQuiz[] = quizs.filter((client) =>
+  const resultQuizs: IQuiz[] = getLessonQuizes(lesson.id).filter((client) =>
     search(client, ["question"], query, false)
   );
 
@@ -71,7 +72,7 @@ const QuizTable: React.FC = () => {
 
   return (
     <>
-      {quizs && quizs.length ? (
+      {getLessonQuizes(lesson.id) && getLessonQuizes(lesson.id).length ? (
         <Card
           title={
             <Col xs={24} md={10} lg={6}>
@@ -86,7 +87,7 @@ const QuizTable: React.FC = () => {
         >
           <Table<IQuiz>
             dataSource={
-              resultQuizs && resultQuizs.length > 0 ? resultQuizs : quizs
+              resultQuizs && resultQuizs.length > 0 ? resultQuizs : getLessonQuizes(lesson.id)
             }
             columns={quizTableColumns}
             style={{ borderRadius: 0 }}

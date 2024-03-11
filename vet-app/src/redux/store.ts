@@ -39,7 +39,7 @@ import { sessionReducer } from "./shared/session.slice";
 import { userRoleReducer } from "./user-role.slice";
 import { roleReducer } from "./role.slice";
 
-const middlewares: [any] = [thunkMiddleware];
+// const middlewares: [any] = [thunkMiddleware];
 
 export const rootReducer = combineReducers({
   user: userReducer,
@@ -113,7 +113,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false })
       .concat(loggerMiddleware)
-      .concat(middlewares),
+      // .concat(middlewares),
   // devTools: false, //change when deploying
 });
 

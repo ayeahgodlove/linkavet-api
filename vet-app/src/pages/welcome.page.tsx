@@ -7,6 +7,7 @@ import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect } from "react";
 import { getConfiguration } from "redux/action/initial.action";
 import { Helmet } from "react-helmet-async";
+import OurServices from "components/service/service.component";
 
 const WelcomePage: React.FC = () => {
   useEffect(() => {
@@ -27,6 +28,8 @@ const WelcomePage: React.FC = () => {
       </Helmet>
       {/* Banner */}
       <HomeBanner />
+
+      <OurServices />
 
       {/* startup in 3 steps */}
       <BuyInThreeSteps />

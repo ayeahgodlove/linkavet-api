@@ -21,7 +21,7 @@ const BuyInThreeSteps: React.FC = () => {
         justify={"center"}
         style={{
           borderRadius: 0,
-          paddingTop: "8rem",
+          paddingTop: "5rem",
           paddingBottom: "8rem",
         }}
       >

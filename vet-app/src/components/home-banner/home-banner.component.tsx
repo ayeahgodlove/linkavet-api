@@ -7,6 +7,7 @@ import Texty from "rc-texty";
 import { FiChevronRight } from "react-icons/fi";
 import { useTween } from "hooks/shared/tween.hook";
 import { useNavigate } from "react-router-dom";
+import CallToActionButton from "components/shared/cta.component";
 
 export const HomeBanner: React.FC = () => {
   const [show, setShow] = useState(true);
