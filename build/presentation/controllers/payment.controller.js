@@ -9,6 +9,7 @@ const payment_repository_1 = require("../../data/repositories/impl/payment.repos
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
 const mapper_1 = require("../mappers/mapper");
+const email_1 = require("../../utils/email");
 const paymentRepository = new payment_repository_1.PaymentRepository();
 const paymentUseCase = new payment_usecase_1.PaymentUseCase(paymentRepository);
 const paymentMapper = new mapper_1.PaymentMapper();
@@ -21,12 +22,13 @@ class PaymentsController {
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
                 success: false,
                 data: null,
-                message: "Attention!"
+                message: "Attention!",
             });
         }
         else {
             try {
                 const paymentResponse = await paymentUseCase.createPayment(dto.toData());
+                await (0, email_1.sendPaymentSuccess)(paymentResponse.dataValues.email);
                 res.status(201).json({
                     data: paymentResponse.toJSON(),
                     message: "Payment created Successfully!",
@@ -96,7 +98,7 @@ class PaymentsController {
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
                 success: false,
                 data: null,
-                message: "Attention!"
+                message: "Attention!",
             });
         }
         else {
@@ -143,13 +145,11 @@ class PaymentsController {
                 message: `Operation successfully completed!`,
                 validationErrors: [],
                 success: true,
-                data: null
+                data: null,
             });
         }
         catch (error) {
-            res
-                .status(400)
-                .json({
+            res.status(400).json({
                 message: error.message,
                 data: null,
                 validationErrors: [error],

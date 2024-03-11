@@ -69,9 +69,11 @@ const useShoppingCart = () => {
   const totalAmount =
     matchingProducts.map((p) => p.amount).reduce((a, b) => a + b) *
     cartQuantity;
-    console.log("matchingProducts: ", matchingProducts)
   const totalQtty = matchingProducts.reduce((a, b) => a + b.qtty, 0);
 
+  const clearProductCart = () => {
+    dispatch(shoppingCartActions.clearCart());;
+  }
   return {
     isOpen,
     cartItems,
@@ -86,6 +88,7 @@ const useShoppingCart = () => {
     matchingProducts,
     totalAmount,
     totalQtty,
+    clearProductCart
   };
 };
 

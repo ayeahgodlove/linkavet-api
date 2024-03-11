@@ -1,5 +1,4 @@
 import { IBaseResponse } from "./base-response";
-import { IProduct } from "./product";
 
 export interface IOrder {
   id: string;
@@ -12,7 +11,7 @@ export interface IOrder {
   username:string;
   cellPhone:string;
   address: string;
-  products: IProduct[]
+  products: string[]
   discount?: number;
 } 
 

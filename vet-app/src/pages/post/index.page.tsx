@@ -4,6 +4,7 @@ import PageBannerComponent from "components/shared/page-banner/page-banner.compo
 import { useAuth } from "hooks/auth/auth.hook";
 import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useDispatch } from "react-redux";
 import { fetchPostsAsync } from "redux/post.slice";
 
@@ -15,6 +16,15 @@ const PostPage: React.FC = () => {
   }, [isLoading]);
   return (
     <GeneralAppShell>
+      <Helmet>
+        <title>
+          Explore Premium Vet Products - Your Pet's Wellbeing, Our Priority
+        </title>
+        <meta
+          name="description"
+          content="Browse through a carefully curated collection of vet-approved products at Linkavet. Elevate your pet's lifestyle with our premium range of nutrition, grooming essentials, toys, and wellness products. Each item is selected with your pet's health and happiness in mind. Shop confidently for top-quality products that complement our commitment to excellence in veterinary care. Enhance your pet's life today with Linkavet."
+        />
+      </Helmet>
       {/* Dummy banner */}
       <PageBannerComponent
         title="Read Our Latest Veterinary Insights and Tips"

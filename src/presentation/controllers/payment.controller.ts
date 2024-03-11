@@ -11,29 +11,34 @@ import { PaymentRepository } from "../../data/repositories/impl/payment.reposito
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 import { PaymentMapper } from "../mappers/mapper";
+import { sendPaymentSuccess } from "../../utils/email";
 
 const paymentRepository = new PaymentRepository();
 const paymentUseCase = new PaymentUseCase(paymentRepository);
 const paymentMapper = new PaymentMapper();
 
 export class PaymentsController {
-  async createPayment(req: Request, res: Response<IPaymentResponse>): Promise<void> {
+  async createPayment(
+    req: Request,
+    res: Response<IPaymentResponse>
+  ): Promise<void> {
     const dto = new PaymentRequestDto(req.body);
     const validationErrors = await validate(dto);
 
     if (validationErrors.length > 0) {
-      res.status(400).json({ 
+      res.status(400).json({
         validationErrors: displayValidationErrors(validationErrors) as any,
         success: false,
         data: null,
-        message: "Attention!"
+        message: "Attention!",
       });
-    }
-    else {
+    } else {
       try {
-        
-        const paymentResponse = await paymentUseCase.createPayment(dto.toData());
-  
+        const paymentResponse = await paymentUseCase.createPayment(
+          dto.toData()
+        );
+
+        await sendPaymentSuccess(paymentResponse.dataValues.email);
         res.status(201).json({
           data: paymentResponse.toJSON<IPayment>(),
           message: "Payment created Successfully!",
@@ -51,12 +56,8 @@ export class PaymentsController {
     }
   }
 
-  async getAll(
-    req: Request,
-    res: Response<IPaymentResponse>
-  ): Promise<void> {
+  async getAll(req: Request, res: Response<IPaymentResponse>): Promise<void> {
     try {
-
       const payments = await paymentUseCase.getAll();
       const paymentsDTO = paymentMapper.toDTOs(payments);
       res.json({
@@ -83,12 +84,12 @@ export class PaymentsController {
       const id = req.params.id;
 
       const payment = await paymentUseCase.getPaymentById(id);
-      
+
       if (!payment) {
         throw new NotFoundException("Payment", id);
       }
       const paymentDTO = paymentMapper.toDTO(payment);
-      
+
       res.json({
         data: paymentDTO,
         message: "Success",
@@ -109,18 +110,17 @@ export class PaymentsController {
     req: Request,
     res: Response<IPaymentResponse>
   ): Promise<void> {
-    const dto = new PaymentRequestDto(req.body)
+    const dto = new PaymentRequestDto(req.body);
     const validationErrors = await validate(dto);
 
     if (validationErrors.length > 0) {
-      res.status(400).json({ 
+      res.status(400).json({
         validationErrors: displayValidationErrors(validationErrors) as any,
         success: false,
         data: null,
-        message: "Attention!"
+        message: "Attention!",
       });
-    }
-    else {
+    } else {
       try {
         const id = req.params.id;
 
@@ -130,16 +130,16 @@ export class PaymentsController {
           ...dto,
           id: id,
         };
-        
+
         const payment = await paymentUseCase.getPaymentById(id);
-        
+
         if (!payment) {
           throw new NotFoundException("Payment", id);
         }
-  
+
         const updatedPayment = await paymentUseCase.updatePayment(obj);
         const paymentDto = paymentMapper.toDTO(updatedPayment);
-  
+
         res.json({
           data: paymentDto,
           message: "Payment Updated Successfully!",
@@ -167,7 +167,7 @@ export class PaymentsController {
       const payment = await paymentUseCase.getPaymentById(id);
 
       if (!payment) {
-          throw new NotFoundException("Payment", id);
+        throw new NotFoundException("Payment", id);
       }
 
       await paymentUseCase.deletePayment(id);
@@ -176,17 +176,15 @@ export class PaymentsController {
         message: `Operation successfully completed!`,
         validationErrors: [],
         success: true,
-        data: null
+        data: null,
       });
     } catch (error: any) {
-      res
-        .status(400)
-        .json({
-          message: error.message,
-          data: null,
-          validationErrors: [error],
-          success: true,
-        });
+      res.status(400).json({
+        message: error.message,
+        data: null,
+        validationErrors: [error],
+        success: true,
+      });
     }
   }
 }

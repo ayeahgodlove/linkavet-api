@@ -60,6 +60,10 @@ const shoppingCartSlice = createSlice({
       );
       state.cartQuantity--;
     },
+    clearCart: (state) => {
+      state.cartItems = [];
+      state.cartQuantity = 0;
+    },
   },
 });
 

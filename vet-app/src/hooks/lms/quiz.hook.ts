@@ -10,6 +10,7 @@ import {
 import { IQuiz, emptyQuiz } from "models/lms/quiz";
 import { useFormErrors } from "hooks/shared/form-error.hook";
 import { QuizService } from "services/lms/quiz.service";
+import { useLesson } from "./lesson.hook";
 
 const useQuiz = () => {
   const quizs = useSelector<IRootState, IQuiz[]>(
@@ -71,6 +72,11 @@ const useQuiz = () => {
     }
     return quiz;
   }, []);
+
+  const getLessonQuizes = useCallback((lessonId: string) => {
+    const items = quizs.filter(q => q.lessonId === lessonId);
+    return items;
+  },[])
   useEffect(() => {
     // loadQuizs();
   }, [quiz, quizs, isLoading, initialFetch, loadQuizs]);
@@ -84,6 +90,7 @@ const useQuiz = () => {
     editQuiz,
     setQuiz,
     getQuiz,
+    getLessonQuizes
   };
 };
 

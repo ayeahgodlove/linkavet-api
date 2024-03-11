@@ -25,7 +25,8 @@ import FaqsPage from "pages/faqs/index.page";
 import ContactUsPage from "pages/contact-us/index.page";
 import AboutUsPages from "pages/about-us/index.page";
 import UnAuthorizedPage from "pages/unauthorized.page";
-import { Navigate } from "react-router-dom";
+import LessonPlayerPage from "pages/course/lesson-player.page";
+import LessonQuizePage from "pages/course/lesson-quize.page";
 
 export const routes: IRoute[] = [
   /**
@@ -106,6 +107,18 @@ export const routes: IRoute[] = [
     private: false,
     exact: true,
     component: <CourseDetailPage />,
+  },
+  {
+    path: "/courses/:name/learn",
+    private: false,
+    exact: true,
+    component: <LessonPlayerPage />,
+  },
+  {
+    path: "/courses/:name/quizes",
+    private: false,
+    exact: true,
+    component: <LessonQuizePage />,
   },
   {
     path: "/courses/:title/enrollment-payment",

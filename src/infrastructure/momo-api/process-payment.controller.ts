@@ -1,4 +1,4 @@
-import { RequestHandler, Request, Response, response } from "express";
+import { RequestHandler, Request, Response } from "express";
 import asyncHandler from "express-async-handler";
 import axios from "axios";
 
@@ -34,7 +34,8 @@ const initiateTransaction = async (
   const response = await axios.post(
     "https://demo.campay.net/api/collect/",
     {
-      amount: `${body.amount}`,
+      // amount: `${body.amount}`,
+      amount: '10',
       currency: "XAF",
       from: `237${body.telephone}`,
       description: "Pay for services",
@@ -88,10 +89,10 @@ const initiatePayment: RequestHandler = asyncHandler(
 
       if (!initiatedResponse.initiated) {
         res.status(400).json({
-          message: "Transaction failed, please try again!",
+          message: "Transaction failed, insufficient funds!",
           success: false,
           validationErrors: [],
-          data: { ...initiatedResponse } as any,
+          data: [],
         });
       }
       res.status(200).json({
@@ -101,11 +102,12 @@ const initiatePayment: RequestHandler = asyncHandler(
         data: { ...initiatedResponse } as any,
       });
     } catch (error: any) {
-      res.status(400).json({
-        message: "Transaction failed, please try again!",
+      const { data, status } = error.response
+      res.status(status).json({
+        message: data.message,
         success: false,
         validationErrors: [],
-        data: error,
+        data: data,
       });
     }
   }

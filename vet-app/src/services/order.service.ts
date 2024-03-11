@@ -1,4 +1,5 @@
 import { IOrder, IOrderResponse, IOrderResponses } from "models/order.model";
+import { IProductResponses } from "models/product.model";
 import { requestType } from "services";
 
 export const OrderService = {
@@ -11,4 +12,6 @@ export const OrderService = {
     requestType.put(`/api/orders/${order.id}`, order),
   delete: (order: IOrder): Promise<IOrderResponse> =>
     requestType.del(`/api/orders/${order.id}`, order),
+  byOrderId: (orderId: string): Promise<IProductResponses> =>
+    requestType.get(`/api/orders/products/${orderId}`),
 };

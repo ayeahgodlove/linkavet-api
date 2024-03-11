@@ -1,4 +1,12 @@
-import { Card, Carousel, Col, Row, Segmented, TabsProps } from "antd";
+import {
+  Calendar,
+  CalendarProps,
+  Card,
+  Carousel,
+  Col,
+  Row,
+  TabsProps,
+} from "antd";
 import React from "react";
 import "./dashboard.style.scss";
 import { FaHospitalUser } from "react-icons/fa";
@@ -11,8 +19,8 @@ import { Tabs } from "antd";
 import { FloatButton } from "antd";
 import { CommentOutlined } from "@ant-design/icons";
 import useWindowSize from "hooks/shared/window-resize.hook";
-import { useMessageContext } from "context/session.context";
 import UploadResourceComponent from "components/user-docs/upload-resource.component";
+import { Dayjs } from "dayjs";
 
 const contentStyle: React.CSSProperties = {
   height: "75vh",
@@ -113,15 +121,19 @@ const DashboardPage: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
   const { width } = useWindowSize();
   const { items } = useTabHeaders(width);
-  const { session } = useMessageContext();
+  // const { session } = useMessageContext();
 
   if (!isAuthenticated || !user) {
     return <Navigate to={"/auth/login"} />;
   }
 
-  if (session.isRedirect) {
-    return <Navigate to={session.redirectTo!} />;
-  }
+  // if (session.isRedirect) {
+  //   return <Navigate to={session.redirectTo!} />;
+  // }
+
+  const onPanelChange = (value: Dayjs, mode: CalendarProps<Dayjs>["mode"]) => {
+    console.log(value.format("YYYY-MM-DD"), mode);
+  };
 
   return (
     <>
@@ -149,25 +161,16 @@ const DashboardPage: React.FC = () => {
             bordered={false}
             title={
               <>
-                <Segmented
-                  options={[
-                    "Daily",
-                    "Weekly",
-                    "Monthly",
-                    "Quarterly",
-                    "Yearly",
-                  ]}
-                  onChange={(value) => {
-                    console.log(value); // string
-                  }}
-                />
+                <div style={wrapperStyle}>
+                  <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+                </div>
               </>
             }
             style={{
               top: "-400px",
-              marginBottom: 25
+              marginBottom: 25,
             }}
-          ></Card>
+          />
         </Col>
 
         <Col xs={22} md={18}>
@@ -193,6 +196,13 @@ const DashboardPage: React.FC = () => {
       <FloatButton icon={<CommentOutlined />} />
     </>
   );
+};
+
+const wrapperStyle: React.CSSProperties = {
+  width: "100%",
+  // height:"250px"
+  // border: `1px solid ${token.colorBorderSecondary}`,
+  // borderRadius: token.borderRadiusLG,
 };
 
 export default DashboardPage;

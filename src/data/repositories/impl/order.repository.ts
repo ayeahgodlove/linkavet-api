@@ -2,6 +2,8 @@ import { Order } from "../../entities/order";
 import { IOrder } from "../../../domain/models/order";
 import { NotFoundException } from "../../../shared/exceptions/not-found.exception";
 import { IOrderRepository } from "../contracts/repository.base";
+import { Product } from "../../entities/product";
+import { ProductOrder } from "../../entities/product-order";
 
 export class OrderRepository implements IOrderRepository {
   /**
@@ -19,7 +21,7 @@ export class OrderRepository implements IOrderRepository {
    */
   async create(order: IOrder): Promise<Order> {
     try {
-      return await Order.create<Order>({...order});
+      return await Order.create<Order>({ ...order });
     } catch (error) {
       throw error;
     }
@@ -55,7 +57,7 @@ export class OrderRepository implements IOrderRepository {
       throw error;
     }
   }
-
+ 
   /*
    * Returns an array of Order
    */
@@ -77,7 +79,7 @@ export class OrderRepository implements IOrderRepository {
     const { id } = order;
     try {
       const orderItem = await Order.findByPk(id);
-      
+
       if (!orderItem) {
         throw new NotFoundException("Order", id.toString());
       }
@@ -104,6 +106,26 @@ export class OrderRepository implements IOrderRepository {
       });
     } catch (error) {
       throw error;
+    }
+  }
+
+  async updateProductTable(products: any[]): Promise<void> {
+    try {
+      for (const product of products) {
+        const item = await Product.findByPk(product.productId);
+
+        if (item) {
+          const remainQtty =  item.dataValues.qtty;
+          const qtty = remainQtty - product.qtty;
+          await Product.update(
+            { qtty: qtty },
+            { where: { id: product.productId } }
+          );
+        }
+      }
+      console.log("Products updated successfully");
+    } catch (error) {
+      console.error("Error updating products:", error);
     }
   }
 }

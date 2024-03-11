@@ -17,20 +17,37 @@ const uuid_1 = require("uuid");
 class OrderRequestDto {
     status;
     orderNo;
+    email;
+    username;
+    cellPhone;
+    address;
+    totalAmount;
+    totalQtty;
+    products;
     constructor(data) {
         this.status = data.status;
         this.orderNo = data.orderNo;
-        // this.totalAmount = data.totalAmount;
-        // this.totalQtty = data.totalQtty
+        this.totalAmount = data.totalAmount;
+        this.totalQtty = data.totalQtty;
+        this.products = data.products;
+        this.cellPhone = data.cellPhone;
+        this.address = data.address;
+        this.email = data.email;
+        this.username = data.username;
     }
-    toData(totalAmount, totalQtty) {
+    toData() {
         return {
             ...order_1.emptyOrder,
             id: (0, uuid_1.v4)(),
             orderNo: this.orderNo,
             status: this.status,
-            totalAmount: totalAmount,
-            totalQtty: totalQtty
+            totalAmount: this.totalAmount,
+            totalQtty: this.totalQtty,
+            products: this.products,
+            cellPhone: this.cellPhone,
+            address: this.address,
+            email: this.email,
+            username: this.username,
         };
     }
     toUpdateData(data) {
@@ -59,4 +76,32 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], OrderRequestDto.prototype, "orderNo", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], OrderRequestDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], OrderRequestDto.prototype, "username", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], OrderRequestDto.prototype, "cellPhone", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], OrderRequestDto.prototype, "address", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], OrderRequestDto.prototype, "totalAmount", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], OrderRequestDto.prototype, "totalQtty", void 0);
 exports.OrderRequestDto = OrderRequestDto;

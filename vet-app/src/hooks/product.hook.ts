@@ -7,9 +7,11 @@ import {
   editProductSuccess,
   fetchProductsAsync,
   setActiveProduct,
+  updatePrductQuantity,
 } from "../redux/product.slice";
 import { ProductService } from "services/product.service";
-import { useTag } from "./tag.hook";
+import { useTag } from "./tag.hook"; 
+import { CartItem } from "redux/shared/shopping-cart.slice";
 
 const useProduct = () => {
   const products = useSelector<IRootState, IProduct[]>(
@@ -82,6 +84,10 @@ const useProduct = () => {
   //     });
   // };
 
+  const updateProductQuantity = (cardItems: CartItem[]) => {
+    dispatch(updatePrductQuantity(cardItems))
+  }
+
   const getProductTags = (product: IProduct): string[] => {
     return product.tags.map((tagId) => {
       const matchingTag = tags.find((tag) => tag.id === tagId);
@@ -102,7 +108,8 @@ const useProduct = () => {
     editProduct,
     setProduct,
     getProduct,
-    getProductTags
+    getProductTags,
+    updateProductQuantity
   };
 };
 

@@ -20,7 +20,8 @@ const getToken = async () => {
 const initiateTransaction = async (body) => {
     const token = await getToken();
     const response = await axios_1.default.post("https://demo.campay.net/api/collect/", {
-        amount: `${body.amount}`,
+        // amount: `${body.amount}`,
+        amount: '10',
         currency: "XAF",
         from: `237${body.telephone}`,
         description: "Pay for services",
@@ -59,10 +60,10 @@ const initiatePayment = (0, express_async_handler_1.default)(async (req, res) =>
         });
         if (!initiatedResponse.initiated) {
             res.status(400).json({
-                message: "Transaction failed, please try again!",
+                message: "Transaction failed, insufficient funds!",
                 success: false,
                 validationErrors: [],
-                data: { ...initiatedResponse },
+                data: [],
             });
         }
         res.status(200).json({
@@ -73,11 +74,12 @@ const initiatePayment = (0, express_async_handler_1.default)(async (req, res) =>
         });
     }
     catch (error) {
-        res.status(400).json({
-            message: "Transaction failed, please try again!",
+        const { data, status } = error.response;
+        res.status(status).json({
+            message: data.message,
             success: false,
             validationErrors: [],
-            data: error,
+            data: data,
         });
     }
 });

@@ -1,4 +1,10 @@
-import { Table, Model, Column, ForeignKey } from "sequelize-typescript";
+import {
+  Table,
+  Model,
+  Column,
+  ForeignKey,
+  DataType,
+} from "sequelize-typescript";
 import { Product } from "./product";
 import { Order } from "./order";
 import { IProductOrder } from "../../domain/models/product-order";
@@ -16,4 +22,16 @@ export class ProductOrder extends Model<IProductOrder> {
   @ForeignKey(() => Order)
   @Column
   orderId!: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  qtty!: number;
+
+  @Column({
+    type: DataType.DECIMAL,
+    allowNull: false,
+  })
+  amount!: number;
 }

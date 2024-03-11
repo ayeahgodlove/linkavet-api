@@ -143,14 +143,6 @@ db.connection()
     app.use("/api/reviews", lesson_review_route_1.default);
     app.use("/api/user-roles", user_role_route_1.default);
     app.use(express_1.default.static(path_1.default.join(__dirname, "..", "vet-app", "build")));
-    app.get("/", (req, res) => {
-        const html = fs_1.default.readFileSync(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"), "utf8");
-        // res.send(html);
-        let htmWithSeo = html
-            .replace("__SEO_TITLE__", seo_1.seo[0].title)
-            .replace("__SEO_DESCRIPTION__", seo_1.seo[0].description);
-        res.send(htmWithSeo);
-    });
     // Handle other routes by serving the frontend's main HTML file
     app.get("*", (req, res) => {
         let pathname = req.path || req.originalUrl;
@@ -162,12 +154,22 @@ db.connection()
                 .replace("__SEO_DESCRIPTION__", page.description);
             return res.send(htmlWithSeo);
         }
-        // let htmWithSEO2 = html
-        //   .replace("__SEO_TITLE__", seo[0].title)
-        //   .replace("__SEO_DESCRIPTION__", seo[0].description);
-        // res.send(htmWithSEO2);
-        res.sendFile(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"));
+        let htmWithSEO2 = html
+            .replace("__SEO_TITLE__", seo_1.seo[0].title)
+            .replace("__SEO_DESCRIPTION__", seo_1.seo[0].description);
+        res.send(htmWithSEO2);
     });
+    // app.get("/", (req, res) => {
+    //   const html = fs.readFileSync(
+    //     path.join(__dirname, "..", "vet-app", "build", "index.html"),
+    //     "utf8"
+    //   );
+    //   // res.send(html);
+    //   let htmWithSeo = html
+    //     .replace("__SEO_TITLE__", seo[0].title)
+    //     .replace("__SEO_DESCRIPTION__", seo[0].description);
+    //   res.send(htmWithSeo);
+    // });
     // middleware interceptions
     app.use(not_found_middleware_1.notFoundHandler);
     /**
@@ -180,3 +182,5 @@ db.connection()
     .catch((erro) => {
     console.log("error: ", erro);
 });
+// sendRegistrationMail("ayeahgodlove5@gmail.com", "https://linkavet.com/release");
+// sendPasswordResetEmail("ayeahgodlove5@gmail.com", "https://linkavet.com/release");

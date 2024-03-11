@@ -6,11 +6,15 @@ import {
   addOrderSuccess,
   editOrderSuccess,
   fetchOrdersAsync,
+  getOrderId,
   setActiveOrder,
 } from "../redux/order.slice";
 import { OrderService } from "services/order.service";
+import { IProduct } from "models/product.model";
 const useOrder = () => {
-  const orders = useSelector<IRootState, IOrder[]>((state) => state.order.orders);
+  const orders = useSelector<IRootState, IOrder[]>(
+    (state) => state.order.orders
+  );
   const isLoading = useSelector<IRootState, boolean>(
     (state) => state.order.isLoading
   );
@@ -18,6 +22,7 @@ const useOrder = () => {
     (state) => state.order.initialFetch
   );
   const order = useSelector<IRootState, IOrder>((state) => state.order.order);
+  const productOrders = useSelector<IRootState, IProduct[]>((state) => state.order.productOrders);
 
   const dispatch = useDispatch();
 
@@ -34,7 +39,7 @@ const useOrder = () => {
         return true;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return false;
       });
   };
@@ -51,11 +56,23 @@ const useOrder = () => {
         return true;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return false;
       });
   };
 
+  const getProductByOrder = async (orderId: string) => {
+    return await OrderService.byOrderId(orderId)
+      .then((response) => {
+        debugger;
+        dispatch(getOrderId(response.data));
+        return true;
+      })
+      .catch((error) => {
+        console.log(error);
+        return false;
+      });
+  };
   useEffect(() => {
     loadOrders();
   }, [order, orders, isLoading, initialFetch, loadOrders]);
@@ -68,6 +85,8 @@ const useOrder = () => {
     addOrder,
     editOrder,
     setOrder,
+    getProductByOrder,
+    productOrders
   };
 };
 

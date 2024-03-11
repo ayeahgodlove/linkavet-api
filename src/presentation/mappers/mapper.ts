@@ -50,6 +50,8 @@ import { Review } from "../../data/entities/review";
 import { IReview } from "../../domain/models/review";
 import { UserRole } from "../../data/entities/user-role";
 import { IUserRole } from "../../domain/models/user-role";
+import { ProductOrder } from "../../data/entities/product-order";
+import { IProductOrder } from "../../domain/models/product-order";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -276,7 +278,19 @@ export class LessonReviewMapper {
     return _reviews;
   }
 }
-
+export class ProductOrderMapper {
+  toDTO(order: ProductOrder): IProductOrder {
+    const entity = order.toJSON<IProductOrder>();
+    return entity;
+  }
+  toDTOs(orders: ProductOrder[]): IProductOrder[] {
+    const _orders = orders.map((order) => {
+      const entity = order.toJSON<IProductOrder>();
+      return entity;
+    });
+    return _orders;
+  }
+}
 export class ProductReviewMapper {
   toDTO(review: ProductReview): IProductReview {
     const entity = review.toJSON<IProductReview>();

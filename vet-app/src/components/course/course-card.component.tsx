@@ -6,6 +6,7 @@ import RaterComponent from "components/shared/rate.component";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
 import { ICourse } from "models/lms/course";
+import { API_URL_UPLOADS_COURSES } from "config/constant";
 
 const { Meta } = Card;
 interface IProp {
@@ -24,9 +25,9 @@ const CourseCard: React.FC<IProp> = ({ course, onCourseClick }) => {
         style={{ padding: 0 }}
         bodyStyle={{ paddingTop: 10 }}
         cover={
-          <img
+          <img 
             alt={course.title}
-            src={`https://linkavet-api.onrender.com/uploads/courses/${course.courseImage}`}
+            src={`${API_URL_UPLOADS_COURSES}/${course.courseImage}`}
           />
         }
         className="course-card"

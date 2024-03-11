@@ -1,11 +1,19 @@
 import { Card, Col, List, Row, Typography } from "antd";
 import { useOrder } from "hooks/order.hook";
 import { useUser } from "hooks/user.hook";
-import React from "react";
+import React, { useCallback, useEffect } from "react";
+import ProductTable from "./sub/product-table.component";
 
 const OrderDetailComponent: React.FC = () => {
-  const { order } = useOrder();
+  const { order, getProductByOrder, productOrders } = useOrder();
   const { getUser } = useUser();
+
+  const fetData = useCallback(async () => {
+    return await getProductByOrder(order.orderNo);
+  }, []);
+  useEffect(() => {
+    fetData();
+  }, []);
   return (
     <Card bordered={false} size="small">
       <List
@@ -45,6 +53,8 @@ const OrderDetailComponent: React.FC = () => {
           </List.Item>
         )}
       />
+
+      <ProductTable products={productOrders} />
     </Card>
   );
 };

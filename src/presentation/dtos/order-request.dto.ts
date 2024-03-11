@@ -13,21 +13,55 @@ export class OrderRequestDto {
   @IsString()
   orderNo: string;
 
+  @IsNotEmpty()
+  @IsString()
+  email: string;
+
+  @IsNotEmpty()
+  @IsString()
+  username: string;
+
+  @IsNotEmpty()
+  @IsString()
+  cellPhone: string;
+
+  @IsNotEmpty()
+  @IsString()
+  address: string;
+
+  @IsNotEmpty()
+  totalAmount: number;
+
+  @IsNotEmpty()
+  totalQtty: number;
+
+  products:string[];
+
   constructor(data: IOrder) {
     this.status = data.status;
     this.orderNo = data.orderNo;
-    // this.totalAmount = data.totalAmount;
-    // this.totalQtty = data.totalQtty
+    this.totalAmount = data.totalAmount;
+    this.totalQtty = data.totalQtty;
+    this.products = data.products;
+    this.cellPhone = data.cellPhone;
+    this.address = data.address;
+    this.email = data.email;
+    this.username = data.username;
   }
 
-  toData(totalAmount: number, totalQtty: number): IOrder {
+  toData(): IOrder {
     return {
       ...emptyOrder,
       id: v4(),
       orderNo: this.orderNo,
       status: this.status,
-      totalAmount: totalAmount,
-      totalQtty: totalQtty
+      totalAmount: this.totalAmount,
+      totalQtty: this.totalQtty,
+      products: this.products,
+      cellPhone: this.cellPhone,
+      address: this.address,
+      email: this.email,
+      username: this.username,
     };
   }
 

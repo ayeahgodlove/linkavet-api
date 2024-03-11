@@ -16,6 +16,8 @@ const order_1 = require("./order");
 let ProductOrder = class ProductOrder extends sequelize_typescript_1.Model {
     productId;
     orderId;
+    qtty;
+    amount;
 };
 __decorate([
     (0, sequelize_typescript_1.ForeignKey)(() => product_1.Product),
@@ -27,6 +29,20 @@ __decorate([
     sequelize_typescript_1.Column,
     __metadata("design:type", String)
 ], ProductOrder.prototype, "orderId", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.INTEGER,
+        allowNull: false,
+    }),
+    __metadata("design:type", Number)
+], ProductOrder.prototype, "qtty", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DECIMAL,
+        allowNull: false,
+    }),
+    __metadata("design:type", Number)
+], ProductOrder.prototype, "amount", void 0);
 ProductOrder = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: true,

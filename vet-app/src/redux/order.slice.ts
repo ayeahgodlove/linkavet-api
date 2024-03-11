@@ -1,11 +1,18 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { OrderService } from "services/order.service";
-import { IOrderState, emptyOrder, IOrder, IOrderResponses } from "../models/order.model";
+import {
+  IOrderState,
+  emptyOrder,
+  IOrder,
+  IOrderResponses,
+} from "../models/order.model";
+import { IProduct } from "models/product.model";
 
 export const initialState: IOrderState = {
   orders: [],
   errors: "",
   order: emptyOrder,
+  productOrders: [],
   isLoading: false,
   initialFetch: true,
 };
@@ -45,6 +52,9 @@ export const orderSlice = createSlice({
     addOrderSuccess: (state, action: PayloadAction<IOrder>) => {
       state.orders = [...state.orders, action.payload];
     },
+    getOrderId: (state, action: PayloadAction<IProduct[]>) => {
+      state.productOrders = action.payload;
+    },
     setActiveOrder: (state, action: PayloadAction<IOrder>) => {
       state.order = action.payload;
     },
@@ -72,6 +82,7 @@ export const {
   editOrderSuccess,
   addOrderSuccess,
   setActiveOrder,
+  getOrderId,
 } = orderSlice.actions;
 
 const reducer = orderSlice.reducer;

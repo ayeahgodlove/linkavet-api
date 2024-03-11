@@ -18,9 +18,19 @@ const uuid_1 = require("uuid");
 class PaymentRequestDto {
     orderNo;
     status;
+    email;
+    username;
+    cellPhone;
+    address;
+    amount;
     constructor(data) {
         this.orderNo = data.orderNo;
         this.status = data.status;
+        this.cellPhone = data.cellPhone;
+        this.address = data.address;
+        this.email = data.email;
+        this.username = data.username;
+        this.amount = data.amount;
     }
     toData() {
         return {
@@ -28,6 +38,11 @@ class PaymentRequestDto {
             id: (0, uuid_1.v4)(),
             orderNo: this.orderNo,
             status: this.status,
+            amount: this.amount,
+            cellPhone: this.cellPhone,
+            address: this.address,
+            email: this.email,
+            username: this.username,
         };
     }
     toUpdateData(data) {
@@ -54,4 +69,28 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PaymentRequestDto.prototype, "status", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PaymentRequestDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PaymentRequestDto.prototype, "username", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PaymentRequestDto.prototype, "cellPhone", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PaymentRequestDto.prototype, "address", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", Number)
+], PaymentRequestDto.prototype, "amount", void 0);
 exports.PaymentRequestDto = PaymentRequestDto;

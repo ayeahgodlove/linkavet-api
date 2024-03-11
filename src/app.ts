@@ -40,6 +40,7 @@ import consultationRouter from "./presentation/routes/health/consultation.route"
 import { seo } from "./utils/seo";
 import fs from "fs";
 import userRoleRouter from "./presentation/routes/user-role.route";
+import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -140,18 +141,6 @@ db.connection()
 
     app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
 
-    app.get("/", (req, res) => {
-      const html = fs.readFileSync(
-        path.join(__dirname, "..", "vet-app", "build", "index.html"),
-        "utf8"
-      );
-      // res.send(html);
-      let htmWithSeo = html
-        .replace("__SEO_TITLE__", seo[0].title)
-        .replace("__SEO_DESCRIPTION__", seo[0].description);
-      res.send(htmWithSeo);
-    });
-
     // Handle other routes by serving the frontend's main HTML file
     app.get("*", (req, res) => {
       let pathname = req.path || req.originalUrl;
@@ -168,13 +157,10 @@ db.connection()
         return res.send(htmlWithSeo);
       }
 
-      // let htmWithSEO2 = html
-      //   .replace("__SEO_TITLE__", seo[0].title)
-      //   .replace("__SEO_DESCRIPTION__", seo[0].description);
-      // res.send(htmWithSEO2);
-      res.sendFile(
-        path.join(__dirname, "..", "vet-app", "build", "index.html")
-      );
+      let htmWithSEO2 = html
+        .replace("__SEO_TITLE__", seo[0].title)
+        .replace("__SEO_DESCRIPTION__", seo[0].description);
+      res.send(htmWithSEO2);
     });
 
     // middleware interceptions
@@ -190,3 +176,6 @@ db.connection()
   .catch((erro) => {
     console.log("error: ", erro);
   });
+
+  // sendRegistrationMail("ayeahgodlove5@gmail.com", "https://linkavet.com/release");
+  // sendPasswordResetEmail("ayeahgodlove5@gmail.com", "https://linkavet.com/release");

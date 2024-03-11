@@ -1,8 +1,9 @@
 import { IBaseResponse } from "../base-response";
 
 export interface ILesson {
-  id: string;
+  id: string; 
   title: string;
+  url: string;
   description: string;
   authorId: string;
   content: string;
@@ -35,7 +36,8 @@ export const emptyLesson: ILesson = {
   objectives: [],
   keywords: [],
   author: "",
-  courseId: ""
+  courseId: "",
+  url: ""
 };
 
 export interface ILessonResponse extends IBaseResponse {

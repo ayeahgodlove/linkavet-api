@@ -1,7 +1,7 @@
 "use strict";
 // src/presentation/mappers/category-mapper.ts
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.LessonReviewMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.CategoryMapper = void 0;
+exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.CategoryMapper = void 0;
 class CategoryMapper {
     toDTO(category) {
         const entity = category.toJSON();
@@ -227,6 +227,20 @@ class LessonReviewMapper {
     }
 }
 exports.LessonReviewMapper = LessonReviewMapper;
+class ProductOrderMapper {
+    toDTO(order) {
+        const entity = order.toJSON();
+        return entity;
+    }
+    toDTOs(orders) {
+        const _orders = orders.map((order) => {
+            const entity = order.toJSON();
+            return entity;
+        });
+        return _orders;
+    }
+}
+exports.ProductOrderMapper = ProductOrderMapper;
 class ProductReviewMapper {
     toDTO(review) {
         const entity = review.toJSON();

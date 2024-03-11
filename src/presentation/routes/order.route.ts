@@ -7,18 +7,19 @@ const orderController = new OrdersController();
 
 const orderRouter = Router();
 
-orderRouter.get("", isAuthenticatedMiddleware, orderController.getAll);
+orderRouter.get("", orderController.getAll);
 orderRouter.get(
   "/:id",
   isAuthenticatedMiddleware,
   orderController.getOrderById
 );
-orderRouter.post("", isAuthenticatedMiddleware, orderController.createOrder);
+orderRouter.post("", orderController.createOrder);
 orderRouter.put("/:id", isAuthenticatedMiddleware, orderController.updateOrder);
 orderRouter.delete(
   "/:id",
   isAuthenticatedMiddleware,
   orderController.deleteOrder
 );
+orderRouter.get("/products/:orderId", orderController.getOrderNo);
 
 export default orderRouter;

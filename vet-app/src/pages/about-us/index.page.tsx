@@ -5,6 +5,7 @@ import React from "react";
 import theme from "utils/themeConfig";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import useWindowSize from "hooks/shared/window-resize.hook";
+import { Helmet } from "react-helmet-async";
 
 const teamMembers = [
   {
@@ -58,6 +59,16 @@ const AboutUsPages = () => {
   const { width } = useWindowSize();
   return (
     <GeneralAppShell>
+      <Helmet>
+        <title>
+          Meet the Heart Behind Linkavet - Where Passion Meets Pet Care
+          Excellence
+        </title>
+        <meta
+          name="description"
+          content="Welcome to Linkavet, where our love for animals and commitment to exceptional pet care converge. Meet our team of dedicated veterinary professionals, each driven by a passion for ensuring the health and happiness of your beloved pets. Learn about our values, mission, and the personalized approach we bring to every veterinary service and product we offer. Discover the faces behind the care, and trust Linkavet as your partner in creating a thriving and joyful life for your furry companions."
+        />
+      </Helmet>
       <ConfigProvider theme={theme}>
         <Row gutter={[16, 16]} align={"middle"} justify={"center"}>
           <Col xs={24} md={24}>

@@ -34,6 +34,13 @@ export class Lesson extends Model<ILesson> {
   title!: string;
 
   @Column({
+    type: DataType.STRING(255),
+    allowNull: true,
+    unique: false,
+  })
+  url!: string;
+
+  @Column({
     type: DataType.TEXT,
     allowNull: false,
   })

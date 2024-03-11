@@ -10,6 +10,7 @@ import {
 import { ILesson, emptyLesson } from "models/lms/lesson";
 import { useFormErrors } from "hooks/shared/form-error.hook";
 import { LessonService } from "services/lms/lesson.service";
+import { useCourse } from "./course.hook";
 
 const useLesson = () => {
   const lessons = useSelector<IRootState, ILesson[]>(
@@ -75,6 +76,10 @@ const useLesson = () => {
     }
     return lesson;
   }, []);
+
+  const {course} = useCourse();
+  const courseLessons = lessons.filter((l) => l.courseId === course.id);
+
   useEffect(() => {
     // loadLessons();
   }, [lesson, lessons, isLoading, initialFetch, loadLessons]);
@@ -88,7 +93,8 @@ const useLesson = () => {
     editLesson,
     setLesson,
     getLesson,
-    getCourseLessons
+    getCourseLessons,
+    courseLessons
   };
 };
 

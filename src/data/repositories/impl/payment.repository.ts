@@ -2,6 +2,7 @@ import { Payment } from "../../entities/payment";
 import { IPayment } from "../../../domain/models/payment";
 import { NotFoundException } from "../../../shared/exceptions/not-found.exception";
 import { IPaymentRepository } from "../contracts/repository.base";
+import { IProduct } from "../../../domain/models/product";
 
 export class PaymentRepository implements IPaymentRepository {
   /**

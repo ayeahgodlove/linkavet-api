@@ -6,14 +6,25 @@ import { WhyLinkaVet } from "components/why-honeyman/why-linkavet.component";
 import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect } from "react";
 import { getConfiguration } from "redux/action/initial.action";
+import { Helmet } from "react-helmet-async";
 
 const WelcomePage: React.FC = () => {
   useEffect(() => {
     // debugger
-    getConfiguration()
-  }, [])
+    getConfiguration();
+  }, []);
   return (
     <GeneralAppShell>
+      <Helmet>
+        <title>
+          Comprehensive Veterinary Services and Premium Vet Products for Your
+          Furry Friends and Farms
+        </title>
+        <meta
+          name="description"
+          content="Discover top-notch veterinary care and a curated selection of high-quality vet products at Linkavet. Our dedicated team of experienced veterinary doctors is committed to providing exceptional services for your beloved pets. From routine check-ups to specialized treatments, we prioritize the health and happiness of your furry companions and farm. Additionally, explore our online store for a wide range of vet products, including nutrition, grooming essentials, and wellness items. Trust Linkavet for all your veterinary needs – where compassion meets excellence in pet care."
+        />
+      </Helmet>
       {/* Banner */}
       <HomeBanner />
 

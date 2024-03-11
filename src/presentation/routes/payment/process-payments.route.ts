@@ -5,8 +5,8 @@ import { isAuthenticatedMiddleware } from "../../../shared/middlewares/is-authen
 const processPaymentRouter = express.Router();
 
 
-processPaymentRouter.post("/", isAuthenticatedMiddleware, initiatePayment);
-processPaymentRouter.get("/:reference", isAuthenticatedMiddleware, transactionStatus);
+processPaymentRouter.post("/", initiatePayment);
+processPaymentRouter.get("/:reference", transactionStatus);
 processPaymentRouter.post("/history", isAuthenticatedMiddleware, getTransactions);
 
 export default processPaymentRouter;

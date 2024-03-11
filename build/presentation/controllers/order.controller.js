@@ -9,9 +9,15 @@ const class_validator_1 = require("class-validator");
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
 const mapper_1 = require("../mappers/mapper");
+const product_order_repository_1 = require("../../data/repositories/impl/product-order.repository");
+const product_order_usecase_1 = require("../../domain/usecases/product-order.usecase");
+const product_order_1 = require("../../domain/models/product-order");
+const email_1 = require("../../utils/email");
 const orderRepository = new order_repository_1.OrderRepository();
 const orderUseCase = new order_usecase_1.OrderUseCase(orderRepository);
 const orderMapper = new mapper_1.OrderMapper();
+const productOrderRepository = new product_order_repository_1.ProductOrderRepository();
+const productOrderUseCase = new product_order_usecase_1.ProductOrderUseCase(productOrderRepository);
 class OrdersController {
     async createOrder(req, res) {
         const dto = new order_request_dto_1.OrderRequestDto(req.body);
@@ -26,7 +32,21 @@ class OrdersController {
         }
         else {
             try {
-                const orderResponse = await orderUseCase.createOrder(dto.toData(req.body.totalAmount, req.body.totalQtty));
+                const orderResponse = await orderUseCase.createOrder(dto.toData());
+                const products = req.body.products;
+                const productOrdersVm = products.map((p) => {
+                    return {
+                        ...product_order_1.emptyProductOrder,
+                        ...p,
+                        orderId: orderResponse.dataValues.id,
+                    };
+                });
+                await productOrderUseCase.createManyOrders(productOrdersVm);
+                const productsData = await orderResponse.$get("products");
+                await (0, email_1.sendOrderConfirmation)(orderResponse.dataValues.email, productsData, {
+                    email: orderResponse.dataValues.email,
+                    username: orderResponse.dataValues.username,
+                });
                 res.status(201).json({
                     data: orderResponse.toJSON(),
                     message: "Order created Successfully!",

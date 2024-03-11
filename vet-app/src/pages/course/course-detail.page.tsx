@@ -21,27 +21,40 @@ import { NoContent } from "components/shared/no-content/no-content.component";
 import { useDispatch } from "react-redux";
 import { fetchLessonsAsync } from "redux/lms/lesson.slice";
 import { fetchUsersAsync } from "redux/user.slice";
+import { API_URL_UPLOADS_COURSES } from "config/constant";
+import { useEnrollment } from "hooks/lms/enrollment.hook";
+import { useAuth } from "hooks/auth/auth.hook";
+import slugify from "slugify";
+import { ILesson } from "models/lms/lesson";
 
 const courseDetailPage: React.FC = () => {
   const { course } = useCourse();
   const { getUser } = useUser();
-  const { lessons } = useLesson();
+  const { user } = useAuth();
+  const { courseLessons, setLesson, lesson } = useLesson();
+  const { getUserCourses } = useEnrollment();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onEnrollCourse = () => {
-    // user needs to be authenticated first.
-    debugger
     navigate("/auth-check");
-    // navigate(`/courses/${slugify(course.title, { lower: true })}/enrollment-payment`);
   };
 
-  const courseLessons = lessons.filter((l) => l.courseId === course.id);
-  console.log("lessons: ", lessons, course);
+  const takeCourse = (lesson: ILesson) => {
+    setLesson(lesson);
+    navigate(
+      `/courses/${slugify(lesson.title, {
+        lower: true,
+        replacement: "-",
+      })}/learn`
+    );
+  };
+
   useEffect(() => {
     dispatch(fetchUsersAsync() as any);
     dispatch(fetchLessonsAsync() as any);
   }, []);
+
   return (
     <GeneralAppShell>
       <Row
@@ -50,7 +63,7 @@ const courseDetailPage: React.FC = () => {
         gutter={[16, 16]}
         className="course-container"
       >
-        <Col span={23}>
+        <Col span={22}>
           <PageBreadCrumbs items={["Pages", "Course", "Details"]} />
           <BackButton title="Course" />
         </Col>
@@ -62,7 +75,7 @@ const courseDetailPage: React.FC = () => {
             >
               <img
                 alt={course.title}
-                src={`https://linkavet-api.onrender.com/uploads/courses/${course.courseImage}`}
+                src={`${API_URL_UPLOADS_COURSES}/${course.courseImage}`}
                 style={{
                   width: "100%",
                   maxHeight: "55vh",
@@ -70,10 +83,6 @@ const courseDetailPage: React.FC = () => {
                   objectFit: "cover",
                 }}
               />
-
-              <div className="overlay">
-                <FiPlayCircle size={80} color="#f0ecec" />
-              </div>
             </div>
 
             <div
@@ -118,7 +127,20 @@ const courseDetailPage: React.FC = () => {
                       }
                       key={index}
                     >
-                      <Typography.Text>{lesson.description}</Typography.Text>
+                      <Row justify={"space-between"} align={"middle"}>
+                        <Col span={2}>
+                          <Button
+                            type="default"
+                            icon={<FiPlayCircle size={25} />}
+                            onClick={() => takeCourse(lesson)}
+                          />
+                        </Col>
+                        <Col span={22}>
+                          <Typography.Text>
+                            {lesson.description}
+                          </Typography.Text>
+                        </Col>
+                      </Row>
                     </Collapse.Panel>
                   );
                 })
@@ -162,8 +184,17 @@ const courseDetailPage: React.FC = () => {
                 </Typography.Text>
               </Descriptions.Item>
             </Descriptions>
-            <Button type="primary" block onClick={onEnrollCourse}>
-              Enroll for this course
+            <Button
+              type="primary"
+              disabled={getUserCourses(user.id) !== null ? true : false}
+              block
+              onClick={onEnrollCourse}
+            >
+              {getUserCourses(user.id) !== null ? (
+                <>Already enrolled!</>
+              ) : (
+                <>Enroll for this course</>
+              )}
             </Button>
           </Card>
         </Col>

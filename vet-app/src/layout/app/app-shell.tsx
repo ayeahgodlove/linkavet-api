@@ -43,13 +43,11 @@ const AppShell: React.FC<IProps> = ({ children }) => {
     setShow(false);
   };
 
-  if (isAuthenticated && user) {
-    setTimeout(() => {
+  useEffect(() => {
+    if (isAuthenticated && user) {
       dispatch(initialDataAsync() as any);
-    }, 3000);
-  }
-
-  useEffect(() => {}, []);
+    }
+  }, []);
   return (
     <ConfigProvider
       theme={{
@@ -81,7 +79,10 @@ const AppShell: React.FC<IProps> = ({ children }) => {
                   <Menu
                     mode="inline"
                     style={{ height: "100vh", borderRight: 0 }}
-                    items={filterMenuItemsByRole(items2, user.roles.map(ur => ur.name))}
+                    items={filterMenuItemsByRole(
+                      items2,
+                      user.roles.map((ur) => ur.name)
+                    )}
                   />
                 </Sider>
                 <Drawer

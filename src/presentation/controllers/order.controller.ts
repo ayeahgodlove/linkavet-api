@@ -6,11 +6,23 @@ import { OrderRequestDto } from "../dtos/order-request.dto";
 import { validate } from "class-validator";
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
-import { OrderMapper } from "../mappers/mapper";
+import { OrderMapper, ProductMapper } from "../mappers/mapper";
+import { ProductOrderRepository } from "../../data/repositories/impl/product-order.repository";
+import { ProductOrderUseCase } from "../../domain/usecases/product-order.usecase";
+import {
+  IProductOrder,
+  emptyProductOrder,
+} from "../../domain/models/product-order";
+import { sendOrderConfirmation } from "../../utils/email";
+import { IProductResponse } from "../../domain/models/product";
 
 const orderRepository = new OrderRepository();
 const orderUseCase = new OrderUseCase(orderRepository);
 const orderMapper = new OrderMapper();
+const productMapper = new ProductMapper();
+
+const productOrderRepository = new ProductOrderRepository();
+const productOrderUseCase = new ProductOrderUseCase(productOrderRepository);
 
 export class OrdersController {
   async createOrder(
@@ -29,10 +41,28 @@ export class OrdersController {
       });
     } else {
       try {
-        const orderResponse = await orderUseCase.createOrder(
-          dto.toData(req.body.totalAmount, req.body.totalQtty)
-        );
+        const orderResponse = await orderUseCase.createOrder(dto.toData());
+        const products: any[] = req.body.products;
 
+        const productOrdersVm: IProductOrder[] = products.map((p) => {
+          return {
+            ...emptyProductOrder,
+            ...p,
+            orderId: orderResponse.dataValues.id,
+          };
+        });
+        await productOrderUseCase.createManyOrders(productOrdersVm);
+
+        const productsData = await orderResponse.$get("products");
+        await sendOrderConfirmation(
+          orderResponse.dataValues.email,
+          productsData,
+          {
+            email: orderResponse.dataValues.email,
+            username: orderResponse.dataValues.username,
+          }
+        );
+        await orderUseCase.updateProducts(productOrdersVm);
         res.status(201).json({
           data: orderResponse.toJSON<IOrder>(),
           message: "Order created Successfully!",
@@ -176,7 +206,33 @@ export class OrdersController {
         message: error.message,
         data: null,
         validationErrors: [error],
+        success: false,
+      });
+    }
+  }
+
+  async getOrderNo(req: Request, res: Response<IProductResponse>) {
+    try {
+      const orderId = req.params.orderId;
+
+      const order = await orderUseCase.getOrderByOrderNo(orderId);
+      if (!order) {
+        throw new NotFoundException("Order", orderId);
+      }
+      const products = await order.$get("products");
+      const productsDTO = productMapper.toDTOs(products);
+      res.status(200).json({
+        message: `Operation successfully completed!`,
+        validationErrors: [],
         success: true,
+        data: productsDTO,
+      });
+    } catch (error: any) {
+      res.status(400).json({
+        message: error.message,
+        data: null,
+        validationErrors: [error],
+        success: false,
       });
     }
   }

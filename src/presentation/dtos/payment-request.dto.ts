@@ -14,9 +14,33 @@ export class PaymentRequestDto {
   @IsString()
   status: string;
 
+  @IsNotEmpty()
+  @IsString()
+  email:string;
+
+  @IsNotEmpty()
+  @IsString()
+  username:string;
+
+  @IsNotEmpty()
+  @IsString()
+  cellPhone:string;
+
+  @IsNotEmpty()
+  @IsString()
+  address: string;
+
+  @IsNotEmpty()
+  amount: number;
+ 
   constructor(data: IPayment) {
     this.orderNo = data.orderNo;
     this.status = data.status;
+    this.cellPhone = data.cellPhone;
+    this.address = data.address;
+    this.email = data.email;
+    this.username = data.username;
+    this.amount = data.amount;
   }
 
   toData(): IPayment {
@@ -25,6 +49,11 @@ export class PaymentRequestDto {
       id: v4(),
       orderNo: this.orderNo,
       status: this.status,
+      amount: this.amount,
+      cellPhone: this.cellPhone,
+      address: this.address,
+      email: this.email,
+      username: this.username,
     };
   }
 

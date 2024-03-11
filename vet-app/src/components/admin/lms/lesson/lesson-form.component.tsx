@@ -113,6 +113,20 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
             >
               <Input />
             </Form.Item>
+            <Form.Item
+              name="url"
+              label="Url"
+              requiredMark
+              style={{ marginBottom: 3 }}
+              rules={[
+                {
+                  required: true,
+                  message: "Url is required",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
             <Row gutter={[8, 8]}>
               <Col xs={24} md={12}>
                 <Form.Item
@@ -157,7 +171,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                 },
               ]}
             >
-              <Input.TextArea rows={4} />
+              <Input.TextArea rows={7} />
             </Form.Item>
           </Col>
         </Row>

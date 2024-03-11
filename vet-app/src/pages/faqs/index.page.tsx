@@ -2,6 +2,7 @@ import { Card, Col, Collapse, ConfigProvider, Row, Typography } from "antd";
 import HexagonCard from "components/hexagon-card/hexagon-card.component";
 import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import theme from "utils/themeConfig";
 
 const faqs = [
@@ -65,12 +66,19 @@ const faqs = [
 const FaqsPage = () => {
   return (
     <GeneralAppShell>
+      <Helmet>
+        <title>
+          Explore Premium FAQs - Find answers to the questions
+        </title>
+        <meta
+          name="description"
+          content="Find answers to the questions"
+        />
+      </Helmet>
       <ConfigProvider theme={theme}>
         <div style={{ margin: "3rem 0" }}>
           <Row gutter={[16, 16]} justify={"center"}>
-            <Col span={8}>
-              {/* <HexagonCard /> */}
-            </Col>
+            <Col span={8}>{/* <HexagonCard /> */}</Col>
             <Col xs={22} md={20}>
               <Typography.Title level={1} style={{ marginBottom: 0 }}>
                 Frequently Asked Questions

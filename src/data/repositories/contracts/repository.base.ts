@@ -13,6 +13,8 @@ import { IOrder } from "../../../domain/models/order";
 import { Order } from "../../entities/order";
 import { Payment } from "../../entities/payment";
 import { IPayment } from "../../../domain/models/payment";
+import { ProductOrder } from "../../entities/product-order";
+import { IProductOrder } from "../../../domain/models/product-order";
 
 export interface IRepository<T, U> {
   create(category: T): Promise<U>;
@@ -47,7 +49,13 @@ export interface IBannerRepository extends IRepository<IBanner, Banner> {
 
 export interface IOrderRepository extends IRepository<IOrder, Order> {
   findByOrderNo(orderNo: string): Promise<Order | null>;
+  updateProductTable(products: any[]): Promise<void>;
+  // getProductsByOrder(orderId: string): Promise<Product[]>;
 }
 export interface IPaymentRepository extends IRepository<IPayment, Payment> {
   findByOrderId(orderNo: string): Promise<Payment | null>;
+}
+
+export interface IProductOrderRepository extends IRepository<IProductOrder, ProductOrder> {
+  createManyOrders(productOrders: IProductOrder[]): Promise<ProductOrder[]>;
 }

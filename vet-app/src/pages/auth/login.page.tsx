@@ -6,14 +6,14 @@ import "../../styles/login.style.scss";
 import { Link, Navigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { useAuth } from "hooks/auth/auth.hook";
-import { useMessageContext } from "context/session.context";
+// import { useMessageContext } from "context/session.context";
 import useWindowSize from "hooks/shared/window-resize.hook";
 
 const LoginPage: React.FC = () => {
   const { loginUserFunction, isAuthenticated, user } = useAuth();
   const [isSubmitting, setSubmitting] = useState(false);
   const [go, setGo] = useState(false);
-  const { session } = useMessageContext();
+  // const { session } = useMessageContext();
   const { width } = useWindowSize();
   
 
@@ -46,7 +46,7 @@ const LoginPage: React.FC = () => {
         align="middle"
         className="form__container"
       >
-        {session.title.length > 0 ? (
+        {/* {session.title.length > 0 ? (
           <Col span={24}>
             <Alert
               banner
@@ -58,7 +58,7 @@ const LoginPage: React.FC = () => {
           </Col>
         ) : (
           <></>
-        )}
+        )} */}
         <Col
           xs={18}
           sm={12}

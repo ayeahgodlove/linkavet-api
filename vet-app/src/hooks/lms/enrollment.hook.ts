@@ -10,6 +10,7 @@ import {
 import { IEnrollment, emptyEnrollment } from "models/lms/enrollment";
 import { useFormErrors } from "hooks/shared/form-error.hook";
 import { EnrollmentService } from "services/lms/enrollment.service";
+import { useAuth } from "hooks/auth/auth.hook";
 
 const useEnrollment = () => {
   const enrollments = useSelector<IRootState, IEnrollment[]>(
@@ -71,6 +72,15 @@ const useEnrollment = () => {
     }
     return enrollment;
   }, []);
+
+  const { user } = useAuth();
+  const getUserCourses = (userId: string) => {
+    const item =  enrollments.find(e => e.userId === userId);
+    if(!item) {
+      return null;
+    }
+    return item;
+  }
   useEffect(() => {
     // loadEnrollments();
   }, [enrollment, enrollments, isLoading, initialFetch, loadEnrollments]);
@@ -84,6 +94,7 @@ const useEnrollment = () => {
     editEnrollment,
     setEnrollment,
     getEnrollment,
+    getUserCourses
   };
 };
 

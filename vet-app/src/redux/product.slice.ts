@@ -7,6 +7,7 @@ import {
   IProductResponses,
   ProductFormData,
 } from "../models/product.model";
+import { CartItem } from "./shared/shopping-cart.slice";
 
 export const initialState: IProductState = {
   products: [],
@@ -48,19 +49,20 @@ export const productSlice = createSlice({
         return product.id === action.payload.id ? action.payload : product;
       });
     },
-    // uploadProductImage: (state, action: PayloadAction<IProduct>) => {
-    //   state.products = state.products.map((product) => {
-    //     return product.id === action.payload.id
-    //       ? { ...action.payload, productImages: action.payload.productImages }
-    //       : { ...product, productImages: product.productImages };
-    //   });
-    // },
     addProductSuccess: (state, action: PayloadAction<IProduct>) => {
       state.products = [...state.products, action.payload];
     },
     setActiveProduct: (state, action: PayloadAction<IProduct>) => {
       state.product = action.payload;
     },
+    updatePrductQuantity: (state, action: PayloadAction<CartItem[]>) => {
+      state.products = state.products.map(product => {
+        const updatedProduct = action.payload.find(p => p.id === product.id);
+        const remainxQtty = Number(product.qtty) - Number(updatedProduct?.quantity);
+        return updatedProduct ? { ...product, qtty: remainxQtty } : product;
+      } )
+    },
+
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProductsAsync.pending, (state) => {
@@ -85,7 +87,7 @@ export const {
   editProductSuccess,
   addProductSuccess,
   setActiveProduct,
-  // uploadProductImage,
+  updatePrductQuantity,
 } = productSlice.actions;
 
 const reducer = productSlice.reducer;

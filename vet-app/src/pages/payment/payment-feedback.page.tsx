@@ -42,8 +42,8 @@ const PaymentFeedbackPage = () => {
   const { initTransaction, initPayment } = useInitTransaction();
   const { setPayment } = usePayment();
   const { order, setOrder } = useOrder();
-  const { products } = useProduct();
-  const { cartItems, findMatchingProducts, totalAmount, totalQtty } =
+  const { products, updateProductQuantity } = useProduct();
+  const { cartItems, findMatchingProducts, totalAmount, totalQtty, clearProductCart } =
     useShoppingCart();
   const matchingProducts = findMatchingProducts(products, cartItems);
   const [loading, setLoading] = useState(false);
@@ -123,7 +123,7 @@ const PaymentFeedbackPage = () => {
     }
   };
 
-  const getTransactionStatus = async (reference: string) => {
+  const getTransactionStatus = useCallback(async (reference: string) => {
     try {
       await processTransaction(reference);
 
@@ -140,35 +140,25 @@ const PaymentFeedbackPage = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [payResp.data.status]);
 
   const completePayment = async () => {
     setLoading(true);
-    console.log("payResp.data.status: ", payResp.data.status);
-    switch (payResp.data.status) {
-      case TRANSACTION_STATUS.PENDING:
-        setTimeout(() => {
-          getTransactionStatus(initTransaction.reference);
-        }, 3000); // Retry after 3 seconds if status is still pending
-        break;
+    if (payResp.data.status === TRANSACTION_STATUS.PENDING) {
+      setTimeout(() => {
+        getTransactionStatus(initTransaction.reference);
+      }, 3000); // Retry after 3 seconds if status is still pending
+    } else {
+      const orderData = await createOrder();
+      const paymentResponse = await createPayment(orderData);
 
-      // Assuming you have other statuses to handle, add them here
-      case TRANSACTION_STATUS.SUCCESSFUL:
-        const orderData = await createOrder();
-        const paymentResponse = await createPayment(orderData);
-        setSuccess(true);
-        message.success("Payment successful!");
-        handlePaymentStatus(paymentResponse);
-        // Handle success case
-        break;
-      case TRANSACTION_STATUS.FAILED:
-        // Handle failure case
-        setSuccess(false);
-        message.error(`Payment failed! ${payResp.message}`);
-        break;
+      handlePaymentStatus(paymentResponse);
+      message.success("Payment Successful");
+      updateProductQuantity(cartItems);
     }
     setLoading(false);
     setDisable(true);
+    clearProductCart();
   };
 
   const cancelPayment = async () => {
@@ -182,7 +172,7 @@ const PaymentFeedbackPage = () => {
   };
   useEffect(() => {
     processTransaction(initTransaction.reference);
-  }, []);
+  }, []); 
 
   console.log(initPayment);
   return (
