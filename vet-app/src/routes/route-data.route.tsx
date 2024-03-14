@@ -27,6 +27,7 @@ import AboutUsPages from "pages/about-us/index.page";
 import UnAuthorizedPage from "pages/unauthorized.page";
 import LessonPlayerPage from "pages/course/lesson-player.page";
 import LessonQuizePage from "pages/course/lesson-quize.page";
+import BookAppointmentsPage from "pages/service/book.page";
 
 export const routes: IRoute[] = [
   /**
@@ -149,6 +150,12 @@ export const routes: IRoute[] = [
     private: false,
     exact: true,
     component: <AboutUsPages />,
+  },
+  {
+    path: "/services/book-appointments",
+    private: false,
+    exact: true,
+    component: <BookAppointmentsPage />,
   },
   /**
    * dashboard route

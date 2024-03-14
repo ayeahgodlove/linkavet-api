@@ -9,6 +9,8 @@ import {
   setActiveUser,
 } from "../redux/user.slice";
 import { UserService } from "services/user.service";
+import { useRole } from "./role.hook";
+import { useUserRole } from "./user-role.hook";
 
 const useUser = () => {
   const users = useSelector<IRootState, IUser[]>((state) => state.user.users);
@@ -64,6 +66,24 @@ const useUser = () => {
     return user;
   };
 
+  const { roles } = useRole();
+  const { userRoles } = useUserRole();
+  function getUsersByRole(roleName: string) {
+    // Find the role id corresponding to the given role name
+    const roleId = roles.find((role) => role.name === roleName)?.id;
+
+    if (roleId) {
+      const usersWithRole = userRoles
+        .filter((userRole) => userRole.roleId === roleId)
+        .map((userRole) => users.find((user) => user.id === userRole.userId));
+
+      return usersWithRole;
+    }
+    // Filter users based on the roleId
+
+    return [];
+  }
+
   useEffect(() => {
     // loadUsers();
   }, [user, users, isLoading, initialFetch, loadUsers]);
@@ -77,6 +97,7 @@ const useUser = () => {
     editUser,
     setUser,
     getUser,
+    getUsersByRole
   };
 };
 

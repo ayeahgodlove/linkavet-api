@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import { getConfiguration } from "redux/action/initial.action";
 import { Helmet } from "react-helmet-async";
 import OurServices from "components/service/service.component";
+import VetDoctorsComponent from "components/vet/vet-doctor.component";
 
 const WelcomePage: React.FC = () => {
   useEffect(() => {
@@ -30,6 +31,9 @@ const WelcomePage: React.FC = () => {
       <HomeBanner />
 
       <OurServices />
+
+      {/* meet our team */}
+      <VetDoctorsComponent />
 
       {/* startup in 3 steps */}
       <BuyInThreeSteps />

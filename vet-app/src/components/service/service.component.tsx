@@ -3,6 +3,7 @@ import { Card, Button, Row, Col, Typography } from "antd";
 import useWindowSize from "hooks/shared/window-resize.hook";
 import { green } from "@ant-design/colors";
 import { FaUserDoctor } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const servicesData = [
   {
@@ -33,6 +34,7 @@ const buttonStyle = {
 };
 const OurServices = () => {
   const { width } = useWindowSize();
+  const navigate = useNavigate();
   return (
     <Row
       justify={"center"}
@@ -75,7 +77,7 @@ const OurServices = () => {
               type="primary"
               style={buttonStyle}
               icon={<FaUserDoctor />}
-              onClick={() => alert(`Book Now for ${service.title}`)}
+              onClick={() => navigate(`/services/book-appointments`)}
             >
               <span style={{ marginLeft: 5 }}>Book Now</span>
             </Button>

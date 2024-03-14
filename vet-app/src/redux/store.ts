@@ -4,7 +4,7 @@ import {
   combineReducers,
   configureStore,
 } from "@reduxjs/toolkit";
-import thunkMiddleware from "redux-thunk";
+// import thunkMiddleware from "redux-thunk";
 import loggerMiddleware from "redux-logger";
 import { persistStore, persistReducer } from "redux-persist";
 import sessionStorage from "redux-persist/lib/storage/session";
@@ -73,7 +73,7 @@ export const rootReducer = combineReducers({
 
   // roles
   userRole: userRoleReducer,
-  role: roleReducer
+  role: roleReducer,
 });
 
 const persistConfig = {
@@ -102,7 +102,7 @@ const persistConfig = {
     "enrollment",
     "quiz",
     "role",
-    "userRole"
+    "userRole",
   ], // Specify the reducers you want to persist
 };
 
@@ -111,11 +111,17 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false })
-      .concat(loggerMiddleware)
-      // .concat(middlewares),
-  // devTools: false, //change when deploying
+    getDefaultMiddleware({ serializableCheck: false }).concat(loggerMiddleware),
 });
+
+// const store = configureStore({
+//   reducer: persistedReducer,
+//   middleware: (getDefaultMiddleware) =>
+//     getDefaultMiddleware({ serializableCheck: false })
+//       .concat(loggerMiddleware)
+//       // .concat(middlewares),
+//   // devTools: false, //change when deploying
+// });
 
 export type IRootState = ReturnType<typeof rootReducer>;
 export type AppThunk = ThunkAction<void, IRootState, unknown, Action<string>>;

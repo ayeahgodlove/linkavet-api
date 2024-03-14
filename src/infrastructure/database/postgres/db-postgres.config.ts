@@ -36,6 +36,7 @@ import { Quiz } from "../../../data/entities/lms/quiz";
 import { Appointment } from "../../../data/entities/health/appointment";
 import { Consultation } from "../../../data/entities/health/consultation";
 import { Review } from "../../../data/entities/review";
+import { UserSpecialty } from "../../../data/entities/user-specialty";
 
 dotenv.config();
 
@@ -59,6 +60,7 @@ export class PostgresDbConfig {
         User,
         Role,
         UserRole,
+        UserSpecialty,
         Post,
         DocumentFile,
         Comment,
