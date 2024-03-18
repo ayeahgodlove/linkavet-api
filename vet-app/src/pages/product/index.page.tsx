@@ -6,7 +6,6 @@ import ProductList from "components/product/product-list.component";
 import { SpinnerComponent } from "components/shared/spinner";
 import useWindowSize from "hooks/shared/window-resize.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import { IProduct } from "models/product.model";
 import React, { useCallback, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
@@ -43,7 +42,7 @@ const ProductPage: React.FC = () => {
   }
 
   return (
-    <GeneralAppShell>
+    <>
       <Helmet>
         <title>
           Explore Premium Vet Products - Your Pet's Wellbeing, Our Priority
@@ -104,7 +103,7 @@ const ProductPage: React.FC = () => {
           onClick={() => router("/shopping-cart")}
         />
       )}
-    </GeneralAppShell>
+    </>
   );
 };
 

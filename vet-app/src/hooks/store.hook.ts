@@ -68,7 +68,7 @@ const useStore = () => {
   }, [])
   useEffect(() => {
     // loadStores();
-  }, [store, stores, isLoading, initialFetch, loadStores]);
+  }, [store, stores, isLoading, initialFetch]);
 
   return {
     store,

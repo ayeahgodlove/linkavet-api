@@ -1,11 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { IUser, emptyUser } from "models/user.model";
 import { authService } from "services/auth.service";
-// import { setTokenAction } from "./token.slice";
-import { useDispatch } from "react-redux";
 
-// const dispatch = useDispatch();
 // Register user
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
@@ -47,6 +43,7 @@ interface AuthState {
   isLoading: boolean;
   error: string | null;
   isAuthenticated: boolean;
+  token: string;
 }
 
 const initialState: AuthState = {
@@ -54,6 +51,7 @@ const initialState: AuthState = {
   isLoading: false,
   error: null,
   isAuthenticated: false,
+  token: ""
 };
 
 const authSlice = createSlice({
@@ -86,18 +84,20 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
         state.isAuthenticated = false;
+        state.token = ""
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
-        // dispatch(setTokenAction(action.payload.token!));
+        state.token = action.payload.token
         window.localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
         state.isAuthenticated = false;
+        state.token = ""
       });
   },
 });

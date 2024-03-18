@@ -1,12 +1,11 @@
 import { Typography } from "antd";
 import AppointmentForm from "components/appointment/book-appointment.component";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const BookAppointmentsPage = () => {
   return (
-    <GeneralAppShell>
+    <>
       <Helmet>
         <title>
           Explore Premium Vet Products - Your Pet's Wellbeing, Our Priority
@@ -18,7 +17,7 @@ const BookAppointmentsPage = () => {
       </Helmet>
       <Typography.Title level={2}>Book Appointment</Typography.Title>
       <AppointmentForm />
-    </GeneralAppShell>
+    </>
   );
 };
 

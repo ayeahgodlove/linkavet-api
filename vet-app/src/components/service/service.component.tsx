@@ -4,6 +4,7 @@ import useWindowSize from "hooks/shared/window-resize.hook";
 import { green } from "@ant-design/colors";
 import { FaUserDoctor } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
+import { RiBaseStationLine } from "react-icons/ri";
 
 const servicesData = [
   {
@@ -41,20 +42,37 @@ const OurServices = () => {
       align={"middle"}
       style={{ padding: `${width > 768 ? "0 5rem" : ".3rem"}` }}
     >
-      <Col span={22} style={{ margin: "2rem 0" }}>
-        <Typography.Title
-          style={{
-            textAlign: "center",
-            lineHeight: 1.5,
-            fontSize: 40,
-            marginBottom: 0,
-          }}
-        >
-          <span style={{ color: green.primary }}>Our</span> Services
-        </Typography.Title>
-        <Typography.Paragraph style={{ fontSize: 17, textAlign: "center" }}>
-          <p>These are some of our services we have</p>
-        </Typography.Paragraph>
+      <Col
+        span={24}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Col xs={22} md={18} lg={18} xl={14} style={{ margin: "5rem 0" }}>
+          <Typography.Title
+            style={{
+              textAlign: "center",
+              fontSize: 40,
+              marginBottom: 0,
+            }}
+          >
+            <span className="gradient-title">
+              On-demand Online vet appointments.
+            </span>
+          </Typography.Title>
+          <Typography.Paragraph style={{ fontSize: 17, textAlign: "center" }}>
+            <p>
+              VetCare connects pet owners to thousands of licenced veterinary
+              surgeons & nurses ready to provide the best online vet services
+              through video chat appointments 24/7. <br />{" "}
+              <Button type="link" style={{ color: "#5a008b", fontWeight: "bold"}} onClick={() => navigate("/services")}>
+                More pet resources →
+              </Button>
+            </p>
+          </Typography.Paragraph>
+        </Col>
       </Col>
       {servicesData.map((service, index) => (
         <Col xs={24} md={8} key={index}>
@@ -75,7 +93,7 @@ const OurServices = () => {
             <p>{service.description}</p>
             <Button
               type="primary"
-              style={buttonStyle}
+              style={{ ...buttonStyle, background: "#92ef94" }}
               icon={<FaUserDoctor />}
               onClick={() => navigate(`/services/book-appointments`)}
             >
@@ -84,6 +102,26 @@ const OurServices = () => {
           </Card>
         </Col>
       ))}
+      <Col
+        span={24}
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Col span={4}>
+          <Button
+            type="primary"
+            style={{ ...buttonStyle }}
+            icon={<RiBaseStationLine />}
+            onClick={() => navigate(`/services/book-appointments`)}
+            block
+          >
+            <span style={{ marginLeft: 5 }}>Book an online vet now</span>
+          </Button>
+        </Col>
+      </Col>
     </Row>
   );
 };

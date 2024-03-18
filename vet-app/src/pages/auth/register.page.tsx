@@ -1,4 +1,3 @@
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect, useState } from "react";
 import { LockOutlined, PhoneOutlined, UserOutlined } from "@ant-design/icons";
 import {
@@ -14,7 +13,7 @@ import {
   message,
 } from "antd";
 import "../../styles/login.style.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import { IUser, emptyUser } from "models/user.model";
 import { useAuth } from "hooks/auth/auth.hook";
@@ -26,7 +25,6 @@ import { ROLES } from "config/constant";
 const RegisterPage: React.FC = () => {
   const { registerUserFunction } = useAuth();
   const [form] = Form.useForm();
-  const router = useNavigate();
   const dispatch = useDispatch();
   const { roles } = useRole();
 
@@ -71,7 +69,7 @@ const RegisterPage: React.FC = () => {
     dispatch(fetchRolesAsync() as any);
   }, []);
   return (
-    <GeneralAppShell>
+    <>
       <Row
         justify={"center"}
         align="middle"
@@ -238,7 +236,7 @@ const RegisterPage: React.FC = () => {
           </Form>
         </Col>
       </Row>
-    </GeneralAppShell>
+    </>
   );
 };
 

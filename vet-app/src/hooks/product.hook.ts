@@ -72,17 +72,6 @@ const useProduct = () => {
     return product;
   };
 
-  // const uploadImage = async (product: ProductFormData) => {
-  //   return await ProductService.upload(product)
-  //     .then((resp) => {
-  //       dispatch(uploadProductImage(resp.data));
-  //       return true;
-  //     })
-  //     .catch((err) => {
-  //       setformError(err);
-  //       return false;
-  //     });
-  // };
 
   const updateProductQuantity = (cardItems: CartItem[]) => {
     dispatch(updatePrductQuantity(cardItems))
@@ -97,7 +86,7 @@ const useProduct = () => {
 
   useEffect(() => {
     // loadProducts();
-  }, [product, products, isLoading, initialFetch, loadProducts]);
+  }, [product, products, isLoading, initialFetch]);
 
   return {
     product,

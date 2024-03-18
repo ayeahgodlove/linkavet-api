@@ -1,7 +1,6 @@
-import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Col, Form, Input, Row } from "antd";
+import {  UserOutlined } from "@ant-design/icons";
+import { Button,  Col, Form, Input, Row } from "antd";
 import "../../styles/login.style.scss";
 import { Link } from "react-router-dom";
 
@@ -11,17 +10,11 @@ const ForgotPasswordPage: React.FC = () => {
   };
 
   return (
-    <GeneralAppShell>
+    <>
       <Row
         justify={"center"}
         align="middle"
         className="form__container"
-        // style={{
-        //   background: "url(./honey-man.svg)",
-        //   backgroundRepeat: "no-repeat, repeat",
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "center",
-        // }}
       >
         <Col
           xs={18}
@@ -74,7 +67,7 @@ const ForgotPasswordPage: React.FC = () => {
           </Form>
         </Col>
       </Row>
-    </GeneralAppShell>
+    </>
   );
 };
 

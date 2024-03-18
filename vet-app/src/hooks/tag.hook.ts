@@ -59,8 +59,8 @@ const useTag = () => {
   };
 
   useEffect(() => {
-    loadTags();
-  }, [tag, tags, isLoading, initialFetch, loadTags]);
+    // loadTags();
+  }, [tag, tags, isLoading, initialFetch]);
 
   return {
     tag,

@@ -1,6 +1,5 @@
 import Spinner from "components/utilities/Spinner";
 import { useAuth } from "hooks/auth/auth.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -11,9 +10,9 @@ const CallbackPage: React.FC = () => {
   const dispatch = useDispatch();
   
   if (isLoading) {
-   return <GeneralAppShell>
+   return <>
       <Spinner />
-    </GeneralAppShell>;
+    </>;
   }
 
   // load initial data into the redux store here

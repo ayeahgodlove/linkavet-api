@@ -1,5 +1,4 @@
 import { message, Typography } from "antd";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserService } from "services/user.service";
@@ -24,7 +23,7 @@ const ActivationPage = () => {
     }
   }, []);
   return (
-    <GeneralAppShell>
+    <>
       <div
         style={{
           height: "100vh",
@@ -42,7 +41,7 @@ const ActivationPage = () => {
           </Typography.Title>
         )}
       </div>
-    </GeneralAppShell>
+    </>
   );
 };
 

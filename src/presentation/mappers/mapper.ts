@@ -52,6 +52,8 @@ import { UserRole } from "../../data/entities/user-role";
 import { IUserRole } from "../../domain/models/user-role";
 import { ProductOrder } from "../../data/entities/product-order";
 import { IProductOrder } from "../../domain/models/product-order";
+import { UserSpecialty } from "../../data/entities/user-specialty";
+import { IUserSpecialty } from "../../domain/models/user-specialty";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -262,6 +264,20 @@ export class RoleMapper {
       return entity;
     });
     return _roles;
+  }
+}
+
+export class UserSpecialtyMapper {
+  toDTO(userSpecialty: UserSpecialty): IUserSpecialty {
+    const entity = userSpecialty.toJSON<IUserSpecialty>();
+    return entity;
+  }
+  toDTOs(userSpecialtys: UserSpecialty[]): IUserSpecialty[] {
+    const _userSpecialties = userSpecialtys.map((userSpecialty) => {
+      const entity = userSpecialty.toJSON<IUserSpecialty>();
+      return entity;
+    });
+    return _userSpecialties;
   }
 }
 

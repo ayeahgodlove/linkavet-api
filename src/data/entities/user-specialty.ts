@@ -15,6 +15,13 @@ import { User } from "./user";
   tableName: "user-specialty",
 })
 export class UserSpecialty extends Model<IUserSpecialty> {
+  @Column({
+    type: DataType.STRING(20),
+    allowNull: false,
+    primaryKey: true,
+  })
+  declare id?: string;
+  
   @ForeignKey(() => User)
   @Column
   userId!: string;
@@ -24,7 +31,7 @@ export class UserSpecialty extends Model<IUserSpecialty> {
     allowNull: false,
     unique: false,
   })
-  speciality!: string;
+  specialty!: string;
 
   @BelongsTo(() => User)
   user!: User; // Define association to User entity

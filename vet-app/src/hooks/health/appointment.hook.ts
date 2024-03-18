@@ -73,7 +73,7 @@ const useAppointment = () => {
   }, []);
   useEffect(() => {
     // loadAppointments();
-  }, [appointment, appointments, isLoading, initialFetch, loadAppointments]);
+  }, [appointment, appointments, isLoading, initialFetch]);
 
   return {
     appointment,

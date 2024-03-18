@@ -1,4 +1,4 @@
-import { Avatar, Button, Card, Col, Image, List, Row, Typography } from "antd";
+import { Avatar, Button, Card, Col, List, Row, Typography } from "antd";
 import CommentComponent from "components/comment/comment.component";
 import BackButton from "components/shared/back-button.component";
 import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
@@ -8,7 +8,6 @@ import { useCategory } from "hooks/category.hook";
 import { useComment } from "hooks/comment.hook";
 import { usePost } from "hooks/post.hook";
 import { useUser } from "hooks/user.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUsersAsync } from "redux/user.slice";
@@ -67,7 +66,7 @@ const postDetailPage: React.FC = () => {
     load();
   }, []);
   return (
-    <GeneralAppShell>
+    <>
       <Row align={"middle"} justify={"center"} style={{ marginTop: "2rem" }}>
         <Col span={23}>
           <PageBreadCrumbs items={["Pages", "Post", "Details"]} />
@@ -167,7 +166,7 @@ const postDetailPage: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </GeneralAppShell>
+    </>
   );
 };
 

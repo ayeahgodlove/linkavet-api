@@ -1,40 +1,86 @@
 // VetDoctorsComponent.tsx
 
 import React, { useEffect } from "react";
-import { Card, Row, Col, Typography } from "antd";
-import { useUser } from "hooks/user.hook";
-import { useDispatch } from "react-redux";
-import { fetchUsersAsync } from "redux/user.slice";
-import { fetchUserRolesAsync } from "redux/user-role.slice";
-import { fetchRolesAsync } from "redux/role.slice";
+import { Card, Row, Col, Typography, Avatar, Button } from "antd";
+import { useUserSpecialty } from "hooks/user-specialty.hook";
+import { FaHouseMedicalFlag } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
 const VetDoctorsComponent: React.FC = () => {
-  const { getUsersByRole } = useUser();
-  const dispatch = useDispatch();
-
-  const users = getUsersByRole("DOCTOR");
+  const { loadUserSpecialties, userSpecialties } = useUserSpecialty();
+  const navigate = useNavigate();
   useEffect(() => {
-    dispatch(fetchUsersAsync() as any);
-    dispatch(fetchUserRolesAsync() as any);
-    dispatch(fetchRolesAsync() as any);
+    loadUserSpecialties();
   }, []);
   return (
-    <div style={{ padding: "20px", display: "flex", justifyContent: "center" }}>
-      <Title level={2}>Meet Our Vet Doctors and Practitioners</Title>
-      <Row gutter={[16, 16]}>
-        {users.map((doctor, index) => (
+    <div
+      style={{
+        padding: "20px",
+        display: "flex",
+        justifyContent: "center",
+        marginTop: "4rem",
+      }}
+    >
+      <Row gutter={[16, 16]} justify={"center"} align={"middle"}>
+        <Col span={20}>
+          <Title level={2} style={{ textAlign: "center" }}>
+            <span className="gradient-title">Meet Our Vet Doctors and Practitioners</span>
+          </Title>
+        </Col>
+        {userSpecialties.map((user, index) => (
           <Col key={index} xs={24} sm={12} md={8} lg={6}>
             <Card
               hoverable
               style={{ width: 250 }}
-              cover={<img alt={doctor?.username} src={doctor?.avatar} />}
+              cover={
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 20,
+                  }}
+                >
+                  <Avatar size={90}>{user.username}</Avatar>
+                </div>
+              }
+              bodyStyle={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <Card.Meta title={doctor?.username} description={"VET DOCTOR"} />
+              <Card.Meta title={user?.username} description={user.specialty} />
             </Card>
           </Col>
         ))}
+        <Col
+          span={24}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Col span={4}>
+            <Button
+              type="primary"
+              style={{
+                marginTop: "10px",
+                paddingLeft: 25,
+                paddingRight: 25,
+                borderRadius: 50,
+              }}
+              icon={<FaHouseMedicalFlag />}
+              onClick={() => navigate(`/professionals`)}
+              block
+            >
+              <span style={{ marginLeft: 5 }}>See all our professionals</span>
+            </Button>
+          </Col>
+        </Col>
       </Row>
     </div>
   );

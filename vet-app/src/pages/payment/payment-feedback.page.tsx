@@ -11,7 +11,6 @@ import {
 } from "antd";
 import BackButton from "components/shared/back-button.component";
 import { useInitTransaction } from "hooks/shopping-cart/init-transaction.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useCallback, useEffect, useState } from "react";
 import { ProcessPaymentService } from "services/process-payment.service";
 import "./payment-feedback.style.scss";
@@ -176,7 +175,7 @@ const PaymentFeedbackPage = () => {
 
   console.log(initPayment);
   return (
-    <GeneralAppShell>
+    <>
       <Row
         align={"top"}
         justify={"center"}
@@ -306,7 +305,7 @@ const PaymentFeedbackPage = () => {
           </Card>
         </Col>
       </Row>
-    </GeneralAppShell>
+    </>
   );
 };
 

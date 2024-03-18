@@ -59,8 +59,8 @@ const useUserRole = () => {
   };
 
   useEffect(() => {
-    loadUserRoles();
-  }, [userRole, userRoles, isLoading, initialFetch, loadUserRoles]);
+    // loadUserRoles();
+  }, [userRole, userRoles, isLoading, initialFetch]);
 
   return {
     userRole,

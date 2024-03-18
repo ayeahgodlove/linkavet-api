@@ -32,10 +32,14 @@ const useAuth = () => {
       dispatch(
         loginUser({ email: userObj.email, password: userObj.password }) as any
       );
+      if(!user.token) {
+       const token = JSON.parse(window.localStorage.getItem("user") || "null");
+       setToken(token.token!);
+      }
       setToken(user.token!);
       // dispatch(setUser())
     },
-    [dispatch]
+    [dispatch, setToken, user]
   );
 
   const registerUserFunction = useCallback(

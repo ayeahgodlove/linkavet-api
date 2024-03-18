@@ -4,7 +4,6 @@ import ListView from "components/product/product-list-view.component";
 import { NoContent } from "components/shared/no-content/no-content.component";
 import { useProduct } from "hooks/product.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +21,7 @@ const ShoppingCartPage: React.FC = () => {
     router("/payment/checkout");
   };
   return (
-    <GeneralAppShell>
+    <>
       <div style={{ padding: "0 2rem", marginBottom: 50 }}>
         <Row gutter={[8, 16]} style={{ marginTop: 50, padding: "0 1rem" }}>
           <Col span={24}>
@@ -76,7 +75,7 @@ const ShoppingCartPage: React.FC = () => {
           <NoContent title="Your shopping cart is empty at the moment" />
         )}
       </div>
-    </GeneralAppShell>
+    </>
   );
 };
 

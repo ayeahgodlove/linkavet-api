@@ -24,6 +24,7 @@ const PostCard: React.FC<IProp> = ({ post, onPostClick }) => {
         bordered={false}
         style={{ padding: 0 }}
         bodyStyle={{ paddingTop: 10 }}
+        hoverable={true}
         cover={
           <img
             alt={post.title}

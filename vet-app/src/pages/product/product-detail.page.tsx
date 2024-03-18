@@ -7,7 +7,6 @@ import { NoContent } from "components/shared/no-content/no-content.component";
 import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
 import { useProduct } from "hooks/product.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { useDispatch } from "react-redux";
@@ -24,7 +23,7 @@ const ProductDetailPage: React.FC = () => {
     dispatch(fetchUsersAsync() as any);
   }, []);
   return (
-    <GeneralAppShell>
+    <>
       {/* <ProductBanner /> */}
       <Row justify={"center"} align={"middle"}>
         <Col xs={23} md={20} style={{ marginTop: 10 }}>
@@ -56,7 +55,7 @@ const ProductDetailPage: React.FC = () => {
           onClick={() => router("/shopping-cart")}
         />
       )}
-    </GeneralAppShell>
+    </>
   );
 };
 

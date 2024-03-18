@@ -1,6 +1,4 @@
-import { Card, Col, Collapse, ConfigProvider, Row, Typography } from "antd";
-import HexagonCard from "components/hexagon-card/hexagon-card.component";
-import GeneralAppShell from "layout/app/general-app-shell";
+import {  Col, Collapse, ConfigProvider, Row, Typography } from "antd";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import theme from "utils/themeConfig";
@@ -65,7 +63,7 @@ const faqs = [
 
 const FaqsPage = () => {
   return (
-    <GeneralAppShell>
+    <>
       <Helmet>
         <title>
           Explore Premium FAQs - Find answers to the questions
@@ -101,7 +99,7 @@ const FaqsPage = () => {
           </Row>
         </div>
       </ConfigProvider>
-    </GeneralAppShell>
+    </>
   );
 };
 

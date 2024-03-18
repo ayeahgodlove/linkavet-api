@@ -86,7 +86,7 @@ const useUser = () => {
 
   useEffect(() => {
     // loadUsers();
-  }, [user, users, isLoading, initialFetch, loadUsers]);
+  }, [user, users, isLoading, initialFetch]);
 
   return {
     user,

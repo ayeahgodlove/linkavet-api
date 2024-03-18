@@ -83,7 +83,7 @@ const useEnrollment = () => {
   }
   useEffect(() => {
     // loadEnrollments();
-  }, [enrollment, enrollments, isLoading, initialFetch, loadEnrollments]);
+  }, [enrollment, enrollments, isLoading, initialFetch]);
 
   return {
     enrollment,

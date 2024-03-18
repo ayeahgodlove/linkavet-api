@@ -5,7 +5,6 @@ import { useCourse } from "hooks/lms/course.hook";
 import { useEnrollment } from "hooks/lms/enrollment.hook";
 import { usePayment } from "hooks/payment.hook";
 import { useInitTransaction } from "hooks/shopping-cart/init-transaction.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import { emptyEnrollment } from "models/lms/enrollment";
 import { IPaymentResponse, emptyPayment } from "models/payment.model";
 import {
@@ -135,114 +134,111 @@ const CourseEnrollmentPage = () => {
   }, []);
   return (
     <>
-      <GeneralAppShell>
-        <Row
-          align={"top"}
-          justify={"center"}
-          gutter={[16, 16]}
-          style={{ marginBottom: 15 }}
-        >
-          <Col span={23}>
-            <BackButton title="Transaction Feedback" />
-          </Col>
-          <Col xs={24} md={13}>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Card title={"Order details"} style={{ width: "100%" }}>
-                <Typography.Title level={5}>
-                  {payResp.data.reference}
-                </Typography.Title>
-                <List itemLayout="horizontal">
-                  <List.Item>
-                    <List.Item.Meta
-                      title={"Username"}
-                      description={enrollment.id}
-                    />
-                  </List.Item>
-                  <List.Item>
-                    <List.Item.Meta
-                      title={"Amount"}
-                      description={initPayment.amount + " XAF"}
-                    />
-                  </List.Item>
-                  <List.Item>
-                    <List.Item.Meta
-                      title={"Address"}
-                      description={initPayment.address}
-                    />
-                  </List.Item>
-                  <List.Item>
-                    <List.Item.Meta
-                      title={"Email"}
-                      description={initPayment.email}
-                    />
-                  </List.Item>
-                  <List.Item>
-                    <List.Item.Meta
-                      title={"Telephone"}
-                      description={initPayment.telephone}
-                    />
-                  </List.Item>
-                  <List.Item>
-                    <List.Item.Meta
-                      title={"Adress"}
-                      description={initPayment.address}
-                    />
-                  </List.Item>
-                  <List.Item>
-                    <List.Item.Meta
-                      title={"Operator"}
-                      description={initTransaction.operator}
-                    />
-                  </List.Item>
-                </List>
-                {error && <Alert message={error.message} />}
-              </Card>
-            </div>
-          </Col>
-          <Col xs={24} md={9}>
-            <Card title={"Instructions"} style={{ width: "100%" }}>
+      <Row
+        align={"top"}
+        justify={"center"}
+        gutter={[16, 16]}
+        style={{ marginBottom: 15 }}
+      >
+        <Col span={23}>
+          <BackButton title="Transaction Feedback" />
+        </Col>
+        <Col xs={24} md={13}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Card title={"Order details"} style={{ width: "100%" }}>
+              <Typography.Title level={5}>
+                {payResp.data.reference}
+              </Typography.Title>
               <List itemLayout="horizontal">
                 <List.Item>
                   <List.Item.Meta
-                    title={
-                      <Typography.Title level={5}>
-                        Dial *126 To Confirm Your Payment
-                      </Typography.Title>
-                    }
-                    description={
-                      <Typography.Text>
-                        Click on Validate Button after confirming the
-                        transaction
-                      </Typography.Text>
-                    }
+                    title={"Username"}
+                    description={enrollment.id}
                   />
                 </List.Item>
                 <List.Item>
                   <List.Item.Meta
-                    title={"Validate"}
-                    description={
-                      <Button
-                        type="primary"
-                        onClick={completePayment}
-                        loading={loading}
-                        disabled={disable}
-                      >
-                        Complete Payment
-                      </Button>
-                    }
+                    title={"Amount"}
+                    description={initPayment.amount + " XAF"}
+                  />
+                </List.Item>
+                <List.Item>
+                  <List.Item.Meta
+                    title={"Address"}
+                    description={initPayment.address}
+                  />
+                </List.Item>
+                <List.Item>
+                  <List.Item.Meta
+                    title={"Email"}
+                    description={initPayment.email}
+                  />
+                </List.Item>
+                <List.Item>
+                  <List.Item.Meta
+                    title={"Telephone"}
+                    description={initPayment.telephone}
+                  />
+                </List.Item>
+                <List.Item>
+                  <List.Item.Meta
+                    title={"Adress"}
+                    description={initPayment.address}
+                  />
+                </List.Item>
+                <List.Item>
+                  <List.Item.Meta
+                    title={"Operator"}
+                    description={initTransaction.operator}
                   />
                 </List.Item>
               </List>
+              {error && <Alert message={error.message} />}
             </Card>
-          </Col>
-        </Row>
-      </GeneralAppShell>
+          </div>
+        </Col>
+        <Col xs={24} md={9}>
+          <Card title={"Instructions"} style={{ width: "100%" }}>
+            <List itemLayout="horizontal">
+              <List.Item>
+                <List.Item.Meta
+                  title={
+                    <Typography.Title level={5}>
+                      Dial *126 To Confirm Your Payment
+                    </Typography.Title>
+                  }
+                  description={
+                    <Typography.Text>
+                      Click on Validate Button after confirming the transaction
+                    </Typography.Text>
+                  }
+                />
+              </List.Item>
+              <List.Item>
+                <List.Item.Meta
+                  title={"Validate"}
+                  description={
+                    <Button
+                      type="primary"
+                      onClick={completePayment}
+                      loading={loading}
+                      disabled={disable}
+                    >
+                      Complete Payment
+                    </Button>
+                  }
+                />
+              </List.Item>
+            </List>
+          </Card>
+        </Col>
+      </Row>
     </>
   );
 };

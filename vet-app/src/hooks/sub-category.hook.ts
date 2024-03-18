@@ -59,8 +59,8 @@ const useSubCategory = () => {
   };
 
   useEffect(() => {
-    loadSubCategories();
-  }, [subCategory, subCategories, isLoading, initialFetch, loadSubCategories]);
+    // loadSubCategories();
+  }, [subCategory, subCategories, isLoading, initialFetch]);
 
   return {
     subCategory,

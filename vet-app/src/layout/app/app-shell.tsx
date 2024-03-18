@@ -45,7 +45,9 @@ const AppShell: React.FC<IProps> = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      dispatch(initialDataAsync() as any);
+      setTimeout(() =>   {
+        dispatch(initialDataAsync() as any);
+      }, 3000);
     }
   }, []);
   return (

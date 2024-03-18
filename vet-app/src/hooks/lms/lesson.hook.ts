@@ -82,7 +82,7 @@ const useLesson = () => {
 
   useEffect(() => {
     // loadLessons();
-  }, [lesson, lessons, isLoading, initialFetch, loadLessons]);
+  }, [lesson, lessons, isLoading, initialFetch]);
 
   return {
     lesson,

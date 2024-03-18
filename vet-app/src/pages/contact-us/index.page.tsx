@@ -10,7 +10,6 @@ import {
   Space,
   Typography,
 } from "antd";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { BiLocationPlus, BiMailSend, BiPhone } from "react-icons/bi";
@@ -23,7 +22,7 @@ const ContactUsPage = () => {
     console.log(values);
   };
   return (
-    <GeneralAppShell>
+    <>
       <Helmet>
         <title>Connect with Linkavet - Your Pet's Wellbeing Starts Here</title>
         <meta
@@ -149,7 +148,7 @@ const ContactUsPage = () => {
           </Row>
         </div>
       </ConfigProvider>
-    </GeneralAppShell>
+    </>
   );
 };
 

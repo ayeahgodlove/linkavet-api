@@ -3,7 +3,6 @@ import BackButton from "components/shared/back-button.component";
 import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
 import { useCourse } from "hooks/lms/course.hook";
 import { useLesson } from "hooks/lms/lesson.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
 import ReactPlayer from "react-player/youtube";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +23,7 @@ const LessonPlayerPage = () => {
     );
   };
   return (
-    <GeneralAppShell>
+    <>
       <Row
         justify={"center"}
         style={{ marginTop: "1rem", marginBottom: "2rem" }}
@@ -63,7 +62,7 @@ const LessonPlayerPage = () => {
           </Card>
         </Col>
       </Row>
-    </GeneralAppShell>
+    </>
   );
 };
 

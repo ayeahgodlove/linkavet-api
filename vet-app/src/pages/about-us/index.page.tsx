@@ -1,6 +1,5 @@
 import { Card, Carousel, Col, ConfigProvider, Row, Typography } from "antd";
 import { SpinnerComponent } from "components/shared/spinner";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
 import theme from "utils/themeConfig";
 import "pure-react-carousel/dist/react-carousel.es.css";
@@ -58,7 +57,7 @@ const banners = [
 const AboutUsPages = () => {
   const { width } = useWindowSize();
   return (
-    <GeneralAppShell>
+    <>
       <Helmet>
         <title>
           Meet the Heart Behind Linkavet - Where Passion Meets Pet Care
@@ -282,7 +281,7 @@ const AboutUsPages = () => {
           </Col>
         </Row>
       </ConfigProvider>
-    </GeneralAppShell>
+    </>
   );
 };
 

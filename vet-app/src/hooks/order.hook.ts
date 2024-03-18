@@ -74,8 +74,8 @@ const useOrder = () => {
       });
   };
   useEffect(() => {
-    loadOrders();
-  }, [order, orders, isLoading, initialFetch, loadOrders]);
+    // loadOrders();
+  }, [order, orders, isLoading, initialFetch]);
 
   return {
     order,

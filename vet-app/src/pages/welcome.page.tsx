@@ -3,20 +3,19 @@ import BuyInThreeSteps from "components/buy-in-three-steps/buy-in-three-steps.co
 import Review from "components/review/review.component";
 import Subscribe from "components/subscribe/subscribe.component";
 import { WhyLinkaVet } from "components/why-honeyman/why-linkavet.component";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect } from "react";
 import { getConfiguration } from "redux/action/initial.action";
 import { Helmet } from "react-helmet-async";
 import OurServices from "components/service/service.component";
 import VetDoctorsComponent from "components/vet/vet-doctor.component";
+import BlogPost from "components/post/post.component";
 
 const WelcomePage: React.FC = () => {
   useEffect(() => {
-    // debugger
     getConfiguration();
   }, []);
   return (
-    <GeneralAppShell>
+    <>
       <Helmet>
         <title>
           Comprehensive Veterinary Services and Premium Vet Products for Your
@@ -35,6 +34,8 @@ const WelcomePage: React.FC = () => {
       {/* meet our team */}
       <VetDoctorsComponent />
 
+      {/* pet connection */}
+      <BlogPost />
       {/* startup in 3 steps */}
       <BuyInThreeSteps />
 
@@ -47,7 +48,7 @@ const WelcomePage: React.FC = () => {
       <Review />
 
       {/* product list */}
-    </GeneralAppShell>
+    </>
   );
 };
 

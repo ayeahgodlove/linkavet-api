@@ -73,7 +73,7 @@ const useConsultation = () => {
   }, []);
   useEffect(() => {
     // loadConsultations();
-  }, [consultation, consultations, isLoading, initialFetch, loadConsultations]);
+  }, [consultation, consultations, isLoading, initialFetch]);
 
   return {
     consultation,

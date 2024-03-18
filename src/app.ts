@@ -41,6 +41,7 @@ import { seo } from "./utils/seo";
 import fs from "fs";
 import userRoleRouter from "./presentation/routes/user-role.route";
 import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
+import userSpecialtyRouter from "./presentation/routes/user-specialty.route";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -138,6 +139,7 @@ db.connection()
 
     app.use("/api/reviews", reviewRouter);
     app.use("/api/user-roles", userRoleRouter);
+    app.use("/api/user-specialties", userSpecialtyRouter);
 
     app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
 

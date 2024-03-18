@@ -57,8 +57,8 @@ const useDocument = () => {
   };
 
   useEffect(() => {
-    loadDocuments();
-  }, [document, documents, isLoading, initialFetch, loadDocuments]);
+    // loadDocuments();
+  }, [document, documents, isLoading, initialFetch]);
 
   return {
     document,

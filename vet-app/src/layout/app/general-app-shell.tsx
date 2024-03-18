@@ -48,8 +48,8 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    getCategories();
-    getTags();
+    // getCategories();
+    // getTags();
   }, []);
 
   return (
@@ -136,28 +136,28 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                     },
                   ],
                 },
-                {
-                  title: <strong>Browse by Categories</strong>,
-                  items: [
-                    ...categories.map((c) => {
-                      return {
-                        title: c.name,
-                        url: `/browse/?category=${c.name}`,
-                      };
-                    }),
-                  ],
-                },
-                {
-                  title: <strong>Browse by Tags</strong>,
-                  items: [
-                    ...tags.map((c) => {
-                      return {
-                        title: c.name,
-                        url: `/browse/?tag=${c.name}`,
-                      };
-                    }),
-                  ],
-                },
+                // {
+                //   title: <strong>Browse by Categories</strong>,
+                //   items: [
+                //     ...categories.map((c) => {
+                //       return {
+                //         title: c.name,
+                //         url: `/browse/?category=${c.name}`,
+                //       };
+                //     }),
+                //   ],
+                // },
+                // {
+                //   title: <strong>Browse by Tags</strong>,
+                //   items: [
+                //     ...tags.map((c) => {
+                //       return {
+                //         title: c.name,
+                //         url: `/browse/?tag=${c.name}`,
+                //       };
+                //     }),
+                //   ],
+                // },
                 {
                   title: <strong>About Us</strong>,
                   items: [

@@ -25,7 +25,7 @@ const BuyInThreeSteps: React.FC = () => {
           paddingBottom: "8rem",
         }}
       >
-        <Col span={22}>
+        <Col xs={22} md={18} lg={18} xl={14}   style={{ margin: "5rem 0" }}>
           <Title
             style={{
               textAlign: "center",
@@ -34,7 +34,7 @@ const BuyInThreeSteps: React.FC = () => {
               marginBottom: 0,
             }}
           >
-            <span style={{ color: green.primary}}>Get Sarted</span> in 3 Easy Steps
+            <span  className="gradient-title">Get Sarted in 3 Easy Steps</span>
           </Title>
           <Paragraph style={{ fontSize: 17, textAlign: "center" }}>
             <p>

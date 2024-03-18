@@ -79,7 +79,7 @@ const useQuiz = () => {
   },[])
   useEffect(() => {
     // loadQuizs();
-  }, [quiz, quizs, isLoading, initialFetch, loadQuizs]);
+  }, [quiz, quizs, isLoading, initialFetch]);
 
   return {
     quiz,

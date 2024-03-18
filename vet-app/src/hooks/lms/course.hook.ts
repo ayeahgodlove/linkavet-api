@@ -73,7 +73,7 @@ const useCourse = () => {
   }, []);
   useEffect(() => {
     // loadCourses();
-  }, [course, courses, isLoading, initialFetch, loadCourses]);
+  }, [course, courses, isLoading, initialFetch]);
 
   return {
     course,

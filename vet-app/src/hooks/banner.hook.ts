@@ -83,8 +83,8 @@ const useBanner = () => {
   };
 
   useEffect(() => {
-    loadBanners();
-  }, [banner, banners, isLoading, initialFetch, loadBanners]);
+    // loadBanners();
+  }, [banner, banners, isLoading, initialFetch]);
 
   return {
     banner,

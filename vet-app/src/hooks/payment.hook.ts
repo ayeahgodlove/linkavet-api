@@ -57,8 +57,8 @@ const usePayment = () => {
   };
 
   useEffect(() => {
-    loadPayments();
-  }, [payment, payments, isLoading, initialFetch, loadPayments]);
+    // loadPayments();
+  }, [payment, payments, isLoading, initialFetch]);
 
   return {
     payment,

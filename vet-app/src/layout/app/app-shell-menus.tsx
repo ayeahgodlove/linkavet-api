@@ -262,6 +262,16 @@ export const useAppShellMenus = () => {
           icon: <FiUserX size={21} color="#08a30a" />,
           roles: [ROLES.ADMIN],
         },
+        {
+          label: (
+            <Link to="/admin/user-specialties" style={{ padding: 0 }}>
+              User Specialties
+            </Link>
+          ),
+          key: "user-specialties",
+          icon: <FiUserX size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
+        },
       ],
       roles: [ROLES.ADMIN],
     }, // remember to pass the key prop
@@ -661,7 +671,7 @@ export const useAppShellMenus = () => {
             {
               label: (
                 <Link
-                  to="/profile/tab?=settings"
+                  to="/profile?=settings"
                   // onClick={() => handleRoute('settings')}
                 >
                   My Settings

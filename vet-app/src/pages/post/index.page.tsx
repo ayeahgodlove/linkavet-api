@@ -2,7 +2,6 @@ import { Col, Divider, Row, Typography } from "antd";
 import PostList from "components/post/post-list.component";
 import PageBannerComponent from "components/shared/page-banner/page-banner.component";
 import { useAuth } from "hooks/auth/auth.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useDispatch } from "react-redux";
@@ -15,7 +14,7 @@ const PostPage: React.FC = () => {
     dispatch(fetchPostsAsync() as any);
   }, [isLoading]);
   return (
-    <GeneralAppShell>
+    <>
       <Helmet>
         <title>
           Explore Premium Vet Products - Your Pet's Wellbeing, Our Priority
@@ -44,7 +43,7 @@ const PostPage: React.FC = () => {
         </Col>
       </Row>
       <PostList />
-    </GeneralAppShell>
+    </>
   );
 };
 

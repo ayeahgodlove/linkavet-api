@@ -121,15 +121,10 @@ const DashboardPage: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
   const { width } = useWindowSize();
   const { items } = useTabHeaders(width);
-  // const { session } = useMessageContext();
 
   if (!isAuthenticated || !user) {
     return <Navigate to={"/auth/login"} />;
   }
-
-  // if (session.isRedirect) {
-  //   return <Navigate to={session.redirectTo!} />;
-  // }
 
   const onPanelChange = (value: Dayjs, mode: CalendarProps<Dayjs>["mode"]) => {
     console.log(value.format("YYYY-MM-DD"), mode);

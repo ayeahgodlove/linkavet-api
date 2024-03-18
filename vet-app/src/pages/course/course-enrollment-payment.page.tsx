@@ -16,7 +16,6 @@ import {
 } from "antd";
 import BackButton from "components/shared/back-button.component";
 import { useCourse } from "hooks/lms/course.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect, useState } from "react";
 import "./course-detail.style.scss";
 import { useNavigate } from "react-router-dom";
@@ -81,7 +80,7 @@ const CourseEnrollmentPaymentPage: React.FC = () => {
   useEffect(() => {}, [mode, method]);
 
   return (
-    <GeneralAppShell>
+    <>
       <Row className="checkout-container">
         <Col xs={24} md={14} className="checkout-form">
           <BackButton title="Shopping Cart" />
@@ -289,7 +288,7 @@ const CourseEnrollmentPaymentPage: React.FC = () => {
           </>
         </Col>
       </Row>
-    </GeneralAppShell>
+    </>
   );
 };
 

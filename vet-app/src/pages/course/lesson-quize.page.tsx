@@ -3,7 +3,6 @@ import BackButton from "components/shared/back-button.component";
 import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
 import { useLesson } from "hooks/lms/lesson.hook";
 import { useQuiz } from "hooks/lms/quiz.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React from "react";
 
 const LessonQuizePage = () => {
@@ -13,7 +12,7 @@ const LessonQuizePage = () => {
   console.log("test: ", getLessonQuizes(lesson.id));
   return (
     <>
-      <GeneralAppShell>
+      <>
         <Row
           justify={"center"}
           style={{ marginTop: "1rem", marginBottom: "2rem" }}
@@ -49,7 +48,7 @@ const LessonQuizePage = () => {
             )}
           </Col>
         </Row>
-      </GeneralAppShell>
+      </>
     </>
   );
 };

@@ -15,7 +15,6 @@ import {
   Typography,
   message,
 } from "antd";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect, useState } from "react";
 import "./checkout.style.scss";
 import { ProcessPaymentService } from "services/process-payment.service";
@@ -83,7 +82,7 @@ export const PageCheckoutPage = () => {
   useEffect(() => {}, [mode, method]);
 
   return (
-    <GeneralAppShell>
+    <>
       <Row className="checkout-container">
         <Col xs={24} md={14} className="checkout-form">
           <BackButton title="Shopping Cart" />
@@ -258,6 +257,6 @@ export const PageCheckoutPage = () => {
           />
         </Col>
       </Row>
-    </GeneralAppShell>
+    </>
   );
 };

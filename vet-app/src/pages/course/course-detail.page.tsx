@@ -12,7 +12,6 @@ import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.c
 import { useCourse } from "hooks/lms/course.hook";
 import { useLesson } from "hooks/lms/lesson.hook";
 import { useUser } from "hooks/user.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect } from "react";
 import "./course-detail.style.scss";
 import { FiPlayCircle } from "react-icons/fi";
@@ -56,7 +55,7 @@ const courseDetailPage: React.FC = () => {
   }, []);
 
   return (
-    <GeneralAppShell>
+    <>
       <Row
         justify={"center"}
         style={{ marginTop: "1rem" }}
@@ -199,7 +198,7 @@ const courseDetailPage: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </GeneralAppShell>
+    </>
   );
 };
 

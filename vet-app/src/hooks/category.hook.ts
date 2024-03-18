@@ -68,7 +68,7 @@ const useCategory = () => {
   }, []) 
   useEffect(() => {
     // loadCategories();
-  }, [category, categories, isLoading, initialFetch, loadCategories]);
+  }, [category, categories, isLoading, initialFetch]);
 
   return {
     category,

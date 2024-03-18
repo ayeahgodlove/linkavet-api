@@ -2,7 +2,6 @@ import { Col, Divider, Row, Typography } from "antd";
 import CourseList from "components/course/course-list.component";
 import PageBannerComponent from "components/shared/page-banner/page-banner.component";
 import { useAuth } from "hooks/auth/auth.hook";
-import GeneralAppShell from "layout/app/general-app-shell";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useDispatch } from "react-redux";
@@ -15,7 +14,7 @@ const CoursePage: React.FC = () => {
     dispatch(fetchCoursesAsync() as any);
   }, [isLoading]);
   return (
-    <GeneralAppShell>
+    <>
         <Helmet>
         <title>
         Empower Yourself with Knowledge: Veterinary Courses Tailored for Pet Enthusiasts
@@ -44,7 +43,7 @@ const CoursePage: React.FC = () => {
         </Col>
       </Row>
       <CourseList />
-    </GeneralAppShell>
+    </>
   );
 };
 
