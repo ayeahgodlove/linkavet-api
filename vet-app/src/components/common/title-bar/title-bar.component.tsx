@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import './title-bar.styles.scss'
 
 type Props = {
-    title: string
+    title: string | React.ReactNode
     subTitle?: string
     goBack?: boolean
     showButton?: boolean

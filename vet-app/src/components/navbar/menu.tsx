@@ -7,6 +7,7 @@ import {
 } from "react-icons/md";
 import { FiHome, FiPhoneCall } from "react-icons/fi";
 import React from "react";
+import { GrServices } from "react-icons/gr";
 
 const GeneralMenuItemsWithIcons: MenuProps["items"] = [
   {
@@ -17,6 +18,15 @@ const GeneralMenuItemsWithIcons: MenuProps["items"] = [
     ),
     key: "home",
     icon: <FiHome size={21} color="#f77908" />,
+  },
+  {
+    label: (
+      <NavLink to="/our_services" style={{ padding: 0 }}>
+        Services
+      </NavLink>
+    ),
+    key: "services",
+    icon: <GrServices size={21} color="#f77908" />,
   },
   {
     label: (
@@ -65,6 +75,14 @@ const GeneralMenuItemsWithoutIcons: MenuProps["items"] = [
       </NavLink>
     ),
     key: "home",
+  },
+  {
+    label: (
+      <NavLink to="/our_services" style={{ padding: 0 }}>
+        Services
+      </NavLink>
+    ),
+    key: "services",
   },
   {
     label: (

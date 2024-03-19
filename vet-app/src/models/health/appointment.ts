@@ -9,13 +9,13 @@ export interface IAppointment {
   doctorId: string;
   appointmentDate: Date;
   appointmentTime: Date;
-  durationMinutes: number;
   isConfirmed: boolean;
   fullName: string;
   email: string;
   contact: string;
   symptoms: string;
   status: string;
+  roomId: string;
 }
 
 export const emptyAppointment: IAppointment = {
@@ -23,14 +23,14 @@ export const emptyAppointment: IAppointment = {
   userId: "",
   doctorId: "",
   appointmentDate: dayjs(new Date()) as any,
-  durationMinutes: 0,
   isConfirmed: false,
   appointmentTime: dayjs(new Date()) as any,
   fullName: "",
   email: "",
   contact: "",
   symptoms: "",
-  status: STATUS.PENDING
+  status: STATUS.PENDING,
+  roomId: ""
 };
 
 export interface IAppointmentState extends IBaseState {

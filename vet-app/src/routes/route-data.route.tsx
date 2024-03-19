@@ -28,6 +28,9 @@ import UnAuthorizedPage from "pages/unauthorized.page";
 import LessonPlayerPage from "pages/course/lesson-player.page";
 import LessonQuizePage from "pages/course/lesson-quize.page";
 import BookAppointmentsPage from "pages/service/book.page";
+import AppointmentListsPage from "pages/service/appointment_lists.page";
+import AppointmentDetailPage from "pages/service/appointment_detail.page";
+import ServicesPage from "pages/service/service.page";
 
 export const routes: IRoute[] = [
   /**
@@ -152,10 +155,28 @@ export const routes: IRoute[] = [
     component: <AboutUsPages />,
   },
   {
-    path: "/services/book-appointments",
+    path: "/book-appointments",
     private: false,
     exact: true,
     component: <BookAppointmentsPage />,
+  },
+  {
+    path: "/appointments",
+    private: false,
+    exact: true,
+    component: <AppointmentListsPage />,
+  },
+  {
+    path: "/appointments/:appointment",
+    private: false,
+    exact: true,
+    component: <AppointmentDetailPage />,
+  },
+  {
+    path: "/our_services",
+    private: false,
+    exact: true,
+    component: <ServicesPage />,
   },
   /**
    * dashboard route

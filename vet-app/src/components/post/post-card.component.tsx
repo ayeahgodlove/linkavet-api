@@ -17,13 +17,10 @@ const PostCard: React.FC<IProp> = ({ post, onPostClick }) => {
   return (
     <List.Item
       key={post.id}
-      className="post-list-item"
       style={{ padding: "4px 8px" }}
     >
       <Card
         bordered={false}
-        style={{ padding: 0 }}
-        bodyStyle={{ paddingTop: 10 }}
         hoverable={true}
         cover={
           <img
@@ -32,6 +29,7 @@ const PostCard: React.FC<IProp> = ({ post, onPostClick }) => {
           />
         }
         className="post-card"
+        key={post.id}
       >
         <div
           style={{

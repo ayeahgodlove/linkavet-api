@@ -29,10 +29,10 @@ const AdminAppointmentPage: React.FC = () => {
   return (
     <>
       <div style={{ margin: "1rem" }}>
-        <PageBreadCrumbs items={["Configurations", "Appointments"]} />
+        <PageBreadCrumbs items={["Health", "Appointments"]} />
         <TitleBar
           title={"Appointments"}
-          subTitle={"View and Create Appointments"}
+          subTitle={"View and manage Appointments"}
           // showButton={true}
           buttonLabel={"Add Record"}
           handleShow={createAppointment}

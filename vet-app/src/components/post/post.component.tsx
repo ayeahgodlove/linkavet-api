@@ -1,9 +1,11 @@
 import React from "react";
-import { Button, Row, Col, Typography } from "antd";
+import { Button, Row, Col, Typography, Card } from "antd";
 import useWindowSize from "hooks/shared/window-resize.hook";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { usePost } from "hooks/post.hook";
 import PostList from "./post-list.component";
+import { API_URL_UPLOADS_POSTS } from "config/constant";
+import slugify from "slugify";
 
 const buttonStyle = {
   marginTop: "10px",

@@ -13,41 +13,33 @@ type Props = {
 
 const AppointmentForm: React.FC<Props> = ({ formMode }) => {
   const [form] = Form.useForm();
-  const { addAppointment, editAppointment, appointment } = useAppointment();
+  const { editAppointment, appointment } = useAppointment();
   const { setShow } = useModalContext();
   const { initFormData } = useFormInit();
 
   const onFinish = async (values: any) => {
     const obj: IAppointment = {
-      ...emptyAppointment,
+      ...appointment,
       ...values,
     };
 
-    if (formMode === UpdateMode.ADD) {
-      const feedback = await addAppointment(obj);
-      if (feedback) {
-        message.success("Appointment created successfully!");
-        setShow(false);
-      } else {
-        message.error("failed to create");
-        setShow(true);
-      }
-    }
+    console.log("obj: ", obj)
 
-    if (formMode === UpdateMode.EDIT) {
-      const feedback = await editAppointment(obj);
-      if (feedback) {
-        message.success("Appointment updated successfully!");
-        setShow(false);
-      } else {
-        message.error("failed to update");
-        setShow(true);
-      }
+    const feedback = await editAppointment(obj);
+    if (feedback) {
+      message.success("Appointment Approved successfully!");
+      setShow(false);
+    } else {
+      message.error("failed to approve");
+      setShow(true);
     }
   };
 
   useEffect(() => {
-    initFormData<IAppointment>(form, formMode, appointment, ["appointmentDate", "appointmentTime", ]);
+    initFormData<IAppointment>(form, formMode, appointment, [
+      "appointmentDate",
+      "appointmentTime",
+    ]);
   }, []);
   return (
     <ConfigProvider theme={theme}>
@@ -55,11 +47,11 @@ const AppointmentForm: React.FC<Props> = ({ formMode }) => {
         form={form}
         onFinish={onFinish}
         layout="vertical"
-        initialValues={emptyAppointment}
+        initialValues={appointment}
       >
         <Form.Item
-          name={"title"}
-          label="Title"
+          name={"roomId"}
+          label="Room ID"
           required={true}
           rules={[
             { required: true, message: "This field is a required field" },
@@ -68,18 +60,6 @@ const AppointmentForm: React.FC<Props> = ({ formMode }) => {
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          name={"description"}
-          label="Description"
-          required={true}
-          rules={[
-            { required: true, message: "This field is a required field" },
-          ]}
-          style={{ marginBottom: 10 }}
-        >
-          <Input.TextArea rows={3} />
-        </Form.Item>
-
         <Space>
           <Button type="primary" htmlType="submit">
             Save

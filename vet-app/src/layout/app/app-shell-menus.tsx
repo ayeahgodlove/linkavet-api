@@ -426,6 +426,14 @@ export const useAppShellMenus = () => {
     },
     {
       label: (
+        <NavLink to="/our_services" style={{ padding: 0 }}>
+          Services
+        </NavLink>
+      ),
+      key: "services",
+    },
+    {
+      label: (
         <NavLink to="/products" style={{ padding: 0 }}>
           Products
         </NavLink>
@@ -448,14 +456,6 @@ export const useAppShellMenus = () => {
         </NavLink>
       ),
       key: "courses",
-    },
-    {
-      label: (
-        <NavLink to="/about-us" style={{ padding: 0 }}>
-          About Us
-        </NavLink>
-      ),
-      key: "about-us",
     },
     {
       label: (

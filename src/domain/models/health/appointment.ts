@@ -7,18 +7,17 @@ export interface IAppointment {
   doctorId: string;
   appointmentDate: Date;
   appointmentTime: Date;
-  durationMinutes: number;
   isConfirmed: boolean;
-  fullName: string;
+  fullName: string; 
   email: string;
   contact: string;
   symptoms: string;
+  roomId: string;
   status: STATUS;
 }
 
 export const emptyAppointment: IAppointment = {
   id: "",
-  durationMinutes: 0,
   isConfirmed: false,
   userId: "",
   doctorId: "",
@@ -28,7 +27,8 @@ export const emptyAppointment: IAppointment = {
   email: "",
   contact: "",
   symptoms: "",
-  status: STATUS.PENDING
+  status: STATUS.PENDING,
+  roomId: ""
 };
 
 export interface IAppointmentResponse extends IBaseResponse {

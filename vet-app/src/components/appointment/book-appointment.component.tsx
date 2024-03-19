@@ -16,22 +16,31 @@ import { useAppointment } from "hooks/health/appointment.hook";
 import { IAppointment, emptyAppointment } from "models/health/appointment";
 import { useFormInit } from "hooks/shared/form-init.hook";
 import { UpdateMode } from "models/shared/update-mode.enum";
+import { useAuth } from "hooks/auth/auth.hook";
+import { useNavigate } from "react-router-dom";
 
 const AppointmentForm: React.FC = () => {
   const { userSpecialties } = useUserSpecialty();
   const { addAppointment, appointment } = useAppointment();
   const { initFormData } = useFormInit();
+  const { user } = useAuth();
   const [form] = Form.useForm();
+  const navigate = useNavigate()
 
   const handleSubmit = async (values: any) => {
     const obj: IAppointment = {
       ...emptyAppointment,
       ...values,
+      userId: user.id,
+      isConfirmed: false,
+      durationMinutes: 0,
     };
 
+    console.log("formData: ", obj);
     const feedback = await addAppointment(obj);
     if (feedback) {
       message.success("Appointment set successfully!");
+      navigate("/appointments")
     } else {
       message.error("failed to set appointment!");
     }
@@ -56,10 +65,11 @@ const AppointmentForm: React.FC = () => {
       layout="vertical"
       initialValues={{ ...emptyAppointment }}
       onFinish={handleSubmit}
+      form={form}
     >
       <Form.Item
         label="Full Name"
-        name={"name"}
+        name={"fullName"}
         rules={[{ required: true, message: "Your Name is Required!" }]}
       >
         <Input placeholder="Enter your name" />
@@ -79,7 +89,7 @@ const AppointmentForm: React.FC = () => {
         <Col xs={24} md={12}>
           <Form.Item
             label="Contact Number"
-            name={"contactNo"}
+            name={"contact"}
             rules={[{ required: true, message: "Your Contact is Required!" }]}
             style={{ marginLeft: 10 }}
           >
@@ -90,7 +100,7 @@ const AppointmentForm: React.FC = () => {
 
       <Form.Item
         label="Doctor's Name"
-        name={"doctor"}
+        name={"doctorId"}
         rules={[
           {
             required: true,
@@ -132,10 +142,7 @@ const AppointmentForm: React.FC = () => {
             rules={[{ required: true, message: "Time is Required!" }]}
             style={{ marginLeft: 10 }}
           >
-            <DatePicker
-              picker={"time"}
-              style={{ width: "100%" }}
-            />
+            <DatePicker picker={"time"} style={{ width: "100%" }} />
           </Form.Item>
         </Col>
       </Row>
@@ -148,11 +155,9 @@ const AppointmentForm: React.FC = () => {
         <Input.TextArea rows={3} placeholder="Enter symptoms" />
       </Form.Item>
 
-      <Form.Item>
-        <Button type="primary" onClick={handleSubmit}>
-          Book Appointment
-        </Button>
-      </Form.Item>
+      <Button htmlType="submit" type="primary">
+        Book Appointment
+      </Button>
     </Form>
   );
 };

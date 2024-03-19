@@ -47,9 +47,6 @@ export class Appointment extends Model<IAppointment> {
   appointmentTime!: Date;
 
   @Column
-  durationMinutes!: number;
-
-  @Column
   isConfirmed!: boolean;
 
   @Column({
@@ -81,6 +78,12 @@ export class Appointment extends Model<IAppointment> {
     allowNull: false,
   })
   symptoms!: string;
+
+  @Column({
+    type: DataType.STRING(255),
+    allowNull: true,
+  })
+  roomId!: string;
 
   @BelongsTo(() => User)
   user!: User;

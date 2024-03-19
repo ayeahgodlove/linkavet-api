@@ -24,14 +24,11 @@ export class AppointmentRequestDto {
   @IsString()
   doctorId: string;
 
-  @IsDate()
+  // @IsDate()
   appointmentDate: Date;
 
-  @IsDate()
+  // @IsDate()
   appointmentTime: Date;
-
-  @IsNumber()
-  durationMinutes: number;
 
   @IsBoolean()
   isConfirmed: boolean;
@@ -55,18 +52,20 @@ export class AppointmentRequestDto {
 
   status: STATUS;
 
+  roomId: string;
+
   constructor(data: IAppointment) {
     this.userId = data.userId;
     this.doctorId = data.doctorId;
     this.appointmentDate = data.appointmentDate;
     this.appointmentTime = data.appointmentTime;
-    this.durationMinutes = data.durationMinutes;
     this.isConfirmed = data.isConfirmed;
     this.fullName = data.fullName;
     this.email = data.email;
     this.contact = data.contact;
     this.symptoms = data.symptoms;
     this.status = data.status
+    this.roomId = data.roomId
   }
 
   toData(): IAppointment {
@@ -77,13 +76,13 @@ export class AppointmentRequestDto {
       doctorId: this.doctorId,
       appointmentDate: this.appointmentDate,
       appointmentTime: this.appointmentTime,
-      durationMinutes: this.durationMinutes,
       isConfirmed: this.isConfirmed,
       fullName: this.fullName,
       email: this.email,
       contact: this.contact,
       symptoms: this.symptoms,
-      status: this.status
+      status: this.status,
+      roomId: this.roomId
     };
   }
 
@@ -94,13 +93,13 @@ export class AppointmentRequestDto {
       doctorId: data.doctorId,
       appointmentDate: data.appointmentDate,
       appointmentTime: data.appointmentTime,
-      durationMinutes: data.durationMinutes,
       isConfirmed: data.isConfirmed,
       fullName: data.fullName,
       email: data.email,
       contact: data.contact,
       symptoms: data.symptoms,
-      status: data.status
+      status: data.status,
+      roomId: data.roomId
     };
   }
 }

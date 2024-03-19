@@ -7,7 +7,6 @@ import {
   Row,
   Typography,
 } from "antd";
-import useWindowSize from "hooks/shared/window-resize.hook";
 import React from "react";
 
 const { Title, Paragraph } = Typography;
@@ -15,13 +14,13 @@ const Subscribe = () => {
   const onFinish = (values: any) => {
     console.log(values);
   };
-  const { width } = useWindowSize();
   return (
     <Card
       bordered={false}
       style={{
         background: "linear-gradient(7deg, rgba(184, 246, 185, 1), transparent)",
         borderRadius: 0,
+        padding: 30
       }}
     >
       <Row justify={"center"} align={"middle"}>
@@ -79,7 +78,6 @@ const Subscribe = () => {
                   paddingLeft: 15,
                   paddingRight: 15,
                   width: "100%",
-                  // width: width > 768 ? "30.5rem" : "100%",
                 }}
                 block={true}
               >
