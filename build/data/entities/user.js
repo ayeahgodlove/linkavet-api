@@ -16,6 +16,7 @@ const user_doc_1 = require("./user-doc");
 const user_role_1 = require("./user-role");
 const store_1 = require("./store");
 const user_store_1 = require("./user-store");
+const user_specialty_1 = require("./user-specialty");
 let User = class User extends sequelize_typescript_1.Model {
     authStrategy;
     firstname;
@@ -31,6 +32,8 @@ let User = class User extends sequelize_typescript_1.Model {
     // verification paramters
     verified;
     userDoc;
+    // Define association to UserSpeciality entity
+    specialty;
     // Define the many-to-many association with Role
     roles;
     stores;
@@ -133,6 +136,10 @@ __decorate([
     (0, sequelize_typescript_1.HasOne)(() => user_doc_1.UserDoc),
     __metadata("design:type", user_doc_1.UserDoc)
 ], User.prototype, "userDoc", void 0);
+__decorate([
+    (0, sequelize_typescript_1.HasMany)(() => user_specialty_1.UserSpecialty),
+    __metadata("design:type", user_specialty_1.UserSpecialty)
+], User.prototype, "specialty", void 0);
 __decorate([
     (0, sequelize_typescript_1.BelongsToMany)(() => role_1.Role, () => user_role_1.UserRole),
     __metadata("design:type", Array)

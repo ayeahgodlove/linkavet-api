@@ -17,6 +17,7 @@ const course_1 = require("./course");
 const quiz_1 = require("./quiz");
 let Lesson = class Lesson extends sequelize_typescript_1.Model {
     title;
+    url;
     description;
     content;
     duration;
@@ -54,6 +55,14 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Lesson.prototype, "title", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: true,
+        unique: false,
+    }),
+    __metadata("design:type", String)
+], Lesson.prototype, "url", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.TEXT,

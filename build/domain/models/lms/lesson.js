@@ -13,5 +13,6 @@ exports.emptyLesson = {
     objectives: [],
     keywords: [],
     author: "",
-    courseId: ""
+    courseId: "",
+    url: ""
 };

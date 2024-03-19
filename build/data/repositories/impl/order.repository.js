@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderRepository = void 0;
 const order_1 = require("../../entities/order");
 const not_found_exception_1 = require("../../../shared/exceptions/not-found.exception");
+const product_1 = require("../../entities/product");
 class OrderRepository {
     /**
      *
@@ -102,6 +103,22 @@ class OrderRepository {
         }
         catch (error) {
             throw error;
+        }
+    }
+    async updateProductTable(products) {
+        try {
+            for (const product of products) {
+                const item = await product_1.Product.findByPk(product.productId);
+                if (item) {
+                    const remainQtty = item.dataValues.qtty;
+                    const qtty = remainQtty - product.qtty;
+                    await product_1.Product.update({ qtty: qtty }, { where: { id: product.productId } });
+                }
+            }
+            console.log("Products updated successfully");
+        }
+        catch (error) {
+            console.error("Error updating products:", error);
         }
     }
 }

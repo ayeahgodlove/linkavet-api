@@ -49,6 +49,8 @@ export class LessonRequestDto {
   @IsString()
   courseId: string;
 
+  url: string;
+
   constructor(data: ILesson) {
     this.title = data.title;
     this.description = data.description;
@@ -61,6 +63,7 @@ export class LessonRequestDto {
     this.keywords = data.keywords;
     this.author = data.author;
     this.courseId = data.courseId;
+    this.url = data.url;
   }
 
   toData(): ILesson {
@@ -77,7 +80,8 @@ export class LessonRequestDto {
       objectives: this.objectives,
       keywords: this.keywords,
       author: this.author,
-      courseId: this.courseId
+      courseId: this.courseId,
+      url: this.url
     };
   }
 
@@ -94,7 +98,8 @@ export class LessonRequestDto {
       keywords: data.keywords,
       difficulty: data.difficulty,
       author: data.author,
-      courseId: data.courseId
+      courseId: data.courseId,
+      url: data.url
     };
   }
 }

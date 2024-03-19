@@ -16,6 +16,7 @@ const email_1 = require("../../utils/email");
 const orderRepository = new order_repository_1.OrderRepository();
 const orderUseCase = new order_usecase_1.OrderUseCase(orderRepository);
 const orderMapper = new mapper_1.OrderMapper();
+const productMapper = new mapper_1.ProductMapper();
 const productOrderRepository = new product_order_repository_1.ProductOrderRepository();
 const productOrderUseCase = new product_order_usecase_1.ProductOrderUseCase(productOrderRepository);
 class OrdersController {
@@ -47,6 +48,7 @@ class OrdersController {
                     email: orderResponse.dataValues.email,
                     username: orderResponse.dataValues.username,
                 });
+                await orderUseCase.updateProducts(productOrdersVm);
                 res.status(201).json({
                     data: orderResponse.toJSON(),
                     message: "Order created Successfully!",
@@ -171,7 +173,32 @@ class OrdersController {
                 message: error.message,
                 data: null,
                 validationErrors: [error],
+                success: false,
+            });
+        }
+    }
+    async getOrderNo(req, res) {
+        try {
+            const orderId = req.params.orderId;
+            const order = await orderUseCase.getOrderByOrderNo(orderId);
+            if (!order) {
+                throw new not_found_exception_1.NotFoundException("Order", orderId);
+            }
+            const products = await order.$get("products");
+            const productsDTO = productMapper.toDTOs(products);
+            res.status(200).json({
+                message: `Operation successfully completed!`,
+                validationErrors: [],
                 success: true,
+                data: productsDTO,
+            });
+        }
+        catch (error) {
+            res.status(400).json({
+                message: error.message,
+                data: null,
+                validationErrors: [error],
+                success: false,
             });
         }
     }

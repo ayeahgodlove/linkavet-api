@@ -15,28 +15,63 @@ const class_validator_1 = require("class-validator");
 const nanoid_1 = require("nanoid");
 const appointment_1 = require("../../../domain/models/health/appointment");
 class AppointmentRequestDto {
-    petOwnerId;
-    vetDoctorId;
+    userId;
+    doctorId;
+    // @IsDate()
+    appointmentDate;
+    // @IsDate()
+    appointmentTime;
+    isConfirmed;
+    fullName;
+    email;
+    contact;
+    symptoms;
+    status;
+    roomId;
     constructor(data) {
-        this.petOwnerId = data.petOwnerId;
-        this.vetDoctorId = data.vetDoctorId;
+        this.userId = data.userId;
+        this.doctorId = data.doctorId;
+        this.appointmentDate = data.appointmentDate;
+        this.appointmentTime = data.appointmentTime;
+        this.isConfirmed = data.isConfirmed;
+        this.fullName = data.fullName;
+        this.email = data.email;
+        this.contact = data.contact;
+        this.symptoms = data.symptoms;
+        this.status = data.status;
+        this.roomId = data.roomId;
     }
     toData() {
         return {
             ...appointment_1.emptyAppointment,
             id: (0, nanoid_1.nanoid)(10),
-            petOwnerId: this.petOwnerId,
-            vetDoctorId: this.vetDoctorId,
+            userId: this.userId,
+            doctorId: this.doctorId,
+            appointmentDate: this.appointmentDate,
+            appointmentTime: this.appointmentTime,
+            isConfirmed: this.isConfirmed,
+            fullName: this.fullName,
+            email: this.email,
+            contact: this.contact,
+            symptoms: this.symptoms,
+            status: this.status,
+            roomId: this.roomId
         };
     }
     toUpdateData(data) {
         return {
             id: data.id,
-            petOwnerId: data.petOwnerId,
-            vetDoctorId: data.vetDoctorId,
-            appointmentDateTime: data.appointmentDateTime,
-            durationMinutes: data.durationMinutes,
-            isConfirmed: data.isConfirmed
+            userId: data.userId,
+            doctorId: data.doctorId,
+            appointmentDate: data.appointmentDate,
+            appointmentTime: data.appointmentTime,
+            isConfirmed: data.isConfirmed,
+            fullName: data.fullName,
+            email: data.email,
+            contact: data.contact,
+            symptoms: data.symptoms,
+            status: data.status,
+            roomId: data.roomId
         };
     }
 }
@@ -44,10 +79,35 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], AppointmentRequestDto.prototype, "petOwnerId", void 0);
+], AppointmentRequestDto.prototype, "userId", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], AppointmentRequestDto.prototype, "vetDoctorId", void 0);
+], AppointmentRequestDto.prototype, "doctorId", void 0);
+__decorate([
+    (0, class_validator_1.IsBoolean)(),
+    __metadata("design:type", Boolean)
+], AppointmentRequestDto.prototype, "isConfirmed", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AppointmentRequestDto.prototype, "fullName", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], AppointmentRequestDto.prototype, "email", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AppointmentRequestDto.prototype, "contact", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AppointmentRequestDto.prototype, "symptoms", void 0);
 exports.AppointmentRequestDto = AppointmentRequestDto;

@@ -157,10 +157,11 @@ class UsersController {
         const user = req.user;
         const { filename } = req.file;
         try {
-            await userUseCase.updateAvatar(user.id, filename);
+            const userResponse = await userUseCase.updateAvatar(user.id, filename);
             res.json({
                 message: "User Avatar uploaded Successfully!",
                 success: true,
+                data: userResponse.toJSON()
             });
         }
         catch (error) {

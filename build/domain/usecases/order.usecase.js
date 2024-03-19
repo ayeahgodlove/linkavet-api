@@ -15,7 +15,7 @@ class OrderUseCase {
         if (existingOrder) {
             throw new not_found_exception_1.NotFoundException("Order", order.orderNo);
         }
-        // const _order = new Order({order}); 
+        // const _order = new Order({order});
         //because it's already done in the Repository
         return this.orderRepository.create(order);
     }
@@ -25,8 +25,8 @@ class OrderUseCase {
     async getOrderById(id) {
         return this.orderRepository.findById(id);
     }
-    async getOrderByOrderNo(order) {
-        const _order = await this.orderRepository.findByOrderNo(order.orderNo);
+    async getOrderByOrderNo(orderId) {
+        const _order = await this.orderRepository.findByOrderNo(orderId);
         if (!_order) {
             return null;
         }
@@ -37,6 +37,9 @@ class OrderUseCase {
     }
     async deleteOrder(id) {
         return this.orderRepository.delete(id);
+    }
+    async updateProducts(products) {
+        return this.orderRepository.updateProductTable(products);
     }
 }
 exports.OrderUseCase = OrderUseCase;

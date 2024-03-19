@@ -43,9 +43,9 @@ class AppointmentRepository {
      * @name
      * returns Appointment
      */
-    async findByName(id) {
+    async findByName(name) {
         try {
-            const appointmentItem = await appointment_1.Appointment.findOne({ where: { vetDoctorId: id } });
+            const appointmentItem = await appointment_1.Appointment.findOne({ where: { fullName: name } });
             return appointmentItem;
         }
         catch (error) {

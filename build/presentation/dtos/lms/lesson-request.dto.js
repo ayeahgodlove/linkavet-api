@@ -26,6 +26,7 @@ class LessonRequestDto {
     objectives;
     keywords;
     courseId;
+    url;
     constructor(data) {
         this.title = data.title;
         this.description = data.description;
@@ -38,6 +39,7 @@ class LessonRequestDto {
         this.keywords = data.keywords;
         this.author = data.author;
         this.courseId = data.courseId;
+        this.url = data.url;
     }
     toData() {
         return {
@@ -53,7 +55,8 @@ class LessonRequestDto {
             objectives: this.objectives,
             keywords: this.keywords,
             author: this.author,
-            courseId: this.courseId
+            courseId: this.courseId,
+            url: this.url
         };
     }
     toUpdateData(data) {
@@ -69,7 +72,8 @@ class LessonRequestDto {
             keywords: data.keywords,
             difficulty: data.difficulty,
             author: data.author,
-            courseId: data.courseId
+            courseId: data.courseId,
+            url: data.url
         };
     }
 }
