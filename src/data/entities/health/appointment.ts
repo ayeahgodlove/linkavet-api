@@ -8,6 +8,7 @@ import {
 } from "sequelize-typescript";
 import { User } from "../user";
 import { IAppointment } from "../../../domain/models/health/appointment";
+import { STATUS } from "../../../domain/models/shared/status.enum";
 
 @Table({
   timestamps: true,
@@ -29,7 +30,7 @@ export class Appointment extends Model<IAppointment> {
     type: DataType.STRING(128),
     allowNull: false,
   })
-  petOwnerId!: string; //targets among users with vet role
+  userId!: string; //targets among users with vet role
 
   // foreign key
   @ForeignKey(() => User)
@@ -37,16 +38,49 @@ export class Appointment extends Model<IAppointment> {
     type: DataType.STRING(128),
     allowNull: false,
   })
-  vetDoctorId!: string; //targets among users with doctors role
+  doctorId!: string; //targets among users with doctors role
 
   @Column
-  appointmentDateTime!: Date;
+  appointmentDate!: Date;
+
+  @Column
+  appointmentTime!: Date;
 
   @Column
   durationMinutes!: number;
 
   @Column
   isConfirmed!: boolean;
+
+  @Column({
+    type: DataType.STRING(255),
+    allowNull: false,
+  })
+  fullName!: string;
+
+  @Column({
+    type: DataType.STRING(255),
+    allowNull: false,
+  })
+  email!: string;
+
+  @Column({
+    type: DataType.STRING(128),
+    allowNull: false,
+  })
+  contact!: string;
+
+  @Column({
+    type: DataType.ENUM(STATUS.APPROVED, STATUS.PENDING, STATUS.CANCELED),
+    allowNull: false,
+  })
+  status!: string;
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: false,
+  })
+  symptoms!: string;
 
   @BelongsTo(() => User)
   user!: User;

@@ -13,9 +13,9 @@ const AppointmentDetailComponent: React.FC = () => {
         size="small"
         dataSource={[
           {
-            label: "Appointment Date",
+            label: "Appointment Time",
             value: (
-              <TimePicker value={dayjs(appointment.appointmentDateTime)} />
+              <TimePicker value={dayjs(appointment.appointmentTime)} />
             ),
           },
           {
@@ -32,11 +32,23 @@ const AppointmentDetailComponent: React.FC = () => {
           },
           {
             label: "Vet Owner",
-            value: getUser(appointment.petOwnerId).username,
+            value: getUser(appointment.userId).username,
           },
           {
             label: "Vet Doctor",
-            value: getUser(appointment.vetDoctorId).username,
+            value: getUser(appointment.doctorId).username,
+          },
+          {
+            label: "Email",
+            value: appointment.email,
+          },
+          {
+            label: "Contact",
+            value: appointment.contact,
+          },
+          {
+            label: "Symptoms",
+            value: appointment.symptoms,
           },
         ]}
         renderItem={(item) => (

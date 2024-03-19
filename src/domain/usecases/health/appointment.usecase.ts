@@ -13,14 +13,6 @@ export class AppointmentUseCase {
   ) {}
 
   async createAppointment(appointment: IAppointment): Promise<Appointment> {
-    const existingAppointment = await this.appointmentRepository.findByName(
-      appointment.vetDoctorId
-    );
-
-    if (existingAppointment) {
-      throw new Error("Appointment already exists");
-    }
-
     // const _appointment = new Appointment({appointment});
     //because it's already done in the Repository
     return this.appointmentRepository.create(appointment);

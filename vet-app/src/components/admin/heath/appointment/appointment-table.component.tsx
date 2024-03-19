@@ -30,7 +30,7 @@ export function AppointmentTable() {
   }, []);
 
   const resultAppointments: IAppointment[] = appointments.filter(
-    (appointment) => search(appointment, ["durationMinutes"], query, false)
+    (appointment) => search(appointment, ["fullName", "email", "appointmentDate"], query, false)
   );
 
   const onChange = (query: any) => {
@@ -40,7 +40,7 @@ export function AppointmentTable() {
   const handleRowClick = (appointment: IAppointment) => {
     setAppointment(appointment);
     router(
-      `/admin/appointments/${slugify(appointment.vetDoctorId, {
+      `/admin/appointments/${slugify(appointment.fullName, {
         lower: true,
         replacement: "-",
       })}`

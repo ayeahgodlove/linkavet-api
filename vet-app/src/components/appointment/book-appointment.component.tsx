@@ -1,14 +1,40 @@
 // AppointmentForm.tsx
 
-import React, { useState } from "react";
-import { Form, Input, DatePicker, Button, message, Select } from "antd";
-import { Moment } from "moment";
+import React from "react";
+import {
+  Form,
+  Input,
+  DatePicker,
+  Button,
+  message,
+  Select,
+  Row,
+  Col,
+} from "antd";
 import { useUserSpecialty } from "hooks/user-specialty.hook";
+import { useAppointment } from "hooks/health/appointment.hook";
+import { IAppointment, emptyAppointment } from "models/health/appointment";
+import { useFormInit } from "hooks/shared/form-init.hook";
+import { UpdateMode } from "models/shared/update-mode.enum";
 
 const AppointmentForm: React.FC = () => {
   const { userSpecialties } = useUserSpecialty();
-  const handleSubmit = (values: any) => {
-    console.log("values: ", values);
+  const { addAppointment, appointment } = useAppointment();
+  const { initFormData } = useFormInit();
+  const [form] = Form.useForm();
+
+  const handleSubmit = async (values: any) => {
+    const obj: IAppointment = {
+      ...emptyAppointment,
+      ...values,
+    };
+
+    const feedback = await addAppointment(obj);
+    if (feedback) {
+      message.success("Appointment set successfully!");
+    } else {
+      message.error("failed to set appointment!");
+    }
   };
 
   const onSearch = (value: string) => {
@@ -21,30 +47,46 @@ const AppointmentForm: React.FC = () => {
     option?: { label: string; value: string }
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
+  initFormData(form, UpdateMode.ADD, appointment, [
+    "appointmentDate",
+    "appointmentTime",
+  ]);
   return (
-    <Form layout="vertical" initialValues={{}} onFinish={handleSubmit}>
+    <Form
+      layout="vertical"
+      initialValues={{ ...emptyAppointment }}
+      onFinish={handleSubmit}
+    >
       <Form.Item
         label="Full Name"
         name={"name"}
         rules={[{ required: true, message: "Your Name is Required!" }]}
       >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        label="Email"
-        name={"email"}
-        rules={[{ required: true, message: "Your Email is Required!" }]}
-      >
-        <Input />
+        <Input placeholder="Enter your name" />
       </Form.Item>
 
-      <Form.Item
-        label="Contact Number"
-        name={"contactNo"}
-        rules={[{ required: true, message: "Your Contact is Required!" }]}
-      >
-        <Input />
-      </Form.Item>
+      <Row justify={"start"}>
+        <Col xs={24} md={12}>
+          <Form.Item
+            label="Email"
+            name={"email"}
+            rules={[{ required: true, message: "Your Email is Required!" }]}
+          >
+            <Input placeholder="Enter your email" />
+          </Form.Item>
+        </Col>
+
+        <Col xs={24} md={12}>
+          <Form.Item
+            label="Contact Number"
+            name={"contactNo"}
+            rules={[{ required: true, message: "Your Contact is Required!" }]}
+            style={{ marginLeft: 10 }}
+          >
+            <Input placeholder="Enter your contact" />
+          </Form.Item>
+        </Col>
+      </Row>
 
       <Form.Item
         label="Doctor's Name"
@@ -58,7 +100,7 @@ const AppointmentForm: React.FC = () => {
       >
         <Select
           showSearch
-          placeholder="Select Runner Period"
+          placeholder="Select a medical practitioner"
           optionFilterProp="children"
           onChange={onSearch}
           onSearch={onSearch}
@@ -72,28 +114,38 @@ const AppointmentForm: React.FC = () => {
         />
       </Form.Item>
 
-      <Form.Item
-        label="Appointment Date"
-        name={"appointmentDate"}
-        rules={[{ required: true, message: "Date is Required!" }]}
-      >
-        <DatePicker style={{ width: "100%" }} />
-      </Form.Item>
+      <Row justify={"start"}>
+        <Col xs={24} md={12}>
+          <Form.Item
+            label="Appointment Date"
+            name={"appointmentDate"}
+            rules={[{ required: true, message: "Date is Required!" }]}
+          >
+            <DatePicker format={"DD/MM/YYYY"} style={{ width: "100%" }} />
+          </Form.Item>
+        </Col>
 
-      <Form.Item
-        label="Appointment Time"
-        name={"appointmentTime"}
-        rules={[{ required: true, message: "Time is Required!" }]}
-      >
-        <DatePicker style={{ width: "100%" }} />
-      </Form.Item>
+        <Col xs={24} md={12}>
+          <Form.Item
+            label="Appointment Time"
+            name={"appointmentTime"}
+            rules={[{ required: true, message: "Time is Required!" }]}
+            style={{ marginLeft: 10 }}
+          >
+            <DatePicker
+              picker={"time"}
+              style={{ width: "100%" }}
+            />
+          </Form.Item>
+        </Col>
+      </Row>
 
       <Form.Item
         label="Symptoms"
         name={"symptoms"}
         rules={[{ required: true, message: "Enter identifiable symptoms!" }]}
       >
-        <Input.TextArea rows={3} />
+        <Input.TextArea rows={3} placeholder="Enter symptoms" />
       </Form.Item>
 
       <Form.Item>

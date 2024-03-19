@@ -19,6 +19,7 @@ const AppointmentForm: React.FC<Props> = ({ formMode }) => {
 
   const onFinish = async (values: any) => {
     const obj: IAppointment = {
+      ...emptyAppointment,
       ...values,
     };
 
@@ -46,7 +47,7 @@ const AppointmentForm: React.FC<Props> = ({ formMode }) => {
   };
 
   useEffect(() => {
-    initFormData(form, formMode, appointment);
+    initFormData<IAppointment>(form, formMode, appointment, ["appointmentDate", "appointmentTime", ]);
   }, []);
   return (
     <ConfigProvider theme={theme}>

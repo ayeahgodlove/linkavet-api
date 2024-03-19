@@ -14,20 +14,26 @@ export const useAppointmentColumn = () => {
       render: (_, _record, index) => index + 1,
     },
     {
-      title: "Pet Owner",
-      dataIndex: "petOwnerId",
-      key: "petOwnerId",
+      title: "User",
+      dataIndex: "userId",
+      key: "userId",
     },
     {
-      title: "Vet Doctor",
-      dataIndex: "vetDoctorId",
-      key: "vetDoctorId",
+      title: "Doctor",
+      dataIndex: "doctorId",
+      key: "doctorId",
+    },
+    {
+      title: "Appointment Date",
+      dataIndex: "appointmentDate",
+      key: "appointmentDate",
+      render: (_, record) => format.date(record.appointmentDate),
     },
     {
       title: "Appointment Time",
       dataIndex: "appointmentTime",
       key: "appointmentTime",
-      render: (_, record) => format.date(record.appointmentDateTime),
+      render: (_, record) => format.date(record.appointmentTime),
     },
     {
       title: "Duration",

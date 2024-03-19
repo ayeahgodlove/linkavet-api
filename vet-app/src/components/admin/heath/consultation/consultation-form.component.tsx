@@ -46,7 +46,7 @@ const ConsultationForm: React.FC<Props> = ({ formMode }) => {
   };
 
   useEffect(() => {
-    initFormData(form, formMode, consultation);
+    initFormData<IConsultation>(form, formMode, consultation);
   }, []);
   return (
     <ConfigProvider theme={theme}>

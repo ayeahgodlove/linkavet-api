@@ -46,9 +46,9 @@ export class AppointmentRepository implements IRepository<IAppointment, Appointm
    * @name
    * returns Appointment
    */
-  async findByName(id: string): Promise<Appointment | null> {
+  async findByName(name: string): Promise<Appointment | null> {
     try {
-      const appointmentItem = await Appointment.findOne({ where: { vetDoctorId: id } });
+      const appointmentItem = await Appointment.findOne({ where: { fullName: name } });
       return appointmentItem;
     } catch (error) {
       throw error;
