@@ -15,45 +15,40 @@ interface IProp {
 }
 const CourseCard: React.FC<IProp> = ({ course, onCourseClick }) => {
   return (
-    <List.Item
-      key={course.id}
-      className="course-list-item"
-      style={{ padding: "4px 8px" }}
-    >
-      <Card
-        bordered={false}
-        style={{ padding: 0 }}
-        bodyStyle={{ paddingTop: 10 }}
-        cover={
-          <img 
-            alt={course.title}
-            src={`${API_URL_UPLOADS_COURSES}/${course.courseImage}`}
-          />
-        }
-        className="course-card"
-      >
-        <div>
-          <Meta
-            style={{ wordWrap: "break-word" }}
-            title={
-              <Link
-                to={`/courses/${slugify(course.title, { lower: true })}`}
-                onClick={() => onCourseClick(course.id)}
-              >
-                {course.title}
-              </Link>
-            }
-            description={course.description.slice(0, 400)}
-          />
-          <RaterComponent />
-        </div>
-        <Button
-          type="link"
-          className="add-to-fav-btn"
-          icon={<RiHeartFill size={30} className="add-to-fav" />}
+    <Card
+      hoverable
+      bordered={false}
+      style={{ padding: 0, marginLeft: 15, marginBottom: 10 }}
+      bodyStyle={{ paddingTop: 10 }}
+      cover={
+        <img
+          alt={course.title}
+          src={`${API_URL_UPLOADS_COURSES}/${course.courseImage}`}
         />
-      </Card>
-    </List.Item>
+      }
+      className="course-card"
+    >
+      <div>
+        <Meta
+          style={{ wordWrap: "break-word" }}
+          title={
+            <Link
+              to={`/courses/${slugify(course.title, { lower: true })}`}
+              onClick={() => onCourseClick(course.id)}
+            >
+              {course.title}
+            </Link>
+          }
+          description={course.description.slice(0, 400)}
+        />
+        <RaterComponent />
+      </div>
+      <Button
+        type="link"
+        className="add-to-fav-btn"
+        icon={<RiHeartFill size={30} className="add-to-fav" />}
+      />
+    </Card>
   );
 };
 

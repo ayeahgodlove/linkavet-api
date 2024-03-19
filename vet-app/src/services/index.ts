@@ -9,7 +9,6 @@ const apiHeaders = {
 
 const apiConfig = () => {
   var user = JSON.parse(localStorage.getItem("user")!);
-  console.log("user: ", user)
   apiHeaders.headers["Authorization"] = `Bearer ${user.token}`;
   return apiHeaders;
 };

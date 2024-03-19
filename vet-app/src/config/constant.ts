@@ -7,6 +7,7 @@ export const  API_URL_UPLOADS_BANNERS = `${API_URL}/uploads/banners`
 export const  API_URL_UPLOADS_STORES = `${API_URL}/uploads/stores`
 export const  API_URL_UPLOADS_PRODUCTS = `${API_URL}/uploads/products`
 export const  API_URL_UPLOADS_COURSES = `${API_URL}/uploads/courses`
+export const  API_URL_UPLOADS_AVATARS = `${API_URL}/uploads/avatars`
 
 export const modules = {
     toolbar: [

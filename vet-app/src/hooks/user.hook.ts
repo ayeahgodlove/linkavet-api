@@ -97,7 +97,8 @@ const useUser = () => {
     editUser,
     setUser,
     getUser,
-    getUsersByRole
+    getUsersByRole,
+    loadUsers
   };
 };
 

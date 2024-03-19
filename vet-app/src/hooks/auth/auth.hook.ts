@@ -33,8 +33,8 @@ const useAuth = () => {
         loginUser({ email: userObj.email, password: userObj.password }) as any
       );
       if(!user.token) {
-       const token = JSON.parse(window.localStorage.getItem("user") || "null");
-       setToken(token.token!);
+      //  const token = JSON.parse(window.localStorage.getItem("user") || "null");
+       setToken(user.token!);
       }
       setToken(user.token!);
       // dispatch(setUser())

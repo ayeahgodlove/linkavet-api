@@ -31,6 +31,7 @@ import BookAppointmentsPage from "pages/service/book.page";
 import AppointmentListsPage from "pages/service/appointment_lists.page";
 import AppointmentDetailPage from "pages/service/appointment_detail.page";
 import ServicesPage from "pages/service/service.page";
+import ClassRoomPage from "pages/course/classroom.page";
 
 export const routes: IRoute[] = [
   /**
@@ -135,6 +136,12 @@ export const routes: IRoute[] = [
     private: false,
     exact: true,
     component: <CourseEnrollmentPage />,
+  },
+  {
+    path: "/classroom",
+    private: false,
+    exact: true,
+    component: <ClassRoomPage />,
   },
   {
     path: "/faqs",

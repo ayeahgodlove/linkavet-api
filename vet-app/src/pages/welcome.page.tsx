@@ -34,21 +34,20 @@ const WelcomePage: React.FC = () => {
       {/* Why */}
       <WhyLinkaVet />
 
-      {/* meet our team */}
-      <VetDoctorsComponent />
-
       {/* pet connection */}
       <BlogPost />
       {/* startup in 3 steps */}
       {/* <BuyInThreeSteps /> */}
 
-      {/* subscribe */}
-      <Subscribe />
+      {/* meet our team */}
+      <VetDoctorsComponent />
 
       {/* reviews */}
       <Review />
 
-      {/* product list */}
+      {/* subscribe */}
+      {/* <Subscribe /> */}
+
     </>
   );
 };

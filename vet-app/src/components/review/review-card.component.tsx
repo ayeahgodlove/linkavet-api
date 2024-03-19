@@ -1,33 +1,30 @@
-import { Card, Typography } from "antd";
+import { Avatar, Card, Rate } from "antd";
+import { API_URL_UPLOADS_AVATARS } from "config/constant";
+import { useUser } from "hooks/user.hook";
 import { IReview } from "models/review.model";
 import React from "react";
 
 interface Props {
   review: IReview;
 }
-const { Title, Paragraph } = Typography;
+const { Meta } = Card;
+
 const ReviewCard: React.FC<Props> = ({ review }) => {
+  const { getUser } = useUser();
+  const user = getUser(review.userId);
   return (
     <>
-      <Card
-        bordered={false}
-        style={{ padding: 0 }}
-        bodyStyle={{ paddingTop: 10 }}
-        className="review-card"
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <img src="./avatar" alt="customers avatar" />
-          {review.description}
-
-          <Title>{review.userId}</Title>
-          <Paragraph>Honeyman Customer</Paragraph>
-        </div>
+      <Card style={{ marginBottom: 20, marginLeft: 10 }}>
+        <Meta
+          avatar={<Avatar src={`${API_URL_UPLOADS_AVATARS}/${user.avatar}`} size={50} />}
+          title={user.firstname + " " + user.lastname}
+          description={
+            <>
+              <Rate disabled defaultValue={review.rating} />
+              <p style={{ marginTop: 8 }}>{review.comment}</p>
+            </>
+          }
+        />
       </Card>
     </>
   );

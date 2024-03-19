@@ -5,8 +5,7 @@ export interface IReview {
   id: string;
   rating: number;
   userId: string;
-  productId: string;
-  description: string;
+  comment: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -17,8 +16,7 @@ export const emptyReview: IReview = {
   updatedAt: new Date(),
   rating: 0,
   userId: "",
-  productId: "",
-  description: "",
+  comment: "",
 };
 
 export interface IReviewState extends IBaseState {

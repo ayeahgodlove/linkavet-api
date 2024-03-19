@@ -5,7 +5,8 @@ export interface IUserSpecialty {
   specialty: string;
   userId: string;
   id: string;
-  username?: string
+  username?: string;
+  avatar?: string
 }
 
 export const emptyUserSpecialty: IUserSpecialty = {

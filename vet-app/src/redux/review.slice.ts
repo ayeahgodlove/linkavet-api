@@ -25,15 +25,15 @@ export const reviewSlice = createSlice({
   name: "review",
   initialState,
   reducers: {
-    fetchreviewRequest: (state) => {
+    fetchReviewRequest: (state) => {
       state.isLoading = true;
     },
-    fetchreviewSuccess: (state, action: PayloadAction<IReview[]>) => {
+    fetchReviewSuccess: (state, action: PayloadAction<IReview[]>) => {
       state.isLoading = false;
       state.initialFetch = false;
       state.reviews = action.payload;
     },
-    fetchreviewError: (state, action: PayloadAction<string>) => {
+    fetchReviewError: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.errors = action.payload;
     },
@@ -66,9 +66,9 @@ export const reviewSlice = createSlice({
 });
 
 export const {
-  fetchreviewRequest,
-  fetchreviewSuccess,
-  fetchreviewError,
+  fetchReviewRequest,
+  fetchReviewSuccess,
+  fetchReviewError,
   editReviewSuccess,
   addReviewSuccess,
   setActiveReview,

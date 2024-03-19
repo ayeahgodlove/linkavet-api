@@ -2,13 +2,33 @@
 import { Router } from "express";
 import { UsersController } from "../controllers/user.controller";
 import { isAuthenticatedMiddleware } from "../../shared/middlewares/is-authenticated.middleware";
-import { multerInstance } from "../../shared/helper/multer.config";
+import { fileFilter } from "../../shared/helper/multer.config";
+import multer from "multer";
 
 const userController = new UsersController();
 
 const userRouter = Router();
 
-userRouter.get("",userController.getAll);
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "./public/uploads/avatars");
+  },
+  filename: (req, file, cb) => {
+    const originalname = file.originalname;
+    const filename = `${Date.now()}-${originalname
+      .replace(/\s+/g, "")
+      .toLowerCase()}`;
+    cb(null, filename);
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  fileFilter,
+  limits: { fileSize: 5 * 1024 * 1024 },
+});
+
+userRouter.get("", userController.getAll);
 userRouter.get("/me", isAuthenticatedMiddleware, (req, res) => {
   try {
     const user = req.user;
@@ -26,15 +46,19 @@ userRouter.get("/me", isAuthenticatedMiddleware, (req, res) => {
   }
 });
 userRouter.post("", userController.createUser);
-userRouter.put('/activation', userController.activateUser);
+userRouter.put("/activation", userController.activateUser);
 userRouter.put("/:id", isAuthenticatedMiddleware, userController.updateUser);
 userRouter.delete("/:id", isAuthenticatedMiddleware, userController.deleteUser);
 // upload user avatar image
 userRouter.post(
-  "/upload",
+  "/upload/:id",
   isAuthenticatedMiddleware,
-  multerInstance.single("avatar"),
+  upload.single("avatar"),
   userController.uploadAvatar
 );
-userRouter.post('/:userId/roles/:roleId', isAuthenticatedMiddleware, userController.addUserRole);
+userRouter.post(
+  "/:userId/roles/:roleId",
+  isAuthenticatedMiddleware,
+  userController.addUserRole
+);
 export default userRouter;

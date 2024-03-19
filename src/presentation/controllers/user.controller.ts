@@ -170,11 +170,12 @@ export class UsersController {
     const { filename } = req.file as Express.Multer.File;
 
     try {
-      await userUseCase.updateAvatar(user.id, filename);
+      const userResponse =  await userUseCase.updateAvatar(user.id, filename);
 
       res.json({
         message: "User Avatar uploaded Successfully!",
         success: true,
+        data: userResponse.toJSON<IUser>()
       });
     } catch (error: any) {
       res.status(400).json({

@@ -44,13 +44,5 @@ export class UserUseCase {
 
     user.avatar = filename.toString();
     return await user.update({...user});
-    // console.log("user: ", user, "fileName: ", filename)
-    // const obj: IUser = {
-    //   ...user,
-    //   avatar: filename,
-    //   updatedAt: new Date(),
-    // } as IUser;
-
-    // return this.userRepository.update(obj);
   }
 }

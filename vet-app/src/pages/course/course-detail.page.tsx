@@ -58,7 +58,7 @@ const courseDetailPage: React.FC = () => {
     <>
       <Row
         justify={"center"}
-        style={{ marginTop: "1rem" }}
+        style={{ marginTop: "1rem", marginBottom: 20 }}
         gutter={[16, 16]}
         className="course-container"
       >

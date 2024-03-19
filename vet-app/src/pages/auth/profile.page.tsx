@@ -1,14 +1,14 @@
 import { Card, Tabs, TabsProps } from "antd";
 import UserSpecialtyView from "components/admin/user-specialty/user-specialty-view.component";
+import SettingComponent from "components/auth/setting.component";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import slugify from "slugify";
 
 const items: TabsProps["items"] = [
   {
     key: "0",
     label: "Settings",
-    children: <></>,
+    children: <SettingComponent />,
   },
   {
     key: "1",

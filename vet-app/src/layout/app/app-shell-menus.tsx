@@ -56,7 +56,8 @@ import { useTheme } from "hooks/shared/theme.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
 import { useAuth } from "hooks/auth/auth.hook";
 import { GrScheduleNew } from "react-icons/gr";
-import { ROLES } from "config/constant";
+import { API_URL_UPLOADS_AVATARS, ROLES } from "config/constant";
+import { useUser } from "hooks/user.hook";
 
 export const useAppShellMenus = () => {
   const [language, setLanguage] = useState("en");
@@ -73,6 +74,8 @@ export const useAppShellMenus = () => {
     router("/shopping-cart");
   };
   const { logoutUserFunction, isAuthenticated, user } = useAuth();
+  const {users} = useUser()
+  const avatar = users.find(u => u.id === user.id);
 
   // roles.some(role => user.roles.map(ur => ur.name).includes(role))
   function filterMenuItemsByRole(items: any["items"], userRoles: string[]) {
@@ -501,29 +504,7 @@ export const useAppShellMenus = () => {
       key: "shopping-cart",
       onClick: redirectToCart,
     }, // remember to pass the key prop
-    {
-      label: (
-        <ConfigProvider
-          theme={{
-            token: {
-              colorPrimary: "#08a30a",
-            },
-          }}
-        >
-          <Switch
-            defaultChecked={isDarkMode}
-            // size="small"
-            onChange={handleSetTheme}
-            checkedChildren={<BsSun size={18} />}
-            unCheckedChildren={<MdDarkMode size={18} color="#333" />}
-          />
-        </ConfigProvider>
-      ),
-      key: "theme",
-      style: {
-        padding: 0,
-      },
-    }, // remember to pass the key prop
+
     {
       label: "",
       key: "notification",
@@ -631,7 +612,7 @@ export const useAppShellMenus = () => {
             fontWeight: "bold",
             fontSize: 14,
           }}
-          // src={user?.picture}
+          src={`${API_URL_UPLOADS_AVATARS}/${avatar?.avatar}`}
         >
           {user?.username?.charAt(0).toUpperCase()}
         </Avatar>
@@ -670,6 +651,22 @@ export const useAppShellMenus = () => {
             },
             {
               label: (
+                <Link to="/appointments" onClick={() => {}}>
+                  My Appointments
+                </Link>
+              ),
+              key: "appointments",
+            },
+            {
+              label: (
+                <Link to="/classroom" onClick={() => {}}>
+                  My Classroom
+                </Link>
+              ),
+              key: "classroom",
+            },
+            {
+              label: (
                 <Link
                   to="/profile?=settings"
                   // onClick={() => handleRoute('settings')}
@@ -696,6 +693,29 @@ export const useAppShellMenus = () => {
               key: "logout",
               icon: <LogoutOutlined />,
             },
+            // {
+            //   label: (
+            //     <ConfigProvider
+            //       theme={{
+            //         token: {
+            //           colorPrimary: "#08a30a",
+            //         },
+            //       }}
+            //     >
+            //       <Switch
+            //         defaultChecked={isDarkMode}
+            //         // size="small"
+            //         onChange={handleSetTheme}
+            //         checkedChildren={<BsSun size={18} />}
+            //         unCheckedChildren={<MdDarkMode size={18} color="#333" />}
+            //       />
+            //     </ConfigProvider>
+            //   ),
+            //   key: "theme",
+            //   style: {
+            //     padding: 0,
+            //   },
+            // }, // remember to pass the key prop
           ],
         },
       ],

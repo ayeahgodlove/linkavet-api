@@ -67,7 +67,7 @@ const useUserSpecialty = () => {
       });
   };
 
-  const {getUser} = useUser()
+  const { getUser } = useUser();
   const getUserSpeciality = useCallback((userId: string) => {
     const specialty = userSpecialties.find((us) => us.userId === userId);
     if (specialty) {
@@ -77,13 +77,14 @@ const useUserSpecialty = () => {
   }, []);
 
   const getUserSpecialities = useCallback((): IUserSpecialty[] => {
-    return userSpecialties.map(us => {
+    return userSpecialties.map((us) => {
       return {
         ...us,
-        username: getUser(us.userId).username
-      }
-    })
-  }, [])
+        username: getUser(us.userId).username,
+        avatar: getUser(us.userId).avatar,
+      };
+    });
+  }, []);
   useEffect(() => {
     // loadUserSpecialtys();
   }, [
@@ -103,7 +104,7 @@ const useUserSpecialty = () => {
     editUserSpecialty,
     setUserSpecialty,
     getUserSpeciality,
-    loadUserSpecialties
+    loadUserSpecialties,
   };
 };
 

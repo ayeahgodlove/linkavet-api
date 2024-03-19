@@ -1,4 +1,4 @@
-import { Drawer, Layout, Menu, Typography } from "antd";
+import { Drawer, Layout, Menu, Space, Typography } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { ConfigProvider, theme, FloatButton } from "antd";
 
@@ -12,8 +12,9 @@ import { ICategory } from "models/category.model";
 import { TagService } from "services/tag.service";
 import { ITag } from "models/tag.model";
 import "rc-footer/assets/index.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppShellMenus } from "./app-shell-menus";
+import { MdOutlineRateReview } from "react-icons/md";
 
 const { Sider, Content } = Layout;
 const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -28,6 +29,7 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
   const [tags, setTags] = useState<ITag[]>([]);
 
   const { GeneralMenuItemsWithIcons } = useAppShellMenus();
+  const navigate = useNavigate();
 
   const handleShow = () => {
     setShow(true);
@@ -48,8 +50,8 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    // getCategories();
-    // getTags();
+    getCategories();
+    getTags();
   }, []);
 
   return (
@@ -101,7 +103,12 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
             >
               {children}
             </Content>
-            <FloatButton.BackTop icon={<FiArrowUp />} visibilityHeight={400} />
+            <Space>
+              <FloatButton.BackTop
+                icon={<FiArrowUp />}
+                visibilityHeight={400}
+              />
+            </Space>
 
             <Footer
               className="app-footer"
@@ -136,28 +143,28 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                     },
                   ],
                 },
-                // {
-                //   title: <strong>Browse by Categories</strong>,
-                //   items: [
-                //     ...categories.map((c) => {
-                //       return {
-                //         title: c.name,
-                //         url: `/browse/?category=${c.name}`,
-                //       };
-                //     }),
-                //   ],
-                // },
-                // {
-                //   title: <strong>Browse by Tags</strong>,
-                //   items: [
-                //     ...tags.map((c) => {
-                //       return {
-                //         title: c.name,
-                //         url: `/browse/?tag=${c.name}`,
-                //       };
-                //     }),
-                //   ],
-                // },
+                {
+                  title: <strong>Browse by Categories</strong>,
+                  items: [
+                    ...categories.map((c) => {
+                      return {
+                        title: c.name,
+                        url: `/browse/?category=${c.name}`,
+                      };
+                    }),
+                  ],
+                },
+                {
+                  title: <strong>Browse by Tags</strong>,
+                  items: [
+                    ...tags.map((c) => {
+                      return {
+                        title: c.name,
+                        url: `/browse/?tag=${c.name}`,
+                      };
+                    }),
+                  ],
+                },
                 {
                   title: <strong>About Us</strong>,
                   items: [
@@ -189,7 +196,7 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                   <Typography.Paragraph style={{ textAlign: "center" }}>
                     Made by Cumi <Link to={"/dashboard"}>Admin Area</Link>
                   </Typography.Paragraph>
-                  <p style={{ color: "#333"}}>
+                  <p style={{ color: "#333" }}>
                     Your Trusted Source for Premium Veterinary Care & Products.
                   </p>
                 </>

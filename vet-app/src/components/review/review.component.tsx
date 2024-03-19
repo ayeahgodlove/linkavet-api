@@ -1,7 +1,7 @@
 import { Col, Row, Typography } from "antd";
 import { useReview } from "hooks/review.hook";
 import React from "react";
-import ReviewList from "./review-list.component";
+import ReviewCard from "./review-card.component";
 
 const { Title, Paragraph } = Typography;
 const Review = () => {
@@ -11,8 +11,8 @@ const Review = () => {
       <Row
         justify={"center"}
         align={"middle"}
-        style={{ marginTop: 40 }}
-        gutter={[4, 4]}
+        style={{ margin: "40px 0" }}
+        gutter={[16, 16]}
       >
         <Col xs={24} md={24} lg={24}>
           <Title
@@ -32,8 +32,14 @@ const Review = () => {
             </p>
           </Paragraph>
         </Col>
-        <Col xs={24} md={24} lg={24}>
-          <ReviewList slice={true} />
+        <Col xs={22} md={20}>
+          <Row justify={"center"} align={"middle"}>
+            {reviews.slice(0,3).map((r) => (
+              <Col xs={22} md={8} key={r.id}>
+                <ReviewCard review={r} />
+              </Col>
+            ))}
+          </Row>
         </Col>
       </Row>
     </>

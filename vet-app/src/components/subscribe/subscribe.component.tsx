@@ -18,7 +18,7 @@ const Subscribe = () => {
     <Card
       bordered={false}
       style={{
-        background: "linear-gradient(7deg, rgba(184, 246, 185, 1), transparent)",
+        background: "#fff",
         borderRadius: 0,
         padding: 30
       }}

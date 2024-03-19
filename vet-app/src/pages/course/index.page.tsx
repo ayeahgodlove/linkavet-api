@@ -2,6 +2,7 @@ import { Col, Divider, Row, Typography } from "antd";
 import CourseList from "components/course/course-list.component";
 import PageBannerComponent from "components/shared/page-banner/page-banner.component";
 import { useAuth } from "hooks/auth/auth.hook";
+import { useCourse } from "hooks/lms/course.hook";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useDispatch } from "react-redux";
@@ -10,14 +11,17 @@ import { fetchCoursesAsync } from "redux/lms/course.slice";
 const CoursePage: React.FC = () => {
   const { isLoading } = useAuth();
   const dispatch = useDispatch();
+  const { courses } = useCourse();
+  
   useEffect(() => {
     dispatch(fetchCoursesAsync() as any);
   }, [isLoading]);
   return (
     <>
-        <Helmet>
+      <Helmet>
         <title>
-        Empower Yourself with Knowledge: Veterinary Courses Tailored for Pet Enthusiasts
+          Empower Yourself with Knowledge: Veterinary Courses Tailored for Pet
+          Enthusiasts
         </title>
         <meta
           name="description"
@@ -31,18 +35,20 @@ const CoursePage: React.FC = () => {
         linkCmd="Browse Course"
       />
       {/* course list */}
-      <Row style={{ marginTop: 50, padding: "0 3rem" }}>
-        <Col span={24}>
+      <Row
+        justify={"center"}
+        style={{ marginTop: 50, marginBottom: 50, padding: "0 50px" }}
+      >
+        <Col xs={22} md={20}>
           <Typography.Title
             level={3}
             style={{ textAlign: "center", opacity: 0.8 }}
           >
             Courses
           </Typography.Title>
-          <Divider />
         </Col>
+        <CourseList courses={courses} />
       </Row>
-      <CourseList />
     </>
   );
 };
