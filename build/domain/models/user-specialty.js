@@ -4,5 +4,8 @@ exports.emptyUserSpecialty = void 0;
 exports.emptyUserSpecialty = {
     userId: "",
     specialty: "",
-    id: ""
+    id: "",
+    facebook: "",
+    twitter: "",
+    linkedin: ""
 };

@@ -17,9 +17,15 @@ const nanoid_1 = require("nanoid");
 class UserSpecialtyRequestDto {
     userId;
     specialty;
+    facebook;
+    linkedin;
+    twitter;
     constructor(data) {
         this.userId = data.userId;
         this.specialty = data.specialty;
+        this.facebook = data.facebook,
+            this.linkedin = data.linkedin,
+            this.twitter = data.twitter;
     }
     toData() {
         return {
@@ -27,6 +33,9 @@ class UserSpecialtyRequestDto {
             id: (0, nanoid_1.nanoid)(15),
             userId: this.userId,
             specialty: this.specialty,
+            facebook: this.facebook,
+            linkedin: this.linkedin,
+            twitter: this.twitter
         };
     }
     toUpdateData(data) {
@@ -34,6 +43,9 @@ class UserSpecialtyRequestDto {
             id: data.id,
             userId: data.userId,
             specialty: data.specialty,
+            facebook: data.facebook,
+            linkedin: data.linkedin,
+            twitter: data.twitter
         };
     }
 }
@@ -47,4 +59,19 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], UserSpecialtyRequestDto.prototype, "specialty", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UserSpecialtyRequestDto.prototype, "facebook", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UserSpecialtyRequestDto.prototype, "linkedin", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], UserSpecialtyRequestDto.prototype, "twitter", void 0);
 exports.UserSpecialtyRequestDto = UserSpecialtyRequestDto;

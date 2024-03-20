@@ -15,6 +15,9 @@ const user_1 = require("./user");
 let UserSpecialty = class UserSpecialty extends sequelize_typescript_1.Model {
     userId;
     specialty;
+    facebook;
+    twitter;
+    linkedin;
     user; // Define association to User entity
 };
 __decorate([
@@ -38,6 +41,30 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], UserSpecialty.prototype, "specialty", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: true,
+        unique: false,
+    }),
+    __metadata("design:type", String)
+], UserSpecialty.prototype, "facebook", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: true,
+        unique: false,
+    }),
+    __metadata("design:type", String)
+], UserSpecialty.prototype, "twitter", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: true,
+        unique: false,
+    }),
+    __metadata("design:type", String)
+], UserSpecialty.prototype, "linkedin", void 0);
 __decorate([
     (0, sequelize_typescript_1.BelongsTo)(() => user_1.User),
     __metadata("design:type", user_1.User)

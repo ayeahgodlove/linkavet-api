@@ -18,6 +18,7 @@ const post_tag_1 = require("./post-tag");
 const tag_1 = require("./tag");
 let Post = class Post extends sequelize_typescript_1.Model {
     title;
+    summary;
     slug;
     content;
     imageUrl;
@@ -44,6 +45,13 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Post.prototype, "title", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: true,
+    }),
+    __metadata("design:type", String)
+], Post.prototype, "summary", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING(128),

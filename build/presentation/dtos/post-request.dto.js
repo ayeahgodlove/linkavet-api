@@ -22,11 +22,12 @@ class PostRequestDto {
     // @Length(10, 128)
     title;
     content;
+    summary;
     categoryId;
     constructor(data) {
         this.title = data.title;
         this.content = data.content;
-        // this.imageUrl = data.imageUrl;
+        this.summary = data.summary;
         this.categoryId = data.categoryId;
     }
     toData() {
@@ -37,7 +38,7 @@ class PostRequestDto {
             title: this.title,
             content: this.content,
             categoryId: this.categoryId,
-            // imageUrl: this.imageUrl, 
+            summary: this.summary,
         };
     }
     toUpdateData(data) {
@@ -50,6 +51,7 @@ class PostRequestDto {
             imageUrl: data.imageUrl,
             publishedAt: data.publishedAt,
             slug: data.slug,
+            summary: data.summary
         };
     }
 }
@@ -65,6 +67,11 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], PostRequestDto.prototype, "content", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], PostRequestDto.prototype, "summary", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),

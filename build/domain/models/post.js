@@ -9,5 +9,6 @@ exports.emptyPost = {
     imageUrl: "",
     publishedAt: new Date(),
     authorId: "",
-    categoryId: ""
+    categoryId: "",
+    summary: ""
 };

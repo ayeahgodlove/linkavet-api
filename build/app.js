@@ -173,5 +173,3 @@ db.connection()
     .catch((erro) => {
     console.log("error: ", erro);
 });
-// sendRegistrationMail("ayeahgodlove5@gmail.com", "https://linkavet.com/release");
-// sendPasswordResetEmail("ayeahgodlove5@gmail.com", "https://linkavet.com/release");
