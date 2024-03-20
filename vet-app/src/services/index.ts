@@ -9,7 +9,7 @@ const apiHeaders = {
 
 const apiConfig = () => {
   var user = JSON.parse(localStorage.getItem("user")!);
-  apiHeaders.headers["Authorization"] = `Bearer ${user.token}`;
+  apiHeaders.headers["Authorization"] = `Bearer ${user ? user.token : ""}`;
   return apiHeaders;
 };
 

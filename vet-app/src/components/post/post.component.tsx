@@ -40,7 +40,7 @@ const BlogPost = () => {
                 marginBottom: 0,
               }}
             >
-              <span className="gradient-title">Pet Connection</span>
+              <span className="gradient-title gradient-title-font">Pet Connection</span>
             </Typography.Title>
             <Typography.Paragraph style={{ fontSize: 17, textAlign: "center" }}>
               <p>

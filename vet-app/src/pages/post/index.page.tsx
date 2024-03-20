@@ -26,7 +26,7 @@ const PostPage: React.FC = () => {
       </Helmet>
       {/* Dummy banner */}
       <PageBannerComponent
-        title="Read Our Latest Veterinary Insights and Tips"
+        title="Our Latest Vet Insights"
         description="Stay informed and connected with the latest trends, insights, and valuable tips in pet care. Our blog at Linkavet is a trusted resource for pet parents, filled with expert advice from our experienced veterinary team."
         linkCmd="Browse Articles"
       />

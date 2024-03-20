@@ -17,12 +17,16 @@ export class PostRequestDto {
 
   @IsNotEmpty()
   @IsString()
+  summary: string;
+
+  @IsNotEmpty()
+  @IsString()
   categoryId: string;
 
   constructor(data: IPost) {
     this.title = data.title;
     this.content = data.content;
-    // this.imageUrl = data.imageUrl;
+    this.summary = data.summary;
     this.categoryId = data.categoryId;
   }
 
@@ -34,7 +38,7 @@ export class PostRequestDto {
       title: this.title,
       content: this.content,
       categoryId: this.categoryId,
-      // imageUrl: this.imageUrl, 
+      summary: this.summary, 
     };
   }
 
@@ -48,6 +52,7 @@ export class PostRequestDto {
       imageUrl: data.imageUrl,
       publishedAt: data.publishedAt,
       slug: data.slug,
+      summary: data.summary
     }
   }
 }

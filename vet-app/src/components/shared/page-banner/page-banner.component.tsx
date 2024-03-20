@@ -63,6 +63,7 @@ const PageBannerComponent: React.FC<Props> = ({
             level={1}
           >
             <Texty
+              className="gradient-title gradient-title-font"
               type="bounce"
               delay={400}
               enter={getEnter}
@@ -110,7 +111,7 @@ const PageBannerComponent: React.FC<Props> = ({
             </Texty>
           </Paragraph>
 
-          <Button type="primary" shape="round"  htmlType="button">
+          <Button type="primary" shape="round" htmlType="button">
             <Space align="center">
               <FiSearch size={18} />
               <span>{linkCmd}</span>

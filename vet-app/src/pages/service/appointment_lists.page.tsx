@@ -1,4 +1,4 @@
-import { Col, Row, Typography } from "antd";
+import { Alert, Button, Col, Row, Typography } from "antd";
 import CalendaComponent from "components/admin/heath/appointment/calenda.component";
 import { UserAppointmentTable } from "components/admin/heath/appointment/user-appointment.component";
 import TitleBar from "components/common/title-bar/title-bar.component";
@@ -12,14 +12,40 @@ import { FiPlusCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 
 const AppointmentListsPage = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const { appointments } = useAppointment();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const resultAppointments: IAppointment[] =
     appointments && appointments.length > 0
       ? appointments.filter((a) => a.userId === user.id)
       : [];
+
+  if (!isAuthenticated) {
+    return (
+      <Row justify={"center"} align={"middle"} style={{ marginTop: "3rem" }}>
+        <Col xs={18} span={12}>
+          <Alert
+            banner
+            style={{ display: "flex", justifyContent: "center" }}
+            type="info"
+            message="Please you need to sign in first"
+            description={
+              <Col span={5}>
+                <Button
+                  type="default"
+                  block
+                  onClick={() => navigate("/auth/login")}
+                >
+                  Login
+                </Button>
+              </Col>
+            }
+          />
+        </Col>
+      </Row>
+    );
+  }
   return (
     <>
       <Helmet>
@@ -47,10 +73,10 @@ const AppointmentListsPage = () => {
               icon={<FiPlusCircle />}
             />
           </Col>
-          <Col xs={{ span: 22, order:2}} md={{ span: 14, order: 1}}>
+          <Col xs={{ span: 22, order: 2 }} md={{ span: 14, order: 1 }}>
             <UserAppointmentTable />
           </Col>
-          <Col xs={{ span: 22, order:1 }} md={{ span: 6, order:2}}>
+          <Col xs={{ span: 22, order: 1 }} md={{ span: 6, order: 2 }}>
             <CalendaComponent appointments={resultAppointments} />
           </Col>
         </Row>

@@ -5,6 +5,7 @@ export interface IPost {
   id: string; //primary key
   title: string;
   content: string;
+  summary: string;
   imageUrl: string;
   slug: string;
   publishedAt: Date;
@@ -27,7 +28,8 @@ export const emptyPost: IPost = {
   publishedAt: new Date(),
   authorId: "",
   categoryId: "",
-  tags: []
+  tags: [],
+  summary: ""
 };
 
 

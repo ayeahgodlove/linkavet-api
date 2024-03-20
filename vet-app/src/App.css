@@ -152,16 +152,13 @@
 .gradient-title {
   background: linear-gradient(to right, #27b025, #5a008b);
   -webkit-background-clip: text;
-  /* This will clip the text to the gradient */
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* This will make the text transparent, showing only the gradient */
   font-weight: bold;
-  /* Adjust font weight as needed */
 }
 
 @media (min-width: 991px) {
-  .gradient-title {
+  .gradient-title-font {
     font-size: 2em;
     /* Adjust font size as needed */
 

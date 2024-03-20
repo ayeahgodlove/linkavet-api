@@ -1,12 +1,14 @@
-import { Button, Card, List } from "antd";
+import { Card } from "antd";
 import React from "react";
-import "./post.style.scss";
-import { RiHeartFill } from "react-icons/ri";
+import "./post.less";
 import RaterComponent from "components/shared/rate.component";
 import { IPost } from "models/post";
-import { Link } from "react-router-dom";
 import slugify from "slugify";
 import { API_URL_UPLOADS_POSTS } from "config/constant";
+import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
+import { format } from "utils/format";
+import "./post.less";
+import { useUser } from "hooks/user.hook";
 
 const { Meta } = Card;
 interface IProp {
@@ -14,55 +16,56 @@ interface IProp {
   onPostClick: (postId: any) => void;
 }
 const PostCard: React.FC<IProp> = ({ post, onPostClick }) => {
+  const { getUser } = useUser();
   return (
-    <List.Item
-      key={post.id}
-      style={{ padding: "4px 8px" }}
+    <a
+      href={`/posts/${slugify(post.title, { lower: true })}`}
+      onClick={() => onPostClick(post.id)}
     >
       <Card
-        bordered={false}
-        hoverable={true}
+        style={{ padding: 0, marginLeft: 15, borderRadius: 0 }}
+        className="post"
+        hoverable
         cover={
           <img
             alt={post.title}
             src={`${API_URL_UPLOADS_POSTS}/${post.imageUrl}`}
+            style={{ borderRadius: 0 }}
           />
         }
-        className="post-card"
-        key={post.id}
+        actions={[
+          <div className="post__info">
+            <div>
+              <UserOutlined />
+              <span>
+                {" "}
+                Posted by{" "}
+                {getUser(post.authorId).firstname +
+                  " " +
+                  getUser(post.authorId).lastname}
+              </span>
+            </div>
+            <div>
+              <CalendarOutlined />
+              <span> {format.date(post.publishedAt)}</span>
+            </div>
+          </div>,
+        ]}
       >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div>
-            <Meta
-              title={
-                <Link to={`/posts/${slugify(post.title, { lower: true })}`} onClick={()=> onPostClick(post.id)}>
-                  {post.title}
-                </Link>
-              }
-              description={
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: post.content.slice(50, 400),
-                  }}
-                />
-              }
+        <Meta
+          title={post.title}
+          description={
+            <div
+              dangerouslySetInnerHTML={{
+                __html: post.summary,
+              }}
             />
-            <RaterComponent />
-          </div>
-        </div>
-        <Button
-          type="link"
-          className="add-to-fav-btn"
-          icon={<RiHeartFill size={30} className="add-to-fav" />}
+          }
         />
+        <time className="post__time-read">{"7"} Read</time>
+        <RaterComponent />
       </Card>
-    </List.Item>
+    </a>
   );
 };
 

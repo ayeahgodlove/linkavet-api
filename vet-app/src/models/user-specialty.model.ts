@@ -6,13 +6,19 @@ export interface IUserSpecialty {
   userId: string;
   id: string;
   username?: string;
-  avatar?: string
+  avatar?: string;
+  facebook: string;
+  twitter: string;
+  linkedin: string;
 }
 
 export const emptyUserSpecialty: IUserSpecialty = {
   userId: "",
   id: "",
   specialty: "",
+  facebook: "",
+  twitter: "",
+  linkedin: ""
 };
 
 export interface IUserSpecialtyState extends IBaseState {

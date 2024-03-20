@@ -89,7 +89,7 @@ const OurServices: React.FC<IProp> = ({ limit = false }) => {
                   marginBottom: 0,
                 }}
               >
-                <span className="gradient-title">
+                <span className="gradient-title gradient-title-font">
                   On-demand Online vet appointments.
                 </span>
               </Typography.Title>
@@ -103,7 +103,7 @@ const OurServices: React.FC<IProp> = ({ limit = false }) => {
                   <Button
                     type="link"
                     style={{ color: "#5a008b", fontWeight: "bold" }}
-                    onClick={() => navigate("/services")}
+                    onClick={() => navigate("/our_services")}
                   >
                     More pet resources →
                   </Button>
@@ -115,7 +115,7 @@ const OurServices: React.FC<IProp> = ({ limit = false }) => {
 
         {limit
           ? servicesData.slice(0, 3).map((service, index) => (
-              <Col xs={24} md={8} key={index}>
+              <Col xs={24} md={7} key={index}>
                 <Card
                   key={index}
                   title={service.title}

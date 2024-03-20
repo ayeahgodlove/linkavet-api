@@ -2,25 +2,21 @@
 
 import React, { useEffect } from "react";
 import {
-  Card,
   Row,
   Col,
   Typography,
-  Avatar,
   Button,
   ConfigProvider,
 } from "antd";
 import { useUserSpecialty } from "hooks/user-specialty.hook";
 import { FaHouseMedicalFlag } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
-import { API_URL_UPLOADS_AVATARS } from "config/constant";
-import { useUser } from "hooks/user.hook";
+import { TeamCard } from "components/team/team-card.component";
 
 const { Title } = Typography;
 
 const VetDoctorsComponent: React.FC = () => {
   const { loadUserSpecialties, userSpecialties } = useUserSpecialty();
-  const {getUser} = useUser()
   const navigate = useNavigate();
   useEffect(() => {
     loadUserSpecialties();
@@ -45,7 +41,7 @@ const VetDoctorsComponent: React.FC = () => {
         <Row gutter={[16, 16]} justify={"center"} align={"middle"}>
           <Col span={20}>
             <Title level={2} style={{ textAlign: "center" }}>
-              <span className="gradient-title">Meet the professionals</span>
+              <span className="gradient-title gradient-title-font">Meet the professionals</span>
             </Title>
             <Typography.Paragraph style={{ fontSize: 17, textAlign: "center" }}>
               <p>
@@ -72,32 +68,7 @@ const VetDoctorsComponent: React.FC = () => {
               lg={6}
               style={{ margin: "2rem 0" }}
             >
-              <Card
-                hoverable
-                style={{ width: 250 }}
-                cover={
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginTop: 20,
-                    }}
-                  >
-                    <Avatar size={90} src={`${API_URL_UPLOADS_AVATARS}/${user.avatar}`}>{user.username}</Avatar>
-                  </div>
-                }
-                bodyStyle={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Card.Meta
-                  title={user?.username}
-                  description={user.specialty}
-                />
-              </Card>
+              <TeamCard team={user} />
             </Col>
           ))}
           <Col

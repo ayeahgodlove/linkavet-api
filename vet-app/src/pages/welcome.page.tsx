@@ -1,4 +1,3 @@
-import { HomeBanner } from "components/home-banner/home-banner.component";
 // import BuyInThreeSteps from "components/buy-in-three-steps/buy-in-three-steps.component";
 import Review from "components/review/review.component";
 import Subscribe from "components/subscribe/subscribe.component";
@@ -9,6 +8,7 @@ import { Helmet } from "react-helmet-async";
 import OurServices from "components/service/service.component";
 import VetDoctorsComponent from "components/vet/vet-doctor.component";
 import BlogPost from "components/post/post.component";
+import AppHero from "components/home-banner/app-hero.component";
 
 const WelcomePage: React.FC = () => {
   useEffect(() => {
@@ -27,7 +27,7 @@ const WelcomePage: React.FC = () => {
         />
       </Helmet>
       {/* Banner */}
-      <HomeBanner />
+      <AppHero />
 
       <OurServices limit={true} />
 
@@ -39,15 +39,13 @@ const WelcomePage: React.FC = () => {
       {/* startup in 3 steps */}
       {/* <BuyInThreeSteps /> */}
 
-      {/* meet our team */}
-      <VetDoctorsComponent />
-
       {/* reviews */}
       <Review />
 
+      {/* meet our team */}
+      <VetDoctorsComponent />
       {/* subscribe */}
       {/* <Subscribe /> */}
-
     </>
   );
 };

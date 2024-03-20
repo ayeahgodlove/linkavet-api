@@ -12,9 +12,16 @@ import { ICategory } from "models/category.model";
 import { TagService } from "services/tag.service";
 import { ITag } from "models/tag.model";
 import "rc-footer/assets/index.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAppShellMenus } from "./app-shell-menus";
-import { MdOutlineRateReview } from "react-icons/md";
+import { getConfiguration } from "redux/action/initial.action";
+import { useDispatch } from "react-redux";
+import { fetchUsersAsync } from "redux/user.slice";
+import { fetchCategoriesAsync } from "redux/category.slice";
+import { fetchTagsAsync } from "redux/tag.slice";
+import { fetchBannersAsync } from "redux/banner.slice";
+import { fetchReviewsAsync } from "redux/review.slice";
+import { fetchUserSpecialtiesAsync } from "redux/user-specialty.slice";
 
 const { Sider, Content } = Layout;
 const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -27,9 +34,8 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
   const { isDarkMode } = useTheme();
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [tags, setTags] = useState<ITag[]>([]);
-
+  const dispatch = useDispatch();
   const { GeneralMenuItemsWithIcons } = useAppShellMenus();
-  const navigate = useNavigate();
 
   const handleShow = () => {
     setShow(true);
@@ -50,6 +56,12 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    dispatch(fetchUsersAsync() as any);
+    dispatch(fetchCategoriesAsync() as any);
+    dispatch(fetchTagsAsync() as any);
+    dispatch(fetchBannersAsync() as any);
+    dispatch(fetchReviewsAsync() as any);
+    dispatch(fetchUserSpecialtiesAsync() as any);
     getCategories();
     getTags();
   }, []);

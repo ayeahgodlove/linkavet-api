@@ -48,6 +48,7 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
 
     const formData = new FormData();
     formData.append("title", values.title);
+    formData.append("summary", values.summary);
     formData.append("content", values.content);
     formData.append("authorId", user.id);
     formData.append("categoryId", values.categoryId);
@@ -181,6 +182,21 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
             {
               required: true,
               message: "Title is required",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          name="summary"
+          label="Summary"
+          requiredMark
+          style={{ marginBottom: 3 }}
+          rules={[
+            {
+              required: true,
+              message: "Summary is required",
             },
           ]}
         >

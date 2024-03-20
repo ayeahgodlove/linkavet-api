@@ -15,7 +15,7 @@ export const ServiceBanner = () => {
             <img
               alt="avatar"
               src="./images/kylee-alons-suQ-D-9dmVU-unsplash.jpg"
-              style={{ height: "auto", width: "550px", maxWidth: "100%" }}
+              style={{ height: "auto", maxWidth: "100%" }}
             />
           </Col>
           <Col xs={24} md={12}>
@@ -32,8 +32,8 @@ export const ServiceBanner = () => {
                 style={{
                   textAlign: "center",
                   lineHeight: 1.5,
-                  fontSize: 40,
                 }}
+                className="gradient-title gradient-title-font"
               >
                 Expert Veterinary Care for Your Beloved Pets
               </Title>
@@ -45,7 +45,7 @@ export const ServiceBanner = () => {
               <Button
                 shape="round"
                 type="primary"
-                href="#services"
+                href="/appointments"
               >
                 Schedule an appointment
               </Button>

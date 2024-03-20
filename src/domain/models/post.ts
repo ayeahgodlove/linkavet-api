@@ -3,6 +3,7 @@ import { IBaseResponse } from "./base-response";
 export interface IPost {
   id: string; //primary key
   title: string;
+  summary: string
   content: string;
   imageUrl: string;
   slug: string;
@@ -19,7 +20,8 @@ export const emptyPost: IPost = {
   imageUrl: "",
   publishedAt: new Date(),
   authorId: "",
-  categoryId: ""
+  categoryId: "",
+  summary: ""
 };
 
 export interface IPostResponse extends IBaseResponse {

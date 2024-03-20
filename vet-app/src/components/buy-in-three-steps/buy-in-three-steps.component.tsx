@@ -34,7 +34,7 @@ const BuyInThreeSteps: React.FC = () => {
               marginBottom: 0,
             }}
           >
-            <span  className="gradient-title">Get Sarted in 3 Easy Steps</span>
+            <span  className="gradient-title gradient-title-font">Get Sarted in 3 Easy Steps</span>
           </Title>
           <Paragraph style={{ fontSize: 17, textAlign: "center" }}>
             <p>

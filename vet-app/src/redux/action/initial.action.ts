@@ -7,6 +7,7 @@ import { fetchReviewsAsync } from "redux/review.slice";
 import { AppThunk } from "redux/store";
 import { fetchTagsAsync } from "redux/tag.slice";
 import { fetchUserRolesAsync } from "redux/user-role.slice";
+import { fetchUserSpecialtiesAsync } from "redux/user-specialty.slice";
 import { fetchUsersAsync } from "redux/user.slice";
 
 export const initialDataAsync = (): AppThunk => async (dispatch) => {
@@ -26,10 +27,12 @@ export const initialDataAsync = (): AppThunk => async (dispatch) => {
 };
 export const getConfiguration = (): AppThunk => async (dispatch) => {
   try {
+    await dispatch(fetchUsersAsync());
     await dispatch(fetchCategoriesAsync());
     await dispatch(fetchTagsAsync());
     await dispatch(fetchBannersAsync());
     await dispatch(fetchReviewsAsync());
+    await dispatch(fetchUserSpecialtiesAsync());
   } catch (error) {
     console.log(error);
   }

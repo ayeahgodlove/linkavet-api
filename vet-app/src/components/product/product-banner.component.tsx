@@ -68,6 +68,7 @@ const ProductBannerComponent = () => {
               level={1}
             >
               <Texty
+              className="gradient-title gradient-title-font"
                 type="bounce"
                 delay={400}
                 enter={getEnter}
@@ -99,7 +100,7 @@ const ProductBannerComponent = () => {
                   ],
                 }}
               >
-                Explore Premium Vet Products
+                Explore Premium Products
               </Texty>
             </Title>
 

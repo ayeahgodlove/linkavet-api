@@ -35,6 +35,13 @@ export class Post extends Model<IPost> {
   title!: string;
 
   @Column({
+    type: DataType.STRING(255),
+    allowNull: true,
+  })
+  summary!: string;
+
+
+  @Column({
     type: DataType.STRING(128),
     allowNull: false,
     unique: true,

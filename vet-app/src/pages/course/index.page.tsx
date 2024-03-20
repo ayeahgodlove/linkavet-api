@@ -30,7 +30,7 @@ const CoursePage: React.FC = () => {
       </Helmet>
       {/* Dummy banner */}
       <PageBannerComponent
-        title="Veterinary Courses Tailored for Pet Enthusiasts"
+        title="Vet Courses Tailored for Enthusiasts"
         description="Embark on a learning journey with our specialized veterinary courses at Linkavet. Designed for pet enthusiasts and aspiring veterinary professionals, our courses cover a range of topics, from basic pet care to advanced veterinary techniques."
         linkCmd="Browse Course"
       />

@@ -123,6 +123,48 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
           />
         </Form.Item>
         <Form.Item
+          name="twitter"
+          label="Twitter"
+          requiredMark
+          style={{ marginBottom: 10 }}
+          rules={[
+            {
+              required: true,
+              message: "Twitter is required",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="facebook"
+          label="Facebook"
+          requiredMark
+          style={{ marginBottom: 10 }}
+          rules={[
+            {
+              required: true,
+              message: "Facebook is required",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="linkedin"
+          label="Linkedin"
+          requiredMark
+          style={{ marginBottom: 10 }}
+          rules={[
+            {
+              required: true,
+              message: "Linkedin is required",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
           name="specialty"
           label="Specialty"
           requiredMark

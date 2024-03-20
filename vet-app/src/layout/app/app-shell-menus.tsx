@@ -5,8 +5,6 @@ import {
   Badge,
   Space,
   Divider,
-  Switch,
-  ConfigProvider,
 } from "antd";
 import { TfiGallery } from "react-icons/tfi";
 import { TbPigMoney, TbPlugConnected } from "react-icons/tb";
@@ -50,7 +48,6 @@ import {
   ShoppingCartOutlined,
   TranslationOutlined,
 } from "@ant-design/icons";
-import { BsSun } from "react-icons/bs";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import { useTheme } from "hooks/shared/theme.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
@@ -74,9 +71,8 @@ export const useAppShellMenus = () => {
     router("/shopping-cart");
   };
   const { logoutUserFunction, isAuthenticated, user } = useAuth();
-  const {users} = useUser()
-  const avatar = users.find(u => u.id === user.id);
-
+  const { users } = useUser();
+    const avatar = isAuthenticated ? users.find((u) => u.id === user.id) as any : null;
   // roles.some(role => user.roles.map(ur => ur.name).includes(role))
   function filterMenuItemsByRole(items: any["items"], userRoles: string[]) {
     return items
@@ -612,7 +608,7 @@ export const useAppShellMenus = () => {
             fontWeight: "bold",
             fontSize: 14,
           }}
-          src={`${API_URL_UPLOADS_AVATARS}/${avatar?.avatar}`}
+          src={`${API_URL_UPLOADS_AVATARS}/${isAuthenticated ? avatar.avatar : ""}`}
         >
           {user?.username?.charAt(0).toUpperCase()}
         </Avatar>

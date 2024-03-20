@@ -33,6 +33,27 @@ export class UserSpecialty extends Model<IUserSpecialty> {
   })
   specialty!: string;
 
+  @Column({
+    type: DataType.STRING(255),
+    allowNull: true,
+    unique: false,
+  })
+  facebook!: string;
+
+  @Column({
+    type: DataType.STRING(255),
+    allowNull: true,
+    unique: false,
+  })
+  twitter!: string;
+
+  @Column({
+    type: DataType.STRING(255),
+    allowNull: true,
+    unique: false,
+  })
+  linkedin!: string;
+
   @BelongsTo(() => User)
   user!: User; // Define association to User entity
 }

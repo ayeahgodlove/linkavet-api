@@ -1,47 +1,55 @@
-import { Col, Row, Typography } from "antd";
+import { Carousel, Modal } from "antd";
 import { useReview } from "hooks/review.hook";
-import React from "react";
+import React, { useState } from "react";
 import ReviewCard from "./review-card.component";
+import ReactPlayer from "react-player/youtube";
+import { Container } from "components/shared/container/container";
+import { CaretRightOutlined } from "@ant-design/icons";
+import "./testimonial.less"
 
-const { Title, Paragraph } = Typography;
 const Review = () => {
+  const [visible, setVisible] = useState(false);
+
+  const showModal = () => {
+    setVisible(true);
+  };
+
+  const hideModal = () => {
+    setVisible(false);
+  };
   const { reviews } = useReview();
+
   return (
     <>
-      <Row
-        justify={"center"}
-        align={"middle"}
-        style={{ margin: "40px 0" }}
-        gutter={[16, 16]}
-      >
-        <Col xs={24} md={24} lg={24}>
-          <Title
-            style={{
-              textAlign: "center",
-              lineHeight: 1.5,
-              fontSize: 40,
-              marginBottom: 0,
-            }}
+      <section id="testimonial" className="testimonial">
+        <Container fluid className="testimonial__container-fluid">
+          <div className="testimonial__play-button" onClick={showModal}>
+            <CaretRightOutlined className="testimonial__play-icon" />
+          </div>
+        </Container>
+        <Container className="testimonial__container">
+          <Carousel
+            className="testimonial__carousel"
+            dotPosition="bottom"
+            autoplay
           >
-            Customer Reviews
-          </Title>
-          <Paragraph style={{ fontSize: 17, textAlign: "center" }}>
-            <p>
-              Thousands of our customers are raving about us, and this is what
-              they have to say.
-            </p>
-          </Paragraph>
-        </Col>
-        <Col xs={22} md={20}>
-          <Row justify={"center"} align={"middle"}>
-            {reviews.slice(0,3).map((r) => (
-              <Col xs={22} md={8} key={r.id}>
-                <ReviewCard review={r} />
-              </Col>
+            {reviews.map((review) => (
+              <ReviewCard review={review} />
             ))}
-          </Row>
-        </Col>
-      </Row>
+          </Carousel>
+        </Container>
+        <Modal
+          centered
+          className="testimonial__modal"
+          visible={visible}
+          onCancel={hideModal}
+          width={"auto"}
+          footer={null}
+          closable={false}
+        >
+          <ReactPlayer url="https://www.youtube.com/watch?v=cLORaUovsc4" />
+        </Modal>
+      </section>
     </>
   );
 };
