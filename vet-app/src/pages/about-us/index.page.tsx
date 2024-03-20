@@ -6,35 +6,6 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import useWindowSize from "hooks/shared/window-resize.hook";
 import { Helmet } from "react-helmet-async";
 
-const teamMembers = [
-  {
-    name: "John Roe",
-    role: "CEO",
-    description:
-      "John is the CEO of our company with over 20 years of experience.",
-    img: "./team/profile.jpg",
-  },
-  {
-    name: "Jane Rich",
-    role: "CTO",
-    description: "Jane leads our technology strategy and development.",
-    img: "./team/prof2.jpg",
-  },
-  {
-    name: "John Doe",
-    role: "CEO",
-    description:
-      "John is the CEO of our company with over 20 years of experience.",
-    img: "./team/prof3.jpg",
-  },
-  {
-    name: "Jane Doe",
-    role: "CTO",
-    description: "Jane leads our technology strategy and development.",
-    img: "./team/profile.jpg",
-  },
-];
-
 const banners = [
   {
     title: "linkavet vet staff group one",
@@ -103,19 +74,35 @@ const AboutUsPages = () => {
                   </Col>
 
                   <Col xs={24} md={10}>
-                    <div style={{ padding: 24 }}>
-                      <Typography.Title level={3} style={{ color: "#02441c" }}>
+                    <div
+                      style={{
+                        padding: 24,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Typography.Title
+                        level={2}
+                        // style={{ color: "#02441c" }}
+                        className="gradient-title gradient-title-font"
+                      >
                         Your Trusted Partner in Pet Care
                       </Typography.Title>
                       <Typography.Title level={5}>
                         Discover a World Where Your Pets are Always a Priority
                       </Typography.Title>
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            "At LinkaVet.com, we're more than just a platform; we're a community dedicated to providing everything your pet needs to live a happy, healthy life. From essential supplies in our comprehensive e-commerce store to expert-led courses designed to empower pet owners, and personalized vet consultations accessible from the comfort of your home, we're here to ensure your furry, feathered, or scaled friends receive the best care possible.",
-                        }}
-                      />
+                      <p>
+                        At LinkaVet.com, we're more than just a platform; we're
+                        a community dedicated to providing everything your pet
+                        needs to live a happy, healthy life. From essential
+                        supplies in our comprehensive e-commerce store to
+                        expert-led courses designed to empower pet owners, and
+                        personalized vet consultations accessible from the
+                        comfort of your home, we're here to ensure your furry,
+                        feathered, or scaled friends receive the best care
+                        possible.
+                      </p>
                     </div>
                   </Col>
                 </Row>
@@ -126,7 +113,8 @@ const AboutUsPages = () => {
           <Col xs={22} style={{ margin: "20px 0" }}>
             <Typography.Title
               level={3}
-              style={{ textAlign: "center", marginTop: 30, color: "#02441c" }}
+              style={{ textAlign: "center", marginTop: 30 }}
+              className="gradient-title gradient-title-font"
             >
               Empower, Engage, and Elevate Your Pet Care Experience{" "}
             </Typography.Title>
@@ -141,143 +129,6 @@ const AboutUsPages = () => {
               resonate with pet owners looking for a reliable, all-in-one
               resource for their pet care needs.
             </Typography.Paragraph>
-
-            <Typography.Title
-              level={3}
-              style={{ textAlign: "center", marginTop: 30, color: "#02441c" }}
-            >
-              Meet the Team
-            </Typography.Title>
-            <Row gutter={[8, 8]} align={"middle"} justify={"center"}>
-              {teamMembers.map((member) => (
-                <Col xs={24} md={6} key={member.name}>
-                  <Card
-                    hoverable
-                    style={{
-                      width: width > 767 ? 300 : "100%",
-                      marginBottom: 10,
-                    }}
-                    cover={
-                      <img
-                        alt={member.name}
-                        style={{ height: 240, objectFit: "cover" }}
-                        src={member.img}
-                      />
-                    }
-                  >
-                    <Card.Meta title={member.name} description={member.role} />
-                    <Typography.Paragraph>
-                      {member.description}
-                    </Typography.Paragraph>
-                  </Card>
-                </Col>
-              ))}
-            </Row>
-          </Col>
-        </Row>
-
-        <Row
-          gutter={[16, 16]}
-          align={"middle"}
-          justify={"center"}
-          style={{ margin: "0 2rem" }}
-        >
-          <Col xs={24}>
-            <Typography.Title
-              level={3}
-              style={{ textAlign: "center", marginTop: 30, color: "#02441c" }}
-            >
-              Crafting the LinkaVet.com Experience
-            </Typography.Title>
-          </Col>
-          <Col xs={24} md={8}>
-            <Card hoverable bordered={false}>
-              <Typography.Title level={5} style={{ color: "#02441c" }}>
-                Identifying the Need
-              </Typography.Title>
-              <Typography.Text>
-                The journey of LinkaVet.com began with a simple observation: pet
-                owners often navigate a fragmented landscape when seeking
-                products, advice, and healthcare for their pets. We envisioned a
-                unified platform that caters to all aspects of pet care - a
-                single destination for quality products, educational content,
-                and expert consultations.
-              </Typography.Text>
-            </Card>
-          </Col>
-          <Col xs={24} md={8}>
-            <Card hoverable bordered={false}>
-              <Typography.Title level={5} style={{ color: "#02441c" }}>
-                {" "}
-                Building the Foundation
-              </Typography.Title>
-              <Typography.Text>
-                With our goal in mind, we embarked on extensive research to
-                understand pet owners' challenges, desires, and expectations.
-                This phase involved engaging with veterinarians, pet care
-                professionals, and pet owners themselves to gather insights that
-                would form the bedrock of our services.
-              </Typography.Text>
-            </Card>
-          </Col>
-          <Col xs={24} md={8}>
-            <Card hoverable bordered={false}>
-              <Typography.Title level={5} style={{ color: "#02441c" }}>
-                Developing the Platform
-              </Typography.Title>
-              <Typography.Text>
-                Leveraging cutting-edge technology and design thinking, we
-                developed LinkaVet.com to be intuitive, user-friendly, and
-                comprehensive. Our e-commerce section offers a curated selection
-                of products, our courses platform provides access to expert
-                knowledge, and our vet consultation service ensures professional
-                advice is just a click away.
-              </Typography.Text>
-            </Card>
-          </Col>
-
-          <Col xs={24} md={8}>
-            <Card hoverable bordered={false}>
-              <Typography.Title level={5} style={{ color: "#02441c" }}>
-                Curating Our Offerings
-              </Typography.Title>
-              <Typography.Text>
-                Every product, course, and vet partner on LinkaVet.com is
-                meticulously selected based on stringent criteria for quality,
-                relevance, and value. We prioritize offerings that align with
-                our mission of promoting pet health, happiness, and well-being.
-              </Typography.Text>
-            </Card>
-          </Col>
-
-          <Col xs={24} md={8}>
-            <Card hoverable bordered={false}>
-              <Typography.Title level={5} style={{ color: "#02441c" }}>
-                Launching and Learning
-              </Typography.Title>
-              <Typography.Text>
-                Launching LinkaVet.com was just the beginning. We believe in
-                continuous improvement, driven by feedback from our community
-                and the latest advancements in pet care. Our commitment to
-                learning and adapting ensures we remain at the forefront of pet
-                care innovation.
-              </Typography.Text>
-            </Card>
-          </Col>
-
-          <Col xs={24} md={8}>
-            <Card hoverable bordered={false}>
-              <Typography.Title level={5} style={{ color: "#02441c" }}>
-                Looking to the future
-              </Typography.Title>
-              <Typography.Text>
-                As LinkaVet.com grows, so does our vision. We are constantly
-                exploring new ways to expand our services, enhance our platform,
-                and deepen our impact on the lives of pets and their owners.
-                With every step, we remain dedicated to our founding principle:
-                to empower, engage, and elevate your pet care experience.
-              </Typography.Text>
-            </Card>
           </Col>
         </Row>
       </ConfigProvider>

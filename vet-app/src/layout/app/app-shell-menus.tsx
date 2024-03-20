@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  MenuProps,
-  Avatar,
-  Badge,
-  Space,
-  Divider,
-} from "antd";
+import { MenuProps, Avatar, Badge, Space, Divider } from "antd";
 import { TfiGallery } from "react-icons/tfi";
 import { TbPigMoney, TbPlugConnected } from "react-icons/tb";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -14,10 +8,7 @@ import { TiDocumentText } from "react-icons/ti";
 import {
   MdOutlineLibraryBooks,
   MdOutlineProductionQuantityLimits,
-  MdOutlineQuiz,
-  MdPlayLesson,
   MdOutlineArticle,
-  MdDarkMode,
 } from "react-icons/md";
 import {
   BiCategoryAlt,
@@ -25,7 +16,6 @@ import {
   BiLogIn,
   BiMoneyWithdraw,
   BiPen,
-  BiQuestionMark,
   BiSolidDashboard,
 } from "react-icons/bi";
 import {
@@ -49,7 +39,6 @@ import {
   TranslationOutlined,
 } from "@ant-design/icons";
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import { useTheme } from "hooks/shared/theme.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
 import { useAuth } from "hooks/auth/auth.hook";
 import { GrScheduleNew } from "react-icons/gr";
@@ -59,7 +48,7 @@ import { useUser } from "hooks/user.hook";
 export const useAppShellMenus = () => {
   const [language, setLanguage] = useState("en");
 
-  const { handleSetTheme, isDarkMode } = useTheme();
+  // const { handleSetTheme, isDarkMode } = useTheme();
   const { cartQuantity } = useShoppingCart();
   const router = useNavigate();
   const toggleLanguage = (key: string) => {
@@ -72,8 +61,18 @@ export const useAppShellMenus = () => {
   };
   const { logoutUserFunction, isAuthenticated, user } = useAuth();
   const { users } = useUser();
-    const avatar = isAuthenticated ? users.find((u) => u.id === user.id) as any : null;
+
+  const avatar = isAuthenticated
+    ? (users.find((u) => u.id === user.id) as any)
+    : null;
   // roles.some(role => user.roles.map(ur => ur.name).includes(role))
+  const hasAccess = isAuthenticated
+    ? user.roles.map((r) => r.name).includes(ROLES.ADMIN) ||
+      user.roles.map((r) => r.name).includes(ROLES.CREATOR) ||
+      user.roles.map((r) => r.name).includes(ROLES.DOCTOR) ||
+      user.roles.map((r) => r.name).includes(ROLES.TRAINER)
+    : false;
+
   function filterMenuItemsByRole(items: any["items"], userRoles: string[]) {
     return items
       .filter((item: any) => item.roles.some((r) => userRoles.includes(r)))
@@ -608,7 +607,9 @@ export const useAppShellMenus = () => {
             fontWeight: "bold",
             fontSize: 14,
           }}
-          src={`${API_URL_UPLOADS_AVATARS}/${isAuthenticated ? avatar.avatar : ""}`}
+          src={`${API_URL_UPLOADS_AVATARS}/${
+            isAuthenticated ? avatar.avatar : ""
+          }`}
         >
           {user?.username?.charAt(0).toUpperCase()}
         </Avatar>
@@ -644,6 +645,9 @@ export const useAppShellMenus = () => {
                 </Link>
               ),
               key: "dashboard",
+              style: {
+                display: !hasAccess ? "none" : "",
+              },
             },
             {
               label: (

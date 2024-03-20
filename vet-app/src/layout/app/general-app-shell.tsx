@@ -135,23 +135,23 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
                   items: [
                     {
                       title: "Discount",
-                      url: "/fags",
+                      url: "/faqs",
                     },
                     {
                       title: "Wish list",
-                      url: "/fagsx",
+                      url: "/faqsx",
                     },
                     {
                       title: "How to buy",
-                      url: "/fags",
+                      url: "/faqs",
                     },
                     {
                       title: "Contact us",
-                      url: "/fagsx",
+                      url: "/faqs",
                     },
                     {
                       title: "Purchase fees",
-                      url: "/fags",
+                      url: "/faqs",
                     },
                   ],
                 },

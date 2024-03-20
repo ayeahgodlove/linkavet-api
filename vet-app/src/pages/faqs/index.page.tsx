@@ -1,7 +1,6 @@
-import {  Col, Collapse, ConfigProvider, Row, Typography } from "antd";
+import AppFaq from "components/faq/faq.component";
 import React from "react";
 import { Helmet } from "react-helmet-async";
-import theme from "utils/themeConfig";
 
 const faqs = [
   {
@@ -73,32 +72,7 @@ const FaqsPage = () => {
           content="Find answers to the questions"
         />
       </Helmet>
-      <ConfigProvider theme={theme}>
-        <div style={{ margin: "3rem 0" }}>
-          <Row gutter={[16, 16]} justify={"center"}>
-            <Col span={8}>{/* <HexagonCard /> */}</Col>
-            <Col xs={22} md={20}>
-              <Typography.Title level={1} style={{ marginBottom: 0 }}>
-                Frequently Asked Questions
-              </Typography.Title>
-              <p>
-                Can't find your answer here? Call us at +237673687549 or email
-                us at linkavet.support@gmail.com
-              </p>
-            </Col>
-
-            <Col xs={22} md={20}>
-              <Collapse accordion>
-                {faqs.map((faq) => (
-                  <Collapse.Panel header={faq.question} key={faq.key}>
-                    <p>{faq.answer}</p>
-                  </Collapse.Panel>
-                ))}
-              </Collapse>
-            </Col>
-          </Row>
-        </div>
-      </ConfigProvider>
+      <AppFaq />
     </>
   );
 };

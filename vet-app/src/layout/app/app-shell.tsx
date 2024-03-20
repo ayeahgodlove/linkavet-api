@@ -27,7 +27,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
   const { items2, filterMenuItemsByRole } = useAppShellMenus();
   const dispatch = useDispatch();
 
-  //sidebar access
+  //sidebar access 
   const hasAccess =
     user.roles.map((r) => r.name).includes(ROLES.ADMIN) ||
     user.roles.map((r) => r.name).includes(ROLES.CREATOR);
