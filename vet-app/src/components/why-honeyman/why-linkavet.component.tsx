@@ -43,7 +43,12 @@ export const WhyLinkaVet = () => {
                 Get access to Veterinary doctors has never been easier in the
                 entire history of mankind
               </Paragraph>
-              <Button shape="round" type="primary" href="/about-us">
+              <Button
+                shape="round"
+                type="primary"
+                href="/about-us"
+                size="large"
+              >
                 Learn more
               </Button>
             </div>

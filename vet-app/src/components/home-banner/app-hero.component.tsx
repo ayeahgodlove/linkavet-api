@@ -5,6 +5,7 @@ import { useTween } from "hooks/shared/tween.hook";
 import TweenOne from "rc-tween-one";
 import Texty from "rc-texty";
 import { FaPlay } from "react-icons/fa";
+import useWindowSize from "hooks/shared/window-resize.hook";
 
 const items = [
   {
@@ -36,6 +37,7 @@ const items = [
 const AppHero = () => {
   const [show, setShow] = useState(true);
 
+  const { width } = useWindowSize();
   const { getEnter, getInterval } = useTween();
   const getSplit = (props: any) => {
     const t = props.split(" ");
@@ -116,12 +118,14 @@ const AppHero = () => {
                     >
                       {item.label}
                     </Button>
-                    <Button size="large" type="default" shape="round">
-                      <Space size={"small"}>
-                        <span> Watch a Demo</span>
-                        <FaPlay />
-                      </Space>
-                    </Button>
+                    {width > 767 && (
+                      <Button size="large" type="default" shape="round">
+                        <Space size={"small"}>
+                          <span> Watch a Demo</span>
+                          <FaPlay />
+                        </Space>
+                      </Button>
+                    )}
                   </Space>
                 </div>
               </div>

@@ -32,7 +32,7 @@ const BlogPost = () => {
             alignItems: "center",
           }}
         >
-          <Col xs={22} md={18} lg={18} xl={14} style={{ margin: "5rem 0" }}>
+          <Col xs={22} md={18} lg={18} xl={14} style={{ margin: `${width > 768 ? "5rem 0" : "2rem 0"}` }}>
             <Typography.Title
               style={{
                 textAlign: "center",

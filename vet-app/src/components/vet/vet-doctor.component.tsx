@@ -79,7 +79,7 @@ const VetDoctorsComponent: React.FC = () => {
               alignItems: "center",
             }}
           >
-            <Col xs={12} lg={6}>
+            <Col xs={20} md={10} lg={6}>
               <Button
                 type="default"
                 style={{

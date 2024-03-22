@@ -81,7 +81,7 @@ const OurServices: React.FC<IProp> = ({ limit = false }) => {
               alignItems: "center",
             }}
           >
-            <Col xs={22} md={18} lg={18} xl={14} style={{ margin: "5rem 0" }}>
+            <Col xs={22} md={18} lg={18} xl={14} style={{ margin: `${width > 768 ? "5rem 0" : "2rem 0px 4rem 0px"}` }}>
               <Typography.Title
                 style={{
                   textAlign: "center",
@@ -188,7 +188,7 @@ const OurServices: React.FC<IProp> = ({ limit = false }) => {
               alignItems: "center",
             }}
           >
-            <Col xs={12} lg={6}>
+            <Col xs={20} md={10} lg={6}>
               <Button
                 type="default"
                 style={{ ...buttonStyle, height: 50 }}
