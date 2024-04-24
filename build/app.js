@@ -97,7 +97,14 @@ db.connection()
         credentials: true,
     }))
         .use((0, cookie_parser_1.default)())
-        .use((0, helmet_1.default)())
+        .use((0, helmet_1.default)({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "https://www.linkavet.com"],
+            },
+        },
+    }))
         .use((0, express_session_1.default)({
         // store: store,
         secret: `${process.env.SESSION_SECRET}`,

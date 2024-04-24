@@ -83,7 +83,16 @@ db.connection()
         })
       )
       .use(cookieParser())
-      .use(helmet())
+      .use(
+        helmet({
+          contentSecurityPolicy: {
+            directives: {
+              defaultSrc: ["'self'"],
+              scriptSrc: ["'self'", "https://www.linkavet.com"],
+            },
+          },
+        })
+      )
       .use(
         session({
           // store: store,
