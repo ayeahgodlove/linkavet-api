@@ -37,6 +37,7 @@ import { appointmentReducer } from "./health/appointment.slice";
 import { userRoleReducer } from "./user-role.slice";
 import { roleReducer } from "./role.slice";
 import { userSpecialtyReducer } from "./user-specialty.slice";
+import { imageReducer } from "./shared/image.slice";
 
 // const middlewares: [any] = [thunkMiddleware];
 
@@ -60,6 +61,7 @@ export const rootReducer = combineReducers({
   shoppingCart: shoppingCartReducer,
   initTransaction: initTransactionReducer,
   comment: commentReducer,
+  image: imageReducer,
   // lms
   course: courseReducer,
   lesson: lessonReducer,

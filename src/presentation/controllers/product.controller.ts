@@ -11,8 +11,6 @@ import { ProductRequestDto } from "../dtos/product-request.dto";
 import { validate } from "class-validator";
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
-import path from "path";
-import rimraf from "rimraf";
 import { deleteFile } from "../../utils/util";
 
 const productRepository = new ProductRepository();

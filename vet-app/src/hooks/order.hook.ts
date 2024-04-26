@@ -64,7 +64,6 @@ const useOrder = () => {
   const getProductByOrder = async (orderId: string) => {
     return await OrderService.byOrderId(orderId)
       .then((response) => {
-        debugger;
         dispatch(getOrderId(response.data));
         return true;
       })

@@ -36,6 +36,12 @@ uploadRouter.post(
   uploadController.uploadFile
 );
 
+// uploadRouter.post(
+//   "/products",
+//   upload("products").fields([{ name: "productImages", maxCount: 5,  }]),
+//   uploadController.uploadFiles
+// );
+
 uploadRouter.post(
   "/products",
   upload("products").single("imageUrl"),

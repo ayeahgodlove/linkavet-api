@@ -16,4 +16,27 @@ export class UploadControllers {
       });
     }
   }
+
+  async uploadFiles(req: Request, res: Response<any>): Promise<void> {
+    if (!req.files) {
+      throw new Error("Please select images");
+    }
+    const { productImages } = req.files as any;
+
+    const filenames = productImages.map((pi: any) => pi.filename);
+    console.log("filenames: ", filenames)
+
+    try {
+      res.json({
+        message: "Files uploaded Successfully!",
+        success: true,
+        data: filenames,
+      });
+    } catch (error: any) {
+      res.status(400).json({
+        message: error.message,
+        success: false,
+      });
+    }
+  }
 }

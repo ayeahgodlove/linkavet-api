@@ -24,7 +24,6 @@ const TagTable: React.FC = () => {
 
   const [query, setQuery] = useState<string>("");
   const [isLoading, setLoading] = useState(false);
-  debugger
 
   const dispatch = useDispatch();
 
@@ -43,7 +42,6 @@ const TagTable: React.FC = () => {
     setLoading(true);
     const response = await fetch(`${API_URL}/api/tags`);
     const { data } = await response.json();
-    debugger
     return data;
   }, []);
 
@@ -68,7 +66,6 @@ const TagTable: React.FC = () => {
   useEffect(() => {
     (async () => {
       const tagDATas = await getTags();
-      debugger
       console.log("tagDATas: ", tagDATas)
       dispatch(fetchtagSuccess([...tagDATas]));
       setLoading(false);

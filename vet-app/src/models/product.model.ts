@@ -17,10 +17,6 @@ export interface IProduct {
   orders: any[];
 }
 
-export interface ProductFormData extends FormData {
-  id: string; // Assuming the ID is a string, adjust the type as needed
-}
-
 export const emptyProduct: IProduct = {
   id: "",
   name: "",

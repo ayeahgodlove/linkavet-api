@@ -17,8 +17,6 @@ const AdminCategoryPage: React.FC = () => {
   const { setContent, setTitle, setShow } = useModalContext();
   const dispatch = useDispatch();
 
-  debugger
-
   const createCategory = () => {
     setContent(<CategoryForm formMode={UpdateMode.ADD} />);
     setTitle("Create new category");

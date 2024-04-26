@@ -5,7 +5,6 @@ import {
   emptyProduct,
   IProduct,
   IProductResponses,
-  ProductFormData,
 } from "../models/product.model";
 import { CartItem } from "./shared/shopping-cart.slice";
 

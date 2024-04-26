@@ -7,7 +7,7 @@ import { useFormInit } from "hooks/shared/form-init.hook";
 import { useForm } from "antd/es/form/Form";
 import { useProduct } from "hooks/product.hook";
 import { useStore } from "hooks/store.hook";
-import { ProductFormData, emptyProduct } from "models/product.model";
+import { emptyProduct, IProduct } from "models/product.model";
 import { UpdateMode } from "models/shared/update-mode.enum";
 import { useUpload } from "hooks/shared/upload.hook";
 import { FormErrorComponent } from "components/shared/form-error/form-error.component";
@@ -37,22 +37,13 @@ const ProductStepForm: React.FC<Props> = ({ formMode }) => {
 
     console.log(values);
 
-    const formData = new FormData();
-    formData.append("name", formValues.name);
-    formData.append("shortDescription", formValues.shortDescription);
-    formData.append("description", formValues.description);
-    formData.append("categoryId", formValues.categoryId);
-
-    formData.append("tags", JSON.stringify(formValues.tags));
-
-    formData.append("amount", formValues.amount.toString());
-    formData.append("qtty", formValues.qtty.toString());
-    formData.append("storeId", `${getUserStore()?.id}`);
-
-    // Append the selected file(s) to the FormData object
-    fileList.forEach((file: any) => {
-      formData.append("productImages", file);
-    });
+    const formData: IProduct = {
+      ...emptyProduct,
+      ...values,
+      amount: formValues.amount.toString(),
+      qtty: formValues.qtty.toString(),
+      storeId: `${getUserStore()?.id}`,
+    };
 
     if (formMode === UpdateMode.ADD) {
       const feedback = await addProduct(formData);
@@ -65,9 +56,9 @@ const ProductStepForm: React.FC<Props> = ({ formMode }) => {
       }
     }
 
-    const formData2: ProductFormData = {
-      ...formData,
-      id: product.id,
+    const formData2: IProduct = {
+      ...product,
+      ...values,
     };
 
     if (formMode === UpdateMode.EDIT) {
@@ -114,11 +105,9 @@ const ProductStepForm: React.FC<Props> = ({ formMode }) => {
   ];
 
   const items = steps.map((item) => ({ key: item.title, title: item.title }));
+  initFormData(form, formMode, product);
 
-  useEffect(() => {
-    initFormData(form, formMode, product);
-    console.log("fileList: ", fileList);
-  }, [hasSubmitted]);
+  useEffect(() => {}, [hasSubmitted]);
   return (
     <>
       <Steps current={current} items={items} />

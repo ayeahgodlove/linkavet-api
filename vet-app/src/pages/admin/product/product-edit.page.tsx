@@ -1,5 +1,4 @@
 import { Card, Col, Row } from "antd";
-import { ProductForm } from "components/admin/product/product-form.component";
 import ProductStepForm from "components/admin/product/product-set-form.component";
 import { UpdateMode } from "models/shared/update-mode.enum";
 import React, { useEffect } from "react";
