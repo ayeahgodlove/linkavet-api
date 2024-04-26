@@ -1,7 +1,6 @@
 import { IBaseResponse } from "./base-response";
 import { IOrder } from "./order";
 import { ILessonReview } from "./lesson-review";
-import { ITag } from "./tag";
 
 export interface IProduct {
   id: string;

@@ -1,19 +1,15 @@
 import { Col, Form, FormInstance, Input, InputNumber, Row, Select } from "antd";
 import { useCategory } from "hooks/category.hook";
-import { useFormInit } from "hooks/shared/form-init.hook";
 import { useTag } from "hooks/tag.hook";
-import { IProduct } from "models/product.model";
 import React, { useEffect } from "react";
 
 interface Props {
   form: FormInstance<any>;
-  formValues: IProduct;
 }
 
-const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
+const ProductFormStepOne: React.FC<Props> = ({ form }) => {
   const { categories } = useCategory();
   const { tags } = useTag();
-  const { initFormData } = useFormInit();
 
   const onChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -42,7 +38,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
                     message: "Name is required",
                   },
                 ]}
-                initialValue={formValues.name}
               >
                 <Input />
               </Form.Item>
@@ -58,7 +53,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
                     message: "Category is required",
                   },
                 ]}
-                initialValue={formValues.categoryId}
               >
                 <Select
                   showSearch
@@ -91,7 +85,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
                     message: "Tags is required",
                   },
                 ]}
-                initialValue={formValues.tags}
               >
                 <Select
                   showSearch
@@ -125,7 +118,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
                     message: "Quantity is required",
                   },
                 ]}
-                initialValue={formValues.qtty}
               >
                 <InputNumber style={{ width: "100%" }} />
               </Form.Item>
@@ -141,7 +133,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
                     message: "Amount is required",
                   },
                 ]}
-                initialValue={formValues.amount}
               >
                 <InputNumber style={{ width: "100%" }} />
               </Form.Item>

@@ -11,10 +11,10 @@ import { useUpload } from "hooks/shared/upload.hook";
 import { FormErrorComponent } from "components/shared/form-error/form-error.component";
 import { useNavigate } from "react-router-dom";
 
-const ProductStepForm: React.FC = () => {
+const ProductStepEditForm: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [form] = useForm();
-  const { addProduct, editProduct } = useProduct();
+  const { editProduct, product } = useProduct();
   const { getUserStore } = useStore();
   const { fileList, beforeUpload, onRemove } = useUpload();
   const navigate = useNavigate();
@@ -22,44 +22,26 @@ const ProductStepForm: React.FC = () => {
   const [hasSubmitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
-  const [formValues, setFormValues] = useState(emptyProduct);
-
   const onFinish = async (values: any) => {
     setSubmitting(true);
     setSubmitted(false);
 
     const formData: IProduct = {
-      ...emptyProduct,
+      ...product,
       ...values,
-      amount: formValues.amount.toString(),
-      qtty: formValues.qtty.toString(),
+      amount: values.amount.toString(),
+      qtty: values.qtty.toString(),
       storeId: `${getUserStore()?.id}`,
     };
 
-      const feedback = await addProduct(formData);
-      if (feedback) {
-        message.success("Product created successfully!");
-        navigate("/admin/products");
-      } else {
-        message.error("failed to create");
-        setSubmitted(true);
-      }
-
-    // const formData2: IProduct = {
-    //   ...product,
-    //   ...values,
-    // };
-
-    // if (formMode === UpdateMode.EDIT) {
-    //   const feedback = await editProduct(formData2);
-    //   if (feedback) {
-    //     message.success("Product updated successfully!");
-    //     navigate("/admin/products");
-    //   } else {
-    //     message.error("failed to update");
-    //     setSubmitted(true);
-    //   }
-    // }
+    const feedback = await editProduct(formData);
+    if (feedback) {
+      message.success("Product updated successfully!");
+      navigate("/admin/products");
+    } else {
+      message.error("failed to update");
+      setSubmitted(true);
+    }
     setSubmitting(false);
   };
 
@@ -107,7 +89,7 @@ const ProductStepForm: React.FC = () => {
         onFinish={onFinish}
         layout="vertical"
         form={form}
-        initialValues={emptyProduct}
+        initialValues={product}
       >
         <div style={contentStyle}>{steps[current].content}</div>
         <div style={{ marginTop: 24 }}>
@@ -137,7 +119,7 @@ const ProductStepForm: React.FC = () => {
   );
 };
 
-export default ProductStepForm;
+export default ProductStepEditForm;
 
 const contentStyle: React.CSSProperties = {
   lineHeight: "260px",

@@ -7,10 +7,9 @@ import ReactQuill from "react-quill";
 
 interface Props {
   form: FormInstance<any>;
-  formValues: IProduct;
 }
 
-const ProductFormStepTwo: React.FC<Props> = ({ form, formValues }) => {
+const ProductFormStepTwo: React.FC<Props> = ({ form }) => {
   useEffect(() => {
     form.validateFields();
   }, [form]);
@@ -27,7 +26,6 @@ const ProductFormStepTwo: React.FC<Props> = ({ form, formValues }) => {
               message: "Short Description is required",
             },
           ]}
-          initialValue={formValues.shortDescription}
         >
           <Input.TextArea />
         </Form.Item>
@@ -41,7 +39,6 @@ const ProductFormStepTwo: React.FC<Props> = ({ form, formValues }) => {
               message: "Description is required",
             },
           ]}
-          // initialValue={formValues.description}
         >
           <ReactQuill
             modules={modules}
