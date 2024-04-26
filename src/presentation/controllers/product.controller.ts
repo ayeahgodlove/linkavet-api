@@ -26,7 +26,7 @@ export class ProductsController {
   ): Promise<void> {
     const dto = new ProductRequestDto(req.body);
     const validationErrors = await validate(dto);
-    const tags = JSON.parse(req.body.tags);
+    // const tags = JSON.parse(req.body.tags);
     const productImages = req.body.productImages;
 
     if (validationErrors.length > 0) {
@@ -40,7 +40,7 @@ export class ProductsController {
       try {
         const productResponse = await productUseCase.createProduct({
           ...dto.toData(),
-          tags,
+          tags: req.body.tags,
           productImages,
         });
 

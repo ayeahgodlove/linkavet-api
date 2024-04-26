@@ -9,6 +9,7 @@ import {
 } from "../redux/post.slice";
 import { PostService } from "services/post.service";
 import { IPost } from "models/post";
+import { useTag } from "./tag.hook";
 const usePost = () => {
   const posts = useSelector<IRootState, IPost[]>((state) => state.post.posts);
   const isLoading = useSelector<IRootState, boolean>(
@@ -56,6 +57,14 @@ const usePost = () => {
       });
   };
 
+  const {tags} = useTag()
+  const getPostTags = (post: IPost): string[] => {
+    return post.tags.map((tagId) => {
+      const matchingTag = tags.find((tag) => tag.id === tagId);
+      return matchingTag ? matchingTag.name : "Unknown Tag"; // Handle missing tags
+    });
+  };
+
   useEffect(() => {
     // loadPosts();
   }, [post, posts, isLoading, initialFetch]);
@@ -68,6 +77,7 @@ const usePost = () => {
     addPost,
     editPost,
     setPost,
+    getPostTags
   };
 };
 

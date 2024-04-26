@@ -8,7 +8,6 @@ export interface IProduct {
   amount: number;
   description: string;
   categoryId: string;
-  // storeId: string;
   shortDescription: string;
   productImages: any[];
   qtty: number;

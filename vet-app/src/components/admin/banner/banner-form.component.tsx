@@ -4,19 +4,22 @@ import {
   Form,
   Input,
   Space,
+  Typography,
   Upload,
   message,
 } from "antd";
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { useAuth } from "hooks/auth/auth.hook";
 import { UpdateMode } from "models/shared/update-mode.enum";
 import { useBanner } from "hooks/banner.hook";
 import { useModalContext } from "context/app-modal.context";
 import { useFormInit } from "hooks/shared/form-init.hook";
-import { emptyBanner } from "models/banner";
+import { emptyBanner, IBanner } from "models/banner";
 import { useUpload } from "hooks/shared/upload.hook";
 import theme from "utils/themeConfig";
+import { upload } from "utils/upload";
+import UploadButton from "components/shared/upload-button.component";
 
 type Props = {
   formMode: UpdateMode;
@@ -28,22 +31,18 @@ const BannerForm: React.FC<Props> = ({ formMode }) => {
   const { user } = useAuth();
   const { setShow } = useModalContext();
   const { initFormData } = useFormInit();
-  const { fileList, onChangeUpload, onRemove, beforeUpload, progress } =
+  const { fileList, handlePreview, onRemove, beforeUpload, progress } =
     useUpload();
 
   const onFinish = async (values: any) => {
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("subTitle", values.subTitle);
-    formData.append("userId", user.id);
-
-    // Append the selected file(s) to the FormData object
-    fileList.forEach((file: any) => {
-      formData.append("image", file);
-    });
+    const formData: IBanner = {
+      ...emptyBanner,
+      ...values,
+      userId: user.id
+    };
 
     if (formMode === UpdateMode.ADD) {
-      const feedback = await addBanner(formData as any);
+      const feedback = await addBanner(formData);
       if (feedback) {
         message.success("Banner created successfully!");
         setShow(false);
@@ -53,8 +52,13 @@ const BannerForm: React.FC<Props> = ({ formMode }) => {
       }
     }
 
+    const formData2: IBanner = {
+      ...banner,
+      ...values,
+      userId: user.id
+    };
     if (formMode === UpdateMode.EDIT) {
-      const feedback = await editBanner(formData as any);
+      const feedback = await editBanner(formData2);
       if (feedback) {
         message.success("Banner updated successfully!");
         setShow(false);
@@ -64,11 +68,35 @@ const BannerForm: React.FC<Props> = ({ formMode }) => {
       }
     }
   };
-  useEffect(() => {
-    initFormData(form, formMode, banner);
-  }, []);
+  initFormData(
+    form,
+    formMode,
+    formMode === UpdateMode.ADD ? emptyBanner : banner
+  );
+  const formData = new FormData();
   return (
     <ConfigProvider theme={theme}>
+      <div style={{ marginBottom: 15 }}>
+        <Typography.Title level={5}>Upload Image</Typography.Title>
+        <Upload
+          name="image"
+          maxCount={1}
+          listType="picture-card"
+          beforeUpload={beforeUpload}
+          onRemove={onRemove}
+          progress={progress}
+          fileList={fileList}
+          onPreview={handlePreview}
+          action={useCallback(async () => {
+            formData.append("image", fileList[0] as any);
+            const response = await upload("banners", formData);
+            form.setFieldValue("image", response);
+            return response;
+          }, [form, fileList, formData])}
+        >
+          {fileList.length > 1 ? null : <UploadButton />}
+        </Upload>
+      </div>
       <Form
         form={form}
         onFinish={onFinish}
@@ -109,16 +137,7 @@ const BannerForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Upload
-            maxCount={1}
-            beforeUpload={beforeUpload}
-            onChange={onChangeUpload}
-            onRemove={onRemove}
-            progress={progress}
-            fileList={fileList}
-          >
-            <Button icon={<UploadOutlined />}>Select File</Button>
-          </Upload>
+          <Input disabled={true} />
         </Form.Item>
         <Space>
           <Button type="primary" htmlType="submit">

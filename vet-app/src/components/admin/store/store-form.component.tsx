@@ -4,19 +4,21 @@ import {
   Form,
   Input,
   Space,
+  Typography,
   Upload,
   message,
 } from "antd";
-import React, { useEffect } from "react";
-import { UploadOutlined } from "@ant-design/icons";
+import React, { useCallback, useEffect } from "react";
 import { useAuth } from "hooks/auth/auth.hook";
 import { UpdateMode } from "models/shared/update-mode.enum";
 import { useStore } from "hooks/store.hook";
 import { useModalContext } from "context/app-modal.context";
 import { useFormInit } from "hooks/shared/form-init.hook";
-import { IStore, StoreFormData, emptyStore } from "models/store";
+import { IStore, emptyStore } from "models/store";
 import { useUpload } from "hooks/shared/upload.hook";
 import theme from "utils/themeConfig";
+import { upload } from "utils/upload";
+import UploadButton from "components/shared/upload-button.component";
 
 type Props = {
   formMode: UpdateMode;
@@ -28,19 +30,15 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
   const { user } = useAuth();
   const { setShow } = useModalContext();
   const { initFormData } = useFormInit();
-  const { fileList, onChangeUpload, onRemove, beforeUpload, progress } =
+  const { fileList, handlePreview, onRemove, beforeUpload, progress } =
     useUpload();
 
   const onFinish = async (values: IStore) => {
-    const formData = new FormData();
-    formData.append("name", values.name);
-    formData.append("location", values.location);
-    formData.append("userId", user.id);
-
-    // Append the selected file(s) to the FormData object
-    fileList.forEach((file: any) => {
-      formData.append("imageBannerUrl", file);
-    });
+    const formData: IStore = {
+      ...emptyStore,
+      ...values,
+      userId: user.id,
+    };
 
     if (formMode === UpdateMode.ADD) {
       const feedback = await addStore(formData);
@@ -53,7 +51,7 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
       }
     }
 
-    const formData2: StoreFormData = {
+    const formData2: IStore = {
       ...formData,
       id: store.id,
     };
@@ -69,11 +67,36 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
     }
   };
 
-  useEffect(() => {
-    initFormData(form, formMode, store);
-  }, []);
+  useEffect(() => {}, []);
+  initFormData(
+    form,
+    formMode,
+    formMode === UpdateMode.ADD ? emptyStore : store
+  );
+  const formData = new FormData();
   return (
     <ConfigProvider theme={theme}>
+      <div style={{ marginBottom: 15 }}>
+        <Typography.Title level={5}>Upload Image</Typography.Title>
+        <Upload
+          name="image"
+          maxCount={1}
+          listType="picture-card"
+          beforeUpload={beforeUpload}
+          onRemove={onRemove}
+          progress={progress}
+          fileList={fileList}
+          onPreview={handlePreview}
+          action={useCallback(async () => {
+            formData.append("imageBannerUrl", fileList[0] as any);
+            const response = await upload("stores", formData);
+            form.setFieldValue("imageBannerUrl", response);
+            return response;
+          }, [form, fileList, formData])}
+        >
+          {fileList.length > 1 ? null : <UploadButton />}
+        </Upload>
+      </div>
       <Form
         form={form}
         onFinish={onFinish}
@@ -114,16 +137,7 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Upload
-            maxCount={1}
-            beforeUpload={beforeUpload}
-            onChange={onChangeUpload}
-            onRemove={onRemove}
-            progress={progress}
-            fileList={fileList}
-          >
-            <Button icon={<UploadOutlined />}>Select File</Button>
-          </Upload>
+          <Input disabled={true} />
         </Form.Item>
         <Space>
           <Button type="primary" htmlType="submit">

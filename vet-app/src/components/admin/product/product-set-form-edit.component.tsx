@@ -5,33 +5,31 @@ import ProductFormStepTwo from "./product-form-step-two.component";
 import ProductFormStepUploads from "./product-form-step-uploads.component";
 import { useForm } from "antd/es/form/Form";
 import { useProduct } from "hooks/product.hook";
-import { useStore } from "hooks/store.hook";
-import { emptyProduct, IProduct } from "models/product.model";
 import { useUpload } from "hooks/shared/upload.hook";
 import { FormErrorComponent } from "components/shared/form-error/form-error.component";
 import { useNavigate } from "react-router-dom";
+import { IProduct } from "models/product.model";
 
 const ProductStepEditForm: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [form] = useForm();
   const { editProduct, product } = useProduct();
-  const { getUserStore } = useStore();
   const { fileList, beforeUpload, onRemove } = useUpload();
   const navigate = useNavigate();
 
   const [hasSubmitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [formValues, setFormValues] = useState(product);
 
   const onFinish = async (values: any) => {
     setSubmitting(true);
     setSubmitted(false);
 
     const formData: IProduct = {
-      ...product,
+      ...formValues,
       ...values,
-      amount: values.amount.toString(),
-      qtty: values.qtty.toString(),
-      storeId: `${getUserStore()?.id}`,
+      amount: values.amount,
+      qtty: values.qtty,
     };
 
     const feedback = await editProduct(formData);
@@ -86,10 +84,14 @@ const ProductStepEditForm: React.FC = () => {
         setSubmitted={setSubmitted}
       />
       <Form
+        onValuesChange={(changedValues, allValues) => {
+          // Update formValues state with allValues on each step change
+          console.log(changedValues);
+          setFormValues({ ...formValues, ...allValues });
+        }}
         onFinish={onFinish}
         layout="vertical"
         form={form}
-        initialValues={product}
       >
         <div style={contentStyle}>{steps[current].content}</div>
         <div style={{ marginTop: 24 }}>

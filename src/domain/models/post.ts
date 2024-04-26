@@ -3,13 +3,14 @@ import { IBaseResponse } from "./base-response";
 export interface IPost {
   id: string; //primary key
   title: string;
-  summary: string
+  summary: string;
   content: string;
   imageUrl: string;
   slug: string;
   publishedAt: Date;
   authorId: string; //foreign key to user table
   categoryId: string; //foreign key to user table
+  tags: string[];
 }
 
 export const emptyPost: IPost = {
@@ -21,7 +22,8 @@ export const emptyPost: IPost = {
   publishedAt: new Date(),
   authorId: "",
   categoryId: "",
-  summary: ""
+  summary: "",
+  tags: [],
 };
 
 export interface IPostResponse extends IBaseResponse {

@@ -94,11 +94,9 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
     }
     setSubmitting(false);
   };
-
+  initFormData(form, formMode, formMode === UpdateMode.ADD ? emptyPost : post);
   const formData = new FormData();
-  useEffect(() => {
-    initFormData(form, formMode, post);
-  }, [hasSubmitted]);
+  useEffect(() => {}, [hasSubmitted]);
 
   return (
     <>
@@ -107,7 +105,7 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
         setSubmitted={setSubmitted}
       />
 
-      <div style={{ marginBottom: 15}}>
+      <div style={{ marginBottom: 15 }}>
         <Typography.Title level={5}>Upload Image</Typography.Title>
         <Upload
           name="image"
@@ -128,7 +126,12 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
           {fileList.length > 1 ? null : <UploadButton />}
         </Upload>
       </div>
-      <Form form={form} onFinish={onFinish} layout="vertical">
+      <Form
+        initialValues={formMode === UpdateMode.ADD ? emptyPost : post}
+        form={form}
+        onFinish={onFinish}
+        layout="vertical"
+      >
         <Row align={"middle"} justify={"space-between"} gutter={[8, 8]}>
           <Col xs={24} md={12}>
             <Form.Item

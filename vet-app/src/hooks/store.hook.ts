@@ -29,7 +29,7 @@ const useStore = () => {
     }
   }, [dispatch, initialFetch]);
 
-  const addStore = async (store: FormData) => {
+  const addStore = async (store: IStore) => {
     return await storeService.create(store)
       .then((storeResponse) => {
         dispatch(addStoreSuccess(storeResponse.data));
@@ -45,7 +45,7 @@ const useStore = () => {
     dispatch(setActiveStore(store));
   };
 
-  const editStore = async (store: StoreFormData) => {
+  const editStore = async (store: IStore) => {
     return await storeService.update(store)
       .then((storeResponse) => {
         dispatch(editStoreSuccess(storeResponse.data));

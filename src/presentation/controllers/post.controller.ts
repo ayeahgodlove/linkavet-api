@@ -8,8 +8,6 @@ import { validate } from "class-validator";
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 import { User } from "../../data/entities/user";
-import path from "path";
-import rimraf from "rimraf";
 import { deleteFile } from "../../utils/util";
 
 const postRepository = new PostRepository();
@@ -21,6 +19,7 @@ export class PostsController {
     const dto = new PostRequestDto(req.body);
     const validationErrors = await validate(dto);
     const user = req.user as User;
+    const tags = req.body.tags;
 
     if (validationErrors.length > 0) {
       res.status(400).json({
@@ -35,6 +34,7 @@ export class PostsController {
           ...dto.toData(),
           authorId: user.id,
           imageUrl: req.body.imageUrl,
+          tags
         });
 
         res.status(201).json({
@@ -58,7 +58,7 @@ export class PostsController {
     try {
       const posts = await postUseCase.getAll();
       const postsDTO = postMapper.toDTOs(posts);
-
+ 
       res.json({
         data: postsDTO,
         message: "Success",

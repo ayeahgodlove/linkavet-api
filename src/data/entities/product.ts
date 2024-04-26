@@ -9,7 +9,6 @@ import {
   BelongsToMany,
 } from "sequelize-typescript";
 import { IProduct } from "../../domain/models/product";
-// import { Store } from "./store";
 import { Category } from "./category";
 import { ProductReview } from "./product-review";
 import { Order } from "./order";
@@ -38,10 +37,6 @@ export class Product extends Model<IProduct> {
   })
   @ForeignKey(() => Category)
   categoryId!: string;
-
-  // @ForeignKey(() => Store) // foreign key
-  // @Column
-  // storeId!: string;
 
   @Column({
     type: DataType.STRING(128),
@@ -92,9 +87,6 @@ export class Product extends Model<IProduct> {
   productReviews!: ProductReview[];
 
   // relationships
-
-  // @BelongsTo(() => Store, "storeId")
-  // store!: Store;
 
   // one-to-one relationships
   @BelongsTo(() => Category)

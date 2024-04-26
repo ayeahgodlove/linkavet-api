@@ -14,7 +14,7 @@ const AdminPostDetailPage: React.FC = () => {
   const { setContent, setTitle, setShow, setWidth } = useModalContext();
 
   const editPost = () => {
-    setWidth("60rem")
+    setWidth("40rem")
     setTitle("Edit new post");
     setContent(<PostForm formMode={UpdateMode.EDIT} />);
     setShow(true);

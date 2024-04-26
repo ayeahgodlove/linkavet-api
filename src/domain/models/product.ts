@@ -9,7 +9,6 @@ export interface IProduct {
   description: string;
   categoryId: string;
   shortDescription: string;
-  storeId: string;
   productImages: string[];
   qtty: number;
   reviews: ILessonReview[]
@@ -25,7 +24,6 @@ export const emptyProduct: IProduct = {
   categoryId: "",
   productImages: [],
   shortDescription: "",
-  storeId: "",
   qtty: 0,
   reviews: [],
   tags: [],

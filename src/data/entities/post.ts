@@ -40,7 +40,6 @@ export class Post extends Model<IPost> {
   })
   summary!: string;
 
-
   @Column({
     type: DataType.STRING(128),
     allowNull: false,
@@ -85,11 +84,16 @@ export class Post extends Model<IPost> {
 
   @BelongsTo(() => Category, "categoryId")
   category!: Category;
-  
+
   @HasMany(() => Comment)
   comments!: Comment[];
 
-  @BelongsToMany(() => Tag, () => PostTag, "postId", "tagId")
-  tags!: Tag[];
+  @Column({
+    type: DataType.ARRAY(DataType.STRING),
+    allowNull: false,
+  })
+  tags!: string[];
+
+  // @BelongsToMany(() => Tag, () => PostTag, "postId", "tagId")
+  // tags!: Tag[];
 }
- 

@@ -29,9 +29,9 @@ export class ProductRequestDto {
   @IsString()
   categoryId: string
 
-  @IsNotEmpty()
-  @IsString()
-  storeId: string
+  // @IsNotEmpty()
+  // @IsString()
+  // storeId: string
 
   // @IsNotEmpty()
   // @IsArray()
@@ -45,7 +45,7 @@ export class ProductRequestDto {
     this.amount = data.amount;
     this.qtty = data.qtty;
     this.categoryId = data.categoryId;
-    this.storeId = data.storeId;
+    // this.storeId = data.storeId;
   }
 
   toData(): IProduct {
@@ -55,10 +55,10 @@ export class ProductRequestDto {
       name: this.name,
       description: this.description,
       shortDescription: this.shortDescription,
-      amount: Number(this.amount),
-      qtty: Number(this.qtty),
+      amount: this.amount,
+      qtty: this.qtty,
       categoryId: this.categoryId,
-      storeId: this.storeId,
+      // storeId: this.storeId,
     };
   }
 
@@ -68,10 +68,9 @@ export class ProductRequestDto {
       name: data.name,
       description: data.description,
       shortDescription: data.shortDescription,
-      amount: Number(data.amount),
-      qtty: Number(data.qtty),
+      amount: data.amount,
+      qtty: data.qtty,
       categoryId: data.categoryId,
-      storeId: data.storeId,
       productImages: data.productImages,
       reviews: data.reviews,
       tags: data.tags,

@@ -1,11 +1,11 @@
-import { Card, Col, List, Row, Typography } from "antd";
+import { Card, Col, Image, List, Row, Tag, Typography } from "antd";
 import { API_URL_UPLOADS_POSTS } from "config/constant";
 import { usePost } from "hooks/post.hook";
 import React from "react";
 import { format } from "utils/format";
 
 const PostDetailComponent: React.FC = () => {
-  const { post } = usePost();
+  const { post, getPostTags } = usePost();
   return (
     <Card bordered={false} size="small">
       <List
@@ -26,10 +26,10 @@ const PostDetailComponent: React.FC = () => {
           {
             label: "Image",
             value: (
-              <img
+              <Image
                 src={`${API_URL_UPLOADS_POSTS}/${post.imageUrl}`}
                 style={{ width: "100%", objectFit: "cover", height: "400px" }}
-                crossOrigin="anonymous"
+                // crossOrigin="anonymous"
               />
             ),
           },
@@ -46,6 +46,10 @@ const PostDetailComponent: React.FC = () => {
           {
             label: "Category",
             value: post.categoryId,
+          },
+          {
+            label: "Tags",
+            value: getPostTags(post).map((tag) => <Tag key={tag}>{tag}</Tag>),
           },
           {
             label: "Author",

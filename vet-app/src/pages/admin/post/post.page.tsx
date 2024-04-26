@@ -16,7 +16,7 @@ const AdminPostPage: React.FC = () => {
   const { setContent, setTitle, setShow, setWidth } = useModalContext();
 
   const createPost = () => {
-    setWidth("60rem")
+    setWidth("40rem")
     setContent(<PostForm formMode={UpdateMode.ADD} />);
     setTitle("Create new post");
     setShow(true);

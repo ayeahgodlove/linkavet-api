@@ -68,7 +68,7 @@ uploadRouter.post(
 
 uploadRouter.post(
   "/stores",
-  upload("stores").single("image"),
+  upload("stores").single("imageBannerUrl"),
   uploadController.uploadFile
 );
 
