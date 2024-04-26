@@ -3,8 +3,6 @@ import GridView from "components/product/product-card-grid.component";
 import ProductDetail from "components/product/product-detail.component";
 import BackButton from "components/shared/back-button.component";
 import { NoContent } from "components/shared/no-content/no-content.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import PageContent from "components/shared/page-content";
 import { useProduct } from "hooks/product.hook";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
 import React, { useEffect } from "react";
@@ -27,22 +25,9 @@ const ProductDetailPage: React.FC = () => {
       {/* <ProductBanner /> */}
       <Row justify={"center"} align={"middle"}>
         <Col xs={23} md={20} style={{ marginTop: 10 }}>
-          <PageBreadCrumbs items={["Pages", "Products", "Details"]} />
           <BackButton title="Products" />
         </Col>
       </Row>
-      <PageContent
-        title={product.name}
-        breadcrumb={[
-          {
-            title: "Products",
-            link: "/products"
-          },
-          {
-            title: "Details",
-          },
-        ]}
-      />
       <Row justify={"center"} align={"middle"}>
         <Col xs={24} md={20} style={{ margin: "1.5rem 0" }}>
           <ProductDetail />

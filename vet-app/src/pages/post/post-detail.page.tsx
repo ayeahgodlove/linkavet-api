@@ -1,5 +1,6 @@
 import { Avatar, Button, Card, Col, List, Row, Typography } from "antd";
 import CommentComponent from "components/comment/comment.component";
+import BackButton from "components/shared/back-button.component";
 import { SpinnerComponent } from "components/shared/spinner";
 import { API_URL_UPLOADS_POSTS } from "config/constant";
 import { useCategory } from "hooks/category.hook";
@@ -10,7 +11,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUsersAsync } from "redux/user.slice";
 import { format } from "utils/format";
-import PageContent from "components/shared/page-content/index";
 
 const postDetailPage: React.FC = () => {
   const { post } = usePost();
@@ -65,23 +65,22 @@ const postDetailPage: React.FC = () => {
     load();
   }, []);
   return (
-    <>
-      <Row align={"middle"} justify={"center"} style={{ marginTop: "2rem" }}>
-        <PageContent
-          title={post.title}
-          breadcrumb={[
-            {
-              title: "Blog Posts",
-              link: "/posts",
-            },
-            {
-              title: "Details",
-            },
-          ]}
-        />
+    <> 
+      <Row align={"middle"} justify={"center"}>
         <Col lg={23}>
-          <Card size="small">
-            <div style={{ display: "flex", justifyContent: "flex-start" }}>
+          <Card size="small" bordered={false} style={{ borderRadius: 0 }}>
+            <BackButton title="Course" />
+
+            <Typography.Title level={3} style={{ padding: "1rem 0" }}>
+              {post.title}
+            </Typography.Title>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                marginBottom: 15,
+              }}
+            >
               <img
                 alt={post.title}
                 src={`${API_URL_UPLOADS_POSTS}/${post.imageUrl}`}
@@ -98,9 +97,6 @@ const postDetailPage: React.FC = () => {
               className="text"
               style={{ paddingLeft: "2rem", color: "#333" }}
             >
-              <Typography.Title level={3} style={{ marginTop: 30 }}>
-                {post.title}
-              </Typography.Title>
               <div
                 dangerouslySetInnerHTML={{
                   __html: post.content,

@@ -7,6 +7,7 @@ import {
   Row,
   Typography,
 } from "antd";
+import BackButton from "components/shared/back-button.component";
 import { useCourse } from "hooks/lms/course.hook";
 import { useLesson } from "hooks/lms/lesson.hook";
 import { useUser } from "hooks/user.hook";
@@ -23,7 +24,6 @@ import { useEnrollment } from "hooks/lms/enrollment.hook";
 import { useAuth } from "hooks/auth/auth.hook";
 import slugify from "slugify";
 import { ILesson } from "models/lms/lesson";
-import PageContent from "components/shared/page-content/index";
 
 const courseDetailPage: React.FC = () => {
   const { course } = useCourse();
@@ -61,20 +61,12 @@ const courseDetailPage: React.FC = () => {
         gutter={[16, 16]}
         className="course-container"
       >
-        <PageContent
-          title={course.title}
-          breadcrumb={[
-            {
-              title: "Courses",
-              link: "/courses",
-            },
-            {
-              title: "Course Details",
-            },
-          ]}
-        />
+        <Col span={22}>
+          <BackButton title="Course" />
+        </Col>
+
         <Col xs={18} md={15}>
-          <Card size="small">
+          <Card size="small" bordered={false} style={{ borderRadius: 0 }}>
             <div
               style={{ display: "flex", justifyContent: "flex-start" }}
               className="course-banner"
