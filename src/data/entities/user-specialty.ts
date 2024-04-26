@@ -21,10 +21,24 @@ export class UserSpecialty extends Model<IUserSpecialty> {
     primaryKey: true,
   })
   declare id?: string;
-  
+
   @ForeignKey(() => User)
   @Column
   userId!: string;
+
+  @Column({
+    type: DataType.STRING(255),
+    allowNull: false,
+    unique: false,
+  })
+  fullname!: string;
+
+  @Column({
+    type: DataType.NUMBER,
+    allowNull: false,
+    unique: false,
+  })
+  yearsOfExperience!: number;
 
   @Column({
     type: DataType.STRING(255),
@@ -39,6 +53,20 @@ export class UserSpecialty extends Model<IUserSpecialty> {
     unique: false,
   })
   facebook!: string;
+
+  @Column({
+    type: DataType.STRING(20),
+    allowNull: true,
+    unique: false,
+  })
+  title!: string;
+
+  @Column({
+    type: DataType.STRING(255),
+    allowNull: true,
+    unique: false,
+  })
+  website!: string;
 
   @Column({
     type: DataType.STRING(255),

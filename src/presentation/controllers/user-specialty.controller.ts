@@ -34,7 +34,13 @@ export class UserSpecialtyController {
     } else {
       try {
         const userSpecialtyResponse =
-          await userSpecialtyUseCase.createUserSpecialty(dto.toData());
+          await userSpecialtyUseCase.createUserSpecialty({
+            ...dto.toData(),
+            fullname: req.body.fullname,
+            title: req.body.title,
+            website: req.body.website,
+            yearsOfExperience: req.body.yearsOfExperience,
+          });
 
         res.status(201).json({
           data: userSpecialtyResponse.toJSON<IUserSpecialty>(),
@@ -121,9 +127,12 @@ export class UserSpecialtyController {
         const id = req.params.id;
 
         const obj: IUserSpecialty = {
-          ...emptyUserSpecialty,
           ...req.body,
           id: id,
+          fullname: req.body.fullname,
+          title: req.body.title,
+          website: req.body.website,
+          yearsOfExperience: req.body.yearsOfExperience,
         };
         const updatedUserSpecialty =
           await userSpecialtyUseCase.updateUserSpecialty(obj);

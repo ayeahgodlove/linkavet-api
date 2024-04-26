@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Space } from "antd";
+import { Card, Image, Space } from "antd";
 import { createFromIconfontCN } from "@ant-design/icons";
 
 import "./member.less";
@@ -24,7 +24,7 @@ export const TeamCard: React.FC<IProp> = ({ team }) => {
       style={{ padding: 0 }}
       className="member"
       cover={
-        <img alt={username} src={`${API_URL_UPLOADS_AVATARS}/${avatar}`} />
+        <Image alt={username} src={`${API_URL_UPLOADS_AVATARS}/${avatar}`} />
       }
     >
       <Space className="member__contact">

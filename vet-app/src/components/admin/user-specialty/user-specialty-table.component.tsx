@@ -44,6 +44,7 @@ const UserSpecialtyTable: React.FC = () => {
     setLoading(true);
     const response = await fetch(`${API_URL}/api/user-specialties`);
     const { data } = await response.json();
+    console.log("data:", response)
     return data;
   }, []);
 

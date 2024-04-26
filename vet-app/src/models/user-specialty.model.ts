@@ -10,6 +10,10 @@ export interface IUserSpecialty {
   facebook: string;
   twitter: string;
   linkedin: string;
+  fullname: string;
+  website: string;
+  yearsOfExperience: number;
+  title: string;
 }
 
 export const emptyUserSpecialty: IUserSpecialty = {
@@ -18,7 +22,11 @@ export const emptyUserSpecialty: IUserSpecialty = {
   specialty: "",
   facebook: "",
   twitter: "",
-  linkedin: ""
+  linkedin: "",
+  fullname: "",
+  title: "",
+  website: "",
+  yearsOfExperience: 0
 };
 
 export interface IUserSpecialtyState extends IBaseState {

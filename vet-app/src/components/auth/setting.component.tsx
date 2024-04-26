@@ -1,6 +1,6 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Avatar, Button, message, Space, Upload } from "antd";
-import { API_URL_UPLOADS_AVATARS } from "config/constant";
+import { API_URL, API_URL_UPLOADS_AVATARS } from "config/constant";
 import { useAuth } from "hooks/auth/auth.hook";
 import { useUser } from "hooks/user.hook";
 import React, { useEffect } from "react";
@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 const SettingComponent = () => {
   const { user } = useAuth();
   const { loadUsers, users } = useUser();
-  const uploadUrl = `/api/users/upload/${user.id}`;
+  const uploadUrl = `${API_URL}/api/users/upload/${user.id}`;
   
 const avatar = users.find(u => u.id === user.id);
 

@@ -44,6 +44,7 @@ import { useAuth } from "hooks/auth/auth.hook";
 import { GrScheduleNew } from "react-icons/gr";
 import { API_URL_UPLOADS_AVATARS, ROLES } from "config/constant";
 import { useUser } from "hooks/user.hook";
+import { emptyUser } from "models/user.model";
 
 export const useAppShellMenus = () => {
   const [language, setLanguage] = useState("en");
@@ -62,9 +63,13 @@ export const useAppShellMenus = () => {
   const { logoutUserFunction, isAuthenticated, user } = useAuth();
   const { users } = useUser();
 
-  const avatar = isAuthenticated
-    ? (users.find((u) => u.id === user.id) as any)
-    : null;
+  // const avatar = isAuthenticated
+  //   ? (users.find((u) => u.id === user.id) as any)
+  //   : null;
+  // console.log("users: ", users, user);
+  // debugger
+  // const avatar =
+  //   users.length > 0 ? (users.find((u) => u.id === user.id) as any) : emptyUser;
   // roles.some(role => user.roles.map(ur => ur.name).includes(role))
   const hasAccess = isAuthenticated
     ? user.roles.map((r) => r.name).includes(ROLES.ADMIN) ||
@@ -607,9 +612,7 @@ export const useAppShellMenus = () => {
             fontWeight: "bold",
             fontSize: 14,
           }}
-          src={`${API_URL_UPLOADS_AVATARS}/${
-            isAuthenticated ? avatar.avatar : ""
-          }`}
+          src={"./user-placeholder.jpeg"}
         >
           {user?.username?.charAt(0).toUpperCase()}
         </Avatar>
