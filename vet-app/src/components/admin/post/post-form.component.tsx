@@ -1,7 +1,17 @@
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, Col, Form, Input, message, Row, Select, Upload } from "antd";
+import {
+  Button,
+  Col,
+  Form,
+  Input,
+  message,
+  Row,
+  Select,
+  Typography,
+  Upload,
+} from "antd";
 import { useForm } from "antd/es/form/Form";
 import { FormErrorComponent } from "components/shared/form-error/form-error.component";
+import UploadButton from "components/shared/upload-button.component";
 import { modules } from "config/constant";
 import { useModalContext } from "context/app-modal.context";
 import { useAuth } from "hooks/auth/auth.hook";
@@ -11,11 +21,12 @@ import { useFormErrors } from "hooks/shared/form-error.hook";
 import { useFormInit } from "hooks/shared/form-init.hook";
 import { useUpload } from "hooks/shared/upload.hook";
 import { useTag } from "hooks/tag.hook";
-import { IPost, PostFormData } from "models/post";
+import { emptyPost, IPost } from "models/post";
 import { UpdateMode } from "models/shared/update-mode.enum";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { upload } from "utils/upload";
 
 type Props = {
   formMode: UpdateMode;
@@ -29,7 +40,9 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
   const { formError } = useFormErrors();
   const { setShow } = useModalContext();
   const { user } = useAuth();
-  const { beforeUpload, onRemove, normFile, fileList, progress } = useUpload();
+  // const { beforeUpload, onRemove, normFile, fileList, progress } = useUpload();
+  const { fileList, handlePreview, onRemove, beforeUpload, progress } =
+    useUpload();
 
   const [hasSubmitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -46,23 +59,14 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
     setSubmitting(true);
     setSubmitted(false);
 
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("summary", values.summary);
-    formData.append("content", values.content);
-    formData.append("authorId", user.id);
-    formData.append("categoryId", values.categoryId);
-    values.tags.forEach((tag) => {
-      formData.append("tags", tag);
-    });
-
-    // Append the selected file(s) to the FormData object
-    fileList.forEach((file: any) => {
-      formData.append("imageUrl", file);
-    });
+    const obj: IPost = {
+      ...emptyPost,
+      ...values,
+      authorId: user.id,
+    };
 
     if (formMode === UpdateMode.ADD) {
-      const feedback = await addPost(formData);
+      const feedback = await addPost(obj);
       if (feedback) {
         message.success("Post created successfully!");
         setShow(false);
@@ -73,12 +77,12 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
       }
     }
 
-    const formData2: PostFormData = {
-      ...formData,
-      id: post.id,
+    const obj2: IPost = {
+      ...post,
+      ...values,
     };
     if (formMode === UpdateMode.EDIT) {
-      const feedback = await editPost(formData2);
+      const feedback = await editPost(obj2);
       if (feedback) {
         message.success("Post updated successfully!");
         setShow(false);
@@ -91,6 +95,7 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
     setSubmitting(false);
   };
 
+  const formData = new FormData();
   useEffect(() => {
     initFormData(form, formMode, post);
   }, [hasSubmitted]);
@@ -102,13 +107,33 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
         setSubmitted={setSubmitted}
       />
 
+      <div style={{ marginBottom: 15}}>
+        <Typography.Title level={5}>Upload Image</Typography.Title>
+        <Upload
+          name="image"
+          maxCount={1}
+          listType="picture-card"
+          beforeUpload={beforeUpload}
+          onRemove={onRemove}
+          progress={progress}
+          fileList={fileList}
+          onPreview={handlePreview}
+          action={useCallback(async () => {
+            formData.append("imageUrl", fileList[0] as any);
+            const response = await upload("posts", formData);
+            form.setFieldValue("imageUrl", response);
+            return response;
+          }, [form, fileList, formData])}
+        >
+          {fileList.length > 1 ? null : <UploadButton />}
+        </Upload>
+      </div>
       <Form form={form} onFinish={onFinish} layout="vertical">
         <Row align={"middle"} justify={"space-between"} gutter={[8, 8]}>
           <Col xs={24} md={12}>
             <Form.Item
               name="categoryId"
               label="Category"
-              requiredMark
               style={{ marginBottom: 3 }}
               rules={[
                 {
@@ -141,7 +166,6 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
             <Form.Item
               name="tags"
               label="Select Tags"
-              requiredMark
               style={{ marginBottom: 3 }}
               rules={[
                 {
@@ -176,7 +200,6 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="title"
           label="Title"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {
@@ -191,7 +214,6 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="summary"
           label="Summary"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {
@@ -201,33 +223,6 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
           ]}
         >
           <Input />
-        </Form.Item>
-
-        <Form.Item
-          name="imageUrl"
-          label="Upload"
-          requiredMark
-          style={{ marginBottom: 3 }}
-          rules={[
-            {
-              required: true,
-              message: "Upload is required",
-            },
-          ]}
-          valuePropName="fileList"
-          getValueFromEvent={normFile}
-        >
-          <Upload
-            beforeUpload={beforeUpload}
-            onRemove={onRemove}
-            maxCount={1}
-            name="imageUrl"
-            progress={progress}
-            fileList={fileList}
-            type="drag"
-          >
-            <Button icon={<UploadOutlined />}>Select File</Button>
-          </Upload>
         </Form.Item>
 
         <Form.Item
@@ -246,6 +241,18 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
             onChange={(html) => form.setFieldValue("content", html)}
             placeholder="Enter content..."
           />
+        </Form.Item>
+
+        <Form.Item
+          name={"imageUrl"}
+          label="Image"
+          required={true}
+          rules={[
+            { required: true, message: "This field is a required field" },
+          ]}
+          style={{ marginBottom: 10 }}
+        >
+          <Input disabled={true} />
         </Form.Item>
 
         <Button

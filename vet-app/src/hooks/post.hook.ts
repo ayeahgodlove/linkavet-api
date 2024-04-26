@@ -8,7 +8,7 @@ import {
   setActivePost,
 } from "../redux/post.slice";
 import { PostService } from "services/post.service";
-import { IPost, PostFormData } from "models/post";
+import { IPost } from "models/post";
 const usePost = () => {
   const posts = useSelector<IRootState, IPost[]>((state) => state.post.posts);
   const isLoading = useSelector<IRootState, boolean>(
@@ -27,14 +27,14 @@ const usePost = () => {
     }
   }, [dispatch, initialFetch]);
 
-  const addPost = async (post: FormData) => {
+  const addPost = async (post: IPost) => {
     return await PostService.create(post)
       .then((postResponse) => {
         dispatch(addPostSuccess(postResponse.data));
         return true;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return false;
       });
   };
@@ -43,7 +43,7 @@ const usePost = () => {
     dispatch(setActivePost(post));
   };
 
-  const editPost = async (post: PostFormData) => {
+  const editPost = async (post: IPost) => {
     return await PostService.update(post)
       .then((postResponse) => {
         dispatch(editPostSuccess(postResponse.data));
@@ -51,7 +51,7 @@ const usePost = () => {
         return true;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return false;
       });
   };

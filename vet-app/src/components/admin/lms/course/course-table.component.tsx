@@ -13,6 +13,7 @@ import { SpinnerComponent } from "components/shared/spinner";
 import { useCourse } from "hooks/lms/course.hook";
 import { ICourse } from "models/lms/course";
 import { fetchCourseSuccess } from "redux/lms/course.slice";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 export function CourseTable() {
@@ -38,7 +39,7 @@ export function CourseTable() {
 
   const getCourses = useCallback(async (): Promise<ICourse[]> => {
     setLoading(true);
-    const response = await fetch(`/api/courses`);
+    const response = await fetch(`${API_URL}/api/courses`);
     const { data } = await response.json();
     return data;
   }, []);

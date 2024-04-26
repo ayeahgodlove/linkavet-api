@@ -99,7 +99,6 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="userId"
           label="User"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {
@@ -128,7 +127,6 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="roleId"
           label="Role"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {

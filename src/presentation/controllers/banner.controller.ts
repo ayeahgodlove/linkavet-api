@@ -14,6 +14,7 @@ import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 import { User } from "../../data/entities/user";
 import rimraf from "rimraf";
 import path from "path";
+import { deleteFile } from "../../utils/util";
 // import cloudinaryV2 from "../../infrastructure/cloudinary/config";
 
 const bannerRepository = new BannerRepository();
@@ -29,15 +30,6 @@ export class BannersController {
     const validationErrors = await validate(dto);
 
     const user = req.user as User;
-    const { filename } = req.file as Express.Multer.File;
-
-    if (!req.file) {
-      throw Error("No file uploaded");
-    }
-
-    if (filename === undefined) {
-      throw new Error("Photo not found!");
-    }
 
     if (validationErrors.length > 0) {
       res.status(400).json({
@@ -48,19 +40,9 @@ export class BannersController {
       });
     } else {
       try {
-        // const result = await cloudinaryV2.uploader.upload(
-        //   `${req.file.path}`,
-        //   {
-        //     folder: "banners", // Optional: Set a folder in Cloudinary
-        //     resource_type: "image", // Automatically determine the file type
-        //   }
-        // );
-
         const bannerResponse = await bannerUseCase.createBanner({
           ...dto.toData(),
           userId: user.id,
-          image: filename.toString(),
-          // image: result.secure_url,
         });
 
         res.status(201).json({
@@ -70,13 +52,9 @@ export class BannersController {
           success: true,
         });
       } catch (error: any) {
-        // const publicId = req.file.buffer.toString("base64");
-        // const deleteErr = await cloudinaryV2.uploader.destroy(publicId); // Delete the uploaded file
-        rimraf.sync(req.file.path);
-
+        deleteFile(req.body.fileUrl, "banners");
         res.status(400).json({
           data: null,
-          // message: error.message + " " + deleteErr.message,
           message: error.message,
           validationErrors: [],
           success: false,
@@ -156,6 +134,7 @@ export class BannersController {
           ...emptyBanner,
           ...req.body,
           id: id,
+          image: req.body.image,
         };
         const updatedBanner = await bannerUseCase.updateBanner(obj);
         const bannerDto = bannerMapper.toDTO(updatedBanner);
@@ -167,6 +146,7 @@ export class BannersController {
           success: true,
         });
       } catch (error: any) {
+        deleteFile(req.body.fileUrl, "banners");
         res.status(400).json({
           data: null,
           message: error.message,
@@ -185,9 +165,7 @@ export class BannersController {
       const id = req.params.id;
       const banner = await bannerUseCase.getBannerById(id);
       if (banner) {
-        const baseDirectory = "./public/uploads/banners";
-        const filePath = path.join(baseDirectory, banner.dataValues.image);
-        rimraf.sync(filePath);
+        deleteFile(banner.dataValues.image, "banners");
       }
       await bannerUseCase.deleteBanner(id);
 

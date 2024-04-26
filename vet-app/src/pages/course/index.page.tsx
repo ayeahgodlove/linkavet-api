@@ -1,18 +1,18 @@
 import { Col, Divider, Row, Typography } from "antd";
 import CourseList from "components/course/course-list.component";
-import PageBannerComponent from "components/shared/page-banner/page-banner.component";
 import { useAuth } from "hooks/auth/auth.hook";
 import { useCourse } from "hooks/lms/course.hook";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useDispatch } from "react-redux";
 import { fetchCoursesAsync } from "redux/lms/course.slice";
+import PageContent from "components/shared/page-content/index";
 
 const CoursePage: React.FC = () => {
   const { isLoading } = useAuth();
   const dispatch = useDispatch();
   const { courses } = useCourse();
-  
+
   useEffect(() => {
     dispatch(fetchCoursesAsync() as any);
   }, [isLoading]);
@@ -29,10 +29,14 @@ const CoursePage: React.FC = () => {
         />
       </Helmet>
       {/* Dummy banner */}
-      <PageBannerComponent
-        title="Vet Courses Tailored for Enthusiasts"
-        description="Embark on a learning journey with our specialized veterinary courses at Linkavet. Designed for pet enthusiasts and aspiring veterinary professionals, our courses cover a range of topics, from basic pet care to advanced veterinary techniques."
-        linkCmd="Browse Course"
+
+      <PageContent
+        title={"Vet Courses Tailored for Enthusiasts"}
+        breadcrumb={[
+          {
+            title: "Courses",
+          },
+        ]}
       />
       {/* course list */}
       <Row

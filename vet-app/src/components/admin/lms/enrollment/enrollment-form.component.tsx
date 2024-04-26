@@ -85,7 +85,6 @@ export const EnrollmentForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="courseId"
           label="Course"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {

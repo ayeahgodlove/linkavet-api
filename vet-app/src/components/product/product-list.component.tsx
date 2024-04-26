@@ -88,13 +88,13 @@ const ProductList: React.FC = () => {
                   {width >= 768 && (
                     <ButtonGroup>
                       <Button
-                        type={view === "list" ? "primary" : "ghost"}
+                        type={view === "list" ? "primary" : "default"}
                         icon={<FiList size={25} />}
                         onClick={onClickList}
                       />
 
                       <Button
-                        type={view === "grid" ? "primary" : "ghost"}
+                        type={view === "grid" ? "primary" : "default"}
                         icon={<FiGrid size={25} />}
                         onClick={onClickGrid}
                       />

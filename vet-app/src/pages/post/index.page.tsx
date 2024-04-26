@@ -1,6 +1,6 @@
 import { Col, Divider, Row, Typography } from "antd";
 import PostList from "components/post/post-list.component";
-import PageBannerComponent from "components/shared/page-banner/page-banner.component";
+import PageContent from "components/shared/page-content/index";
 import { useAuth } from "hooks/auth/auth.hook";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
@@ -25,10 +25,13 @@ const PostPage: React.FC = () => {
         />
       </Helmet>
       {/* Dummy banner */}
-      <PageBannerComponent
-        title="Our Latest Vet Insights"
-        description="Stay informed and connected with the latest trends, insights, and valuable tips in pet care. Our blog at Linkavet is a trusted resource for pet parents, filled with expert advice from our experienced veterinary team."
-        linkCmd="Browse Articles"
+      <PageContent
+        title={"Our Latest Vet Insights"}
+        breadcrumb={[
+          {
+            title: "Blog Posts",
+          },
+        ]}
       />
       {/* post list */}
       <Row style={{ marginTop: 50, padding: "0 3rem" }}>

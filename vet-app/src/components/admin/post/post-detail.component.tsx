@@ -1,4 +1,5 @@
 import { Card, Col, List, Row, Typography } from "antd";
+import { API_URL_UPLOADS_POSTS } from "config/constant";
 import { usePost } from "hooks/post.hook";
 import React from "react";
 import { format } from "utils/format";
@@ -21,6 +22,16 @@ const PostDetailComponent: React.FC = () => {
           {
             label: "Title",
             value: post.title,
+          },
+          {
+            label: "Image",
+            value: (
+              <img
+                src={`${API_URL_UPLOADS_POSTS}/${post.imageUrl}`}
+                style={{ width: "100%", objectFit: "cover", height: "400px" }}
+                crossOrigin="anonymous"
+              />
+            ),
           },
           {
             label: "Content",

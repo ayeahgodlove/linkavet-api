@@ -13,16 +13,18 @@ import search from "utils/search";
 import { fetchtagSuccess } from "redux/tag.slice";
 import { SpinnerComponent } from "components/shared/spinner";
 import slugify from "slugify";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 
 const TagTable: React.FC = () => {
-  const { tags, setTag, initialFetch } = useTag();
+  const { tags, setTag } = useTag();
   const { setContent, setShow, setTitle, setWidth } = useModalContext();
   const router = useNavigate();
 
   const [query, setQuery] = useState<string>("");
   const [isLoading, setLoading] = useState(false);
+  debugger
 
   const dispatch = useDispatch();
 
@@ -39,8 +41,9 @@ const TagTable: React.FC = () => {
 
   const getTags = useCallback(async (): Promise<ITag[]> => {
     setLoading(true);
-    const response = await fetch(`/api/tags`);
+    const response = await fetch(`${API_URL}/api/tags`);
     const { data } = await response.json();
+    debugger
     return data;
   }, []);
 
@@ -65,6 +68,8 @@ const TagTable: React.FC = () => {
   useEffect(() => {
     (async () => {
       const tagDATas = await getTags();
+      debugger
+      console.log("tagDATas: ", tagDATas)
       dispatch(fetchtagSuccess([...tagDATas]));
       setLoading(false);
     })();

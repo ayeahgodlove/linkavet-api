@@ -13,6 +13,7 @@ import search from "utils/search";
 import { fetchUserSpecialtySuccess } from "redux/user-specialty.slice";
 import { SpinnerComponent } from "components/shared/spinner";
 import slugify from "slugify";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 
@@ -41,7 +42,7 @@ const UserSpecialtyTable: React.FC = () => {
 
   const getUserSpecialtys = useCallback(async (): Promise<IUserSpecialty[]> => {
     setLoading(true);
-    const response = await fetch(`/api/user-specialties`);
+    const response = await fetch(`${API_URL}/api/user-specialties`);
     const { data } = await response.json();
     return data;
   }, []);

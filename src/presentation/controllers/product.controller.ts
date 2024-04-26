@@ -13,6 +13,7 @@ import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 import path from "path";
 import rimraf from "rimraf";
+import { deleteFile } from "../../utils/util";
 
 const productRepository = new ProductRepository();
 const productUseCase = new ProductUseCase(productRepository);
@@ -28,15 +29,7 @@ export class ProductsController {
     const dto = new ProductRequestDto(req.body);
     const validationErrors = await validate(dto);
     const tags = JSON.parse(req.body.tags);
-
-    if (!req.files) {
-      throw new Error("Please select Images!");
-    }
-
-    const { productImages } = req.files as any;
-    const productImagesStrArr: string[] = productImages.map(
-      (p: Express.Multer.File) => p.filename
-    );
+    const productImages = req.body.productImages;
 
     if (validationErrors.length > 0) {
       res.status(400).json({
@@ -50,7 +43,7 @@ export class ProductsController {
         const productResponse = await productUseCase.createProduct({
           ...dto.toData(),
           tags,
-          productImages: productImagesStrArr,
+          productImages,
         });
 
         const obj: IProduct = {
@@ -65,10 +58,8 @@ export class ProductsController {
           success: true,
         });
       } catch (error: any) {
-        const baseDirectory = "./public/uploads/products";
-        productImagesStrArr.forEach((filePath: string) => {
-          const fullPath = path.join(baseDirectory, filePath);
-          rimraf.sync(fullPath); // Delete each file using rimraf
+        productImages.forEach((imageUrl: string) => {
+          deleteFile(imageUrl, "products");
         });
 
         res.status(400).json({
@@ -183,6 +174,7 @@ export class ProductsController {
   ): Promise<void> {
     const dto = new ProductRequestDto(req.body);
     const validationErrors = await validate(dto);
+    const productImages = req.body.productImages;
 
     if (validationErrors.length > 0) {
       res.status(400).json({
@@ -199,6 +191,7 @@ export class ProductsController {
           ...emptyProduct,
           ...req.body,
           id: id,
+          productImages,
         };
         const updatedProduct = await productUseCase.updateProduct(obj);
         const productDto = productMapper.toDTO(updatedProduct);
@@ -210,6 +203,9 @@ export class ProductsController {
           success: true,
         });
       } catch (error: any) {
+        productImages.forEach((imageUrl: any) => {
+          deleteFile(imageUrl, "products");
+        });
         res.status(400).json({
           data: null,
           message: error.message,
@@ -229,11 +225,8 @@ export class ProductsController {
 
       const product = await productUseCase.getProductById(id);
       if (product) {
-        const baseDirectory = "./public/uploads/products";
-
-        product.dataValues.productImages.forEach((filePath: string) => {
-          const fullPath = path.join(baseDirectory, filePath);
-          rimraf.sync(fullPath); // Delete each file using rimraf
+        product.dataValues.productImages.forEach((imageUrl: string) => {
+          deleteFile(imageUrl, "products");
         });
       }
       await productUseCase.deleteProduct(id);

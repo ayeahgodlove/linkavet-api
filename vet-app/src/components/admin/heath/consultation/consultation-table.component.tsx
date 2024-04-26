@@ -10,6 +10,7 @@ import { SpinnerComponent } from "components/shared/spinner";
 import { useConsultation } from "hooks/health/consultation.hook";
 import { IConsultation } from "models/health/consultation";
 import { fetchConsultationSuccess } from "redux/health/consultation.slice";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 export function ConsultationTable() {
@@ -25,7 +26,7 @@ export function ConsultationTable() {
 
   const getConsultations = useCallback(async (): Promise<IConsultation[]> => {
     setLoading(true);
-    const response = await fetch(`/api/consultations`);
+    const response = await fetch(`${API_URL}/api/consultations`);
     const { data } = await response.json();
     return data;
   }, []);

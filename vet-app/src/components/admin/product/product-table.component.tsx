@@ -10,6 +10,7 @@ import { SpinnerComponent } from "components/shared/spinner";
 import { useProductColumn } from "./product-column.component";
 import { IProduct } from "models/product.model";
 import slugify from "slugify";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 
@@ -31,7 +32,7 @@ const ProductTable: React.FC = () => {
 
   const getProducts = useCallback(async (): Promise<IProduct[]> => {
     setLoading(true);
-    const response = await fetch(`/api/products`);
+    const response = await fetch(`${API_URL}/api/products`);
     const { data } = await response.json();
     return data;
   }, []);

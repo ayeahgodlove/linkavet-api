@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { IUser, emptyUser } from "models/user.model";
 import { authService } from "services/auth.service";
 
@@ -51,13 +51,46 @@ const initialState: AuthState = {
   isLoading: false,
   error: null,
   isAuthenticated: false,
-  token: ""
+  token: "",
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    // login section
+    loginRequest: (state) => {
+      state.isLoading = true;
+    },
+    loginSuccess: (state, action: PayloadAction<IUser>) => {
+      state.isLoading = false;
+      state.user = action.payload;
+      state.isLoading = false;
+      state.user = action.payload;
+      state.isAuthenticated = true;
+      state.token = action.payload.token as string;
+      console.log("nted: ", action.payload)
+      window.localStorage.setItem("user", JSON.stringify(action.payload));
+    },
+    loginError: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    // register section
+    registerRequest: (state) => {
+      state.isLoading = true;
+    },
+    registerSuccess: (state, action: PayloadAction<IUser>) => {
+      state.isLoading = false;
+      state.user = action.payload;
+    },
+    registerError: (state, action: PayloadAction<string>) => {
+      state.isLoading = false;
+      state.error = action.payload;
+    },
+
+    // logout
     logoutUser: (state) => {
       state.user = emptyUser;
       state.isLoading = false;
@@ -84,25 +117,32 @@ const authSlice = createSlice({
         state.isLoading = true;
         state.error = null;
         state.isAuthenticated = false;
-        state.token = ""
+        state.token = "";
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
         state.isAuthenticated = true;
-        state.token = action.payload.token
-        window.localStorage.setItem("user", JSON.stringify(action.payload));
+        state.token = action.payload.token;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
         state.isAuthenticated = false;
-        state.token = ""
+        state.token = "";
       });
   },
 });
 
-export const { logoutUser } = authSlice.actions;
+export const {
+  logoutUser,
+  loginError,
+  loginRequest,
+  loginSuccess,
+  registerError,
+  registerRequest,
+  registerSuccess,
+} = authSlice.actions;
 const reducer = authSlice.reducer;
 
 export { reducer as authReducer };

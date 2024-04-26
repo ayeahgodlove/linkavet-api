@@ -10,6 +10,7 @@ import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 import { User } from "../../data/entities/user";
 import path from "path";
 import rimraf from "rimraf";
+import { deleteFile } from "../../utils/util";
 
 const postRepository = new PostRepository();
 const postUseCase = new PostUseCase(postRepository);
@@ -20,11 +21,7 @@ export class PostsController {
     const dto = new PostRequestDto(req.body);
     const validationErrors = await validate(dto);
     const user = req.user as User;
-    const { filename } = req.file as Express.Multer.File;
 
-    if(filename === undefined) {
-     throw new Error("Photo not found!")
-    }
     if (validationErrors.length > 0) {
       res.status(400).json({
         validationErrors: displayValidationErrors(validationErrors) as any,
@@ -37,7 +34,7 @@ export class PostsController {
         const postResponse = await postUseCase.createPost({
           ...dto.toData(),
           authorId: user.id,
-          imageUrl: filename.toString()
+          imageUrl: req.body.imageUrl,
         });
 
         res.status(201).json({
@@ -106,7 +103,6 @@ export class PostsController {
   async updatePost(req: Request, res: Response<IPostResponse>): Promise<void> {
     const dto = new PostRequestDto(req.body);
     const validationErrors = await validate(dto);
-    const { filename } = req.file as Express.Multer.File;
     const user = req.user as User;
 
     if (validationErrors.length > 0) {
@@ -124,7 +120,7 @@ export class PostsController {
           ...emptyPost,
           ...req.body,
           id: id,
-          imageUrl: filename.toString(),
+          imageUrl: req.body.imageUrl,
           authorId: user.id,
         };
         const updatedPost = await postUseCase.updatePost(obj);
@@ -152,10 +148,9 @@ export class PostsController {
       const id = req.params.id;
 
       const post = await postUseCase.getPostById(id);
+
       if (post) {
-        const baseDirectory = "./public/uploads/posts";
-        const filePath = path.join(baseDirectory, post.dataValues.imageUrl);
-        rimraf.sync(filePath);
+        deleteFile(post.dataValues.imageUrl, "posts");
       }
       await postUseCase.deletePost(id);
 

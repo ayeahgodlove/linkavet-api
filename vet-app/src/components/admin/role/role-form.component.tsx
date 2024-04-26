@@ -79,7 +79,6 @@ export const RoleForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="name"
           label="Name"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {

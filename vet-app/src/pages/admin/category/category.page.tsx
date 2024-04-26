@@ -6,17 +6,18 @@ import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.c
 import { useModalContext } from "context/app-modal.context";
 import { useAuth } from "hooks/auth/auth.hook";
 import { UpdateMode } from "models/shared/update-mode.enum";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { fetchCategoriesAsync } from "redux/category.slice";
 
 const AdminCategoryPage: React.FC = () => {
   const { isLoading } = useAuth();
-  useEffect(() => {}, [isLoading]);
+
   const { setContent, setTitle, setShow } = useModalContext();
   const dispatch = useDispatch();
 
+  debugger
 
   const createCategory = () => {
     setContent(<CategoryForm formMode={UpdateMode.ADD} />);
@@ -26,7 +27,7 @@ const AdminCategoryPage: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchCategoriesAsync() as any);
-  }, []);
+  }, [isLoading]);
 
   return (
     <>

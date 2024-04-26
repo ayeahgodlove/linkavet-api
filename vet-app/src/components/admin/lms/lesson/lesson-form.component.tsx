@@ -102,7 +102,6 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
             <Form.Item
               name="title"
               label="Title"
-              requiredMark
               style={{ marginBottom: 3 }}
               rules={[
                 {
@@ -116,7 +115,6 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
             <Form.Item
               name="url"
               label="Url"
-              requiredMark
               style={{ marginBottom: 3 }}
               rules={[
                 {
@@ -163,7 +161,6 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
             <Form.Item
               name="description"
               label="Description"
-              requiredMark
               rules={[
                 {
                   required: true,

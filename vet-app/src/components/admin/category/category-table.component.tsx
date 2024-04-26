@@ -12,6 +12,7 @@ import { UpdateMode } from "models/shared/update-mode.enum";
 import search from "utils/search";
 import { fetchcategorySuccess } from "redux/category.slice";
 import { SpinnerComponent } from "components/shared/spinner";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 
@@ -38,7 +39,7 @@ const CategoryTable: React.FC = () => {
 
   const getCategories = useCallback(async (): Promise<ICategory[]> => {
     setLoading(true);
-    const response = await fetch(`/api/categories`);
+    const response = await fetch(`${API_URL}/api/categories`);
     const { data } = await response.json();
     return data;
   }, []);

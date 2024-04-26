@@ -8,6 +8,7 @@ import { validate } from "class-validator";
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 import { User } from "../../data/entities/user";
+import { deleteFile } from "../../utils/util";
 
 const storeRepository = new StoreRepository();
 const storeUseCase = new StoreUseCase(storeRepository);
@@ -21,11 +22,7 @@ export class StoresController {
     const dto = new StoreRequestDto(req.body);
     const validationErrors = await validate(dto);
     const user = req.user as User;
-    const { filename } = req.file as Express.Multer.File;
 
-    if (filename === undefined) {
-      throw new Error("Photo not found!");
-    }
     if (validationErrors.length > 0) {
       res.status(400).json({
         validationErrors: displayValidationErrors(validationErrors) as any,
@@ -38,7 +35,7 @@ export class StoresController {
         const storeResponse = await storeUseCase.createStore({
           ...dto.toData(),
           userId: user.id,
-          imageBannerUrl: filename.toString(),
+          imageBannerUrl: req.body.imageBannerUrl,
         });
 
         res.status(201).json({
@@ -48,6 +45,7 @@ export class StoresController {
           success: true,
         });
       } catch (error: any) {
+        deleteFile(req.body.imageBannerUrl, "stores");
         res.status(400).json({
           data: null,
           message: error.message,
@@ -129,6 +127,7 @@ export class StoresController {
           ...emptyStore,
           ...req.body,
           id: id,
+          imageBannerUrl: req.body.imageBannerUrl,
         };
         const updatedStore = await storeUseCase.updateStore(obj);
         const storeDto = storeMapper.toDTO(updatedStore);
@@ -140,6 +139,7 @@ export class StoresController {
           success: true,
         });
       } catch (error: any) {
+        deleteFile(req.body.imageBannerUrl, "stores");
         res.status(400).json({
           data: null,
           message: error.message,
@@ -156,6 +156,11 @@ export class StoresController {
   ): Promise<void> {
     try {
       const id = req.params.id;
+
+      const store = await storeUseCase.getStoreById(id);
+      if (store) {
+        deleteFile(store.dataValues.imageBannerUrl, "stores");
+      }
 
       await storeUseCase.deleteStore(id);
 

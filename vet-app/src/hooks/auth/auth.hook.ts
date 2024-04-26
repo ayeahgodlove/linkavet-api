@@ -3,12 +3,16 @@ import { useCallback, useEffect } from "react";
 import { IRootState } from "redux/store";
 import { IUser } from "models/user.model";
 import {
+  loginError,
+  loginSuccess,
   loginUser,
   logoutFun,
   logoutUser,
+  registerSuccess,
   registerUser,
 } from "redux/auth/auth.slice";
 import { useToken } from "./token.hook";
+import { authService } from "services/auth.service";
 
 const useAuth = () => {
   const user = useSelector<IRootState, IUser>((state) => state.auth.user);
@@ -27,33 +31,59 @@ const useAuth = () => {
     dispatch(logoutFun() as any);
   }, [dispatch]);
 
-  const loginUserFunction = useCallback(
-    (userObj: { email: string; password: string }) => {
-      dispatch(
-        loginUser({ email: userObj.email, password: userObj.password }) as any
-      );
-      if(!user.token) {
-      //  const token = JSON.parse(window.localStorage.getItem("user") || "null");
-       setToken(user.token!);
-      }
-      setToken(user.token!);
-      // dispatch(setUser())
-    },
-    [dispatch, setToken, user]
-  );
-
-  const registerUserFunction = useCallback(
-    (user: IUser) => {
-      try {
-        dispatch(registerUser(user) as any);
-        return true;
-      } catch (error) {
-        console.log(error);
+  const loginUserFunction = async (user: {
+    email: string;
+    password: string;
+  }) => {
+    return await authService
+      .login(user)
+      .then((userResponse) => {
+        if (userResponse.status === 200) {
+          dispatch(loginSuccess(userResponse.data.data));
+          console.log("userResponse: ", userResponse);
+          setToken(userResponse.data.data.token);
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch((error) => {
+        dispatch(loginError(error.message));
         return false;
-      }
-    },
-    [dispatch]
-  );
+      });
+  };
+
+
+  const registerUserFunction = async (user: IUser) => {
+    return await authService
+      .register(user)
+      .then((userResponse) => {
+        if (userResponse.status === 201) {
+          dispatch(registerSuccess(userResponse.data.data));
+          console.log("userResponse: ", userResponse);
+          return true;
+        } else {
+          return false;
+        }
+      })
+      .catch((error) => {
+        dispatch(loginError(error.message));
+        return false;
+      });
+  };
+
+  // const registerUserFunction = useCallback(
+  //   (user: IUser) => {
+  //     try {
+  //       dispatch(registerUser(user) as any);
+  //       return true;
+  //     } catch (error) {
+  //       console.log(error);
+  //       return false;
+  //     }
+  //   },
+  //   [dispatch]
+  // );
 
   useEffect(() => {}, [
     isLoading,

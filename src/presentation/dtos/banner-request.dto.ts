@@ -13,9 +13,14 @@ export class BannerRequestDto {
   @IsString()
   subTitle: string;
 
+  @IsNotEmpty()
+  @IsString()
+  image: string;
+
   constructor(data: IBanner) {
     this.title = data.title;
     this.subTitle = data.subTitle;
+    this.image = data.image;
   }
 
   toData(): IBanner {
@@ -24,6 +29,7 @@ export class BannerRequestDto {
       id: nanoid(10),
       title: this.title,
       subTitle: this.subTitle,
+      image: this.image
     };
   }
 

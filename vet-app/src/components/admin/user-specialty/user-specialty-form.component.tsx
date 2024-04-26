@@ -13,7 +13,7 @@ import { useUser } from "hooks/user.hook";
 
 type Props = {
   formMode: UpdateMode;
-  isTrue: boolean
+  isTrue: boolean;
 };
 export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
   const { initFormData } = useFormInit();
@@ -97,7 +97,6 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
         <Form.Item
           name="userId"
           label="User"
-          requiredMark
           style={{ marginBottom: 10 }}
           rules={[
             {
@@ -125,7 +124,6 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
         <Form.Item
           name="twitter"
           label="Twitter"
-          requiredMark
           style={{ marginBottom: 10 }}
           rules={[
             {
@@ -139,7 +137,6 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
         <Form.Item
           name="facebook"
           label="Facebook"
-          requiredMark
           style={{ marginBottom: 10 }}
           rules={[
             {
@@ -153,7 +150,6 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
         <Form.Item
           name="linkedin"
           label="Linkedin"
-          requiredMark
           style={{ marginBottom: 10 }}
           rules={[
             {
@@ -167,7 +163,6 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
         <Form.Item
           name="specialty"
           label="Specialty"
-          requiredMark
           style={{ marginBottom: 10 }}
           rules={[
             {

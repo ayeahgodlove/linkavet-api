@@ -81,7 +81,6 @@ export const QuizForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="question"
           label="Question"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {
@@ -160,7 +159,6 @@ export const QuizForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="correctAnswerIndex"
           label="Correct Answer Index"
-          requiredMark
           style={{ marginBottom: 10 }}
           rules={[
             {

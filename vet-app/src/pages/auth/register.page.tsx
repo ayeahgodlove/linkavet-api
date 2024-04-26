@@ -49,10 +49,9 @@ const RegisterPage: React.FC = () => {
       userRole: value,
     };
 
-    const feedback = registerUserFunction(obj);
+    const feedback = await registerUserFunction(obj);
     if (feedback) {
       message.success("User Registered Sucessfully!");
-      // router("/auth/check-email");
       setSuccess(true);
     } else {
       message.error("Registration failed!");

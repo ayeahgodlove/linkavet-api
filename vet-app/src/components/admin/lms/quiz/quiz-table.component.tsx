@@ -12,6 +12,7 @@ import { useQuiz } from "hooks/lms/quiz.hook";
 import { IQuiz } from "models/lms/quiz";
 import { fetchquizSuccess } from "redux/lms/quiz.slice";
 import { useLesson } from "hooks/lms/lesson.hook";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 
@@ -38,7 +39,7 @@ const QuizTable: React.FC = () => {
 
   const getQuizs = useCallback(async (): Promise<IQuiz[]> => {
     setLoading(true);
-    const response = await fetch(`/api/quizes`);
+    const response = await fetch(`${API_URL}/api/quizes`);
     const { data } = await response.json();
     return data;
   }, []);

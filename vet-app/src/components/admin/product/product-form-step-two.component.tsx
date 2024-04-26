@@ -20,7 +20,6 @@ const ProductFormStepTwo: React.FC<Props> = ({ form, formValues }) => {
         <Form.Item
           name="shortDescription"
           label="Short Description"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {

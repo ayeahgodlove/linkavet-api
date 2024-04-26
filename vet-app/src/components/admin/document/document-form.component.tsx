@@ -79,7 +79,6 @@ export const DocumentForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="name"
           label="Name"
-          requiredMark
           rules={[
             {
               required: true,
@@ -92,7 +91,6 @@ export const DocumentForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="description"
           label="Description"
-          requiredMark
           rules={[
             {
               required: true,

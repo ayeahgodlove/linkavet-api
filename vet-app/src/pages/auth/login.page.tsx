@@ -15,10 +15,15 @@ const LoginPage: React.FC = () => {
 
   const onFinish = async (values: any) => {
     setSubmitting(true);
-    await loginUserFunction({
+    const feedback = await loginUserFunction({
       email: values.email,
       password: values.password,
     });
+    if (feedback) {
+      message.success("Login Successful!");
+    } else {
+      message.error("Failure: Wrong credentials!");
+    }
     setSubmitting(false);
   };
 

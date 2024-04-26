@@ -1,7 +1,6 @@
 import { Card, Col, Divider, FloatButton, Row, Typography } from "antd";
 import CategoryList from "components/admin/category/category-list.component";
 import TagList from "components/admin/tag/tag-list.component";
-import BannerIndexComponent from "components/product/product-banner.component";
 import ProductList from "components/product/product-list.component";
 import { SpinnerComponent } from "components/shared/spinner";
 import useWindowSize from "hooks/shared/window-resize.hook";
@@ -13,6 +12,8 @@ import { FiShoppingCart } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchproductSuccess } from "redux/product.slice";
+import PageContent from "components/shared/page-content/index";
+import { API_URL } from "config/constant";
 
 const ProductPage: React.FC = () => {
   const router = useNavigate();
@@ -24,7 +25,7 @@ const ProductPage: React.FC = () => {
 
   const getProducts = useCallback(async (): Promise<IProduct[]> => {
     setLoading(true);
-    const response = await fetch("/api/products");
+    const response = await fetch(`${API_URL}/api/products`);
     const { data } = await response.json();
     return data;
   }, []);
@@ -53,7 +54,14 @@ const ProductPage: React.FC = () => {
         />
       </Helmet>
       {/* banner */}
-      <BannerIndexComponent />
+      <PageContent
+        title={"Explore Premium Products"}
+        breadcrumb={[
+          {
+            title: "Products",
+          },
+        ]}
+      />
 
       {/* Branding Information */}
 

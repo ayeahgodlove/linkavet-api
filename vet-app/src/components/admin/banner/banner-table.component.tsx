@@ -13,6 +13,7 @@ import { IBanner } from "models/banner";
 import search from "utils/search";
 import { fetchbannerSuccess } from "redux/banner.slice";
 import { SpinnerComponent } from "components/shared/spinner";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 export function BannerTable() {
@@ -38,7 +39,7 @@ export function BannerTable() {
 
   const getBanners = useCallback(async (): Promise<IBanner[]> => {
     setLoading(true)
-    const response = await fetch(`/api/banners`);
+    const response = await fetch(`${API_URL}/api/banners`);
     const { data } = await response.json();
     return data;
   }, []);

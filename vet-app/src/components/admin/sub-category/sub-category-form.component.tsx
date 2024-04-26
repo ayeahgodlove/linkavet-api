@@ -81,7 +81,6 @@ export const SubCategoryForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="name"
           label="Name"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {
@@ -95,7 +94,6 @@ export const SubCategoryForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="description"
           label="Description"
-          requiredMark
           rules={[
             {
               required: true,

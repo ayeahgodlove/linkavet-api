@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useState } from "react";
 import debounce from "lodash/debounce";
 import { Select, Spin } from "antd";
 import type { SelectProps } from "antd/es/select";
+import { API_URL } from "config/constant";
 
 export interface DebounceSelectProps<ValueType = any>
   extends Omit<SelectProps<ValueType | ValueType[]>, "options" | "children"> {
@@ -66,11 +67,10 @@ interface ProductValue {
 async function fetchProductList(searchTerm: string): Promise<ProductValue[]> {
   console.log("fetching product", searchTerm);
 
-  return fetch(`/api/products/search/?searchTerm=${searchTerm}`)
+  return fetch(`${API_URL}/api/products/search/?searchTerm=${searchTerm}`)
     .then((response) => response.json())
     .then((body) => {
       const { data } = body;
-      console.log("body: ", data);
       return data;
     })
     .catch((error) => console.log(error));

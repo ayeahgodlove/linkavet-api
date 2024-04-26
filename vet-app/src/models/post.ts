@@ -14,11 +14,6 @@ export interface IPost {
   tags: string[]
 }
 
-
-export interface PostFormData extends FormData {
-  id: string; // Assuming the ID is a string, adjust the type as needed
-}
-
 export const emptyPost: IPost = {
   id: "",
   slug: "",

@@ -1,54 +1,60 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, FormInstance, Upload, UploadFile } from "antd";
-import React, { useEffect } from "react";
+import {
+  Button,
+  Form,
+  FormInstance,
+  Typography,
+  Upload,
+  UploadFile,
+} from "antd";
+import UploadButton from "components/shared/upload-button.component";
+import { useUpload } from "hooks/shared/upload.hook";
+import React, { useCallback, useEffect } from "react";
+import { upload } from "utils/upload";
 
 interface Props {
   form: FormInstance<any>;
   fileList: UploadFile<any>[];
   beforeUpload: (file: UploadFile<any>) => boolean;
   onRemove: (file: UploadFile<any>) => void;
-  normFile: (e: any) => any;
 }
+
+const { Dragger } = Upload;
 const ProductFormStepUploads: React.FC<Props> = ({
   form,
   fileList,
   beforeUpload,
   onRemove,
-  normFile,
 }) => {
+  const { handlePreview, progress } = useUpload();
+  const formData = new FormData();
   useEffect(() => {
     form.validateFields();
   }, [form]);
 
   return (
     <div style={{ padding: 10 }}>
-      <Form.Item
-        name="productImages"
-        label="Upload Product Images"
-        requiredMark
-        style={{ marginBottom: 3 }}
-        rules={[
-          {
-            required: true,
-            message: "Upload is required",
-          },
-        ]}
-        valuePropName="fileList"
-        getValueFromEvent={normFile}
-      >
-        <Upload
+      <>
+        <Typography.Title level={5}>Upload Image</Typography.Title>
+        <Dragger
+          name="image"
+          maxCount={1}
+          listType="picture-card"
           beforeUpload={beforeUpload}
           onRemove={onRemove}
-          name="productImages"
+          progress={progress}
           fileList={fileList}
-          type="drag"
-          style={{
-            padding: "1rem",
-          }}
+          onPreview={handlePreview}
+          action={useCallback(async () => {
+            formData.append("imageUrl", fileList[0] as any);
+            const response = await upload("products", formData);
+            form.setFieldValue("imageUrl", response);
+            return response;
+          }, [form, fileList, formData])}
         >
-          <Button icon={<UploadOutlined />}>Select File</Button>
-        </Upload>
-      </Form.Item>
+          {fileList.length > 1 ? null : <UploadButton />}
+        </Dragger>
+      </>
     </div>
   );
 };

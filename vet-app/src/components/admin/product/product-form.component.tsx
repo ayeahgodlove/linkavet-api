@@ -39,7 +39,7 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
   const { formError } = useFormErrors();
   const { setShow } = useModalContext();
   const { getUserStore } = useStore();
-  const { beforeUpload, onRemove, normFile, fileList } = useUpload();
+  const { beforeUpload, onRemove,  fileList } = useUpload();
 
   const [hasSubmitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -124,7 +124,6 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
                 <Form.Item
                   name="name"
                   label="Name"
-                  requiredMark
                   style={{ marginBottom: 3 }}
                   rules={[
                     {
@@ -140,7 +139,6 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
                 <Form.Item
                   name="categoryId"
                   label="Category"
-                  requiredMark
                   style={{ marginBottom: 3 }}
                   rules={[
                     {
@@ -173,7 +171,6 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
                 <Form.Item
                   name="tags"
                   label="Select Tags"
-                  requiredMark
                   style={{ marginBottom: 3 }}
                   rules={[
                     {
@@ -207,7 +204,6 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
                 <Form.Item
                   name="qtty"
                   label="Quantity"
-                  requiredMark
                   style={{ marginBottom: 3, width: "100%" }}
                   rules={[
                     {
@@ -223,7 +219,6 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
                 <Form.Item
                   name="amount"
                   label="Amount"
-                  requiredMark
                   style={{ marginBottom: 3, width: "100%" }}
                   rules={[
                     {
@@ -241,7 +236,6 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
             <Form.Item
               name="shortDescription"
               label="Short Description"
-              requiredMark
               style={{ marginBottom: 3 }}
               rules={[
                 {
@@ -273,10 +267,9 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
           </Col>
         </Row>
 
-        <Form.Item
+        {/* <Form.Item
           name="productImages"
           label="Upload Product Images"
-          requiredMark
           style={{ marginBottom: 3 }}
           rules={[
             {
@@ -296,7 +289,7 @@ export const ProductForm: React.FC<Props> = ({ formMode }) => {
           >
             <Button icon={<UploadOutlined />}>Select File</Button>
           </Upload>
-        </Form.Item>
+        </Form.Item> */}
 
         <Button
           type="primary"

@@ -1,7 +1,5 @@
 import { Avatar, Button, Card, Col, List, Row, Typography } from "antd";
 import CommentComponent from "components/comment/comment.component";
-import BackButton from "components/shared/back-button.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
 import { SpinnerComponent } from "components/shared/spinner";
 import { API_URL_UPLOADS_POSTS } from "config/constant";
 import { useCategory } from "hooks/category.hook";
@@ -12,6 +10,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUsersAsync } from "redux/user.slice";
 import { format } from "utils/format";
+import PageContent from "components/shared/page-content/index";
 
 const postDetailPage: React.FC = () => {
   const { post } = usePost();
@@ -68,10 +67,18 @@ const postDetailPage: React.FC = () => {
   return (
     <>
       <Row align={"middle"} justify={"center"} style={{ marginTop: "2rem" }}>
-        <Col span={23}>
-          <PageBreadCrumbs items={["Pages", "Post", "Details"]} />
-          <BackButton title="Post" />
-        </Col>
+        <PageContent
+          title={post.title}
+          breadcrumb={[
+            {
+              title: "Blog Posts",
+              link: "/posts",
+            },
+            {
+              title: "Details",
+            },
+          ]}
+        />
         <Col lg={23}>
           <Card size="small">
             <div style={{ display: "flex", justifyContent: "flex-start" }}>

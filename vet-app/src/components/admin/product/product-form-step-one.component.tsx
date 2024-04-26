@@ -35,7 +35,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
               <Form.Item
                 name="name"
                 label="Name"
-                requiredMark
                 style={{ marginBottom: 3 }}
                 rules={[
                   {
@@ -52,7 +51,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
               <Form.Item
                 name="categoryId"
                 label="Category"
-                requiredMark
                 style={{ marginBottom: 3 }}
                 rules={[
                   {
@@ -86,7 +84,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
               <Form.Item
                 name="tags"
                 label="Select Tags"
-                requiredMark
                 style={{ marginBottom: 3 }}
                 rules={[
                   {
@@ -121,7 +118,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
               <Form.Item
                 name="qtty"
                 label="Quantity"
-                requiredMark
                 style={{ marginBottom: 3, width: "100%" }}
                 rules={[
                   {
@@ -138,7 +134,6 @@ const ProductFormStepOne: React.FC<Props> = ({ form, formValues }) => {
               <Form.Item
                 name="amount"
                 label="Amount"
-                requiredMark
                 style={{ marginBottom: 3, width: "100%" }}
                 rules={[
                   {

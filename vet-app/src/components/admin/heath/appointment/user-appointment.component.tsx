@@ -11,6 +11,7 @@ import { useAppointment } from "hooks/health/appointment.hook";
 import { IAppointment } from "models/health/appointment";
 import { fetchAppointmentSuccess } from "redux/health/appointment.slice";
 import { useAuth } from "hooks/auth/auth.hook";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 export function UserAppointmentTable() {
@@ -25,7 +26,7 @@ export function UserAppointmentTable() {
 
   const getAppointments = useCallback(async (): Promise<IAppointment[]> => {
     setLoading(true);
-    const response = await fetch(`/api/appointments`);
+    const response = await fetch(`${API_URL}/api/appointments`);
     const { data } = await response.json();
     return data;
   }, []);

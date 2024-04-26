@@ -12,6 +12,7 @@ import { fetchpostSuccess } from "redux/post.slice";
 import { SpinnerComponent } from "components/shared/spinner";
 import { IPost } from "models/post";
 import { usePostColumn } from "./post-column.component";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 
@@ -39,7 +40,7 @@ const PostTable: React.FC = () => {
 
   const getPosts = useCallback(async (): Promise<IPost[]> => {
     setLoading(true);
-    const response = await fetch(`/api/posts`);
+    const response = await fetch(`${API_URL}/api/posts`);
     const { data } = await response.json();
     return data;
   }, []);
@@ -51,8 +52,6 @@ const PostTable: React.FC = () => {
   const onChange = (query: any) => {
     setQuery(query.target.value);
   };
-
-  const { Paragraph } = Typography;
 
   const inputRef = useRef(null);
 

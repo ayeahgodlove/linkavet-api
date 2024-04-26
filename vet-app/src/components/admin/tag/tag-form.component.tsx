@@ -80,7 +80,6 @@ export const TagForm: React.FC<Props> = ({ formMode }) => {
         <Form.Item
           name="name"
           label="Name"
-          requiredMark
           style={{ marginBottom: 10 }}
           rules={[
             {

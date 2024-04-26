@@ -13,6 +13,7 @@ import { IStore } from "models/store";
 import search from "utils/search";
 import { fetchstoreSuccess } from "redux/store.slice";
 import { SpinnerComponent } from "components/shared/spinner";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 export function StoreTable() {
@@ -38,7 +39,7 @@ export function StoreTable() {
 
   const getStores = useCallback(async (): Promise<IStore[]> => {
     setLoading(true)
-    const response = await fetch(`/api/stores`);
+    const response = await fetch(`${API_URL}/api/stores`);
     const { data } = await response.json();
     return data;
   }, []);

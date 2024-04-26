@@ -13,6 +13,7 @@ import { useEnrollment } from "hooks/lms/enrollment.hook";
 import { IEnrollment } from "models/lms/enrollment";
 import { fetchenrollmentSuccess } from "redux/lms/enrollment.slice";
 import { useCourse } from "hooks/lms/course.hook";
+import { API_URL } from "config/constant";
 
 const { Search } = Input;
 
@@ -41,7 +42,7 @@ const EnrollmentTable: React.FC = () => {
 
   const getEnrollments = useCallback(async (): Promise<IEnrollment[]> => {
     setLoading(true);
-    const response = await fetch(`/api/enrollments`);
+    const response = await fetch(`${API_URL}/api/enrollments`);
     const { data } = await response.json();
     return data;
   }, []);

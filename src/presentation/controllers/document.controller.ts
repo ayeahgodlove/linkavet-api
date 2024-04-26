@@ -12,8 +12,7 @@ import { validate } from "class-validator";
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 import { User } from "../../data/entities/user";
-import path from "path";
-import rimraf from "rimraf";
+import { deleteFile } from "../../utils/util";
 
 const documentRepository = new DocumentRepository();
 const documentUseCase = new DocumentUseCase(documentRepository);
@@ -27,7 +26,6 @@ export class DocumentsController {
     const dto = new DocumentRequestDto(req.body);
     const validationErrors = await validate(dto);
     const user = req.user as User;
-    const { filename } = req.file as Express.Multer.File;
 
     if (validationErrors.length > 0) {
       res.status(400).json({
@@ -41,7 +39,7 @@ export class DocumentsController {
         const documentResponse = await documentUseCase.createDocument({
           ...dto.toData(),
           userId: user.id,
-          fileUrl: filename.toString(),
+          fileUrl: req.body.fileUrl,
         });
 
         res.status(201).json({
@@ -51,6 +49,7 @@ export class DocumentsController {
           success: true,
         });
       } catch (error: any) {
+        deleteFile(req.body.fileUrl, "documents");
         res.status(400).json({
           data: null,
           message: error.message,
@@ -117,7 +116,6 @@ export class DocumentsController {
     const dto = new DocumentRequestDto(req.body);
     const validationErrors = await validate(dto);
     const user = req.user as User;
-    const { filename } = req.file as Express.Multer.File;
 
     if (validationErrors.length > 0) {
       res.status(400).json({
@@ -135,7 +133,7 @@ export class DocumentsController {
           ...req.body,
           id: id,
           userId: user.id,
-          fileUrl: filename.toString(),
+          fileUrl: req.body.fileUrl,
         };
         const updatedDocument = await documentUseCase.updateDocument(obj);
         const documentDto = documentMapper.toDTO(updatedDocument);
@@ -147,6 +145,7 @@ export class DocumentsController {
           success: true,
         });
       } catch (error: any) {
+        deleteFile(req.body.fileUrl, "documents");
         res.status(400).json({
           data: null,
           message: error.message,
@@ -166,10 +165,9 @@ export class DocumentsController {
 
       const document = await documentUseCase.getDocumentById(id);
       if (document) {
-        const baseDirectory = "./public/uploads/documents";
-        const filePath = path.join(baseDirectory, document.dataValues.fileUrl);
-        rimraf.sync(filePath);
+        deleteFile(document.dataValues.fileUrl, "documents");
       }
+
       await documentUseCase.deleteDocument(id);
 
       res.status(204).json({

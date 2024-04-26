@@ -23,7 +23,7 @@ const ProductStepForm: React.FC<Props> = ({ formMode }) => {
   const [form] = useForm();
   const { product, addProduct, editProduct } = useProduct();
   const { getUserStore } = useStore();
-  const { fileList, beforeUpload, onRemove, normFile } = useUpload();
+  const { fileList, beforeUpload, onRemove } = useUpload();
   const navigate = useNavigate();
 
   const [hasSubmitted, setSubmitted] = useState(false);
@@ -93,24 +93,23 @@ const ProductStepForm: React.FC<Props> = ({ formMode }) => {
 
   const steps = [
     {
-      title: "Product Details",
-      content: <ProductFormStepOne form={form} formValues={product} />,
-    },
-    {
-      title: "Product Description",
-      content: <ProductFormStepTwo form={form} formValues={product} />,
-    },
-    {
       title: "Product Images",
       content: (
         <ProductFormStepUploads
           form={form}
           fileList={fileList}
           beforeUpload={beforeUpload}
-          normFile={normFile}
           onRemove={onRemove}
         />
       ),
+    },
+    {
+      title: "Product Details",
+      content: <ProductFormStepOne form={form} formValues={product} />,
+    },
+    {
+      title: "Product Description",
+      content: <ProductFormStepTwo form={form} formValues={product} />,
     },
   ];
 
