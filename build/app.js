@@ -63,10 +63,13 @@ const product_review_route_1 = __importDefault(require("./presentation/routes/pr
 const lesson_review_route_1 = __importDefault(require("./presentation/routes/lesson-review.route"));
 const appointment_route_1 = __importDefault(require("./presentation/routes/health/appointment.route"));
 const consultation_route_1 = __importDefault(require("./presentation/routes/health/consultation.route"));
+// import { seo } from "./utils/seo";
+// import fs from "fs";
 const user_role_route_1 = __importDefault(require("./presentation/routes/user-role.route"));
 // import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
 const user_specialty_route_1 = __importDefault(require("./presentation/routes/user-specialty.route"));
 const upload_route_1 = __importDefault(require("./presentation/routes/upload.route"));
+debugger;
 dotenv.config();
 const db = new db_postgres_config_1.PostgresDbConfig();
 /**
@@ -85,23 +88,26 @@ db.connection()
     // Serve static files from the public folder
     app.use(express_1.default.static("public"));
     app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
-    app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "public")));
+    // app.use("/uploads", express.static(path.join(__dirname, "public")));
     // enable the use of request body parsing middleware
-    const allowedOrigins = [
-        "http://localhost:3000",
-        "https://linkavet.com",
-        "https://www.linkavet.com",
-    ];
+    // const allowedOrigins = [
+    //   "http://localhost:3000",
+    //   "https://linkavet.com",
+    //   "https://www.linkavet.com",
+    // ];
+    // const corsOptions = {
+    //   origin: function (origin: any, callback: any) {
+    //     if (allowedOrigins.indexOf(origin) !== -1) {
+    //       callback(null, true);
+    //     } else {
+    //       callback(new Error("Not allowed by CORS"));
+    //     }
+    //   },
+    //   credentials: true, // Needed if you're sending cookies or authorization headers
+    // };
     const corsOptions = {
-        origin: function (origin, callback) {
-            if (allowedOrigins.indexOf(origin) !== -1) {
-                callback(null, true);
-            }
-            else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
-        credentials: true, // Needed if you're sending cookies or authorization headers
+        origin: "*",
+        credentials: true,
     };
     app.use((0, cors_1.default)(corsOptions));
     app
@@ -158,26 +164,6 @@ db.connection()
     app.use("/api/user-roles", user_role_route_1.default);
     app.use("/api/user-specialties", user_specialty_route_1.default);
     app.use("/api/uploads", upload_route_1.default);
-    // app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
-    // Handle other routes by serving the frontend's main HTML file
-    // app.get("*", (req, res) => {
-    //   let pathname = req.path || req.originalUrl;
-    //   let page = seo.find((item) => item.path === pathname);
-    //   let html = fs.readFileSync(
-    //     path.join(__dirname, "..", "vet-app", "build", "index.html"),
-    //     "utf8"
-    //   );
-    //   if (page) {
-    //     let htmlWithSeo = html
-    //       .replace("__SEO_TITLE__", page.title)
-    //       .replace("__SEO_DESCRIPTION__", page.description);
-    //     return res.send(htmlWithSeo);
-    //   }
-    //   let htmWithSEO2 = html
-    //     .replace("__SEO_TITLE__", seo[0].title)
-    //     .replace("__SEO_DESCRIPTION__", seo[0].description);
-    //   res.send(htmWithSEO2);
-    // });
     // middleware interceptions
     app.use(not_found_middleware_1.notFoundHandler);
     /**
