@@ -10,7 +10,16 @@ interface IProp {
   team: IUserSpecialty;
 }
 export const TeamCard: React.FC<IProp> = ({ team }) => {
-  const { username, specialty, avatar, facebook, twitter, linkedin } = team;
+  const {
+    username,
+    fullname,
+    specialty,
+    title,
+    avatar,
+    facebook,
+    twitter,
+    linkedin,
+  } = team;
   const { Meta } = Card;
 
   const IconFont = createFromIconfontCN({
@@ -53,7 +62,7 @@ export const TeamCard: React.FC<IProp> = ({ team }) => {
           <IconFont type="icon-linkedin" />
         </a>
       </Space>
-      <Meta title={username} description={specialty} />
+      <Meta title={fullname} description={title + " " + specialty} />
     </Card>
   );
 };

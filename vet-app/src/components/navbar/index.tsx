@@ -14,7 +14,7 @@ interface IProps {
   handleShow?: () => void;
 }
 
-const Navbar: React.FC<IProps> = ({ showMenuIcon = false, handleShow }) => {
+const Navbar: React.FC<IProps> = ({ handleShow }) => {
   const { isDarkMode } = useTheme();
   const { width } = useWindowSize();
   return (
@@ -68,14 +68,14 @@ const Navbar: React.FC<IProps> = ({ showMenuIcon = false, handleShow }) => {
               <RightMenu />
             </div>
 
-            {showMenuIcon && (
-              <Button
-                type="default"
-                icon={<MenuOutlined size={25} style={{ fontSize: "18px" }} />}
-                onClick={handleShow}
-                className="app-shell-baricon"
-              />
-            )}
+            {/* {showMenuIcon && ( */}
+            <Button
+              type="default"
+              icon={<MenuOutlined size={25} style={{ fontSize: "18px" }} />}
+              onClick={handleShow}
+              className="app-shell-baricon"
+            />
+            {/* )} */}
           </div>
         </Header>
       </Affix>

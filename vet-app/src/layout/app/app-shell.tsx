@@ -2,7 +2,7 @@ import { Drawer, Layout, Menu } from "antd";
 import React, { useEffect, useState } from "react";
 
 import Navbar from "components/navbar";
-import "./AppShell.scss";
+import "./app-shell.scss";
 
 import { ConfigProvider, theme } from "antd";
 import { useTheme } from "hooks/shared/theme.hook";

@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { ConfigProvider, theme, FloatButton } from "antd";
 
 import Navbar from "components/navbar";
-import "./AppShell.scss";
+import "./app-shell.scss";
 import { useTheme } from "hooks/shared/theme.hook";
 import { FiArrowUp } from "react-icons/fi";
 import Footer from "rc-footer";
@@ -14,7 +14,6 @@ import { ITag } from "models/tag.model";
 import "rc-footer/assets/index.css";
 import { Link } from "react-router-dom";
 import { useAppShellMenus } from "./app-shell-menus";
-import { getConfiguration } from "redux/action/initial.action";
 import { useDispatch } from "react-redux";
 import { fetchUsersAsync } from "redux/user.slice";
 import { fetchCategoriesAsync } from "redux/category.slice";
