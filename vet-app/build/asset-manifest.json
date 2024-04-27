@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.969d9f53.css",
-    "main.js": "/static/js/main.b5ed6426.js",
+    "main.css": "/static/css/main.95a0e24e.css",
+    "main.js": "/static/js/main.b7e81c6e.js",
     "reactPlayerPreview.js": "/static/js/reactPlayerPreview.1ab0f654.chunk.js",
     "static/media/kylee-alons-suQ-D-9dmVU-unsplash.jpg": "/static/media/kylee-alons-suQ-D-9dmVU-unsplash.7be6bc395f51ce62c732.jpg",
     "index.html": "/index.html",
-    "main.969d9f53.css.map": "/static/css/main.969d9f53.css.map",
-    "main.b5ed6426.js.map": "/static/js/main.b5ed6426.js.map",
+    "main.95a0e24e.css.map": "/static/css/main.95a0e24e.css.map",
+    "main.b7e81c6e.js.map": "/static/js/main.b7e81c6e.js.map",
     "reactPlayerPreview.1ab0f654.chunk.js.map": "/static/js/reactPlayerPreview.1ab0f654.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.969d9f53.css",
-    "static/js/main.b5ed6426.js"
+    "static/css/main.95a0e24e.css",
+    "static/js/main.b7e81c6e.js"
   ]
 }

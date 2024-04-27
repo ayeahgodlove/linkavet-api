@@ -63,10 +63,10 @@ const product_review_route_1 = __importDefault(require("./presentation/routes/pr
 const lesson_review_route_1 = __importDefault(require("./presentation/routes/lesson-review.route"));
 const appointment_route_1 = __importDefault(require("./presentation/routes/health/appointment.route"));
 const consultation_route_1 = __importDefault(require("./presentation/routes/health/consultation.route"));
-const seo_1 = require("./utils/seo");
-const fs_1 = __importDefault(require("fs"));
 const user_role_route_1 = __importDefault(require("./presentation/routes/user-role.route"));
+// import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
 const user_specialty_route_1 = __importDefault(require("./presentation/routes/user-specialty.route"));
+const upload_route_1 = __importDefault(require("./presentation/routes/upload.route"));
 dotenv.config();
 const db = new db_postgres_config_1.PostgresDbConfig();
 /**
@@ -82,29 +82,35 @@ db.connection()
     /**
      *  App Configuration
      */
-    // Function to serve all static files
-    // inside public directory.
+    // Serve static files from the public folder
     app.use(express_1.default.static("public"));
     app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
+    app.use("/uploads", express_1.default.static(path_1.default.join(__dirname, "public")));
     // enable the use of request body parsing middleware
+    const allowedOrigins = [
+        "http://localhost:3000",
+        "https://linkavet.com",
+        "https://www.linkavet.com",
+    ];
+    const corsOptions = {
+        origin: function (origin, callback) {
+            if (allowedOrigins.indexOf(origin) !== -1) {
+                callback(null, true);
+            }
+            else {
+                callback(new Error("Not allowed by CORS"));
+            }
+        },
+        credentials: true, // Needed if you're sending cookies or authorization headers
+    };
+    app.use((0, cors_1.default)(corsOptions));
     app
         .use(express_1.default.urlencoded({
         extended: true,
     }))
         .use(express_1.default.json({ limit: "50kb" }))
-        .use((0, cors_1.default)({
-        origin: "*",
-        credentials: true,
-    }))
         .use((0, cookie_parser_1.default)())
-        .use((0, helmet_1.default)({
-        contentSecurityPolicy: {
-            directives: {
-                defaultSrc: ["'self'"],
-                scriptSrc: ["'self'", "https://www.linkavet.com"],
-            },
-        },
-    }))
+        .use((0, helmet_1.default)())
         .use((0, express_session_1.default)({
         // store: store,
         secret: `${process.env.SESSION_SECRET}`,
@@ -151,23 +157,27 @@ db.connection()
     app.use("/api/reviews", review_route_1.default);
     app.use("/api/user-roles", user_role_route_1.default);
     app.use("/api/user-specialties", user_specialty_route_1.default);
+    app.use("/api/uploads", upload_route_1.default);
     app.use(express_1.default.static(path_1.default.join(__dirname, "..", "vet-app", "build")));
     // Handle other routes by serving the frontend's main HTML file
-    app.get("*", (req, res) => {
-        let pathname = req.path || req.originalUrl;
-        let page = seo_1.seo.find((item) => item.path === pathname);
-        let html = fs_1.default.readFileSync(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"), "utf8");
-        if (page) {
-            let htmlWithSeo = html
-                .replace("__SEO_TITLE__", page.title)
-                .replace("__SEO_DESCRIPTION__", page.description);
-            return res.send(htmlWithSeo);
-        }
-        let htmWithSEO2 = html
-            .replace("__SEO_TITLE__", seo_1.seo[0].title)
-            .replace("__SEO_DESCRIPTION__", seo_1.seo[0].description);
-        res.send(htmWithSEO2);
-    });
+    // app.get("*", (req, res) => {
+    //   let pathname = req.path || req.originalUrl;
+    //   let page = seo.find((item) => item.path === pathname);
+    //   let html = fs.readFileSync(
+    //     path.join(__dirname, "..", "vet-app", "build", "index.html"),
+    //     "utf8"
+    //   );
+    //   if (page) {
+    //     let htmlWithSeo = html
+    //       .replace("__SEO_TITLE__", page.title)
+    //       .replace("__SEO_DESCRIPTION__", page.description);
+    //     return res.send(htmlWithSeo);
+    //   }
+    //   let htmWithSEO2 = html
+    //     .replace("__SEO_TITLE__", seo[0].title)
+    //     .replace("__SEO_DESCRIPTION__", seo[0].description);
+    //   res.send(htmWithSEO2);
+    // });
     // middleware interceptions
     app.use(not_found_middleware_1.notFoundHandler);
     /**

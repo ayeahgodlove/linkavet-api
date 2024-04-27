@@ -1,6 +1,6 @@
 // src/presentation/dtos/post-request.dto.ts
 
-import {  IsNotEmpty, IsString, Length } from "class-validator";
+import { IsNotEmpty, IsString, Length } from "class-validator";
 import { IPost, emptyPost } from "../../domain/models/post";
 import slugify from "slugify";
 import { nanoid } from "nanoid";
@@ -34,11 +34,11 @@ export class PostRequestDto {
     return {
       ...emptyPost,
       id: nanoid(10),
-      slug:  slugify(this.title, {lower: true, replacement: "-"}),
+      slug: slugify(this.title, { lower: true, replacement: "-" }),
       title: this.title,
       content: this.content,
       categoryId: this.categoryId,
-      summary: this.summary, 
+      summary: this.summary,
     };
   }
 
@@ -52,7 +52,8 @@ export class PostRequestDto {
       imageUrl: data.imageUrl,
       publishedAt: data.publishedAt,
       slug: data.slug,
-      summary: data.summary
-    }
+      summary: data.summary,
+      tags: data.tags,
+    };
   }
 }

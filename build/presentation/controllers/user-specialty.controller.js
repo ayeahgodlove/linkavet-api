@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserSpecialtyController = void 0;
-const user_specialty_1 = require("../../domain/models/user-specialty");
 const user_specialty_usecase_1 = require("../../domain/usecases/user-specialty.usecase");
 const user_specialty_repository_1 = require("../../data/repositories/impl/user-specialty.repository");
 const mapper_1 = require("../mappers/mapper");
@@ -26,7 +25,13 @@ class UserSpecialtyController {
         }
         else {
             try {
-                const userSpecialtyResponse = await userSpecialtyUseCase.createUserSpecialty(dto.toData());
+                const userSpecialtyResponse = await userSpecialtyUseCase.createUserSpecialty({
+                    ...dto.toData(),
+                    fullname: req.body.fullname,
+                    title: req.body.title,
+                    website: req.body.website,
+                    yearsOfExperience: req.body.yearsOfExperience,
+                });
                 res.status(201).json({
                     data: userSpecialtyResponse.toJSON(),
                     message: "UserSpecialty created Successfully!",
@@ -103,9 +108,12 @@ class UserSpecialtyController {
             try {
                 const id = req.params.id;
                 const obj = {
-                    ...user_specialty_1.emptyUserSpecialty,
                     ...req.body,
                     id: id,
+                    fullname: req.body.fullname,
+                    title: req.body.title,
+                    website: req.body.website,
+                    yearsOfExperience: req.body.yearsOfExperience,
                 };
                 const updatedUserSpecialty = await userSpecialtyUseCase.updateUserSpecialty(obj);
                 const userSpecialtyDto = userSpecialtyMapper.toDTO(updatedUserSpecialty);

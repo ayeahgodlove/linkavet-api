@@ -10,5 +10,6 @@ exports.emptyPost = {
     publishedAt: new Date(),
     authorId: "",
     categoryId: "",
-    summary: ""
+    summary: "",
+    tags: [],
 };

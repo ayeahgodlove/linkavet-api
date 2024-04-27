@@ -9,6 +9,7 @@ const store_request_dto_1 = require("../dtos/store-request.dto");
 const class_validator_1 = require("class-validator");
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
+const util_1 = require("../../utils/util");
 const storeRepository = new store_repository_1.StoreRepository();
 const storeUseCase = new store_usecase_1.StoreUseCase(storeRepository);
 const storeMapper = new mapper_1.StoreMapper();
@@ -17,10 +18,6 @@ class StoresController {
         const dto = new store_request_dto_1.StoreRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         const user = req.user;
-        const { filename } = req.file;
-        if (filename === undefined) {
-            throw new Error("Photo not found!");
-        }
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -34,7 +31,7 @@ class StoresController {
                 const storeResponse = await storeUseCase.createStore({
                     ...dto.toData(),
                     userId: user.id,
-                    imageBannerUrl: filename.toString(),
+                    imageBannerUrl: req.body.imageBannerUrl,
                 });
                 res.status(201).json({
                     data: storeResponse.toJSON(),
@@ -44,6 +41,7 @@ class StoresController {
                 });
             }
             catch (error) {
+                (0, util_1.deleteFile)(req.body.imageBannerUrl, "stores");
                 res.status(400).json({
                     data: null,
                     message: error.message,
@@ -115,6 +113,7 @@ class StoresController {
                     ...store_1.emptyStore,
                     ...req.body,
                     id: id,
+                    imageBannerUrl: req.body.imageBannerUrl,
                 };
                 const updatedStore = await storeUseCase.updateStore(obj);
                 const storeDto = storeMapper.toDTO(updatedStore);
@@ -126,6 +125,7 @@ class StoresController {
                 });
             }
             catch (error) {
+                (0, util_1.deleteFile)(req.body.imageBannerUrl, "stores");
                 res.status(400).json({
                     data: null,
                     message: error.message,
@@ -138,6 +138,10 @@ class StoresController {
     async deleteStore(req, res) {
         try {
             const id = req.params.id;
+            const store = await storeUseCase.getStoreById(id);
+            if (store) {
+                (0, util_1.deleteFile)(store.dataValues.imageBannerUrl, "stores");
+            }
             await storeUseCase.deleteStore(id);
             res.status(204).json({
                 message: `Operation successfully completed!`,

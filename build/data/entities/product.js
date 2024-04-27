@@ -11,16 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-// import { Store } from "./store";
 const category_1 = require("./category");
 const product_review_1 = require("./product-review");
 const order_1 = require("./order");
 const product_order_1 = require("./product-order");
 let Product = class Product extends sequelize_typescript_1.Model {
     categoryId;
-    // @ForeignKey(() => Store) // foreign key
-    // @Column
-    // storeId!: string;
     name;
     amount;
     shortDescription;
@@ -30,8 +26,6 @@ let Product = class Product extends sequelize_typescript_1.Model {
     tags;
     productReviews;
     // relationships
-    // @BelongsTo(() => Store, "storeId")
-    // store!: Store;
     // one-to-one relationships
     category;
     orders;

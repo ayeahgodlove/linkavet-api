@@ -17,9 +17,11 @@ const nanoid_1 = require("nanoid");
 class BannerRequestDto {
     title;
     subTitle;
+    image;
     constructor(data) {
         this.title = data.title;
         this.subTitle = data.subTitle;
+        this.image = data.image;
     }
     toData() {
         return {
@@ -27,6 +29,7 @@ class BannerRequestDto {
             id: (0, nanoid_1.nanoid)(10),
             title: this.title,
             subTitle: this.subTitle,
+            image: this.image
         };
     }
     toUpdateData(data) {
@@ -50,4 +53,9 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], BannerRequestDto.prototype, "subTitle", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], BannerRequestDto.prototype, "image", void 0);
 exports.BannerRequestDto = BannerRequestDto;

@@ -14,8 +14,12 @@ const sequelize_typescript_1 = require("sequelize-typescript");
 const user_1 = require("./user");
 let UserSpecialty = class UserSpecialty extends sequelize_typescript_1.Model {
     userId;
+    fullname;
+    yearsOfExperience;
     specialty;
     facebook;
+    title;
+    website;
     twitter;
     linkedin;
     user; // Define association to User entity
@@ -40,6 +44,22 @@ __decorate([
         unique: false,
     }),
     __metadata("design:type", String)
+], UserSpecialty.prototype, "fullname", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.NUMBER,
+        allowNull: false,
+        unique: false,
+    }),
+    __metadata("design:type", Number)
+], UserSpecialty.prototype, "yearsOfExperience", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: false,
+        unique: false,
+    }),
+    __metadata("design:type", String)
 ], UserSpecialty.prototype, "specialty", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
@@ -49,6 +69,22 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], UserSpecialty.prototype, "facebook", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(20),
+        allowNull: true,
+        unique: false,
+    }),
+    __metadata("design:type", String)
+], UserSpecialty.prototype, "title", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: true,
+        unique: false,
+    }),
+    __metadata("design:type", String)
+], UserSpecialty.prototype, "website", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING(255),

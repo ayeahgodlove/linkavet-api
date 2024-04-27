@@ -22,7 +22,9 @@ class ProductRequestDto {
     // @IsNumber()
     qtty;
     categoryId;
-    storeId;
+    // @IsNotEmpty()
+    // @IsString()
+    // storeId: string
     // @IsNotEmpty()
     // @IsArray()
     // productImages: string[];
@@ -33,7 +35,7 @@ class ProductRequestDto {
         this.amount = data.amount;
         this.qtty = data.qtty;
         this.categoryId = data.categoryId;
-        this.storeId = data.storeId;
+        // this.storeId = data.storeId;
     }
     toData() {
         return {
@@ -42,10 +44,10 @@ class ProductRequestDto {
             name: this.name,
             description: this.description,
             shortDescription: this.shortDescription,
-            amount: Number(this.amount),
-            qtty: Number(this.qtty),
+            amount: this.amount,
+            qtty: this.qtty,
             categoryId: this.categoryId,
-            storeId: this.storeId,
+            // storeId: this.storeId,
         };
     }
     toUpdateData(data) {
@@ -54,10 +56,9 @@ class ProductRequestDto {
             name: data.name,
             description: data.description,
             shortDescription: data.shortDescription,
-            amount: Number(data.amount),
-            qtty: Number(data.qtty),
+            amount: data.amount,
+            qtty: data.qtty,
             categoryId: data.categoryId,
-            storeId: data.storeId,
             productImages: data.productImages,
             reviews: data.reviews,
             tags: data.tags,
@@ -98,9 +99,4 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ProductRequestDto.prototype, "categoryId", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], ProductRequestDto.prototype, "storeId", void 0);
 exports.ProductRequestDto = ProductRequestDto;

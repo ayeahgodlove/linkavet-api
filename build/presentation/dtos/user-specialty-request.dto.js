@@ -23,9 +23,9 @@ class UserSpecialtyRequestDto {
     constructor(data) {
         this.userId = data.userId;
         this.specialty = data.specialty;
-        this.facebook = data.facebook,
-            this.linkedin = data.linkedin,
-            this.twitter = data.twitter;
+        (this.facebook = data.facebook),
+            (this.linkedin = data.linkedin),
+            (this.twitter = data.twitter);
     }
     toData() {
         return {
@@ -35,7 +35,7 @@ class UserSpecialtyRequestDto {
             specialty: this.specialty,
             facebook: this.facebook,
             linkedin: this.linkedin,
-            twitter: this.twitter
+            twitter: this.twitter,
         };
     }
     toUpdateData(data) {
@@ -45,7 +45,11 @@ class UserSpecialtyRequestDto {
             specialty: data.specialty,
             facebook: data.facebook,
             linkedin: data.linkedin,
-            twitter: data.twitter
+            twitter: data.twitter,
+            fullname: data.fullname,
+            title: data.title,
+            website: data.website,
+            yearsOfExperience: data.yearsOfExperience,
         };
     }
 }

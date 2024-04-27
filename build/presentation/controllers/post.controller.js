@@ -1,7 +1,4 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostsController = void 0;
 const post_1 = require("../../domain/models/post");
@@ -12,8 +9,7 @@ const post_request_dto_1 = require("../dtos/post-request.dto");
 const class_validator_1 = require("class-validator");
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
-const path_1 = __importDefault(require("path"));
-const rimraf_1 = __importDefault(require("rimraf"));
+const util_1 = require("../../utils/util");
 const postRepository = new post_repository_1.PostRepository();
 const postUseCase = new post_usecase_1.PostUseCase(postRepository);
 const postMapper = new mapper_1.PostMapper();
@@ -22,10 +18,7 @@ class PostsController {
         const dto = new post_request_dto_1.PostRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         const user = req.user;
-        const { filename } = req.file;
-        if (filename === undefined) {
-            throw new Error("Photo not found!");
-        }
+        const tags = req.body.tags;
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -39,7 +32,8 @@ class PostsController {
                 const postResponse = await postUseCase.createPost({
                     ...dto.toData(),
                     authorId: user.id,
-                    imageUrl: filename.toString()
+                    imageUrl: req.body.imageUrl,
+                    tags
                 });
                 res.status(201).json({
                     data: postResponse.toJSON(),
@@ -105,7 +99,6 @@ class PostsController {
     async updatePost(req, res) {
         const dto = new post_request_dto_1.PostRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
-        const { filename } = req.file;
         const user = req.user;
         if (validationErrors.length > 0) {
             res.status(400).json({
@@ -122,7 +115,7 @@ class PostsController {
                     ...post_1.emptyPost,
                     ...req.body,
                     id: id,
-                    imageUrl: filename.toString(),
+                    imageUrl: req.body.imageUrl,
                     authorId: user.id,
                 };
                 const updatedPost = await postUseCase.updatePost(obj);
@@ -149,9 +142,7 @@ class PostsController {
             const id = req.params.id;
             const post = await postUseCase.getPostById(id);
             if (post) {
-                const baseDirectory = "./public/uploads/posts";
-                const filePath = path_1.default.join(baseDirectory, post.dataValues.imageUrl);
-                rimraf_1.default.sync(filePath);
+                (0, util_1.deleteFile)(post.dataValues.imageUrl, "posts");
             }
             await postUseCase.deletePost(id);
             res.status(204).json({

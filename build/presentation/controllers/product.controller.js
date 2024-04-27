@@ -1,7 +1,4 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsController = void 0;
 const product_1 = require("../../domain/models/product");
@@ -12,8 +9,7 @@ const product_request_dto_1 = require("../dtos/product-request.dto");
 const class_validator_1 = require("class-validator");
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
-const path_1 = __importDefault(require("path"));
-const rimraf_1 = __importDefault(require("rimraf"));
+const util_1 = require("../../utils/util");
 const productRepository = new product_repository_1.ProductRepository();
 const productUseCase = new product_usecase_1.ProductUseCase(productRepository);
 const productMapper = new mapper_1.ProductMapper();
@@ -22,12 +18,8 @@ class ProductsController {
     async createProduct(req, res) {
         const dto = new product_request_dto_1.ProductRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
-        const tags = JSON.parse(req.body.tags);
-        if (!req.files) {
-            throw new Error("Please select Images!");
-        }
-        const { productImages } = req.files;
-        const productImagesStrArr = productImages.map((p) => p.filename);
+        // const tags = JSON.parse(req.body.tags);
+        const productImages = req.body.productImages;
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -40,8 +32,8 @@ class ProductsController {
             try {
                 const productResponse = await productUseCase.createProduct({
                     ...dto.toData(),
-                    tags,
-                    productImages: productImagesStrArr,
+                    tags: req.body.tags,
+                    productImages,
                 });
                 const obj = {
                     ...productResponse.toJSON(),
@@ -55,10 +47,8 @@ class ProductsController {
                 });
             }
             catch (error) {
-                const baseDirectory = "./public/uploads/products";
-                productImagesStrArr.forEach((filePath) => {
-                    const fullPath = path_1.default.join(baseDirectory, filePath);
-                    rimraf_1.default.sync(fullPath); // Delete each file using rimraf
+                productImages.forEach((imageUrl) => {
+                    (0, util_1.deleteFile)(imageUrl, "products");
                 });
                 res.status(400).json({
                     data: null,
@@ -158,6 +148,7 @@ class ProductsController {
     async updateProduct(req, res) {
         const dto = new product_request_dto_1.ProductRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
+        const productImages = req.body.productImages;
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -173,6 +164,7 @@ class ProductsController {
                     ...product_1.emptyProduct,
                     ...req.body,
                     id: id,
+                    productImages,
                 };
                 const updatedProduct = await productUseCase.updateProduct(obj);
                 const productDto = productMapper.toDTO(updatedProduct);
@@ -184,6 +176,9 @@ class ProductsController {
                 });
             }
             catch (error) {
+                productImages.forEach((imageUrl) => {
+                    (0, util_1.deleteFile)(imageUrl, "products");
+                });
                 res.status(400).json({
                     data: null,
                     message: error.message,
@@ -198,10 +193,8 @@ class ProductsController {
             const id = req.params.id;
             const product = await productUseCase.getProductById(id);
             if (product) {
-                const baseDirectory = "./public/uploads/products";
-                product.dataValues.productImages.forEach((filePath) => {
-                    const fullPath = path_1.default.join(baseDirectory, filePath);
-                    rimraf_1.default.sync(fullPath); // Delete each file using rimraf
+                product.dataValues.productImages.forEach((imageUrl) => {
+                    (0, util_1.deleteFile)(imageUrl, "products");
                 });
             }
             await productUseCase.deleteProduct(id);

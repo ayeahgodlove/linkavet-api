@@ -9,7 +9,6 @@ exports.emptyProduct = {
     categoryId: "",
     productImages: [],
     shortDescription: "",
-    storeId: "",
     qtty: 0,
     reviews: [],
     tags: [],

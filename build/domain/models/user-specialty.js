@@ -7,5 +7,9 @@ exports.emptyUserSpecialty = {
     id: "",
     facebook: "",
     twitter: "",
-    linkedin: ""
+    linkedin: "",
+    fullname: "",
+    website: "",
+    yearsOfExperience: 0,
+    title: "",
 };

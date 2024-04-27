@@ -14,8 +14,6 @@ const sequelize_typescript_1 = require("sequelize-typescript");
 const user_1 = require("./user");
 const category_1 = require("./category");
 const comment_1 = require("./comment");
-const post_tag_1 = require("./post-tag");
-const tag_1 = require("./tag");
 let Post = class Post extends sequelize_typescript_1.Model {
     title;
     summary;
@@ -112,7 +110,10 @@ __decorate([
     __metadata("design:type", Array)
 ], Post.prototype, "comments", void 0);
 __decorate([
-    (0, sequelize_typescript_1.BelongsToMany)(() => tag_1.Tag, () => post_tag_1.PostTag, "postId", "tagId"),
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.ARRAY(sequelize_typescript_1.DataType.STRING),
+        allowNull: false,
+    }),
     __metadata("design:type", Array)
 ], Post.prototype, "tags", void 0);
 Post = __decorate([

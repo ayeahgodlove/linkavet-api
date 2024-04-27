@@ -1,7 +1,4 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DocumentsController = void 0;
 const document_1 = require("../../domain/models/document");
@@ -12,8 +9,7 @@ const document_request_dto_1 = require("../dtos/document-request.dto");
 const class_validator_1 = require("class-validator");
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
-const path_1 = __importDefault(require("path"));
-const rimraf_1 = __importDefault(require("rimraf"));
+const util_1 = require("../../utils/util");
 const documentRepository = new document_repository_1.DocumentRepository();
 const documentUseCase = new document_usecase_1.DocumentUseCase(documentRepository);
 const documentMapper = new mapper_1.DocumentMapper();
@@ -22,7 +18,6 @@ class DocumentsController {
         const dto = new document_request_dto_1.DocumentRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         const user = req.user;
-        const { filename } = req.file;
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -36,7 +31,7 @@ class DocumentsController {
                 const documentResponse = await documentUseCase.createDocument({
                     ...dto.toData(),
                     userId: user.id,
-                    fileUrl: filename.toString(),
+                    fileUrl: req.body.fileUrl,
                 });
                 res.status(201).json({
                     data: documentResponse.toJSON(),
@@ -46,6 +41,7 @@ class DocumentsController {
                 });
             }
             catch (error) {
+                (0, util_1.deleteFile)(req.body.fileUrl, "documents");
                 res.status(400).json({
                     data: null,
                     message: error.message,
@@ -103,7 +99,6 @@ class DocumentsController {
         const dto = new document_request_dto_1.DocumentRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         const user = req.user;
-        const { filename } = req.file;
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -120,7 +115,7 @@ class DocumentsController {
                     ...req.body,
                     id: id,
                     userId: user.id,
-                    fileUrl: filename.toString(),
+                    fileUrl: req.body.fileUrl,
                 };
                 const updatedDocument = await documentUseCase.updateDocument(obj);
                 const documentDto = documentMapper.toDTO(updatedDocument);
@@ -132,6 +127,7 @@ class DocumentsController {
                 });
             }
             catch (error) {
+                (0, util_1.deleteFile)(req.body.fileUrl, "documents");
                 res.status(400).json({
                     data: null,
                     message: error.message,
@@ -146,9 +142,7 @@ class DocumentsController {
             const id = req.params.id;
             const document = await documentUseCase.getDocumentById(id);
             if (document) {
-                const baseDirectory = "./public/uploads/documents";
-                const filePath = path_1.default.join(baseDirectory, document.dataValues.fileUrl);
-                rimraf_1.default.sync(filePath);
+                (0, util_1.deleteFile)(document.dataValues.fileUrl, "documents");
             }
             await documentUseCase.deleteDocument(id);
             res.status(204).json({

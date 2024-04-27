@@ -51,7 +51,8 @@ class PostRequestDto {
             imageUrl: data.imageUrl,
             publishedAt: data.publishedAt,
             slug: data.slug,
-            summary: data.summary
+            summary: data.summary,
+            tags: data.tags,
         };
     }
 }
