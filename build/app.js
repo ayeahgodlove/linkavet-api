@@ -63,8 +63,6 @@ const product_review_route_1 = __importDefault(require("./presentation/routes/pr
 const lesson_review_route_1 = __importDefault(require("./presentation/routes/lesson-review.route"));
 const appointment_route_1 = __importDefault(require("./presentation/routes/health/appointment.route"));
 const consultation_route_1 = __importDefault(require("./presentation/routes/health/consultation.route"));
-const seo_1 = require("./utils/seo");
-const fs_1 = __importDefault(require("fs"));
 const user_role_route_1 = __importDefault(require("./presentation/routes/user-role.route"));
 // import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
 const user_specialty_route_1 = __importDefault(require("./presentation/routes/user-specialty.route"));
@@ -160,23 +158,26 @@ db.connection()
     app.use("/api/user-roles", user_role_route_1.default);
     app.use("/api/user-specialties", user_specialty_route_1.default);
     app.use("/api/uploads", upload_route_1.default);
-    app.use(express_1.default.static(path_1.default.join(__dirname, "..", "vet-app", "build")));
+    // app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
     // Handle other routes by serving the frontend's main HTML file
-    app.get("*", (req, res) => {
-        let pathname = req.path || req.originalUrl;
-        let page = seo_1.seo.find((item) => item.path === pathname);
-        let html = fs_1.default.readFileSync(path_1.default.join(__dirname, "..", "vet-app", "build", "index.html"), "utf8");
-        if (page) {
-            let htmlWithSeo = html
-                .replace("__SEO_TITLE__", page.title)
-                .replace("__SEO_DESCRIPTION__", page.description);
-            return res.send(htmlWithSeo);
-        }
-        let htmWithSEO2 = html
-            .replace("__SEO_TITLE__", seo_1.seo[0].title)
-            .replace("__SEO_DESCRIPTION__", seo_1.seo[0].description);
-        res.send(htmWithSEO2);
-    });
+    // app.get("*", (req, res) => {
+    //   let pathname = req.path || req.originalUrl;
+    //   let page = seo.find((item) => item.path === pathname);
+    //   let html = fs.readFileSync(
+    //     path.join(__dirname, "..", "vet-app", "build", "index.html"),
+    //     "utf8"
+    //   );
+    //   if (page) {
+    //     let htmlWithSeo = html
+    //       .replace("__SEO_TITLE__", page.title)
+    //       .replace("__SEO_DESCRIPTION__", page.description);
+    //     return res.send(htmlWithSeo);
+    //   }
+    //   let htmWithSEO2 = html
+    //     .replace("__SEO_TITLE__", seo[0].title)
+    //     .replace("__SEO_DESCRIPTION__", seo[0].description);
+    //   res.send(htmWithSEO2);
+    // });
     // middleware interceptions
     app.use(not_found_middleware_1.notFoundHandler);
     /**
