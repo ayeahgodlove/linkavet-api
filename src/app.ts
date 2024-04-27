@@ -158,26 +158,26 @@ db.connection()
     app.use(express.static(path.join(__dirname, "..", "vet-app", "build")));
 
     // Handle other routes by serving the frontend's main HTML file
-    // app.get("*", (req, res) => {
-    //   let pathname = req.path || req.originalUrl;
-    //   let page = seo.find((item) => item.path === pathname);
+    app.get("*", (req, res) => {
+      let pathname = req.path || req.originalUrl;
+      let page = seo.find((item) => item.path === pathname);
 
-    //   let html = fs.readFileSync(
-    //     path.join(__dirname, "..", "vet-app", "build", "index.html"),
-    //     "utf8"
-    //   );
-    //   if (page) {
-    //     let htmlWithSeo = html
-    //       .replace("__SEO_TITLE__", page.title)
-    //       .replace("__SEO_DESCRIPTION__", page.description);
-    //     return res.send(htmlWithSeo);
-    //   }
+      let html = fs.readFileSync(
+        path.join(__dirname, "..", "vet-app", "build", "index.html"),
+        "utf8"
+      );
+      if (page) {
+        let htmlWithSeo = html
+          .replace("__SEO_TITLE__", page.title)
+          .replace("__SEO_DESCRIPTION__", page.description);
+        return res.send(htmlWithSeo);
+      }
 
-    //   let htmWithSEO2 = html
-    //     .replace("__SEO_TITLE__", seo[0].title)
-    //     .replace("__SEO_DESCRIPTION__", seo[0].description);
-    //   res.send(htmWithSEO2);
-    // });
+      let htmWithSEO2 = html
+        .replace("__SEO_TITLE__", seo[0].title)
+        .replace("__SEO_DESCRIPTION__", seo[0].description);
+      res.send(htmWithSEO2);
+    });
 
     // middleware interceptions
     app.use(notFoundHandler);
