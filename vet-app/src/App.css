@@ -22,7 +22,7 @@
 }
 
 .menuCon {
-  /* width: calc(100% - 200px); */
+  width: calc(100% - 200px);
   float: left;
 }
 
@@ -60,7 +60,7 @@
 
 .menuCon .leftMenu {
   justify-self: start;
-
+  width: 100%;
 }
 
 .menuCon .rightMenu {

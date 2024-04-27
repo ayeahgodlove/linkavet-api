@@ -63,7 +63,6 @@ const OurServices: React.FC<IProp> = ({ limit = false }) => {
       theme={{
         token: {
           fontSize: 16,
-          colorPrimary: "#941c50",
         },
       }}
     >

@@ -67,7 +67,14 @@ const useUserSpecialty = () => {
       });
   };
 
-  const { getUser } = useUser();
+  const { users } = useUser();
+  const getUser = (userId: string) => {
+    const user = users.find((p) => p.id === userId);
+    if (!user) {
+      return;
+    }
+    return user;
+  };
   const getUserSpeciality = useCallback((userId: string) => {
     const specialty = userSpecialties.find((us) => us.userId === userId);
     if (specialty) {
@@ -77,11 +84,12 @@ const useUserSpecialty = () => {
   }, []);
 
   const getUserSpecialities = useCallback((): IUserSpecialty[] => {
+    console.log("userSpecialties: ", userSpecialties);
     return userSpecialties.map((us) => {
       return {
         ...us,
-        username: getUser(us.userId).username,
-        avatar: getUser(us.userId).avatar,
+        username: getUser(us.userId)?.username,
+        avatar: getUser(us.userId)?.avatar,
       };
     });
   }, []);

@@ -33,7 +33,11 @@ export const TeamCard: React.FC<IProp> = ({ team }) => {
       style={{ padding: 0 }}
       className="member"
       cover={
-        <Image alt={username} src={`${API_URL_UPLOADS_AVATARS}/${avatar}`} />
+        avatar ? (
+          <Image alt={username} src={`${API_URL_UPLOADS_AVATARS}/${avatar}`} />
+        ) : (
+          <Image alt={username} src={`/user-placeholder.jpg`} />
+        )
       }
     >
       <Space className="member__contact">

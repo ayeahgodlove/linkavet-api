@@ -42,9 +42,8 @@ import { ItemType } from "antd/es/menu/hooks/useItems";
 import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
 import { useAuth } from "hooks/auth/auth.hook";
 import { GrScheduleNew } from "react-icons/gr";
-import { API_URL_UPLOADS_AVATARS, ROLES } from "config/constant";
+import { ROLES } from "config/constant";
 import { useUser } from "hooks/user.hook";
-import { emptyUser } from "models/user.model";
 
 export const useAppShellMenus = () => {
   const [language, setLanguage] = useState("en");
@@ -62,6 +61,7 @@ export const useAppShellMenus = () => {
   };
   const { logoutUserFunction, isAuthenticated, user } = useAuth();
   const { users } = useUser();
+  const isLoggedIn = isAuthenticated && user;
 
   // const avatar = isAuthenticated
   //   ? (users.find((u) => u.id === user.id) as any)
@@ -407,15 +407,33 @@ export const useAppShellMenus = () => {
       key: "contact-us",
       icon: <FiPhoneCall size={21} color="#08a30a" />,
     },
-    {
-      label: (
-        <NavLink to="/auth/login" style={{ padding: 0 }}>
-          Sign in
-        </NavLink>
-      ),
-      key: "login",
-      icon: <BiLogIn size={21} color="#08a30a" />,
-    },
+    isLoggedIn
+      ? {
+          label: (
+            <>
+              <Link
+                to="#"
+                onClick={() => {
+                  logoutUserFunction();
+                  router("/");
+                }}
+              >
+                Logout
+              </Link>
+            </>
+          ),
+          key: "logout",
+          icon: <LogoutOutlined />,
+        }
+      : {
+          label: (
+            <NavLink to="/auth/login" style={{ padding: 0 }}>
+              Sign in
+            </NavLink>
+          ),
+          key: "login",
+          icon: <BiLogIn size={21} color="#08a30a" />,
+        },
   ];
 
   const GeneralMenuItemsWithoutIcons: MenuProps["items"] = [
@@ -612,7 +630,7 @@ export const useAppShellMenus = () => {
             fontWeight: "bold",
             fontSize: 14,
           }}
-          src={"./user-placeholder.jpeg"}
+          src={"/user-placeholder.jpg"}
         >
           {user?.username?.charAt(0).toUpperCase()}
         </Avatar>
