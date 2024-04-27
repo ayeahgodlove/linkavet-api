@@ -5,7 +5,7 @@ import store, { persistor } from "redux/store";
 import AppRouteProvider from "routes/app-route-provider";
 import withLoading from "components/shared/with-loading/with-loading.component";
 import { AppModalProvider } from "context/app-modal.context";
-import "./app.css";
+import "./App.css";
 
 function App() {
   return (
