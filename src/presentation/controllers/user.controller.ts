@@ -21,7 +21,7 @@ const userUseCase = new UserUseCase(userRepository);
 const roleUseCase = new RoleUseCase(roleRepository);
 const userMapper = new UserMapper();
 const roleMapper = new RoleMapper();
-
+ 
 export class UsersController {
   async createUser(
     req: Request,
@@ -59,7 +59,7 @@ export class UsersController {
 
         const activationToken = createActivationToken(user);
         const activationUrl = `${process.env.APP_URL}/activation/${activationToken}`;
-
+        
         await sendRegistrationMail(user.email, activationUrl);
         res.status(201).json({
           data: {

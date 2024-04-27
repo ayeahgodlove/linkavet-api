@@ -1,6 +1,6 @@
-import { message, Typography } from "antd";
+import { Button, message, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { UserService } from "services/user.service";
 
 const ActivationPage = () => {
@@ -28,17 +28,28 @@ const ActivationPage = () => {
         style={{
           height: "100vh",
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
         }}
       >
         {error ? (
-          <Typography.Title level={5} style={{ color: "#1e7ad0"}}>Your token is expired!</Typography.Title>
-        ) : (
-          <Typography.Title level={5} style={{ color: "#f14b4b"}}>
-            {" "}
-            Your account has been created successfully!
+          <Typography.Title level={5} style={{ color: "#1e7ad0" }}>
+            Your token is expired!
           </Typography.Title>
+        ) : (
+          <>
+            <Typography.Title level={5} style={{ color: "#f14b4b" }}>
+              Your account has been created successfully!
+            </Typography.Title>
+            <br />
+            <Typography.Paragraph>
+              You can now proceed and{" "}
+              <Button size="small" type="primary" href={"/auth/login"}>
+                Sign in
+              </Button>
+            </Typography.Paragraph>
+          </>
         )}
       </div>
     </>
