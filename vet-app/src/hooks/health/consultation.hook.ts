@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../../redux/store";
 import {
   addConsultationSuccess,
   editConsultationSuccess,
   fetchConsultationsAsync,
   setActiveConsultation,
 } from "../../redux/health/consultation.slice";
-import { IConsultation, emptyConsultation } from "models/health/consultation";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { ConsultationService } from "services/health/consultation.service";
+import { IConsultation, emptyConsultation } from "../../models/health/consultation";
+import { useFormErrors } from "../../hooks/shared/form-error.hook";
+import { ConsultationService } from "../../services/health/consultation.service";
 
 const useConsultation = () => {
   const consultations = useSelector<IRootState, IConsultation[]>(

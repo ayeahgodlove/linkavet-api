@@ -1,5 +1,5 @@
-import AppFaq from "components/faq/faq.component";
-import PageContent from "components/shared/page-content";
+import AppFaq from "../../components/faq/faq.component";
+import PageContent from "../../components/shared/page-content";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 

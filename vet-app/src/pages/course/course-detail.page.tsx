@@ -7,23 +7,23 @@ import {
   Row,
   Typography,
 } from "antd";
-import BackButton from "components/shared/back-button.component";
-import { useCourse } from "hooks/lms/course.hook";
-import { useLesson } from "hooks/lms/lesson.hook";
-import { useUser } from "hooks/user.hook";
+import BackButton from "../../components/shared/back-button.component";
+import { useCourse } from "../../hooks/lms/course.hook";
+import { useLesson } from "../../hooks/lms/lesson.hook";
+import { useUser } from "../../hooks/user.hook";
 import React, { useEffect } from "react";
 import "./course-detail.style.scss";
 import { FiPlayCircle } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { NoContent } from "../../components/shared/no-content/no-content.component";
 import { useDispatch } from "react-redux";
-import { fetchLessonsAsync } from "redux/lms/lesson.slice";
-import { fetchUsersAsync } from "redux/user.slice";
-import { API_URL_UPLOADS_COURSES } from "config/constant";
-import { useEnrollment } from "hooks/lms/enrollment.hook";
-import { useAuth } from "hooks/auth/auth.hook";
+import { fetchLessonsAsync } from "../../redux/lms/lesson.slice";
+import { fetchUsersAsync } from "../../redux/user.slice";
+import { API_URL_UPLOADS_COURSES } from "../../config/constant";
+import { useEnrollment } from "../../hooks/lms/enrollment.hook";
+import { useAuth } from "../../hooks/auth/auth.hook";
 import slugify from "slugify";
-import { ILesson } from "models/lms/lesson";
+import { ILesson } from "../../models/lms/lesson";
 
 const courseDetailPage: React.FC = () => {
   const { course } = useCourse();

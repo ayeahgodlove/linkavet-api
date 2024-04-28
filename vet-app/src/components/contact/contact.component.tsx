@@ -2,9 +2,9 @@ import React from "react";
 import { Form, Col, Input, Row } from "antd";
 
 import "./contact.less";
-import { Container } from "components/shared/container/container";
-import { AppButton } from "components/shared/app-button/app-button";
-import { SectionHeading } from "components/shared/section-heading/section-heading";
+import { Container } from "../../components/shared/container/container";
+import { AppButton } from "../../components/shared/app-button/app-button";
+import { SectionHeading } from "../../components/shared/section-heading/section-heading";
 
 export const ContactForm = () => {
   const { Item } = Form;
@@ -13,6 +13,7 @@ export const ContactForm = () => {
     <section id="contact" className="contact">
       <Container>
         <SectionHeading
+          className=""
           heading="Get In Touch"
           subHeading="Have a question, need assistance, or simply want to reach out? We're here for you at Linkavet. Contact our friendly team of veterinary experts to discuss your pet's needs, inquire about our products, or schedule an appointment."
         />

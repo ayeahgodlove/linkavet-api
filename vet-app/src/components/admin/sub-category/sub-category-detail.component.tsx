@@ -1,5 +1,5 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useSubCategory } from "hooks/sub-category.hook";
+import { useSubCategory } from "../../../hooks/sub-category.hook";
 import React from "react";
 
 const SubCategoryDetailComponent: React.FC = () => {

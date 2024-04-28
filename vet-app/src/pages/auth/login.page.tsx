@@ -4,8 +4,8 @@ import { Button, Checkbox, Col, Form, Input, Row, message } from "antd";
 import "../../styles/login.style.scss";
 import { Link, Navigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
-import { useAuth } from "hooks/auth/auth.hook";
-import useWindowSize from "hooks/shared/window-resize.hook";
+import { useAuth } from "../../hooks/auth/auth.hook";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
 
 const LoginPage: React.FC = () => {
   const { loginUserFunction, isAuthenticated, user } = useAuth();

@@ -1,9 +1,9 @@
 import { Carousel, Modal } from "antd";
-import { useReview } from "hooks/review.hook";
+import { useReview } from "../../hooks/review.hook";
 import React, { useState } from "react";
 import ReviewCard from "./review-card.component";
 import ReactPlayer from "react-player/youtube";
-import { Container } from "components/shared/container/container";
+import { Container } from "../../components/shared/container/container";
 import { CaretRightOutlined } from "@ant-design/icons";
 import "./testimonial.less"
 

@@ -2,18 +2,18 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useUserSpecialtyColumn } from "./user-specialty-column.component";
-import { IUserSpecialty } from "models/user-specialty.model";
-import { useUserSpecialty } from "hooks/user-specialty.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useModalContext } from "context/app-modal.context";
+import { IUserSpecialty } from "../../../models/user-specialty.model";
+import { useUserSpecialty } from "../../../hooks/user-specialty.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
+import { useModalContext } from "../../../context/app-modal.context";
 import { useDispatch } from "react-redux";
 import { UserSpecialtyForm } from "./user-specialty-form.component";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import search from "utils/search";
-import { fetchUserSpecialtySuccess } from "redux/user-specialty.slice";
-import { SpinnerComponent } from "components/shared/spinner";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
+import search from "../../../utils/search";
+import { fetchUserSpecialtySuccess } from "../../../redux/user-specialty.slice";
+import { SpinnerComponent } from "../../../components/shared/spinner";
 import slugify from "slugify";
-import { API_URL } from "config/constant";
+import { API_URL } from "../../../config/constant";
 
 const { Search } = Input;
 

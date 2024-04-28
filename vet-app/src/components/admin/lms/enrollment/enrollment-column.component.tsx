@@ -1,8 +1,8 @@
 import { ColumnsType } from "antd/es/table";
-import { useCourse } from "hooks/lms/course.hook";
-import { useUser } from "hooks/user.hook";
-import { IEnrollment } from "models/lms/enrollment";
-import { format } from "utils/format";
+import { useCourse } from "../../../../hooks/lms/course.hook";
+import { useUser } from "../../../../hooks/user.hook";
+import { IEnrollment } from "../../../../models/lms/enrollment";
+import { format } from "../../../../utils/format";
 
 export const useEnrollmentColumns = () => {
   const { getCourse } = useCourse();

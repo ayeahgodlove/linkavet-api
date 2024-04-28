@@ -1,8 +1,8 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Avatar, Button, message, Space, Upload } from "antd";
-import { API_URL, API_URL_UPLOADS_AVATARS } from "config/constant";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useUser } from "hooks/user.hook";
+import { API_URL, API_URL_UPLOADS_AVATARS } from "../../config/constant";
+import { useAuth } from "../../hooks/auth/auth.hook";
+import { useUser } from "../../hooks/user.hook";
 import React, { useEffect } from "react";
 
 const SettingComponent = () => {

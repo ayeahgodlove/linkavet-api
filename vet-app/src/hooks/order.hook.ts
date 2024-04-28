@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { IOrder } from "models/order.model";
+import { IRootState } from "../redux/store";
+import { IOrder } from "../models/order.model";
 import {
   addOrderSuccess,
   editOrderSuccess,
@@ -9,8 +9,8 @@ import {
   getOrderId,
   setActiveOrder,
 } from "../redux/order.slice";
-import { OrderService } from "services/order.service";
-import { IProduct } from "models/product.model";
+import { OrderService } from "../services/order.service";
+import { IProduct } from "../models/product.model";
 const useOrder = () => {
   const orders = useSelector<IRootState, IOrder[]>(
     (state) => state.order.orders

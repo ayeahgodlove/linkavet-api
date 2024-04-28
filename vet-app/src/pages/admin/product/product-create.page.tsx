@@ -1,8 +1,8 @@
 import { Card, Col, Row } from "antd";
-import ProductStepForm from "components/admin/product/product-set-form.component";
+import ProductStepForm from "../../../components/admin/product/product-set-form.component";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCategoriesAsync } from "redux/category.slice";
+import { fetchCategoriesAsync } from "../../../redux/category.slice";
 
 const ProductCreatePage = () => {
   const dispatch = useDispatch();

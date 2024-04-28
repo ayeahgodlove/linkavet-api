@@ -1,6 +1,6 @@
 import { Card, Col, Image, List, Row, Typography } from "antd";
-import { API_URL_UPLOADS_BANNERS } from "config/constant";
-import { useBanner } from "hooks/banner.hook";
+import { API_URL_UPLOADS_BANNERS } from "../../../config/constant";
+import { useBanner } from "../../../hooks/banner.hook";
 import React from "react";
 
 const BannerDetailComponent: React.FC = () => {

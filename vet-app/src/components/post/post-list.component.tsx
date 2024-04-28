@@ -1,7 +1,7 @@
 import { Col, Row } from "antd";
 import React from "react";
 import PostCard from "./post-card.component";
-import { usePost } from "hooks/post.hook";
+import { usePost } from "../../hooks/post.hook";
 // import { NoContent } from "components/shared/no-content/no-content.component";
 import "./blog.less";
 

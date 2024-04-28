@@ -1,7 +1,7 @@
 import { Image } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { API_URL_UPLOADS_COURSES } from "config/constant";
-import { ICourse } from "models/lms/course";
+import { API_URL_UPLOADS_COURSES } from "../../../../config/constant";
+import { ICourse } from "../../../../models/lms/course";
 import React from "react";
 
 export const courseTableColumns: ColumnsType<ICourse> = [

@@ -2,9 +2,9 @@ import React from "react";
 import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useOrderColumn } from "./order-column.component";
-import { IOrder } from "models/order.model";
-import { useOrder } from "hooks/order.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { IOrder } from "../../../models/order.model";
+import { useOrder } from "../../../hooks/order.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
 
 const OrderTable: React.FC = () => {
   const { orders, setOrder } = useOrder();

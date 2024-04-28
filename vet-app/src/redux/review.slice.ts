@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ReviewService } from "services/review.service";
+import { ReviewService } from "../services/review.service";
 import { IReviewState, emptyReview, IReview, IReviewResponse, IReviewResponses } from "../models/review.model";
 
 export const initialState: IReviewState = {

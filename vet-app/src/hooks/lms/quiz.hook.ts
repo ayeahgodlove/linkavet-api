@@ -1,16 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../../redux/store";
 import {
   addQuizSuccess,
   editQuizSuccess,
   fetchQuizsAsync,
   setActiveQuiz,
 } from "../../redux/lms/quiz.slice";
-import { IQuiz, emptyQuiz } from "models/lms/quiz";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { QuizService } from "services/lms/quiz.service";
-import { useLesson } from "./lesson.hook";
+import { IQuiz, emptyQuiz } from "../../models/lms/quiz";
+import { useFormErrors } from "../../hooks/shared/form-error.hook";
+import { QuizService } from "../../services/lms/quiz.service";
 
 const useQuiz = () => {
   const quizs = useSelector<IRootState, IQuiz[]>(

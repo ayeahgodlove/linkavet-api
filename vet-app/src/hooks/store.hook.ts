@@ -5,8 +5,8 @@ import { useFormErrors } from "./shared/form-error.hook";
 import { IRootState } from "../redux/store";
 import { storeService } from "../services/store.service";
 import { useToken } from "./auth/token.hook";
-import { IStore, StoreFormData } from "models/store";
-import { addStoreSuccess, editStoreSuccess, fetchStoresAsync, setActiveStore } from "redux/store.slice";
+import { IStore } from "../models/store";
+import { addStoreSuccess, editStoreSuccess, fetchStoresAsync, setActiveStore } from "../redux/store.slice";
 import { useAuth } from "./auth/auth.hook";
 
 const useStore = () => {

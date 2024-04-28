@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { ISubCategory } from "models/category.model";
+import { IRootState } from "../redux/store";
+import { ISubCategory } from "../models/category.model";
 import {
   addSubCategorySuccess,
   editSubCategorySuccess,
   fetchSubCategoriesAsync,
   setActiveSubCategory,
 } from "../redux/sub-category.slice";
-import { SubCategoryService } from "services/sub-category.service";
+import { SubCategoryService } from "../services/sub-category.service";
 import { useFormErrors } from "./shared/form-error.hook";
 const useSubCategory = () => {
   const subCategories = useSelector<IRootState, ISubCategory[]>((state) => state.subCategory.subCategories);

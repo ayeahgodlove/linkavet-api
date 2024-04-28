@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-import { IUserRole } from "models/user-role.model";
-import { useUserRole } from "hooks/user-role.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { IUserRole } from "../../../models/user-role.model";
+import { useUserRole } from "../../../hooks/user-role.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
 import slugify from "slugify";
 import { useDispatch } from "react-redux";
-import search from "utils/search";
-import { fetchUserRoleSuccess } from "redux/user-role.slice";
-import { SpinnerComponent } from "components/shared/spinner";
+import search from "../../../utils/search";
+import { fetchUserRoleSuccess } from "../../../redux/user-role.slice";
+import { SpinnerComponent } from "../../../components/shared/spinner";
 import { useUserRoleColumn } from "./user-role-column.component";
-import { UserRoleService } from "services/user-role.service";
+import { UserRoleService } from "../../../services/user-role.service";
 
 const UserRoleTable: React.FC = () => {
   const { userRoles, setUserRole, initialFetch } = useUserRole();

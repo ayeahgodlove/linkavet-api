@@ -1,6 +1,6 @@
 import { ColumnsType } from "antd/es/table";
-import { useUser } from "hooks/user.hook";
-import { IUserSpecialty } from "models/user-specialty.model";
+import { useUser } from "../../../hooks/user.hook";
+import { IUserSpecialty } from "../../../models/user-specialty.model";
 
 export const useUserSpecialtyColumn = () => {
   const {getUser} = useUser();

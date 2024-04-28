@@ -1,15 +1,15 @@
 import { Button, Form, Input, Alert, message, Select, Space } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { FormErrorComponent } from "components/shared/form-error/form-error.component";
-import { useModalContext } from "context/app-modal.context";
-import { useUserRole } from "hooks/user-role.hook";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { IUserRole } from "models/user-role.model";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { FormErrorComponent } from "../../../components/shared/form-error/form-error.component";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useUserRole } from "../../../hooks/user-role.hook";
+import { useFormErrors } from "../../../hooks/shared/form-error.hook";
+import { useFormInit } from "../../../hooks/shared/form-init.hook";
+import { IUserRole } from "../../../models/user-role.model";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import React, { useCallback, useEffect, useState } from "react";
-import { useUser } from "hooks/user.hook";
-import { useRole } from "hooks/role.hook";
+import { useUser } from "../../../hooks/user.hook";
+import { useRole } from "../../../hooks/role.hook";
 
 type Props = {
   formMode: UpdateMode;

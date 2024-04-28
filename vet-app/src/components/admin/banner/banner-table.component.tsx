@@ -5,20 +5,20 @@ import BannerForm from "./banner-form.component";
 
 import { useDispatch } from "react-redux";
 import slugify from "slugify";
-import { useModalContext } from "context/app-modal.context";
-import { useBanner } from "hooks/banner.hook";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useBanner } from "../../../hooks/banner.hook";
 import { useNavigate } from "react-router-dom";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import { IBanner } from "models/banner";
-import search from "utils/search";
-import { fetchbannerSuccess } from "redux/banner.slice";
-import { SpinnerComponent } from "components/shared/spinner";
-import { API_URL } from "config/constant";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
+import { IBanner } from "../../../models/banner";
+import search from "../../../utils/search";
+import { fetchbannerSuccess } from "../../../redux/banner.slice";
+import { SpinnerComponent } from "../../../components/shared/spinner";
+import { API_URL } from "../../../config/constant";
 
 const { Search } = Input;
 export function BannerTable() {
   const { setContent, setShow, setTitle, setWidth } = useModalContext();
-  const { banners, initialFetch, setBanner } = useBanner();
+  const { banners, setBanner } = useBanner();
   const router = useNavigate();
 
   const [query, setQuery] = useState<string>("");

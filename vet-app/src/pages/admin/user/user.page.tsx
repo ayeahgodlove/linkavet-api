@@ -1,14 +1,14 @@
-import { UserForm } from "components/admin/user/user-form.component";
-import UserTable from "components/admin/user/user-table.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { UserForm } from "../../../components/admin/user/user-form.component";
+import UserTable from "../../../components/admin/user/user-table.component";
+import TitleBar from "../../../components/common/title-bar/title-bar.component";
+import PageBreadCrumbs from "../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { fetchUsersAsync } from "redux/user.slice";
+import { fetchUsersAsync } from "../../../redux/user.slice";
 
 const AdminUserPage: React.FC = () => {
   const { isLoading } = useAuth();

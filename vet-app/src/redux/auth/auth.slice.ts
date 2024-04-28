@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import { IUser, emptyUser } from "models/user.model";
-import { authService } from "services/auth.service";
+import { IUser, emptyUser } from "../../models/user.model";
+import { authService } from "../../services/auth.service";
 
 // Register user
 export const registerUser = createAsyncThunk(

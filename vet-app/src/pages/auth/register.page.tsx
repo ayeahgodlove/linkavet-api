@@ -15,12 +15,12 @@ import {
 import "../../styles/login.style.scss";
 import { Link } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
-import { IUser, emptyUser } from "models/user.model";
-import { useAuth } from "hooks/auth/auth.hook";
+import { IUser, emptyUser } from "../../models/user.model";
+import { useAuth } from "../../hooks/auth/auth.hook";
 import { useDispatch } from "react-redux";
-import { fetchRolesAsync } from "redux/role.slice";
-import { useRole } from "hooks/role.hook";
-import { ROLES } from "config/constant";
+import { fetchRolesAsync } from "../../redux/role.slice";
+import { useRole } from "../../hooks/role.hook";
+import { ROLES } from "../../config/constant";
 
 const RegisterPage: React.FC = () => {
   const { registerUserFunction } = useAuth();

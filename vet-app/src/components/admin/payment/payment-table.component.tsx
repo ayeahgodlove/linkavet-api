@@ -2,9 +2,9 @@ import React from "react";
 import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { usePaymentColumn } from "./payment-column.component";
-import { IPayment } from "models/payment.model";
-import { usePayment } from "hooks/payment.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { IPayment } from "../../../models/payment.model";
+import { usePayment } from "../../../hooks/payment.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
 
 const PaymentTable: React.FC = () => {
   const { payments, setPayment } = usePayment();

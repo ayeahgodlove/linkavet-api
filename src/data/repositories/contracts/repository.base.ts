@@ -8,7 +8,6 @@ import { Banner } from "../../entities/banner";
 import { IBanner } from "../../../domain/models/banner";
 import { IProduct } from "../../../domain/models/product";
 import { Product } from "../../entities/product";
-import { Tag } from "../../entities/tag";
 import { IOrder } from "../../../domain/models/order";
 import { Order } from "../../entities/order";
 import { Payment } from "../../entities/payment";

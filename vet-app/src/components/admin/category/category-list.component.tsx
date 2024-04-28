@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import { useCategory } from "hooks/category.hook";
+import { useCategory } from "../../../hooks/category.hook";
 import { Space, Tag } from "antd";
-import { ICategory } from "models/category.model";
-import { CategoryService } from "services/category.service";
+import { ICategory } from "../../../models/category.model";
+import { CategoryService } from "../../../services/category.service";
 import { useDispatch } from "react-redux";
-import { fetchcategorySuccess } from "redux/category.slice";
-import { baseColor, generateShadesOfColor } from "utils/tag-generator";
+import { fetchcategorySuccess } from "../../../redux/category.slice";
+import { baseColor, generateShadesOfColor } from "../../../utils/tag-generator";
 
 const CategoryList = () => {
   const { categories } = useCategory();

@@ -1,8 +1,8 @@
 import { Card, Col, List, Row, Typography, Image, Tag } from "antd";
-import { API_URL_UPLOADS_PRODUCTS } from "config/constant";
-import { useProduct } from "hooks/product.hook";
+import { API_URL_UPLOADS_PRODUCTS } from "../../../config/constant";
+import { useProduct } from "../../../hooks/product.hook";
 import React from "react";
-import { format } from "utils/format";
+import { format } from "../../../utils/format";
 
 const ProductDetailComponent: React.FC = () => {
   const { product, getProductTags } = useProduct();

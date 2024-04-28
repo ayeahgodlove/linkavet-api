@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../../redux/store";
 import {
   addLessonSuccess,
   editLessonSuccess,
   fetchLessonsAsync,
   setActiveLesson,
 } from "../../redux/lms/lesson.slice";
-import { ILesson, emptyLesson } from "models/lms/lesson";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { LessonService } from "services/lms/lesson.service";
+import { ILesson, emptyLesson } from "../../models/lms/lesson";
+import { useFormErrors } from "../../hooks/shared/form-error.hook";
+import { LessonService } from "../../services/lms/lesson.service";
 import { useCourse } from "./course.hook";
 
 const useLesson = () => {

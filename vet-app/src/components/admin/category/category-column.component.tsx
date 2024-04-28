@@ -1,6 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { ICategory } from "models/category.model";
-import { format } from "utils/format";
+import { ICategory } from "../../../models/category.model";
 
 export const categorieTableColumns: ColumnsType<ICategory> = [
   {

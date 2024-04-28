@@ -4,8 +4,8 @@ import {
   IBanner,
   IBannerResponses,
   IBannerState,
-} from "models/banner";
-import { bannerService } from "services/banner.service";
+} from "../models/banner";
+import { bannerService } from "../services/banner.service";
 
 export const initialState: IBannerState = {
   banners: [],

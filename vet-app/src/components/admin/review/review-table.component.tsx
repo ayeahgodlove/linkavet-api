@@ -2,9 +2,9 @@ import React from "react";
 import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { reviewTableColumns } from "./review-column.component";
-import { IReview } from "models/review.model";
-import { useReview } from "hooks/review.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { IReview } from "../../../models/review.model";
+import { useReview } from "../../../hooks/review.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
 
 type Prop = {
   createReview: () => void

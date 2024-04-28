@@ -1,8 +1,7 @@
 import { ColumnsType } from "antd/es/table";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useCategory } from "hooks/category.hook";
-import { IProduct } from "models/product.model";
-import { format } from "utils/format";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { useCategory } from "../../../hooks/category.hook";
+import { IProduct } from "../../../models/product.model";
 
 export const useProductColumn = () => {
   const { user } = useAuth();

@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react";
-import { useTag } from "hooks/tag.hook";
+import { useTag } from "../../../hooks/tag.hook";
 import { Space, Tag } from "antd";
-import { ITag } from "models/tag.model";
-import { TagService } from "services/tag.service";
+import { ITag } from "../../../models/tag.model";
+import { TagService } from "../../../services/tag.service";
 import { useDispatch } from "react-redux";
-import { fetchtagSuccess } from "redux/tag.slice";
-import { generateShadesOfColor, tagColor } from "utils/tag-generator";
+import { fetchtagSuccess } from "../../../redux/tag.slice";
+import { generateShadesOfColor, tagColor } from "../../../utils/tag-generator";
 
 const TagList = () => {
   const { tags } = useTag();

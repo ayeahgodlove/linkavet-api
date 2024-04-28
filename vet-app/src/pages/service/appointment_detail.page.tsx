@@ -1,9 +1,7 @@
 import { Col, Row } from "antd";
-import UserAppointmentDetailComponent from "components/admin/heath/appointment/user-appointment-detail.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import BackButton from "components/shared/back-button.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import PageContent from "components/shared/page-content";
+import UserAppointmentDetailComponent from "../../components/admin/heath/appointment/user-appointment-detail.component";
+import TitleBar from "../../components/common/title-bar/title-bar.component";
+import PageContent from "../../components/shared/page-content";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 

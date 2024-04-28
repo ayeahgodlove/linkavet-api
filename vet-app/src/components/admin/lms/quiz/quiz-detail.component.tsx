@@ -1,7 +1,7 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useCourse } from "hooks/lms/course.hook";
-import { useQuiz } from "hooks/lms/quiz.hook";
-import { useUser } from "hooks/user.hook";
+import { useCourse } from "../../../../hooks/lms/course.hook";
+import { useQuiz } from "../../../../hooks/lms/quiz.hook";
+import { useUser } from "../../../../hooks/user.hook";
 import React from "react";
 
 const QuizDetailComponent: React.FC = () => {

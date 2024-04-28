@@ -1,13 +1,13 @@
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, Input, InputNumber, message } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { FormErrorComponent } from "components/shared/form-error/form-error.component";
-import { useModalContext } from "context/app-modal.context";
-import { useLesson } from "hooks/lms/lesson.hook";
-import { useQuiz } from "hooks/lms/quiz.hook";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { IQuiz } from "models/lms/quiz";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { FormErrorComponent } from "../../../../components/shared/form-error/form-error.component";
+import { useModalContext } from "../../../../context/app-modal.context";
+import { useLesson } from "../../../../hooks/lms/lesson.hook";
+import { useQuiz } from "../../../../hooks/lms/quiz.hook";
+import { useFormInit } from "../../../../hooks/shared/form-init.hook";
+import { IQuiz } from "../../../../models/lms/quiz";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
 import React, { useCallback, useEffect, useState } from "react";
 
 type Props = {

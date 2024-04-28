@@ -1,11 +1,11 @@
 import { Badge, Tag, TimePicker, Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
-import { useUser } from "hooks/user.hook";
-import { IAppointment } from "models/health/appointment";
-import { STATUS } from "models/shared/status.enum";
+import { useUser } from "../../../../hooks/user.hook";
+import { IAppointment } from "../../../../models/health/appointment";
+import { STATUS } from "../../../../models/shared/status.enum";
 import React from "react";
-import { format } from "utils/format";
+import { format } from "../../../../utils/format";
 
 export const useAppointmentColumn = () => {
   const { getUser } = useUser();

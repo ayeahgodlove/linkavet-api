@@ -1,20 +1,20 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table } from "antd";
 import { useNavigate } from "react-router-dom";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { NoContent } from "../../../../components/shared/no-content/no-content.component";
 import slugify from "slugify";
 import { useDispatch } from "react-redux";
-import search from "utils/search";
-import { SpinnerComponent } from "components/shared/spinner";
+import search from "../../../../utils/search";
+import { SpinnerComponent } from "../../../../components/shared/spinner";
 import { useLessonColumn } from "./lesson-column.component";
-import { useLesson } from "hooks/lms/lesson.hook";
-import { LessonService } from "services/lms/lesson.service";
-import { ILesson } from "models/lms/lesson";
+import { useLesson } from "../../../../hooks/lms/lesson.hook";
+import { LessonService } from "../../../../services/lms/lesson.service";
+import { ILesson } from "../../../../models/lms/lesson";
 import { fetchLessonSuccess } from "../../../../redux/lms/lesson.slice";
-import { useModalContext } from "context/app-modal.context";
+import { useModalContext } from "../../../../context/app-modal.context";
 import { LessonForm } from "./lesson-form.component";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import { useCourse } from "hooks/lms/course.hook";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
+import { useCourse } from "../../../../hooks/lms/course.hook";
 
 const LessonTable: React.FC = () => {
   const { getCourseLessons, setLesson, initialFetch } = useLesson();

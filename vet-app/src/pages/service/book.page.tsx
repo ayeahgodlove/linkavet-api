@@ -1,7 +1,7 @@
 import { Alert, Button, Card, Col, Row, Typography } from "antd";
-import AppointmentForm from "components/appointment/book-appointment.component";
-import PageContent from "components/shared/page-content";
-import { useAuth } from "hooks/auth/auth.hook";
+import AppointmentForm from "../../components/appointment/book-appointment.component";
+import PageContent from "../../components/shared/page-content";
+import { useAuth } from "../../hooks/auth/auth.hook";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link, useNavigate } from "react-router-dom";

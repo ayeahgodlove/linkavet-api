@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { IProduct, emptyProduct } from "models/product.model";
+import { IRootState } from "../redux/store";
+import { IProduct, emptyProduct } from "../models/product.model";
 import {
   addProductSuccess,
   editProductSuccess,
@@ -9,9 +9,9 @@ import {
   setActiveProduct,
   updatePrductQuantity,
 } from "../redux/product.slice";
-import { ProductService } from "services/product.service";
+import { ProductService } from "../services/product.service";
 import { useTag } from "./tag.hook"; 
-import { CartItem } from "redux/shared/shopping-cart.slice";
+import { CartItem } from "../redux/shared/shopping-cart.slice";
 
 const useProduct = () => {
   const products = useSelector<IRootState, IProduct[]>(

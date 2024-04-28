@@ -1,11 +1,11 @@
 import { Alert, Button, Col, Row, Typography } from "antd";
-import CalendaComponent from "components/admin/heath/appointment/calenda.component";
-import { UserAppointmentTable } from "components/admin/heath/appointment/user-appointment.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import PageContent from "components/shared/page-content";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useAppointment } from "hooks/health/appointment.hook";
-import { IAppointment } from "models/health/appointment";
+import CalendaComponent from "../../components/admin/heath/appointment/calenda.component";
+import { UserAppointmentTable } from "../../components/admin/heath/appointment/user-appointment.component";
+import TitleBar from "../../components/common/title-bar/title-bar.component";
+import PageContent from "../../components/shared/page-content";
+import { useAuth } from "../../hooks/auth/auth.hook";
+import { useAppointment } from "../../hooks/health/appointment.hook";
+import { IAppointment } from "../../models/health/appointment";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { FiPlusCircle } from "react-icons/fi";

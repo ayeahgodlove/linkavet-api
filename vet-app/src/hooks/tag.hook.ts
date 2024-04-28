@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { ITag } from "models/tag.model";
+import { IRootState } from "../redux/store";
+import { ITag } from "../models/tag.model";
 import {
   addTagSuccess,
   editTagSuccess,
   fetchTagsAsync,
   setActiveTag,
 } from "../redux/tag.slice";
-import { TagService } from "services/tag.service";
+import { TagService } from "../services/tag.service";
 import { useFormErrors } from "./shared/form-error.hook";
 const useTag = () => {
   const tags = useSelector<IRootState, ITag[]>((state) => state.tag.tags);

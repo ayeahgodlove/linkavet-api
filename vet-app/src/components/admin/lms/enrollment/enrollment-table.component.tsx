@@ -2,18 +2,18 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useEnrollmentColumns } from "./enrollment-column.component";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useModalContext } from "context/app-modal.context";
+import { NoContent } from "../../../../components/shared/no-content/no-content.component";
+import { useModalContext } from "../../../../context/app-modal.context";
 import { useDispatch } from "react-redux";
 import { EnrollmentForm } from "./enrollment-form.component";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import search from "utils/search";
-import { SpinnerComponent } from "components/shared/spinner";
-import { useEnrollment } from "hooks/lms/enrollment.hook";
-import { IEnrollment } from "models/lms/enrollment";
-import { fetchenrollmentSuccess } from "redux/lms/enrollment.slice";
-import { useCourse } from "hooks/lms/course.hook";
-import { API_URL } from "config/constant";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
+import search from "../../../../utils/search";
+import { SpinnerComponent } from "../../../../components/shared/spinner";
+import { useEnrollment } from "../../../../hooks/lms/enrollment.hook";
+import { IEnrollment } from "../../../../models/lms/enrollment";
+import { fetchenrollmentSuccess } from "../../../../redux/lms/enrollment.slice";
+import { useCourse } from "../../../../hooks/lms/course.hook";
+import { API_URL } from "../../../../config/constant";
 
 const { Search } = Input;
 

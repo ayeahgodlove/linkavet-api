@@ -1,15 +1,15 @@
 import { Button, Card, Carousel, Col, List } from "antd";
-import { IProduct } from "models/product.model";
+import { IProduct } from "../../models/product.model";
 import React from "react";
 import "./product.style.scss";
 import { RiHeartFill } from "react-icons/ri";
-import RaterComponent from "components/shared/rate.component";
-import { API_URL_UPLOADS_PRODUCTS } from "config/constant";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import RaterComponent from "../../components/shared/rate.component";
+import { API_URL_UPLOADS_PRODUCTS } from "../../config/constant";
+import { NoContent } from "../../components/shared/no-content/no-content.component";
 import ProductAddToCart from "./product-add-to-cart.component";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
-import { useProduct } from "hooks/product.hook";
+import { useProduct } from "../../hooks/product.hook";
 
 const { Meta } = Card;
 interface IProp {

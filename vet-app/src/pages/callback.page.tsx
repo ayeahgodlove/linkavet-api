@@ -1,9 +1,9 @@
-import Spinner from "components/utilities/Spinner";
-import { useAuth } from "hooks/auth/auth.hook";
+import Spinner from "../components/utilities/Spinner";
+import { useAuth } from "../hooks/auth/auth.hook";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { initialDataAsync } from "redux/action/initial.action";
+import { initialDataAsync } from "../redux/action/initial.action";
 
 const CallbackPage: React.FC = () => {
   const {isLoading, isAuthenticated, user } = useAuth();

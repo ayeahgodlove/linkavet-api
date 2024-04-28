@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../redux/store";
 import {
   addCommentSuccess,
   editCommentSuccess,
@@ -8,8 +8,8 @@ import {
   fetchcommentSuccess,
   setActiveComment,
 } from "../redux/comment.slice";
-import { CommentService } from "services/comment.service";
-import { CommentData, IComment } from "models/comment";
+import { CommentService } from "../services/comment.service";
+import { CommentData, IComment } from "../models/comment";
 const useComment = () => {
   const comments = useSelector<IRootState, IComment[]>(
     (state) => state.comment.comments

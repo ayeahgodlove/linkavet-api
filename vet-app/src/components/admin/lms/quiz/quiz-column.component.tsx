@@ -1,11 +1,11 @@
 import { Button, Tag } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { useModalContext } from "context/app-modal.context";
-import { IQuiz } from "models/lms/quiz";
+import { useModalContext } from "../../../../context/app-modal.context";
+import { IQuiz } from "../../../../models/lms/quiz";
 import React from "react";
 import { FiEdit } from "react-icons/fi";
 import { QuizForm } from "./quiz-form.component";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
 
 export const useQuizColumns = () => {
   const { setContent, setShow, setTitle, setWidth } = useModalContext();

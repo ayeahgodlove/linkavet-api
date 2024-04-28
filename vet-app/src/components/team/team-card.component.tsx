@@ -3,8 +3,8 @@ import { Card, Image, Space } from "antd";
 import { createFromIconfontCN } from "@ant-design/icons";
 
 import "./member.less";
-import { IUserSpecialty } from "models/user-specialty.model";
-import { API_URL_UPLOADS_AVATARS } from "config/constant";
+import { IUserSpecialty } from "../../models/user-specialty.model";
+import { API_URL_UPLOADS_AVATARS } from "../../config/constant";
 
 interface IProp {
   team: IUserSpecialty;

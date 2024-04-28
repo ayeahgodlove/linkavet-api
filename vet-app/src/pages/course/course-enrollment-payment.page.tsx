@@ -14,14 +14,14 @@ import {
   Typography,
   message,
 } from "antd";
-import BackButton from "components/shared/back-button.component";
-import { useCourse } from "hooks/lms/course.hook";
+import BackButton from "../../components/shared/back-button.component";
+import { useCourse } from "../../hooks/lms/course.hook";
 import React, { useEffect, useState } from "react";
 import "./course-detail.style.scss";
 import { useNavigate } from "react-router-dom";
-import { useInitTransaction } from "hooks/shopping-cart/init-transaction.hook";
-import { IInitPayment } from "models/init-payment.model";
-import { ProcessPaymentService } from "services/process-payment.service";
+import { useInitTransaction } from "../../hooks/shopping-cart/init-transaction.hook";
+import { IInitPayment } from "../../models/init-payment.model";
+import { ProcessPaymentService } from "../../services/process-payment.service";
 import { PiEqualsLight } from "react-icons/pi";
 import slugify from "slugify";
 

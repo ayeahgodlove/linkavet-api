@@ -11,17 +11,17 @@ import {
   Select,
 } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { FormErrorComponent } from "components/shared/form-error/form-error.component";
-import { modules } from "config/constant";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useCategory } from "hooks/category.hook";
-import { useCourse } from "hooks/lms/course.hook";
-import { useLesson } from "hooks/lms/lesson.hook";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { ILesson } from "models/lms/lesson";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { FormErrorComponent } from "../../../../components/shared/form-error/form-error.component";
+import { modules } from "../../../../config/constant";
+import { useModalContext } from "../../../../context/app-modal.context";
+import { useAuth } from "../../../../hooks/auth/auth.hook";
+import { useCategory } from "../../../../hooks/category.hook";
+import { useCourse } from "../../../../hooks/lms/course.hook";
+import { useLesson } from "../../../../hooks/lms/lesson.hook";
+import { useFormErrors } from "../../../../hooks/shared/form-error.hook";
+import { useFormInit } from "../../../../hooks/shared/form-init.hook";
+import { ILesson } from "../../../../models/lms/lesson";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
 import React, { useCallback, useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 

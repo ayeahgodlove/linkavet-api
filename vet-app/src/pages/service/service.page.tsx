@@ -1,6 +1,6 @@
 import { Card, Col, Row } from "antd";
-import { ServiceBanner } from "components/service/service-banner.component";
-import OurServices from "components/service/service.component";
+import { ServiceBanner } from "../../components/service/service-banner.component";
+import OurServices from "../../components/service/service.component";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 

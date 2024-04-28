@@ -5,12 +5,12 @@ import { useConsultationColumn } from "./consultation-column.component";
 import { useDispatch } from "react-redux";
 import slugify from "slugify";
 import { useNavigate } from "react-router-dom";
-import search from "utils/search";
-import { SpinnerComponent } from "components/shared/spinner";
-import { useConsultation } from "hooks/health/consultation.hook";
-import { IConsultation } from "models/health/consultation";
-import { fetchConsultationSuccess } from "redux/health/consultation.slice";
-import { API_URL } from "config/constant";
+import search from "../../../../utils/search";
+import { SpinnerComponent } from "../../../../components/shared/spinner";
+import { useConsultation } from "../../../../hooks/health/consultation.hook";
+import { IConsultation } from "../../../../models/health/consultation";
+import { fetchConsultationSuccess } from "../../../../redux/health/consultation.slice";
+import { API_URL } from "../../../../config/constant";
 
 const { Search } = Input;
 export function ConsultationTable() {

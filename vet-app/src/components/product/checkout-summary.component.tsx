@@ -1,5 +1,5 @@
 import { Typography } from "antd";
-import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
+import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
 import React from "react";
 import { PiEqualsLight } from "react-icons/pi";
 import { TiTimes } from "react-icons/ti";

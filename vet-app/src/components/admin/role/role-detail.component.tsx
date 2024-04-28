@@ -1,5 +1,5 @@
 import { Badge, Card, Col, List, Row, Typography } from "antd";
-import { useRole } from "hooks/role.hook";
+import { useRole } from "../../../hooks/role.hook";
 import React from "react";
 
 const RoleDetailComponent: React.FC = () => {

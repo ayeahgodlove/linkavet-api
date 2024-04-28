@@ -1,18 +1,18 @@
-import { Col, Divider, FloatButton, Row, Tooltip, Typography } from "antd";
-import GridView from "components/product/product-card-grid.component";
-import ProductDetail from "components/product/product-detail.component";
-import BackButton from "components/shared/back-button.component";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useProduct } from "hooks/product.hook";
-import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
+import { Col, Divider, FloatButton, Row, Typography } from "antd";
+import GridView from "../../components/product/product-card-grid.component";
+import ProductDetail from "../../components/product/product-detail.component";
+import BackButton from "../../components/shared/back-button.component";
+import { NoContent } from "../../components/shared/no-content/no-content.component";
+import { useProduct } from "../../hooks/product.hook";
+import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
 import React, { useEffect } from "react";
 import { FiShoppingCart } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchUsersAsync } from "redux/user.slice";
+import { fetchUsersAsync } from "../../redux/user.slice";
 
 const ProductDetailPage: React.FC = () => {
-  const { products, product } = useProduct();
+  const { products } = useProduct();
   const { cartQuantity } = useShoppingCart();
   const router = useNavigate();
   const dispatch = useDispatch();

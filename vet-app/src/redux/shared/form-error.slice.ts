@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { emptyResponseBase, IResponseBase } from 'models/response-base.model'
+import { emptyResponseBase, IResponseBase } from '../../models/response-base.model'
 
 export const initialState: IResponseBase = emptyResponseBase
 

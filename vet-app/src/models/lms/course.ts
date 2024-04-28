@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import { IBaseState } from "models/base-state.model";
-import { IResponseBase } from "models/response-base.model";
+import { IBaseState } from "../base-state.model";
+import { IResponseBase } from "../response-base.model";
 
 export interface ICourse {
   id: string;

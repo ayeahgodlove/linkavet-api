@@ -54,6 +54,8 @@ import { ProductOrder } from "../../data/entities/product-order";
 import { IProductOrder } from "../../domain/models/product-order";
 import { UserSpecialty } from "../../data/entities/user-specialty";
 import { IUserSpecialty } from "../../domain/models/user-specialty";
+import { IEvent } from "../../domain/models/event";
+import { Event } from "../../data/entities/event";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -66,6 +68,20 @@ export class CategoryMapper {
       return entity;
     });
     return _categories;
+  }
+}
+
+export class EventMapper {
+  toDTO(event: Event): IEvent {
+    const entity = event.toJSON<IEvent>();
+    return entity;
+  }
+  toDTOs(events: Event[]): IEvent[] {
+    const _events = events.map((event) => {
+      const entity = event.toJSON<IEvent>();
+      return entity;
+    });
+    return _events;
   }
 }
 

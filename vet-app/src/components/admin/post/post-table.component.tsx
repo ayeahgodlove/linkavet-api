@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Card, Col, Input, Table, Typography } from "antd";
+import { Card, Col, Input, Table } from "antd";
 import { useNavigate } from "react-router-dom";
-import { usePost } from "hooks/post.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useModalContext } from "context/app-modal.context";
+import { usePost } from "../../../hooks/post.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
+import { useModalContext } from "../../../context/app-modal.context";
 import { useDispatch } from "react-redux";
 import { PostForm } from "./post-form.component";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import search from "utils/search";
-import { fetchpostSuccess } from "redux/post.slice";
-import { SpinnerComponent } from "components/shared/spinner";
-import { IPost } from "models/post";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
+import search from "../../../utils/search";
+import { fetchpostSuccess } from "../../../redux/post.slice";
+import { SpinnerComponent } from "../../../components/shared/spinner";
+import { IPost } from "../../../models/post";
 import { usePostColumn } from "./post-column.component";
-import { API_URL } from "config/constant";
+import { API_URL } from "../../../config/constant";
 
 const { Search } = Input;
 

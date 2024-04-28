@@ -1,8 +1,8 @@
 import { Card, Col, Image, List, Row, Tag, Typography } from "antd";
-import { API_URL_UPLOADS_POSTS } from "config/constant";
-import { usePost } from "hooks/post.hook";
+import { API_URL_UPLOADS_POSTS } from "../../../config/constant";
+import { usePost } from "../../../hooks/post.hook";
 import React from "react";
-import { format } from "utils/format";
+import { format } from "../../../utils/format";
 
 const PostDetailComponent: React.FC = () => {
   const { post, getPostTags } = usePost();

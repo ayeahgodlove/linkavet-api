@@ -1,12 +1,12 @@
 import { Col, Divider, Row, Typography } from "antd";
-import CourseList from "components/course/course-list.component";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useCourse } from "hooks/lms/course.hook";
+import CourseList from "../../components/course/course-list.component";
+import { useAuth } from "../../hooks/auth/auth.hook";
+import { useCourse } from "../../hooks/lms/course.hook";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useDispatch } from "react-redux";
-import { fetchCoursesAsync } from "redux/lms/course.slice";
-import PageContent from "components/shared/page-content/index";
+import { fetchCoursesAsync } from "../../redux/lms/course.slice";
+import PageContent from "../../components/shared/page-content/index";
 
 const CoursePage: React.FC = () => {
   const { isLoading } = useAuth();

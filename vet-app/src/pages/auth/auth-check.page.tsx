@@ -1,5 +1,5 @@
-import { useAuth } from "hooks/auth/auth.hook";
-import { useCourse } from "hooks/lms/course.hook";
+import { useAuth } from "../../hooks/auth/auth.hook";
+import { useCourse } from "../../hooks/lms/course.hook";
 import React from "react";
 import { Navigate } from "react-router-dom";
 import slugify from "slugify";

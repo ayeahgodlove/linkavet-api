@@ -13,15 +13,15 @@ import {
 } from "antd";
 import React, { useEffect } from "react";
 import { UploadOutlined } from "@ant-design/icons";
-import { useAuth } from "hooks/auth/auth.hook";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import { useModalContext } from "context/app-modal.context";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { useUpload } from "hooks/shared/upload.hook";
-import theme from "utils/themeConfig";
-import { useCourse } from "hooks/lms/course.hook";
-import { CourseFormData, ICourse, emptyCourse } from "models/lms/course";
-import useWindowSize from "hooks/shared/window-resize.hook";
+import { useAuth } from "../../../../hooks/auth/auth.hook";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
+import { useModalContext } from "../../../../context/app-modal.context";
+import { useFormInit } from "../../../../hooks/shared/form-init.hook";
+import { useUpload } from "../../../../hooks/shared/upload.hook";
+import theme from "../../../../utils/themeConfig";
+import { useCourse } from "../../../../hooks/lms/course.hook";
+import { CourseFormData, ICourse, emptyCourse } from "../../../../models/lms/course";
+import useWindowSize from "../../../../hooks/shared/window-resize.hook";
 
 type Props = {
   formMode: UpdateMode;

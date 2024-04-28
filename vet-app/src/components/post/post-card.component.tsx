@@ -1,14 +1,14 @@
 import { Card } from "antd";
 import React from "react";
 import "./post.less";
-import RaterComponent from "components/shared/rate.component";
-import { IPost } from "models/post";
+import RaterComponent from "../../components/shared/rate.component";
+import { IPost } from "../../models/post";
 import slugify from "slugify";
-import { API_URL_UPLOADS_POSTS } from "config/constant";
+import { API_URL_UPLOADS_POSTS } from "../../config/constant";
 import { CalendarOutlined, UserOutlined } from "@ant-design/icons";
-import { format } from "utils/format";
+import { format } from "../../utils/format";
 import "./post.less";
-import { useUser } from "hooks/user.hook";
+import { useUser } from "../../hooks/user.hook";
 
 const { Meta } = Card;
 interface IProp {

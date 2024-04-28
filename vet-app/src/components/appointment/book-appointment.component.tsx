@@ -11,12 +11,12 @@ import {
   Row,
   Col,
 } from "antd";
-import { useUserSpecialty } from "hooks/user-specialty.hook";
-import { useAppointment } from "hooks/health/appointment.hook";
-import { IAppointment, emptyAppointment } from "models/health/appointment";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import { useAuth } from "hooks/auth/auth.hook";
+import { useUserSpecialty } from "../../hooks/user-specialty.hook";
+import { useAppointment } from "../../hooks/health/appointment.hook";
+import { IAppointment, emptyAppointment } from "../../models/health/appointment";
+import { useFormInit } from "../../hooks/shared/form-init.hook";
+import { UpdateMode } from "../../models/shared/update-mode.enum";
+import { useAuth } from "../../hooks/auth/auth.hook";
 import { useNavigate } from "react-router-dom";
 
 const AppointmentForm: React.FC = () => {

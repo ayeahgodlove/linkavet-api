@@ -9,20 +9,20 @@ import {
   Typography,
   message,
 } from "antd";
-import BackButton from "components/shared/back-button.component";
-import { useInitTransaction } from "hooks/shopping-cart/init-transaction.hook";
+import BackButton from "../../components/shared/back-button.component";
+import { useInitTransaction } from "../../hooks/shopping-cart/init-transaction.hook";
 import React, { useCallback, useEffect, useState } from "react";
-import { ProcessPaymentService } from "services/process-payment.service";
+import { ProcessPaymentService } from "../../services/process-payment.service";
 import "./payment-feedback.style.scss";
-import { usePayment } from "hooks/payment.hook";
-import { useOrder } from "hooks/order.hook";
-import { emptyOrder } from "models/order.model";
-import { generateOrderNumber } from "utils/order-no";
-import { useProduct } from "hooks/product.hook";
-import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
-import { IPaymentResponse, emptyPayment } from "models/payment.model";
-import { OrderService } from "services/order.service";
-import { PaymentService } from "services/payment.service";
+import { usePayment } from "../../hooks/payment.hook";
+import { useOrder } from "../../hooks/order.hook";
+import { emptyOrder } from "../../models/order.model";
+import { generateOrderNumber } from "../../utils/order-no";
+import { useProduct } from "../../hooks/product.hook";
+import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
+import { IPaymentResponse, emptyPayment } from "../../models/payment.model";
+import { OrderService } from "../../services/order.service";
+import { PaymentService } from "../../services/payment.service";
 import {
   ITransactionVmResponse,
   TRANSACTION_STATUS,

@@ -1,8 +1,8 @@
 import { Card, Col, Row } from "antd";
-import ProductStepEditForm from "components/admin/product/product-set-form-edit.component";
+import ProductStepEditForm from "../../../components/admin/product/product-set-form-edit.component";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCategoriesAsync } from "redux/category.slice";
+import { fetchCategoriesAsync } from "../../../redux/category.slice";
 
 const ProductEditPage = () => {
   const dispatch = useDispatch();

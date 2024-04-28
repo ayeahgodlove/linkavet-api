@@ -4,8 +4,8 @@ import {
   IAppointment,
   IAppointmentResponses,
   IAppointmentState,
-} from "models/health/appointment";
-import { AppointmentService } from "services/health/appointment.service";
+} from "../../models/health/appointment";
+import { AppointmentService } from "../../services/health/appointment.service";
 
 export const initialState: IAppointmentState = {
   appointments: [],

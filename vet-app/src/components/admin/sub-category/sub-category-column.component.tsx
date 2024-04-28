@@ -1,5 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { ISubCategory } from "models/category.model";
+import { ISubCategory } from "../../../models/category.model";
 
 export const subSubCategoryTableColumns: ColumnsType<ISubCategory> = [
   {

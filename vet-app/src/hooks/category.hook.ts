@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
 import { IRootState } from "redux/store";
-import { ICategory, emptyCategory } from "models/category.model";
+import { ICategory, emptyCategory } from "../models/category.model";
 import {
   addCategorySuccess,
   editCategorySuccess,
   fetchCategoriesAsync,
   setActiveCategory,
 } from "../redux/category.slice";
-import { CategoryService } from "services/category.service";
+import { CategoryService } from "../services/category.service";
 import { useFormErrors } from "./shared/form-error.hook";
 const useCategory = () => {
   const categories = useSelector<IRootState, ICategory[]>((state) => state.category.categories);

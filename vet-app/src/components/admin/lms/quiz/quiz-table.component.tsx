@@ -1,18 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table } from "antd";
 import { useQuizColumns } from "./quiz-column.component";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useModalContext } from "context/app-modal.context";
+import { NoContent } from "../../../../components/shared/no-content/no-content.component";
+import { useModalContext } from "../../../../context/app-modal.context";
 import { useDispatch } from "react-redux";
 import { QuizForm } from "./quiz-form.component";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import search from "utils/search";
-import { SpinnerComponent } from "components/shared/spinner";
-import { useQuiz } from "hooks/lms/quiz.hook";
-import { IQuiz } from "models/lms/quiz";
-import { fetchquizSuccess } from "redux/lms/quiz.slice";
-import { useLesson } from "hooks/lms/lesson.hook";
-import { API_URL } from "config/constant";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
+import search from "../../../../utils/search";
+import { SpinnerComponent } from "../../../../components/shared/spinner";
+import { useQuiz } from "../../../../hooks/lms/quiz.hook";
+import { IQuiz } from "../../../../models/lms/quiz";
+import { fetchquizSuccess } from "../../../../redux/lms/quiz.slice";
+import { useLesson } from "../../../../hooks/lms/lesson.hook";
+import { API_URL } from "../../../../config/constant";
 
 const { Search } = Input;
 

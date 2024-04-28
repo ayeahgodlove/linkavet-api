@@ -1,5 +1,5 @@
 import { Badge, Card, Col, List, Row, Typography } from "antd";
-import { useUser } from "hooks/user.hook";
+import { useUser } from "../../../hooks/user.hook";
 import React from "react";
 
 const UserDetailComponent: React.FC = () => {

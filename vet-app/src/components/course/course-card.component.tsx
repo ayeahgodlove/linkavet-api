@@ -2,11 +2,11 @@ import { Button, Card, List } from "antd";
 import React from "react";
 import "./course.style.scss";
 import { RiHeartFill } from "react-icons/ri";
-import RaterComponent from "components/shared/rate.component";
+import RaterComponent from "../../components/shared/rate.component";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
-import { ICourse } from "models/lms/course";
-import { API_URL_UPLOADS_COURSES } from "config/constant";
+import { ICourse } from "../../models/lms/course";
+import { API_URL_UPLOADS_COURSES } from "../../config/constant";
 
 const { Meta } = Card;
 interface IProp {

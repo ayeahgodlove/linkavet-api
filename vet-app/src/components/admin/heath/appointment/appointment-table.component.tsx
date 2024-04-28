@@ -5,12 +5,12 @@ import { useAppointmentColumn } from "./appointment-column.component";
 import { useDispatch } from "react-redux";
 import slugify from "slugify";
 import { useNavigate } from "react-router-dom";
-import search from "utils/search";
-import { SpinnerComponent } from "components/shared/spinner";
-import { useAppointment } from "hooks/health/appointment.hook";
-import { IAppointment } from "models/health/appointment";
-import { fetchAppointmentSuccess } from "redux/health/appointment.slice";
-import { API_URL } from "config/constant";
+import search from "../../../../utils/search";
+import { SpinnerComponent } from "../../../../components/shared/spinner";
+import { useAppointment } from "../../../../hooks/health/appointment.hook";
+import { IAppointment } from "../../../../models/health/appointment";
+import { fetchAppointmentSuccess } from "../../../../redux/health/appointment.slice";
+import { API_URL } from "../../../../config/constant";
 
 const { Search } = Input;
 export function AppointmentTable() {

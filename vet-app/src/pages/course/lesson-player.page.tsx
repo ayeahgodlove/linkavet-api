@@ -1,8 +1,8 @@
 import { Button, Card, Col, Row, Typography } from "antd";
-import BackButton from "components/shared/back-button.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useCourse } from "hooks/lms/course.hook";
-import { useLesson } from "hooks/lms/lesson.hook";
+import BackButton from "../../components/shared/back-button.component";
+import PageBreadCrumbs from "../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useCourse } from "../../hooks/lms/course.hook";
+import { useLesson } from "../../hooks/lms/lesson.hook";
 import React from "react";
 import ReactPlayer from "react-player/youtube";
 import { useNavigate } from "react-router-dom";

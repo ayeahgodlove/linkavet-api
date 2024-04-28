@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RoleService } from "services/role.service";
+import { RoleService } from "../services/role.service";
 import { IRoleState, emptyRole, IRole, IRoleResponse, IRoleResponses } from "../models/role.model";
 
 export const initialState: IRoleState = {

@@ -6,11 +6,11 @@ import {
   Upload,
   UploadFile,
 } from "antd";
-import UploadButton from "components/shared/upload-button.component";
-import { useImage } from "hooks/shared/image.hook";
-import { useUpload } from "hooks/shared/upload.hook";
+import UploadButton from "../../../components/shared/upload-button.component";
+import { useImage } from "../../../hooks/shared/image.hook";
+import { useUpload } from "../../../hooks/shared/upload.hook";
 import React, { useCallback, useEffect, useState } from "react";
-import { upload } from "utils/upload";
+import { upload } from "../../../utils/upload";
 
 interface Props {
   form: FormInstance<any>;

@@ -1,9 +1,9 @@
-import ProductDetailComponent from "components/admin/product/product-detail.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import BackButton from "components/shared/back-button.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useProduct } from "hooks/product.hook";
+import ProductDetailComponent from "../../../components/admin/product/product-detail.component";
+import TitleBar from "../../../components/common/title-bar/title-bar.component";
+import BackButton from "../../../components/shared/back-button.component";
+import PageBreadCrumbs from "../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { useProduct } from "../../../hooks/product.hook";
 import React, { useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";

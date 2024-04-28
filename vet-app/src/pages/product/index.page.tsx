@@ -1,19 +1,19 @@
 import { Card, Col, Divider, FloatButton, Row, Typography } from "antd";
-import CategoryList from "components/admin/category/category-list.component";
-import TagList from "components/admin/tag/tag-list.component";
-import ProductList from "components/product/product-list.component";
-import { SpinnerComponent } from "components/shared/spinner";
-import useWindowSize from "hooks/shared/window-resize.hook";
-import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
-import { IProduct } from "models/product.model";
+import CategoryList from "../../components/admin/category/category-list.component";
+import TagList from "../../components/admin/tag/tag-list.component";
+import ProductList from "../../components/product/product-list.component";
+import { SpinnerComponent } from "../../components/shared/spinner";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
+import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
+import { IProduct } from "../../models/product.model";
 import React, { useCallback, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { FiShoppingCart } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchproductSuccess } from "redux/product.slice";
-import PageContent from "components/shared/page-content/index";
-import { API_URL } from "config/constant";
+import { fetchproductSuccess } from "../../redux/product.slice";
+import PageContent from "../../components/shared/page-content/index";
+import { API_URL } from "../../config/constant";
 
 const ProductPage: React.FC = () => {
   const router = useNavigate();

@@ -1,10 +1,10 @@
-import OrderTable from "components/admin/order/order-table.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useAuth } from "hooks/auth/auth.hook";
+import OrderTable from "../../../components/admin/order/order-table.component";
+import TitleBar from "../../../components/common/title-bar/title-bar.component";
+import PageBreadCrumbs from "../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useAuth } from "../../../hooks/auth/auth.hook";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchOrdersAsync } from "redux/order.slice";
+import { fetchOrdersAsync } from "../../../redux/order.slice";
 
 const AdminOrderPage: React.FC = () => {
   const { isLoading } = useAuth();

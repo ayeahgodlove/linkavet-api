@@ -4,12 +4,11 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Col, Row, Steps, Typography } from "antd";
-import useWindowSize from "hooks/shared/window-resize.hook";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
 import React from "react";
 import { MdOutlinePayments } from "react-icons/md";
 import { FaUsersCog } from "react-icons/fa";
 import "./style.scss";
-import { green } from "@ant-design/colors";
 
 const { Title, Paragraph } = Typography;
 const BuyInThreeSteps: React.FC = () => {

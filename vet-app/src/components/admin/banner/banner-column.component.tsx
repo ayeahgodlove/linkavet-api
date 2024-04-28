@@ -1,7 +1,7 @@
 import { Image } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { API_URL_UPLOADS_BANNERS } from "config/constant";
-import { IBanner } from "models/banner";
+import { API_URL_UPLOADS_BANNERS } from "../../../config/constant";
+import { IBanner } from "../../../models/banner";
 import React from "react";
 
 export const bannerTableColumns: ColumnsType<IBanner> = [

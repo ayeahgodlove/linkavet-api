@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { IRootState } from "redux/store";
-import { setTokenAction } from "redux/auth/token.slice";
+import { IRootState } from "../../redux/store";
+import { setTokenAction } from "../../redux/auth/token.slice";
 
 const useToken = () => {
   const token = useSelector<IRootState, null | string>(

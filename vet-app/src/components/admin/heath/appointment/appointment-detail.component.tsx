@@ -1,8 +1,8 @@
 import { Badge, Card, Col, List, Row, TimePicker, Typography } from "antd";
-import CopyToClipboard from "components/shared/copy-to-clipboard.component";
+import CopyToClipboard from "../../../../components/shared/copy-to-clipboard.component";
 import dayjs from "dayjs";
-import { useAppointment } from "hooks/health/appointment.hook";
-import { useUser } from "hooks/user.hook";
+import { useAppointment } from "../../../../hooks/health/appointment.hook";
+import { useUser } from "../../../../hooks/user.hook";
 import React  from "react";
 
 const AppointmentDetailComponent: React.FC = () => {

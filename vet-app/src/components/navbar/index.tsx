@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 import LeftMenu from "./left-menu";
 import RightMenu from "./right-menu";
 import { Header } from "antd/es/layout/layout";
-import { useTheme } from "hooks/shared/theme.hook";
+import { useTheme } from "../../hooks/shared/theme.hook";
 import "./navbar.style.scss";
-import useWindowSize from "hooks/shared/window-resize.hook";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
 
 interface IProps {
   showMenuIcon?: boolean;

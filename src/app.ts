@@ -43,8 +43,8 @@ import userRoleRouter from "./presentation/routes/user-role.route";
 // import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
 import userSpecialtyRouter from "./presentation/routes/user-specialty.route";
 import uploadRouter from "./presentation/routes/upload.route";
+import eventRouter from "./presentation/routes/event.route";
 
-debugger;
 dotenv.config();
 const db = new PostgresDbConfig();
 /**
@@ -160,6 +160,7 @@ db.connection()
     app.use("/api/user-roles", userRoleRouter);
     app.use("/api/user-specialties", userSpecialtyRouter);
     app.use("/api/uploads", uploadRouter);
+    app.use("/api/calendar/events", eventRouter);
 
     // middleware interceptions
     app.use(notFoundHandler);

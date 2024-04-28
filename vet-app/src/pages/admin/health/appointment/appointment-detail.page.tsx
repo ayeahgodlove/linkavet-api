@@ -1,19 +1,18 @@
 import { Button, ConfigProvider, message, Space } from "antd";
-import AppointmentDetailComponent from "components/admin/heath/appointment/appointment-detail.component";
-import AppointmentForm from "components/admin/heath/appointment/appointment-form.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import BackButton from "components/shared/back-button.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { STATUS } from "models/shared/status.enum";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import AppointmentDetailComponent from "../../../../components/admin/heath/appointment/appointment-detail.component";
+import AppointmentForm from "../../../../components/admin/heath/appointment/appointment-form.component";
+import TitleBar from "../../../../components/common/title-bar/title-bar.component";
+import BackButton from "../../../../components/shared/back-button.component";
+import PageBreadCrumbs from "../../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useModalContext } from "../../../../context/app-modal.context";
+import { useAuth } from "../../../../hooks/auth/auth.hook";
+import { STATUS } from "../../../../models/shared/status.enum";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
 import React, { useEffect, useState } from "react";
 import { FiEdit } from "react-icons/fi";
 import { TiCancelOutline } from "react-icons/ti";
 import { FcApprove } from "react-icons/fc";
-import { useAppointment } from "hooks/health/appointment.hook";
-import { IAppointment } from "models/health/appointment";
+import { useAppointment } from "../../../../hooks/health/appointment.hook";
 
 const AdminAppointmentDetailPage: React.FC = () => {
   const { isLoading } = useAuth();

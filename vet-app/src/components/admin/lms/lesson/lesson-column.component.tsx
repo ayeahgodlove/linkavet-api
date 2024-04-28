@@ -1,5 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { ILesson } from "models/lms/lesson";
+import { ILesson } from "../../../../models/lms/lesson";
 import React from "react";
 export const useLessonColumn = () => {
   const lessonTableColumns: ColumnsType<ILesson> = [

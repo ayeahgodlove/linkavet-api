@@ -1,7 +1,7 @@
 import { Button, message, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { UserService } from "services/user.service";
+import { useParams } from "react-router-dom";
+import { UserService } from "../services/user.service";
 
 const ActivationPage = () => {
   const { activationToken } = useParams();

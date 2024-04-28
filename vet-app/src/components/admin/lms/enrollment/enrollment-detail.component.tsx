@@ -1,7 +1,7 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useCourse } from "hooks/lms/course.hook";
-import { useEnrollment } from "hooks/lms/enrollment.hook";
-import { useUser } from "hooks/user.hook";
+import { useCourse } from "../../../../hooks/lms/course.hook";
+import { useEnrollment } from "../../../../hooks/lms/enrollment.hook";
+import { useUser } from "../../../../hooks/user.hook";
 import React from "react";
 
 const EnrollmentDetailComponent: React.FC = () => {

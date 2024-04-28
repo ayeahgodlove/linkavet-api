@@ -1,9 +1,9 @@
 import { Col, List, Row } from "antd";
 import React from "react";
 import CourseCard from "./course-card.component";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useCourse } from "hooks/lms/course.hook";
-import { ICourse } from "models/lms/course";
+import { NoContent } from "../../components/shared/no-content/no-content.component";
+import { useCourse } from "../../hooks/lms/course.hook";
+import { ICourse } from "../../models/lms/course";
 
 interface IProp {
   courses: ICourse[]

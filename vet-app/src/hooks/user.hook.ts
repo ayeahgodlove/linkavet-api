@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { IUser, emptyUser } from "models/user.model";
+import { IRootState } from "../redux/store";
+import { IUser, emptyUser } from "../models/user.model";
 import {
   addUserSuccess,
   editUserSuccess,
   fetchUsersAsync,
   setActiveUser,
 } from "../redux/user.slice";
-import { UserService } from "services/user.service";
+import { UserService } from "../services/user.service";
 import { useRole } from "./role.hook";
 import { useUserRole } from "./user-role.hook";
 

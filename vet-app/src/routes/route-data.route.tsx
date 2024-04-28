@@ -1,37 +1,37 @@
 import { IRoute } from "models/route.model";
-import NotFoundPage from "pages/404_Page";
+import NotFoundPage from "../pages/404_Page";
 
-import CallbackPage from "pages/callback.page";
-import DashboardPage from "pages/dashboard/dashboard.page";
-import PostPage from "pages/post/index.page";
-import PostDetailPage from "pages/post/post-detail.page";
-import ProductPage from "pages/product/index.page";
-import ProductDetailPage from "pages/product/product-detail.page";
-import WelcomePage from "pages/welcome.page";
+import CallbackPage from "../pages/callback.page";
+import DashboardPage from "../pages/dashboard/dashboard.page";
+import PostPage from "../pages/post/index.page";
+import PostDetailPage from "../pages/post/post-detail.page";
+import ProductPage from "../pages/product/index.page";
+import ProductDetailPage from "../pages/product/product-detail.page";
+import WelcomePage from "../pages/welcome.page";
 import React from "react";
 
-import ShoppingCartPage from "pages/shopping-cart/shopping-cart.page";
-import { PageCheckoutPage } from "pages/payment/payment-checkout.page";
-import PaymentFeedbackPage from "pages/payment/payment-feedback.page";
+import ShoppingCartPage from "../pages/shopping-cart/shopping-cart.page";
+import { PageCheckoutPage } from "../pages/payment/payment-checkout.page";
+import PaymentFeedbackPage from "../pages/payment/payment-feedback.page";
 
-import CoursePage from "pages/course/index.page";
-import CourseDetailPage from "pages/course/course-detail.page";
+import CoursePage from "../pages/course/index.page";
+import CourseDetailPage from "../pages/course/course-detail.page";
 
-import CourseEnrollmentPaymentPage from "pages/course/course-enrollment-payment.page";
-import CourseEnrollmentPage from "pages/course/course-enrollment.page";
+import CourseEnrollmentPaymentPage from "../pages/course/course-enrollment-payment.page";
+import CourseEnrollmentPage from "../pages/course/course-enrollment.page";
 import { adminRoutes } from "./admin.route";
 import { authRoutes } from "./auth.route";
-import FaqsPage from "pages/faqs/index.page";
-import ContactUsPage from "pages/contact-us/index.page";
-import AboutUsPages from "pages/about-us/index.page";
-import UnAuthorizedPage from "pages/unauthorized.page";
-import LessonPlayerPage from "pages/course/lesson-player.page";
-import LessonQuizePage from "pages/course/lesson-quize.page";
-import BookAppointmentsPage from "pages/service/book.page";
-import AppointmentListsPage from "pages/service/appointment_lists.page";
-import AppointmentDetailPage from "pages/service/appointment_detail.page";
-import ServicesPage from "pages/service/service.page";
-import ClassRoomPage from "pages/course/classroom.page";
+import FaqsPage from "../pages/faqs/index.page";
+import ContactUsPage from "../pages/contact-us/index.page";
+import AboutUsPages from "../pages/about-us/index.page";
+import UnAuthorizedPage from "../pages/unauthorized.page";
+import LessonPlayerPage from "../pages/course/lesson-player.page";
+import LessonQuizePage from "../pages/course/lesson-quize.page";
+import BookAppointmentsPage from "../pages/service/book.page";
+import AppointmentListsPage from "../pages/service/appointment_lists.page";
+import AppointmentDetailPage from "../pages/service/appointment_detail.page";
+import ServicesPage from "../pages/service/service.page";
+import ClassRoomPage from "../pages/course/classroom.page";
 
 export const routes: IRoute[] = [
   /**

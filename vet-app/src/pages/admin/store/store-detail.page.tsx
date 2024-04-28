@@ -1,11 +1,11 @@
-import StoreDetailComponent from "components/admin/store/store-detail.component";
-import StoreForm from "components/admin/store/store-form.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import BackButton from "components/shared/back-button.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import StoreDetailComponent from "../../../components/admin/store/store-detail.component";
+import StoreForm from "../../../components/admin/store/store-form.component";
+import TitleBar from "../../../components/common/title-bar/title-bar.component";
+import BackButton from "../../../components/shared/back-button.component";
+import PageBreadCrumbs from "../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import React, { useEffect } from "react";
 import { FiEdit } from "react-icons/fi";
 

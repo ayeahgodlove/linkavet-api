@@ -1,16 +1,16 @@
 import { Drawer, Layout, Menu } from "antd";
 import React, { useEffect, useState } from "react";
 
-import Navbar from "components/navbar";
+import Navbar from "../../components/navbar";
 import "./app-shell.scss";
 
 import { ConfigProvider, theme } from "antd";
-import { useTheme } from "hooks/shared/theme.hook";
-import { useAuth } from "hooks/auth/auth.hook";
+import { useTheme } from "../../hooks/shared/theme.hook";
+import { useAuth } from "../../hooks/auth/auth.hook";
 import { useDispatch } from "react-redux";
-import { initialDataAsync } from "redux/action/initial.action";
+import { initialDataAsync } from "../../redux/action/initial.action";
 import { useAppShellMenus } from "./app-shell-menus";
-import { ROLES } from "config/constant";
+import { ROLES } from "../../config/constant";
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
 

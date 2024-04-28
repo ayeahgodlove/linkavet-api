@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { Alert } from 'antd'
-import { useFormErrors } from 'hooks/shared/form-error.hook'
+import { useFormErrors } from '../../../hooks/shared/form-error.hook'
 
 interface IProps {
     hasSubmitted: boolean

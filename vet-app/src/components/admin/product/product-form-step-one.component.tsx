@@ -1,6 +1,6 @@
 import { Col, Form, FormInstance, Input, InputNumber, Row, Select } from "antd";
-import { useCategory } from "hooks/category.hook";
-import { useTag } from "hooks/tag.hook";
+import { useCategory } from "../../../hooks/category.hook";
+import { useTag } from "../../../hooks/tag.hook";
 import React, { useEffect } from "react";
 
 interface Props {

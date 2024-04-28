@@ -17,13 +17,13 @@ import {
 } from "antd";
 import React, { useEffect, useState } from "react";
 import "./checkout.style.scss";
-import { ProcessPaymentService } from "services/process-payment.service";
-import { IInitPayment } from "models/init-payment.model";
-import BackButton from "components/shared/back-button.component";
-import CheckoutSummaryComponent from "components/product/checkout-summary.component";
+import { ProcessPaymentService } from "../../services/process-payment.service";
+import { IInitPayment } from "../../models/init-payment.model";
+import BackButton from "../../components/shared/back-button.component";
+import CheckoutSummaryComponent from "../../components/product/checkout-summary.component";
 import { useNavigate } from "react-router-dom";
-import { useInitTransaction } from "hooks/shopping-cart/init-transaction.hook";
-import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
+import { useInitTransaction } from "../../hooks/shopping-cart/init-transaction.hook";
+import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
 
 export const PageCheckoutPage = () => {
   const [form] = Form.useForm();

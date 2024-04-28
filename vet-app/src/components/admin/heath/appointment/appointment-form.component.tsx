@@ -1,11 +1,11 @@
 import { Button, ConfigProvider, Form, Input, Space, message } from "antd";
 import React, { useEffect } from "react";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import { useModalContext } from "context/app-modal.context";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import theme from "utils/themeConfig";
-import { useAppointment } from "hooks/health/appointment.hook";
-import { IAppointment, emptyAppointment } from "models/health/appointment";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
+import { useModalContext } from "../../../../context/app-modal.context";
+import { useFormInit } from "../../../../hooks/shared/form-init.hook";
+import theme from "../../../../utils/themeConfig";
+import { useAppointment } from "../../../../hooks/health/appointment.hook";
+import { IAppointment, emptyAppointment } from "../../../../models/health/appointment";
 
 type Props = {
   formMode: UpdateMode;

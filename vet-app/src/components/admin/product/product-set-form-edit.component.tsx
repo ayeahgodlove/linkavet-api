@@ -4,11 +4,11 @@ import ProductFormStepOne from "./product-form-step-one.component";
 import ProductFormStepTwo from "./product-form-step-two.component";
 import ProductFormStepUploads from "./product-form-step-uploads.component";
 import { useForm } from "antd/es/form/Form";
-import { useProduct } from "hooks/product.hook";
-import { useUpload } from "hooks/shared/upload.hook";
-import { FormErrorComponent } from "components/shared/form-error/form-error.component";
+import { useProduct } from "../../../hooks/product.hook";
+import { useUpload } from "../../../hooks/shared/upload.hook";
+import { FormErrorComponent } from "../../../components/shared/form-error/form-error.component";
 import { useNavigate } from "react-router-dom";
-import { IProduct } from "models/product.model";
+import { IProduct } from "../../../models/product.model";
 
 const ProductStepEditForm: React.FC = () => {
   const [current, setCurrent] = useState(0);

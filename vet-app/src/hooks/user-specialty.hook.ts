@@ -1,17 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../redux/store";
 import {
   IUserSpecialty,
   emptyUserSpecialty,
-} from "models/user-specialty.model";
+} from "../models/user-specialty.model";
 import {
   addUserSpecialtySuccess,
   editUserSpecialtySuccess,
   fetchUserSpecialtiesAsync,
   setActiveUserSpecialty,
 } from "../redux/user-specialty.slice";
-import { UserSpecialtyService } from "services/user-specialty.service";
+import { UserSpecialtyService } from "../services/user-specialty.service";
 import { useFormErrors } from "./shared/form-error.hook";
 import { useUser } from "./user.hook";
 

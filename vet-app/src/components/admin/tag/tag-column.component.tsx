@@ -1,5 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { ITag } from "models/tag.model";
+import { ITag } from "../../../models/tag.model";
 
 export const tagTableColumns: ColumnsType<ITag> = [
   {

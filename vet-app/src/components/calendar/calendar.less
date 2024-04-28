@@ -1,0 +1,26 @@
+.open-calenda-on-mobile {
+  display: block;
+}
+
+.flatpickr-wrapper {
+  width: 100%;
+
+  input {
+    padding: 15px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    /* Adjust styles for specific input types */
+    /* For example: */
+    height: 35px; /* Adjust height for buttons */
+    &:focus {
+      outline: 1px solid #6ce96e; /* Outline on focus */
+    }
+  }
+}
+
+@media screen and (min-width: 767px) {
+  .open-calenda-on-mobile {
+    display: none;
+  }
+}

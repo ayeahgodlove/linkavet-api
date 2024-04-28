@@ -1,7 +1,7 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useDocument } from "hooks/document.hook";
+import { useDocument } from "../../../hooks/document.hook";
 import React from "react";
-import { format } from "utils/format";
+import { format } from "../../../utils/format";
 
 const DocumentDetailComponent: React.FC = () => {
   const { document } = useDocument();

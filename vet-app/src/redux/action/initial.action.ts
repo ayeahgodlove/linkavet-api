@@ -1,14 +1,14 @@
-import { fetchBannersAsync } from "redux/banner.slice";
-import { fetchCategoriesAsync } from "redux/category.slice";
-import { fetchDocumentsAsync } from "redux/document.slice";
-import { fetchPostsAsync } from "redux/post.slice";
-import { fetchProductsAsync } from "redux/product.slice";
-import { fetchReviewsAsync } from "redux/review.slice";
-import { AppThunk } from "redux/store";
-import { fetchTagsAsync } from "redux/tag.slice";
-import { fetchUserRolesAsync } from "redux/user-role.slice";
-import { fetchUserSpecialtiesAsync } from "redux/user-specialty.slice";
-import { fetchUsersAsync } from "redux/user.slice";
+import { fetchBannersAsync } from "../banner.slice";
+import { fetchCategoriesAsync } from "../category.slice";
+import { fetchDocumentsAsync } from "../document.slice";
+import { fetchPostsAsync } from "../post.slice";
+import { fetchProductsAsync } from "../product.slice";
+import { fetchReviewsAsync } from "../review.slice";
+import { AppThunk } from "../store";
+import { fetchTagsAsync } from "../tag.slice";
+import { fetchUserRolesAsync } from "../user-role.slice";
+import { fetchUserSpecialtiesAsync } from "../user-specialty.slice";
+import { fetchUsersAsync } from "../user.slice";
 
 export const initialDataAsync = (): AppThunk => async (dispatch) => {
   try {

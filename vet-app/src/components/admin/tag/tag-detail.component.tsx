@@ -1,5 +1,5 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useTag } from "hooks/tag.hook";
+import { useTag } from "../../../hooks/tag.hook";
 import React from "react";
 
 const TagDetailComponent: React.FC = () => {

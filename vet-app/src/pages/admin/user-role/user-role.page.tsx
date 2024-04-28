@@ -1,14 +1,14 @@
-import { UserRoleForm } from "components/admin/user-role/user-role-form.component";
-import UserRoleTable from "components/admin/user-role/user-role-table.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { UserRoleForm } from "../../../components/admin/user-role/user-role-form.component";
+import UserRoleTable from "../../../components/admin/user-role/user-role-table.component";
+import TitleBar from "../../../components/common/title-bar/title-bar.component";
+import PageBreadCrumbs from "../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { fetchUserRolesAsync } from "redux/user-role.slice";
+import { fetchUserRolesAsync } from "../../../redux/user-role.slice";
 
 const AdminUserRolePage: React.FC = () => {
   const { isLoading } = useAuth();

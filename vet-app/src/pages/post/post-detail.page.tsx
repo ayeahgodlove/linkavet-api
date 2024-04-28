@@ -1,16 +1,16 @@
 import { Avatar, Button, Card, Col, List, Row, Typography } from "antd";
-import CommentComponent from "components/comment/comment.component";
-import BackButton from "components/shared/back-button.component";
-import { SpinnerComponent } from "components/shared/spinner";
-import { API_URL_UPLOADS_POSTS } from "config/constant";
-import { useCategory } from "hooks/category.hook";
-import { useComment } from "hooks/comment.hook";
-import { usePost } from "hooks/post.hook";
-import { useUser } from "hooks/user.hook";
+import CommentComponent from "../../components/comment/comment.component";
+import BackButton from "../../components/shared/back-button.component";
+import { SpinnerComponent } from "../../components/shared/spinner";
+import { API_URL_UPLOADS_POSTS } from "../../config/constant";
+import { useCategory } from "../../hooks/category.hook";
+import { useComment } from "../../hooks/comment.hook";
+import { usePost } from "../../hooks/post.hook";
+import { useUser } from "../../hooks/user.hook";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { fetchUsersAsync } from "redux/user.slice";
-import { format } from "utils/format";
+import { fetchUsersAsync } from "../../redux/user.slice";
+import { format } from "../../utils/format";
 
 const postDetailPage: React.FC = () => {
   const { post } = usePost();

@@ -5,7 +5,7 @@ import {
   IInitPayment,
   IInitTransaction,
   IInitTransactionState,
-} from "models/init-payment.model";
+} from "../models/init-payment.model";
 
 export const initialState: IInitTransactionState = {
   errors: "",

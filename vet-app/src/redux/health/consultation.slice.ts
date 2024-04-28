@@ -4,8 +4,8 @@ import {
   IConsultation,
   IConsultationResponses,
   IConsultationState,
-} from "models/health/consultation";
-import { ConsultationService } from "services/health/consultation.service";
+} from "../../models/health/consultation";
+import { ConsultationService } from "../../services/health/consultation.service";
 
 export const initialState: IConsultationState = {
   consultations: [],

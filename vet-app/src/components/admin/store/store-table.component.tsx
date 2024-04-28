@@ -5,15 +5,15 @@ import StoreForm from "./store-form.component";
 
 import { useDispatch } from "react-redux";
 import slugify from "slugify";
-import { useModalContext } from "context/app-modal.context";
-import { useStore } from "hooks/store.hook";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useStore } from "../../../hooks/store.hook";
 import { useNavigate } from "react-router-dom";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import { IStore } from "models/store";
-import search from "utils/search";
-import { fetchstoreSuccess } from "redux/store.slice";
-import { SpinnerComponent } from "components/shared/spinner";
-import { API_URL } from "config/constant";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
+import { IStore } from "../../../models/store";
+import search from "../../../utils/search";
+import { fetchstoreSuccess } from "../../../redux/store.slice";
+import { SpinnerComponent } from "../../../components/shared/spinner";
+import { API_URL } from "../../../config/constant";
 
 const { Search } = Input;
 export function StoreTable() {

@@ -1,7 +1,7 @@
 import { Image } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { API_URL_UPLOADS_STORES } from "config/constant";
-import { IStore } from "models/store";
+import { API_URL_UPLOADS_STORES } from "../../../config/constant";
+import { IStore } from "../../../models/store";
 import React from "react";
 
 export const storeTableColumns: ColumnsType<IStore> = [

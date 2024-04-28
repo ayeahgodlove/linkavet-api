@@ -5,15 +5,15 @@ import CourseForm from "./course-form.component";
 
 import { useDispatch } from "react-redux";
 import slugify from "slugify";
-import { useModalContext } from "context/app-modal.context";
+import { useModalContext } from "../../../../context/app-modal.context";
 import { useNavigate } from "react-router-dom";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import search from "utils/search";
-import { SpinnerComponent } from "components/shared/spinner";
-import { useCourse } from "hooks/lms/course.hook";
-import { ICourse } from "models/lms/course";
-import { fetchCourseSuccess } from "redux/lms/course.slice";
-import { API_URL } from "config/constant";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
+import search from "../../../../utils/search";
+import { SpinnerComponent } from "../../../../components/shared/spinner";
+import { useCourse } from "../../../../hooks/lms/course.hook";
+import { ICourse } from "../../../../models/lms/course";
+import { fetchCourseSuccess } from "../../../../redux/lms/course.slice";
+import { API_URL } from "../../../../config/constant";
 
 const { Search } = Input;
 export function CourseTable() {

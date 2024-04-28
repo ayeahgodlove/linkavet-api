@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Card, Col, Input, Table, Typography } from "antd";
+import { Card, Col, Input, Table } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useProduct } from "hooks/product.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { useProduct } from "../../../../hooks/product.hook";
+import { NoContent } from "../../../../components/shared/no-content/no-content.component";
 import { useDispatch } from "react-redux";
-import search from "utils/search";
-import { fetchproductSuccess } from "redux/product.slice";
-import { SpinnerComponent } from "components/shared/spinner";
-import { IProduct } from "models/product.model";
+import search from "../../../../utils/search";
+import { fetchproductSuccess } from "../../../../redux/product.slice";
+import { SpinnerComponent } from "../../../../components/shared/spinner";
+import { IProduct } from "../../../../models/product.model";
 import slugify from "slugify";
-import { useProductColumn } from "components/admin/product/product-column.component";
-import { API_URL } from "config/constant";
+import { useProductColumn } from "../../../../components/admin/product/product-column.component";
+import { API_URL } from "../../../../config/constant";
 
 const { Search } = Input;
 

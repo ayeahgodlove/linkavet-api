@@ -1,10 +1,10 @@
-import { Card, Col, List, Row, Typography, Image, Tag, Button } from "antd";
-import { API_URL_UPLOADS_PRODUCTS } from "config/constant";
-import { useCategory } from "hooks/category.hook";
-import { useProduct } from "hooks/product.hook";
-import { useTag } from "hooks/tag.hook";
+import { Card, Col, List, Row, Typography, Image, Tag } from "antd";
+import { API_URL_UPLOADS_PRODUCTS } from "../../config/constant";
+import { useCategory } from "../../hooks/category.hook";
+import { useProduct } from "../../hooks/product.hook";
+import { useTag } from "../../hooks/tag.hook";
 import React from "react";
-import { generateShadesOfColor, tagColor } from "utils/tag-generator";
+import { generateShadesOfColor, tagColor } from "../../utils/tag-generator";
 import ProductAddToCart from "./product-add-to-cart.component";
 
 const ProductDetail: React.FC = () => {

@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-import { IUser } from "models/user.model";
-import { useUser } from "hooks/user.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { IUser } from "../../../models/user.model";
+import { useUser } from "../../../hooks/user.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
 import slugify from "slugify";
 import { useDispatch } from "react-redux";
-import search from "utils/search";
-import { fetchUserSuccess } from "redux/user.slice";
-import { SpinnerComponent } from "components/shared/spinner";
+import search from "../../../utils/search";
+import { fetchUserSuccess } from "../../../redux/user.slice";
+import { SpinnerComponent } from "../../../components/shared/spinner";
 import { useUserColumn } from "./user-column.component";
-import { UserService } from "services/user.service";
+import { UserService } from "../../../services/user.service";
 
 const UserTable: React.FC = () => {
   const { users, setUser, initialFetch } = useUser();

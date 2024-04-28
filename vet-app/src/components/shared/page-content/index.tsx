@@ -2,7 +2,12 @@ import React from "react";
 import { Breadcrumb, Col, Row, Typography } from "antd";
 import { Link } from "react-router-dom";
 
-export default function PageContent(props) {
+interface IProps {
+  title: string;
+  breadcrumb: any;
+  desc?: string
+}
+export default function PageContent(props: IProps) {
   const { title, breadcrumb, desc } = props;
 
   return (

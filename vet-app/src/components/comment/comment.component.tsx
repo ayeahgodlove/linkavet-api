@@ -1,7 +1,7 @@
 import { Button, Form, Input, message } from "antd";
-import { useComment } from "hooks/comment.hook";
-import { CommentData } from "models/comment";
-import { IPost } from "models/post";
+import { useComment } from "../../hooks/comment.hook";
+import { CommentData } from "../../models/comment";
+import { IPost } from "../../models/post";
 import React, { useState } from "react";
 
 const emptyCommentData: CommentData = {

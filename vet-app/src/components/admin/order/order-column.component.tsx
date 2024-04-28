@@ -1,6 +1,6 @@
 import { ColumnsType } from "antd/es/table";
-import { useUser } from "hooks/user.hook";
-import { IOrder } from "models/order.model";
+import { useUser } from "../../../hooks/user.hook";
+import { IOrder } from "../../../models/order.model";
 
 export const useOrderColumn = () => {
   const { getUser } = useUser();

@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../redux/store";
 import {
   addPostSuccess,
   editPostSuccess,
   fetchPostsAsync,
   setActivePost,
 } from "../redux/post.slice";
-import { PostService } from "services/post.service";
-import { IPost } from "models/post";
+import { PostService } from "../services/post.service";
+import { IPost } from "../models/post";
 import { useTag } from "./tag.hook";
 const usePost = () => {
   const posts = useSelector<IRootState, IPost[]>((state) => state.post.posts);

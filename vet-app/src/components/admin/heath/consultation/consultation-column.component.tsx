@@ -1,6 +1,6 @@
 import { ColumnsType } from "antd/es/table";
-import { IConsultation } from "models/health/consultation";
-import { format } from "utils/format";
+import { IConsultation } from "../../../../models/health/consultation";
+import { format } from "../../../../utils/format";
 
 export const useConsultationColumn = () => {
   const consultationTableColumns: ColumnsType<IConsultation> = [

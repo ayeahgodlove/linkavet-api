@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserSpecialtyService } from "services/user-specialty.service";
+import { UserSpecialtyService } from "../services/user-specialty.service";
 import {
   IUserSpecialtyState,
   emptyUserSpecialty,

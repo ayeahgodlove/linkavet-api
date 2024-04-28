@@ -2,9 +2,9 @@ import React from "react";
 import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { subSubCategoryTableColumns } from "./sub-category-column.component";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useSubCategory } from "hooks/sub-category.hook";
-import { ISubCategory } from "models/category.model";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
+import { useSubCategory } from "../../../hooks/sub-category.hook";
+import { ISubCategory } from "../../../models/category.model";
 
 type Prop = {
   createSubCategory: () => void

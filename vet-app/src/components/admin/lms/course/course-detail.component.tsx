@@ -1,6 +1,6 @@
 import { Card, Col, Image, List, Row, Typography } from "antd";
-import { API_URL_UPLOADS_COURSES } from "config/constant";
-import { useCourse } from "hooks/lms/course.hook";
+import { API_URL_UPLOADS_COURSES } from "../../../../config/constant";
+import { useCourse } from "../../../../hooks/lms/course.hook";
 import React from "react";
 
 const CourseDetailComponent: React.FC = () => {

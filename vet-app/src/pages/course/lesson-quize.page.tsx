@@ -1,8 +1,8 @@
 import { Card, Col, Empty, List, Row, Typography } from "antd";
-import BackButton from "components/shared/back-button.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useLesson } from "hooks/lms/lesson.hook";
-import { useQuiz } from "hooks/lms/quiz.hook";
+import BackButton from "../../components/shared/back-button.component";
+import PageBreadCrumbs from "../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useLesson } from "../../hooks/lms/lesson.hook";
+import { useQuiz } from "../../hooks/lms/quiz.hook";
 import React from "react";
 
 const LessonQuizePage = () => {

@@ -1,6 +1,6 @@
 import { Descriptions } from "antd";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useUserSpecialty } from "hooks/user-specialty.hook";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { useUserSpecialty } from "../../../hooks/user-specialty.hook";
 import React from "react";
 
 const UserSpecialtyView = () => {

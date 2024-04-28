@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { emptyDocument, IDocument, IDocumentState } from "models/document";
-import { DocumentService } from "services/document.service";
+import { emptyDocument, IDocument, IDocumentState } from "../models/document";
+import { DocumentService } from "../services/document.service";
 
 export const initialState: IDocumentState = {
   documents: [],

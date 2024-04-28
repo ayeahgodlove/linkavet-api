@@ -1,22 +1,12 @@
 import React from "react";
-import { Button, Row, Col, Typography, Card } from "antd";
-import useWindowSize from "hooks/shared/window-resize.hook";
-import { Link, useNavigate } from "react-router-dom";
-import { usePost } from "hooks/post.hook";
+import { Button, Row, Col, Typography } from "antd";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
+import {useNavigate } from "react-router-dom";
 import PostList from "./post-list.component";
-import { API_URL_UPLOADS_POSTS } from "config/constant";
-import slugify from "slugify";
 
-const buttonStyle = {
-  marginTop: "10px",
-  paddingLeft: 25,
-  paddingRight: 25,
-  borderRadius: 50,
-};
 const BlogPost = () => {
   const { width } = useWindowSize();
   const navigate = useNavigate();
-  const { posts } = usePost();
   return (
     <>
       <Row

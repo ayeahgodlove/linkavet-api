@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../redux/store";
 import {
   addDocumentSuccess,
   editDocumentSuccess,
   fetchDocumentsAsync,
   setActiveDocument,
 } from "../redux/document.slice";
-import { DocumentService } from "services/document.service";
-import { IDocument } from "models/document";
+import { DocumentService } from "../services/document.service";
+import { IDocument } from "../models/document";
 const useDocument = () => {
   const documents = useSelector<IRootState, IDocument[]>((state) => state.document.documents);
   const isLoading = useSelector<IRootState, boolean>(

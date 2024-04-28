@@ -1,6 +1,5 @@
-import { Calendar, CalendarProps } from "antd";
-import dayjs, { Dayjs } from "dayjs";
-import { IAppointment } from "models/health/appointment";
+import { Calendar } from "antd";
+import { IAppointment } from "../../../../models/health/appointment";
 import React from "react";
 import "./calenda.style.scss";
 

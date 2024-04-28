@@ -1,5 +1,5 @@
 import {
-  Calendar,
+  // Calendar,
   CalendarProps,
   Card,
   Carousel,
@@ -13,14 +13,15 @@ import { FaHospitalUser } from "react-icons/fa";
 import { LiaSchoolSolid } from "react-icons/lia";
 import { RiReservedFill } from "react-icons/ri";
 import { MdEmergency } from "react-icons/md";
-import { useAuth } from "hooks/auth/auth.hook";
+import { useAuth } from "../../hooks/auth/auth.hook";
 import { Navigate } from "react-router-dom";
 import { Tabs } from "antd";
 import { FloatButton } from "antd";
 import { CommentOutlined } from "@ant-design/icons";
-import useWindowSize from "hooks/shared/window-resize.hook";
-import UploadResourceComponent from "components/user-docs/upload-resource.component";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
+import UploadResourceComponent from "../../components/user-docs/upload-resource.component";
 import { Dayjs } from "dayjs";
+import CalenderComponent from "../../components/calendar/calendar.component";
 
 const contentStyle: React.CSSProperties = {
   height: "75vh",
@@ -157,7 +158,8 @@ const DashboardPage: React.FC = () => {
             title={
               <>
                 <div style={wrapperStyle}>
-                  <Calendar fullscreen={false} onPanelChange={onPanelChange} />
+                  {/* <Calendar fullscreen={false} onPanelChange={onPanelChange} /> */}
+                  <CalenderComponent />
                 </div>
               </>
             }

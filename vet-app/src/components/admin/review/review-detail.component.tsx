@@ -1,5 +1,5 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useReview } from "hooks/review.hook";
+import { useReview } from "../../../hooks/review.hook";
 import React from "react";
 
 const ReviewDetailComponent: React.FC = () => {

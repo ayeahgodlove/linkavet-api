@@ -1,6 +1,5 @@
-import { Badge } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { IRole } from "models/role.model";
+import { IRole } from "../../../models/role.model";
 
 export const useRoleColumn = () => {
   const roleTableColumns: ColumnsType<IRole> = [

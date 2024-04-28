@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UserRoleService } from "services/user-role.service";
+import { UserRoleService } from "../services/user-role.service";
 import {
   IUserRoleState,
   emptyUserRole,

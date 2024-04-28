@@ -39,11 +39,11 @@ import {
   TranslationOutlined,
 } from "@ant-design/icons";
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
-import { useAuth } from "hooks/auth/auth.hook";
+import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
+import { useAuth } from "../../hooks/auth/auth.hook";
 import { GrScheduleNew } from "react-icons/gr";
-import { ROLES } from "config/constant";
-import { useUser } from "hooks/user.hook";
+import { ROLES } from "../../config/constant";
+import { useUser } from "../../hooks/user.hook";
 
 export const useAppShellMenus = () => {
   const [language, setLanguage] = useState("en");
@@ -67,7 +67,6 @@ export const useAppShellMenus = () => {
   //   ? (users.find((u) => u.id === user.id) as any)
   //   : null;
   // console.log("users: ", users, user);
-  // debugger
   // const avatar =
   //   users.length > 0 ? (users.find((u) => u.id === user.id) as any) : emptyUser;
   // roles.some(role => user.roles.map(ur => ur.name).includes(role))

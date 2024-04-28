@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { IRole, emptyRole } from "models/role.model";
+import { IRootState } from "../redux/store";
+import { IRole, emptyRole } from "../models/role.model";
 import {
   addRoleSuccess,
   editRoleSuccess,
   fetchRolesAsync,
   setActiveRole,
 } from "../redux/role.slice";
-import { RoleService } from "services/role.service";
+import { RoleService } from "../services/role.service";
 import { useFormErrors } from "./shared/form-error.hook";
 const useRole = () => {
   const roles = useSelector<IRootState, IRole[]>((state) => state.role.roles);

@@ -1,6 +1,6 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { usePayment } from "hooks/payment.hook";
-import { useUser } from "hooks/user.hook";
+import { usePayment } from "../../../hooks/payment.hook";
+import { useUser } from "../../../hooks/user.hook";
 import React from "react";
 
 const PaymentDetailComponent: React.FC = () => {

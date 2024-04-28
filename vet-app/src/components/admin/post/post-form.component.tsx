@@ -10,23 +10,23 @@ import {
   Upload,
 } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { FormErrorComponent } from "components/shared/form-error/form-error.component";
-import UploadButton from "components/shared/upload-button.component";
-import { modules } from "config/constant";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useCategory } from "hooks/category.hook";
-import { usePost } from "hooks/post.hook";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { useUpload } from "hooks/shared/upload.hook";
-import { useTag } from "hooks/tag.hook";
-import { emptyPost, IPost } from "models/post";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { FormErrorComponent } from "../../../components/shared/form-error/form-error.component";
+import UploadButton from "../../../components/shared/upload-button.component";
+import { modules } from "../../../config/constant";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { useCategory } from "../../../hooks/category.hook";
+import { usePost } from "../../../hooks/post.hook";
+import { useFormErrors } from "../../../hooks/shared/form-error.hook";
+import { useFormInit } from "../../../hooks/shared/form-init.hook";
+import { useUpload } from "../../../hooks/shared/upload.hook";
+import { useTag } from "../../../hooks/tag.hook";
+import { emptyPost, IPost } from "../../../models/post";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import React, { useCallback, useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { upload } from "utils/upload";
+import { upload } from "../../../utils/upload";
 
 type Props = {
   formMode: UpdateMode;

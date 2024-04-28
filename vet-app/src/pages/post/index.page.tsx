@@ -1,11 +1,11 @@
 import { Col, Divider, Row, Typography } from "antd";
-import PostList from "components/post/post-list.component";
-import PageContent from "components/shared/page-content/index";
-import { useAuth } from "hooks/auth/auth.hook";
+import PostList from "../../components/post/post-list.component";
+import PageContent from "../../components/shared/page-content/index";
+import { useAuth } from "../../hooks/auth/auth.hook";
 import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useDispatch } from "react-redux";
-import { fetchPostsAsync } from "redux/post.slice";
+import { fetchPostsAsync } from "../../redux/post.slice";
 
 const PostPage: React.FC = () => {
   const { isLoading } = useAuth();

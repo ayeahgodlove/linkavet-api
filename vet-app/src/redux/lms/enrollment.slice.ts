@@ -4,8 +4,8 @@ import {
   IEnrollment,
   IEnrollmentResponses,
   IEnrollmentState,
-} from "models/lms/enrollment";
-import { EnrollmentService } from "services/lms/enrollment.service";
+} from "../../models/lms/enrollment";
+import { EnrollmentService } from "../../services/lms/enrollment.service";
 
 export const initialState: IEnrollmentState = {
   enrollments: [],

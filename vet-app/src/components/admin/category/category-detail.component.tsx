@@ -1,5 +1,5 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useCategory } from "hooks/category.hook";
+import { useCategory } from "../../../hooks/category.hook";
 import React from "react";
 
 const CategoryDetailComponent: React.FC = () => {

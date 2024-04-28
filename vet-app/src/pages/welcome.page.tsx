@@ -1,14 +1,13 @@
 // import BuyInThreeSteps from "components/buy-in-three-steps/buy-in-three-steps.component";
-import Review from "components/review/review.component";
-import Subscribe from "components/subscribe/subscribe.component";
-import { WhyLinkaVet } from "components/why-honeyman/why-linkavet.component";
+import Review from "../components/review/review.component";
+import { WhyLinkaVet } from "../components/why-honeyman/why-linkavet.component";
 import React, { useEffect } from "react";
-import { getConfiguration } from "redux/action/initial.action";
+import { getConfiguration } from "../redux/action/initial.action";
 import { Helmet } from "react-helmet-async";
-import OurServices from "components/service/service.component";
-import VetDoctorsComponent from "components/vet/vet-doctor.component";
-import BlogPost from "components/post/post.component";
-import AppHero from "components/home-banner/app-hero.component";
+import OurServices from "../components/service/service.component";
+import VetDoctorsComponent from "../components/vet/vet-doctor.component";
+import BlogPost from "../components/post/post.component";
+import AppHero from "../components/home-banner/app-hero.component";
 
 const WelcomePage: React.FC = () => {
   useEffect(() => {

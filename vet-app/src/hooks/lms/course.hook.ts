@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../../redux/store";
 import {
   addCourseSuccess,
   editCourseSuccess,
   fetchCoursesAsync,
   setActiveCourse,
 } from "../../redux/lms/course.slice";
-import { CourseFormData, ICourse, emptyCourse } from "models/lms/course";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { CourseService } from "services/lms/course.service";
+import { CourseFormData, ICourse, emptyCourse } from "../../models/lms/course";
+import { useFormErrors } from "../../hooks/shared/form-error.hook";
+import { CourseService } from "../../services/lms/course.service";
 
 const useCourse = () => {
   const courses = useSelector<IRootState, ICourse[]>(

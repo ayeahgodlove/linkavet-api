@@ -1,7 +1,7 @@
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Space, Typography } from "antd";
-import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
-import { IProduct } from "models/product.model";
+import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
+import { IProduct } from "../../models/product.model";
 import React from "react";
 import { FiMinus, FiPlus } from "react-icons/fi";
 

@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../../redux/store";
 import {
   addEnrollmentSuccess,
   editEnrollmentSuccess,
   fetchEnrollmentsAsync,
   setActiveEnrollment,
 } from "../../redux/lms/enrollment.slice";
-import { IEnrollment, emptyEnrollment } from "models/lms/enrollment";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { EnrollmentService } from "services/lms/enrollment.service";
+import { IEnrollment, emptyEnrollment } from "../../models/lms/enrollment";
+import { useFormErrors } from "../../hooks/shared/form-error.hook";
+import { EnrollmentService } from "../../services/lms/enrollment.service";
 
 const useEnrollment = () => {
   const enrollments = useSelector<IRootState, IEnrollment[]>(

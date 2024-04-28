@@ -1,13 +1,13 @@
 import { Button, Card, Col, Divider, Row, Typography } from "antd";
-import GridView from "components/product/product-card-grid.component";
-import ListView from "components/product/product-list-view.component";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useProduct } from "hooks/product.hook";
-import { useShoppingCart } from "hooks/shopping-cart/shopping-cart.hook";
+import GridView from "../../components/product/product-card-grid.component";
+import ListView from "../../components/product/product-list-view.component";
+import { NoContent } from "../../components/shared/no-content/no-content.component";
+import { useProduct } from "../../hooks/product.hook";
+import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import CheckoutSummaryComponent from "components/product/checkout-summary.component";
+import CheckoutSummaryComponent from "../../components/product/checkout-summary.component";
 
 const ShoppingCartPage: React.FC = () => {
   const { cartItems, findMatchingProducts, cartQuantity } = useShoppingCart();

@@ -2,9 +2,9 @@ import React from "react";
 import { Table } from "antd";
 import { useNavigate } from "react-router-dom";
 import { documentTableColumns } from "./document-column.component";
-import { useDocument } from "hooks/document.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { IDocument } from "models/document";
+import { useDocument } from "../../../hooks/document.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
+import { IDocument } from "../../../models/document";
 
 type Prop = {
   createDocument: () => void

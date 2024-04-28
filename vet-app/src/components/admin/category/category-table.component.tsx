@@ -2,17 +2,17 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import { categorieTableColumns } from "./category-column.component";
-import { ICategory } from "models/category.model";
-import { useCategory } from "hooks/category.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
-import { useModalContext } from "context/app-modal.context";
+import { ICategory } from "../../../models/category.model";
+import { useCategory } from "../../../hooks/category.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
+import { useModalContext } from "../../../context/app-modal.context";
 import { useDispatch } from "react-redux";
 import { CategoryForm } from "./category-form.component";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import search from "utils/search";
-import { fetchcategorySuccess } from "redux/category.slice";
-import { SpinnerComponent } from "components/shared/spinner";
-import { API_URL } from "config/constant";
+import { fetchcategorySuccess } from "../../../redux/category.slice";
+import { SpinnerComponent } from "../../../components/shared/spinner";
+import { API_URL } from "../../../config/constant";
 
 const { Search } = Input;
 

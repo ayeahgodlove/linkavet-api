@@ -1,5 +1,5 @@
 import { FormInstance } from 'antd'
-import { UpdateMode } from 'models/shared/update-mode.enum'
+import { UpdateMode } from '../../models/shared/update-mode.enum'
 import moment from 'moment'
 import { FieldData } from 'rc-field-form/lib/interface'
 

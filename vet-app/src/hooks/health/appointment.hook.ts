@@ -1,15 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
+import { IRootState } from "../../redux/store";
 import {
   addAppointmentSuccess,
   editAppointmentSuccess,
   fetchAppointmentsAsync,
   setActiveAppointment,
 } from "../../redux/health/appointment.slice";
-import { IAppointment, emptyAppointment } from "models/health/appointment";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { AppointmentService } from "services/health/appointment.service";
+import { IAppointment, emptyAppointment } from "../../models/health/appointment";
+import { useFormErrors } from "../../hooks/shared/form-error.hook";
+import { AppointmentService } from "../../services/health/appointment.service";
 
 const useAppointment = () => {
   const appointments = useSelector<IRootState, IAppointment[]>(

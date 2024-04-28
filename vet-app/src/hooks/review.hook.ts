@@ -1,14 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { IReview } from "models/review.model";
+import { IRootState } from "../redux/store";
+import { IReview } from "../models/review.model";
 import {
   addReviewSuccess,
   editReviewSuccess,
   fetchReviewsAsync,
   setActiveReview,
 } from "../redux/review.slice";
-import { ReviewService } from "services/review.service";
+import { ReviewService } from "../services/review.service";
 import { useFormErrors } from "./shared/form-error.hook";
 const useReview = () => {
   const reviews = useSelector<IRootState, IReview[]>(

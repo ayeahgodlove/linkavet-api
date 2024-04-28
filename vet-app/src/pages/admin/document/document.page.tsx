@@ -1,15 +1,14 @@
-import { Modal } from "antd";
-import { DocumentForm } from "components/admin/document/document-form.component";
-import DocumentTable from "components/admin/document/document-table.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import React, { useEffect, useState } from "react";
+import { DocumentForm } from "../../../components/admin/document/document-form.component";
+import DocumentTable from "../../../components/admin/document/document-table.component";
+import TitleBar from "../../../components/common/title-bar/title-bar.component";
+import PageBreadCrumbs from "../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
+import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { fetchDocumentsAsync } from "redux/document.slice";
+import { fetchDocumentsAsync } from "../../../redux/document.slice";
 
 const AdminDocumentPage: React.FC = () => {
   const { isLoading } = useAuth();

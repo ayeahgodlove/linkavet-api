@@ -1,6 +1,6 @@
 import { ColumnsType } from "antd/es/table";
-import { useUser } from "hooks/user.hook";
-import { IPayment } from "models/payment.model";
+import { useUser } from "../../../hooks/user.hook";
+import { IPayment } from "../../../models/payment.model";
 
 export const usePaymentColumn = () => {
   const { getUser } = useUser();

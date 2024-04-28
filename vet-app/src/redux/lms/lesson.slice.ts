@@ -4,8 +4,8 @@ import {
   ILesson,
   ILessonResponses,
   ILessonState,
-} from "models/lms/lesson";
-import { LessonService } from "services/lms/lesson.service";
+} from "../../models/lms/lesson";
+import { LessonService } from "../../services/lms/lesson.service";
 
 export const initialState: ILessonState = {
   lessons: [],

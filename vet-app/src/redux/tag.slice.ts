@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { TagService } from "services/tag.service";
-import { ITagState, emptyTag, ITag, ITagResponse, ITagResponses } from "../models/tag.model";
+import { TagService } from "../services/tag.service";
+import { ITagState, emptyTag, ITag, ITagResponses } from "../models/tag.model";
 
 export const initialState: ITagState = {
   tags: [],

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PaymentService } from "services/payment.service";
+import { PaymentService } from "../services/payment.service";
 import { IPaymentState, emptyPayment, IPayment, IPaymentResponses } from "../models/payment.model";
 
 export const initialState: IPaymentState = {

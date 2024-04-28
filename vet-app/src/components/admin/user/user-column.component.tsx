@@ -1,6 +1,6 @@
 import { Badge } from "antd";
 import { ColumnsType } from "antd/es/table";
-import { IUser } from "models/user.model";
+import { IUser } from "../../../models/user.model";
 import React from "react";
 
 export const useUserColumn = () => {

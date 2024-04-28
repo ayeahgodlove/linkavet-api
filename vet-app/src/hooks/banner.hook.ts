@@ -5,14 +5,14 @@ import { useFormErrors } from "./shared/form-error.hook";
 import { IRootState } from "../redux/store";
 import { bannerService } from "../services/banner.service";
 import { useToken } from "./auth/token.hook";
-import { IBanner } from "models/banner";
+import { IBanner } from "../models/banner";
 import {
   addBannerSuccess,
   deleteBanner,
   editBannerSuccess,
   fetchBannersAsync,
   setActiveBanner,
-} from "redux/banner.slice";
+} from "../redux/banner.slice";
 
 const useBanner = () => {
   const banners = useSelector<IRootState, IBanner[]>(

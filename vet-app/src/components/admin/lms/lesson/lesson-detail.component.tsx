@@ -1,5 +1,5 @@
 import { Badge, Card, Col, List, Row, Typography } from "antd";
-import { useLesson } from "hooks/lms/lesson.hook";
+import { useLesson } from "../../../../hooks/lms/lesson.hook";
 import React from "react";
 
 const LessonDetailComponent: React.FC = () => {

@@ -37,6 +37,7 @@ import { Appointment } from "../../../data/entities/health/appointment";
 import { Consultation } from "../../../data/entities/health/consultation";
 import { Review } from "../../../data/entities/review";
 import { UserSpecialty } from "../../../data/entities/user-specialty";
+import { Event } from "../../../data/entities/event";
 
 dotenv.config();
 
@@ -87,7 +88,8 @@ export class PostgresDbConfig {
         Consultation,
 
         // reviews
-        Review
+        Review,
+        Event
       ],
       logging: false,
       pool: {

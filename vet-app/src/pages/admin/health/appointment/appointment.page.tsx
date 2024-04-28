@@ -1,14 +1,14 @@
-import AppointmentForm from "components/admin/heath/appointment/appointment-form.component";
-import { AppointmentTable } from "components/admin/heath/appointment/appointment-table.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import AppointmentForm from "../../../../components/admin/heath/appointment/appointment-form.component";
+import { AppointmentTable } from "../../../../components/admin/heath/appointment/appointment-table.component";
+import TitleBar from "../../../../components/common/title-bar/title-bar.component";
+import PageBreadCrumbs from "../../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useModalContext } from "../../../../context/app-modal.context";
+import { useAuth } from "../../../../hooks/auth/auth.hook";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
 import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { fetchAppointmentsAsync } from "redux/health/appointment.slice";
+import { fetchAppointmentsAsync } from "../../../../redux/health/appointment.slice";
 
 const AdminAppointmentPage: React.FC = () => {
   const { isLoading } = useAuth();

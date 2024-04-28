@@ -1,12 +1,12 @@
 import { Button, Form, Input, Alert, message } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { FormErrorComponent } from "components/shared/form-error/form-error.component";
-import { useModalContext } from "context/app-modal.context";
-import { useReview } from "hooks/review.hook";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { IReview } from "models/review.model";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { FormErrorComponent } from "../../../components/shared/form-error/form-error.component";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useReview } from "../../../hooks/review.hook";
+import { useFormErrors } from "../../../hooks/shared/form-error.hook";
+import { useFormInit } from "../../../hooks/shared/form-init.hook";
+import { IReview } from "../../../models/review.model";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import React, { useCallback, useEffect, useState } from "react";
 
 type Props = {

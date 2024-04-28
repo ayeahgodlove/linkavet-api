@@ -9,16 +9,16 @@ import {
   message,
 } from "antd";
 import React, { useCallback, useEffect } from "react";
-import { useAuth } from "hooks/auth/auth.hook";
-import { UpdateMode } from "models/shared/update-mode.enum";
-import { useStore } from "hooks/store.hook";
-import { useModalContext } from "context/app-modal.context";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { IStore, emptyStore } from "models/store";
-import { useUpload } from "hooks/shared/upload.hook";
-import theme from "utils/themeConfig";
-import { upload } from "utils/upload";
-import UploadButton from "components/shared/upload-button.component";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
+import { useStore } from "../../../hooks/store.hook";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useFormInit } from "../../../hooks/shared/form-init.hook";
+import { IStore, emptyStore } from "../../../models/store";
+import { useUpload } from "../../../hooks/shared/upload.hook";
+import theme from "../../../utils/themeConfig";
+import { upload } from "../../../utils/upload";
+import UploadButton from "../../../components/shared/upload-button.component";
 
 type Props = {
   formMode: UpdateMode;

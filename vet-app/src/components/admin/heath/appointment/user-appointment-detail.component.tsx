@@ -1,11 +1,11 @@
 import { Badge, Card, Col, List, Row, Tag, TimePicker, Typography } from "antd";
-import CopyToClipboard from "components/shared/copy-to-clipboard.component";
+import CopyToClipboard from "../../../../components/shared/copy-to-clipboard.component";
 import dayjs from "dayjs";
-import { useAppointment } from "hooks/health/appointment.hook";
-import { useUser } from "hooks/user.hook";
-import { STATUS } from "models/shared/status.enum";
+import { useAppointment } from "../../../../hooks/health/appointment.hook";
+import { useUser } from "../../../../hooks/user.hook";
+import { STATUS } from "../../../../models/shared/status.enum";
 import React from "react";
-import { format } from "utils/format";
+import { format } from "../../../../utils/format";
 
 const UserAppointmentDetailComponent: React.FC = () => {
   const { appointment } = useAppointment();

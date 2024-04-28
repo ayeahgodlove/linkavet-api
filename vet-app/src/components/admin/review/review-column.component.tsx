@@ -1,5 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { IReview } from "models/review.model";
+import { IReview } from "../../../models/review.model";
 
 export const reviewTableColumns: ColumnsType<IReview> = [
     {

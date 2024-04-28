@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React from "react";
 import { routes } from "./route-data.route";
-import AppShell from "layout/app/app-shell";
-import GeneralAppShell from "layout/app/general-app-shell";
+import AppShell from "../layout/app/app-shell";
+import GeneralAppShell from "../layout/app/general-app-shell";
 
 const AppRouteProvider: React.FC = () => {
   return (

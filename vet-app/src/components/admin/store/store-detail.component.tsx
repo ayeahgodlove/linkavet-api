@@ -1,6 +1,6 @@
 import { Card, Col, Image, List, Row, Typography } from "antd";
-import { API_URL_UPLOADS_STORES } from "config/constant";
-import { useStore } from "hooks/store.hook";
+import { API_URL_UPLOADS_STORES } from "../../../config/constant";
+import { useStore } from "../../../hooks/store.hook";
 import React from "react";
 
 const StoreDetailComponent: React.FC = () => {

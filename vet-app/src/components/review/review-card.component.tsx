@@ -1,7 +1,7 @@
 import { Rate, Avatar } from "antd";
-import { API_URL_UPLOADS_AVATARS } from "config/constant";
-import { useUser } from "hooks/user.hook";
-import { IReview } from "models/review.model";
+import { API_URL_UPLOADS_AVATARS } from "../../config/constant";
+import { useUser } from "../../hooks/user.hook";
+import { IReview } from "../../models/review.model";
 import React from "react";
 
 interface Props {

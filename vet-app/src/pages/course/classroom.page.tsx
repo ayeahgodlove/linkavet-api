@@ -1,10 +1,10 @@
 import { Col, Row } from "antd";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import CourseList from "components/course/course-list.component";
-import BackButton from "components/shared/back-button.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useCourse } from "hooks/lms/course.hook";
-import { useEnrollment } from "hooks/lms/enrollment.hook";
+import TitleBar from "../../components/common/title-bar/title-bar.component";
+import CourseList from "../../components/course/course-list.component";
+import BackButton from "../../components/shared/back-button.component";
+import PageBreadCrumbs from "../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useCourse } from "../../hooks/lms/course.hook";
+import { useEnrollment } from "../../hooks/lms/enrollment.hook";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 

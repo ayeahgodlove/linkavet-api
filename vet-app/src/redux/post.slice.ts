@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { emptyPost, IPost, IPostResponses, IPostState } from "models/post";
-import { PostService } from "services/post.service";
+import { emptyPost, IPost, IPostResponses, IPostState } from "../models/post";
+import { PostService } from "../services/post.service";
 
 export const initialState: IPostState = {
   posts: [],

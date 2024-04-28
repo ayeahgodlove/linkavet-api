@@ -4,8 +4,8 @@ import {
   IQuiz,
   IQuizResponses,
   IQuizState,
-} from "models/lms/quiz";
-import { QuizService } from "services/lms/quiz.service";
+} from "../../models/lms/quiz";
+import { QuizService } from "../../services/lms/quiz.service";
 
 export const initialState: IQuizState = {
   quizs: [],

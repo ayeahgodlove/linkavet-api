@@ -1,9 +1,9 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { IProduct } from "models/product.model";
+import { IProduct } from "../../models/product.model";
 import React from "react";
 import "./product.style.scss";
-import RaterComponent from "components/shared/rate.component";
-import { API_URL_UPLOADS_PRODUCTS } from "config/constant";
+import RaterComponent from "../../components/shared/rate.component";
+import { API_URL_UPLOADS_PRODUCTS } from "../../config/constant";
 import {
   CarouselProvider,
   Slider,
@@ -16,7 +16,7 @@ import "./product-list-view.style.scss";
 import ProductAddToCart from "./product-add-to-cart.component";
 import { Link } from "react-router-dom";
 import slugify from "slugify";
-import { useProduct } from "hooks/product.hook";
+import { useProduct } from "../../hooks/product.hook";
 
 interface IProp {
   product: IProduct;

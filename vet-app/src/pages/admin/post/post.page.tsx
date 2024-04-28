@@ -1,14 +1,14 @@
-import { PostForm } from "components/admin/post/post-form.component";
-import PostTable from "components/admin/post/post-table.component";
-import TitleBar from "components/common/title-bar/title-bar.component";
-import PageBreadCrumbs from "components/shared/page-breadcrumb/page-breadcrumb.component";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
+import { PostForm } from "../../../components/admin/post/post-form.component";
+import PostTable from "../../../components/admin/post/post-table.component";
+import TitleBar from "../../../components/common/title-bar/title-bar.component";
+import PageBreadCrumbs from "../../../components/shared/page-breadcrumb/page-breadcrumb.component";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useAuth } from "../../../hooks/auth/auth.hook";
 import { UpdateMode } from "models/shared/update-mode.enum";
 import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { useDispatch } from "react-redux";
-import { fetchPostsAsync } from "redux/post.slice";
+import { fetchPostsAsync } from "../../../redux/post.slice";
 
 const AdminPostPage: React.FC = () => {
   const { isLoading } = useAuth();

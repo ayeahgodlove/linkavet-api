@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { useCallback } from 'react'
 import * as formErrorActions from '../../redux/shared/form-error.slice'
-import { IRootState } from 'redux/store'
-import { IResponseBase } from 'models/response-base.model'
+import { IRootState } from '../../redux/store'
+import { IResponseBase } from '../../models/response-base.model'
 const useFormErrors = () => {
     const formError = useSelector<IRootState, IResponseBase>(
         (state) => state.formError

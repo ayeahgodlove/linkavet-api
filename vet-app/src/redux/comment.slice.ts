@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { emptyComment, IComment, ICommentState } from "models/comment";
+import { emptyComment, IComment, ICommentState } from "../models/comment";
 
 export const initialState: ICommentState = {
   comments: [],

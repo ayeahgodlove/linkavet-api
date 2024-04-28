@@ -1,7 +1,7 @@
 import { Col, Form, Input } from "antd";
 import { FormInstance } from "antd/es/form/Form";
-import { modules } from "config/constant";
-import { IProduct } from "models/product.model";
+import { modules } from "../../../config/constant";
+import { IProduct } from "../../../models/product.model";
 import React, { useEffect } from "react";
 import ReactQuill from "react-quill";
 

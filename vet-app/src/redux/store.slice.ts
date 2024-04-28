@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { emptyStore, IStore, IStoreResponses, IStoreState } from "models/store";
-import { storeService } from "services/store.service";
+import { emptyStore, IStore, IStoreResponses, IStoreState } from "../models/store";
+import { storeService } from "../services/store.service";
 
 export const initialState: IStoreState = {
   stores: [],

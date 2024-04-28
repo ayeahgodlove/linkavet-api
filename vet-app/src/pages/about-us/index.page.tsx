@@ -1,9 +1,9 @@
 import { Card, Carousel, Col, ConfigProvider, Row, Typography } from "antd";
-import { SpinnerComponent } from "components/shared/spinner";
+import { SpinnerComponent } from "../../components/shared/spinner";
 import React from "react";
-import theme from "utils/themeConfig";
+import theme from "../../utils/themeConfig";
 import "pure-react-carousel/dist/react-carousel.es.css";
-import useWindowSize from "hooks/shared/window-resize.hook";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
 import { Helmet } from "react-helmet-async";
 
 const banners = [

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { SubCategoryService } from "services/sub-category.service";
+import { SubCategoryService } from "../services/sub-category.service";
 import { ISubCategoryState, emptySubCategory, ISubCategory, ISubCategoryResponses } from "../models/category.model";
 
 export const initialState: ISubCategoryState = {

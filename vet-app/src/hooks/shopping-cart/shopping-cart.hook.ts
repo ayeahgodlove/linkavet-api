@@ -1,12 +1,11 @@
-import { useProduct } from "hooks/product.hook";
-import { useLocalStorage } from "hooks/shared/local-storage.hook";
-import { IProduct, emptyProduct } from "models/product.model";
+import { useProduct } from "../../hooks/product.hook";
+import { IProduct, emptyProduct } from "../../models/product.model";
 import { useDispatch, useSelector } from "react-redux";
 import {
   CartItem,
   shoppingCartActions,
-} from "redux/shared/shopping-cart.slice";
-import { IRootState } from "redux/store";
+} from "../../redux/shared/shopping-cart.slice";
+import { IRootState } from "../../redux/store";
 
 const useShoppingCart = () => {
   const isOpen = useSelector<IRootState, boolean>(

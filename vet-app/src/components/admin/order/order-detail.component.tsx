@@ -1,6 +1,6 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useOrder } from "hooks/order.hook";
-import { useUser } from "hooks/user.hook";
+import { useOrder } from "../../../hooks/order.hook";
+import { useUser } from "../../../hooks/user.hook";
 import React, { useCallback, useEffect } from "react";
 import ProductTable from "./sub/product-table.component";
 

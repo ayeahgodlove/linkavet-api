@@ -1,5 +1,5 @@
-import { ContactForm } from "components/contact/contact.component";
-import PageContent from "components/shared/page-content";
+import { ContactForm } from "../../components/contact/contact.component";
+import PageContent from "../../components/shared/page-content";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 

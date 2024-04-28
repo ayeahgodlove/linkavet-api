@@ -1,15 +1,15 @@
 import { Button, Form, Input, Alert, message, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { FormErrorComponent } from "components/shared/form-error/form-error.component";
-import { useModalContext } from "context/app-modal.context";
-import { useUserSpecialty } from "hooks/user-specialty.hook";
-import { useFormErrors } from "hooks/shared/form-error.hook";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { IUserSpecialty } from "models/user-specialty.model";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { FormErrorComponent } from "../../../components/shared/form-error/form-error.component";
+import { useModalContext } from "../../../context/app-modal.context";
+import { useUserSpecialty } from "../../../hooks/user-specialty.hook";
+import { useFormErrors } from "../../../hooks/shared/form-error.hook";
+import { useFormInit } from "../../../hooks/shared/form-init.hook";
+import { IUserSpecialty } from "../../../models/user-specialty.model";
+import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import React, { useCallback, useEffect, useState } from "react";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useUser } from "hooks/user.hook";
+import { useAuth } from "../../../hooks/auth/auth.hook";
+import { useUser } from "../../../hooks/user.hook";
 
 type Props = {
   formMode: UpdateMode;

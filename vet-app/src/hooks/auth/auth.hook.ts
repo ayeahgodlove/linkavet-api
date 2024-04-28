@@ -1,18 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { IUser } from "models/user.model";
+import { IRootState } from "../../redux/store";
+import { IUser } from "../../models/user.model";
 import {
   loginError,
   loginSuccess,
-  loginUser,
   logoutFun,
   logoutUser,
   registerSuccess,
-  registerUser,
-} from "redux/auth/auth.slice";
+} from "../../redux/auth/auth.slice";
 import { useToken } from "./token.hook";
-import { authService } from "services/auth.service";
+import { authService } from "../../services/auth.service";
 
 const useAuth = () => {
   const user = useSelector<IRootState, IUser>((state) => state.auth.user);
@@ -52,7 +50,6 @@ const useAuth = () => {
         return false;
       });
   };
-
 
   const registerUserFunction = async (user: IUser) => {
     return await authService

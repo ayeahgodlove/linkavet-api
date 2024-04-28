@@ -1,13 +1,13 @@
 import { Card, Typography, Input, Space, Button } from "antd";
 import React, { useEffect, useState } from "react";
-import { useProduct } from "hooks/product.hook";
-import { ProductService } from "services/product.service";
-import { fetchproductSuccess } from "redux/product.slice";
-import { IProduct } from "models/product.model";
-import search from "utils/search";
+import { useProduct } from "../../hooks/product.hook";
+import { ProductService } from "../../services/product.service";
+import { fetchproductSuccess } from "../../redux/product.slice";
+import { IProduct } from "../../models/product.model";
+import search from "../../utils/search";
 import { FiGrid, FiList } from "react-icons/fi";
 import ButtonGroup from "antd/es/button/button-group";
-import useWindowSize from "hooks/shared/window-resize.hook";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
 import GridView from "./product-card-grid.component";
 import ListView from "./product-list-view.component";
 

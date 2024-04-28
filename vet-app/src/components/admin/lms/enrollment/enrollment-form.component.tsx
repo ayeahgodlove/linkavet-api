@@ -1,13 +1,13 @@
 import { Button, Form, Select, message } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { FormErrorComponent } from "components/shared/form-error/form-error.component";
-import { useModalContext } from "context/app-modal.context";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useCourse } from "hooks/lms/course.hook";
-import { useEnrollment } from "hooks/lms/enrollment.hook";
-import { useFormInit } from "hooks/shared/form-init.hook";
-import { IEnrollment } from "models/lms/enrollment";
-import { UpdateMode } from "models/shared/update-mode.enum";
+import { FormErrorComponent } from "../../../../components/shared/form-error/form-error.component";
+import { useModalContext } from "../../../../context/app-modal.context";
+import { useAuth } from "../../../../hooks/auth/auth.hook";
+import { useCourse } from "../../../../hooks/lms/course.hook";
+import { useEnrollment } from "../../../../hooks/lms/enrollment.hook";
+import { useFormInit } from "../../../../hooks/shared/form-init.hook";
+import { IEnrollment } from "../../../../models/lms/enrollment";
+import { UpdateMode } from "../../../../models/shared/update-mode.enum";
 import React, { useCallback, useEffect, useState } from "react";
 
 type Props = {

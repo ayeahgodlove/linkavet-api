@@ -38,6 +38,7 @@ import { userRoleReducer } from "./user-role.slice";
 import { roleReducer } from "./role.slice";
 import { userSpecialtyReducer } from "./user-specialty.slice";
 import { imageReducer } from "./shared/image.slice";
+import { eventReducer } from "./event.slice";
 
 // const middlewares: [any] = [thunkMiddleware];
 
@@ -75,6 +76,7 @@ export const rootReducer = combineReducers({
   userRole: userRoleReducer,
   role: roleReducer,
   userSpecialty: userSpecialtyReducer,
+  event: eventReducer,
 });
 
 const persistConfig = {
@@ -105,6 +107,8 @@ const persistConfig = {
     "role",
     "userRole",
     "userSpecialty",
+    "event",
+    "image",
   ], // Specify the reducers you want to persist
 };
 

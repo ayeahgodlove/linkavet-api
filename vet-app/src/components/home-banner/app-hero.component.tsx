@@ -1,11 +1,11 @@
 import { Button, Carousel, Image, Space } from "antd";
 import React, { useEffect, useState } from "react";
 import "./app-hero.style.scss";
-import { useTween } from "hooks/shared/tween.hook";
+import { useTween } from "../../hooks/shared/tween.hook";
 import TweenOne from "rc-tween-one";
 import Texty from "rc-texty";
 import { FaPlay } from "react-icons/fa";
-import useWindowSize from "hooks/shared/window-resize.hook";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
 
 const items = [
   {

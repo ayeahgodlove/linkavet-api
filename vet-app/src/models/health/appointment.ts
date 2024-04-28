@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
-import { IBaseState } from "models/base-state.model";
-import { IResponseBase } from "models/response-base.model";
-import { STATUS } from "models/shared/status.enum";
+import { IBaseState } from "../base-state.model";
+import { IResponseBase } from "../response-base.model";
+import { STATUS } from "../shared/status.enum";
 
 export interface IAppointment {
   id: string;

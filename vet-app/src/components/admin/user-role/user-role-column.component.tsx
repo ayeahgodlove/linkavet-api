@@ -1,7 +1,7 @@
 import { ColumnsType } from "antd/es/table";
-import { useRole } from "hooks/role.hook";
-import { useUser } from "hooks/user.hook";
-import { IUserRole } from "models/user-role.model";
+import { useRole } from "../../../hooks/role.hook";
+import { useUser } from "../../../hooks/user.hook";
+import { IUserRole } from "../../../models/user-role.model";
 
 export const useUserRoleColumn = () => {
   const { getUser } = useUser();

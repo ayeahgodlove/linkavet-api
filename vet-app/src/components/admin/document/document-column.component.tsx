@@ -1,6 +1,6 @@
 import { ColumnsType } from "antd/es/table";
-import { IDocument } from "models/document";
-import { format } from "utils/format";
+import { IDocument } from "../../../models/document";
+import { format } from "../../../utils/format";
 
 export const documentTableColumns: ColumnsType<IDocument> = [
   {

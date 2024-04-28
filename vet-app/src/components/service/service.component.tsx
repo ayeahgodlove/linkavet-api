@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button, Row, Col, Typography, ConfigProvider } from "antd";
-import useWindowSize from "hooks/shared/window-resize.hook";
+import useWindowSize from "../../hooks/shared/window-resize.hook";
 import { green } from "@ant-design/colors";
 import { FaUserDoctor } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";

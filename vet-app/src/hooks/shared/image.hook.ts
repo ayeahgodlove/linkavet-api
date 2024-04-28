@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useCallback, useEffect } from "react";
-import { IRootState } from "redux/store";
-import { addImageSuccess } from "redux/shared/image.slice";
+import {  useEffect } from "react";
+import { IRootState } from "../../redux/store";
+import { addImageSuccess } from "../../redux/shared/image.slice";
 
 const useImage = () => {
   const images = useSelector<IRootState, string[]>(

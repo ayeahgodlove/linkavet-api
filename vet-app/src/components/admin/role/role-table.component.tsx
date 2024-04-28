@@ -1,16 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table } from "antd";
 import { useNavigate } from "react-router-dom";
-import { IRole } from "models/role.model";
-import { useRole } from "hooks/role.hook";
-import { NoContent } from "components/shared/no-content/no-content.component";
+import { IRole } from "../../../models/role.model";
+import { useRole } from "../../../hooks/role.hook";
+import { NoContent } from "../../../components/shared/no-content/no-content.component";
 import slugify from "slugify";
 import { useDispatch } from "react-redux";
-import search from "utils/search";
-import { fetchRoleSuccess } from "redux/role.slice";
-import { SpinnerComponent } from "components/shared/spinner";
+import search from "../../../utils/search";
+import { fetchRoleSuccess } from "../../../redux/role.slice";
+import { SpinnerComponent } from "../../../components/shared/spinner";
 import { useRoleColumn } from "./role-column.component";
-import { RoleService } from "services/role.service";
+import { RoleService } from "../../../services/role.service";
 
 const RoleTable: React.FC = () => {
   const { roles, setRole, initialFetch } = useRole();

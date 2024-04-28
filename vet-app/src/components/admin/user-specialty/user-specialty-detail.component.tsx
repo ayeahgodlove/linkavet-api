@@ -1,5 +1,5 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useUserSpecialty } from "hooks/user-specialty.hook";
+import { useUserSpecialty } from "../../../hooks/user-specialty.hook";
 import React from "react";
 
 const UserSpecialtyDetailComponent: React.FC = () => {

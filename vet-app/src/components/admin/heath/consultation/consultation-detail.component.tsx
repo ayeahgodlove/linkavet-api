@@ -1,6 +1,6 @@
 import { Card, Col, Image, List, Row, Typography } from "antd";
-import { useConsultation } from "hooks/health/consultation.hook";
-import { useUser } from "hooks/user.hook";
+import { useConsultation } from "../../../../hooks/health/consultation.hook";
+import { useUser } from "../../../../hooks/user.hook";
 import React from "react";
 
 const ConsultationDetailComponent: React.FC = () => {

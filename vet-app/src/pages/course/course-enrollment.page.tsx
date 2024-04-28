@@ -1,12 +1,12 @@
 import { Alert, Button, Card, Col, List, Row, Typography, message } from "antd";
-import BackButton from "components/shared/back-button.component";
-import { useAuth } from "hooks/auth/auth.hook";
-import { useCourse } from "hooks/lms/course.hook";
-import { useEnrollment } from "hooks/lms/enrollment.hook";
-import { usePayment } from "hooks/payment.hook";
-import { useInitTransaction } from "hooks/shopping-cart/init-transaction.hook";
-import { emptyEnrollment } from "models/lms/enrollment";
-import { IPaymentResponse, emptyPayment } from "models/payment.model";
+import BackButton from "../../components/shared/back-button.component";
+import { useAuth } from "../../hooks/auth/auth.hook";
+import { useCourse } from "../../hooks/lms/course.hook";
+import { useEnrollment } from "../../hooks/lms/enrollment.hook";
+import { usePayment } from "../../hooks/payment.hook";
+import { useInitTransaction } from "../../hooks/shopping-cart/init-transaction.hook";
+import { emptyEnrollment } from "../../models/lms/enrollment";
+import { IPaymentResponse, emptyPayment } from "../../models/payment.model";
 import {
   ITransactionVmResponse,
   TRANSACTION_STATUS,

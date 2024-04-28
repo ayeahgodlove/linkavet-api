@@ -4,8 +4,8 @@ import {
   ICourse,
   ICourseResponses,
   ICourseState,
-} from "models/lms/course";
-import { CourseService } from "services/lms/course.service";
+} from "../../models/lms/course";
+import { CourseService } from "../../services/lms/course.service";
 
 export const initialState: ICourseState = {
   courses: [],
