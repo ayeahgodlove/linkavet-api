@@ -14,6 +14,10 @@ import { SiGooglemeet, SiGooglemessages } from "react-icons/si";
 import { format } from "utils/format";
 import BalanceCard from "components/dashboard/balance-card";
 import ProjectTableEcommerceCard from "components/dashboard/project-table-ecommerce-card";
+import { useUser } from "hooks/user.hook";
+import { usePayment } from "hooks/payment.hook";
+import { useAppointment } from "hooks/health/appointment.hook";
+import { usePost } from "hooks/post.hook";
 
 const contentStyle: React.CSSProperties = {
   height: "75vh",
@@ -28,6 +32,10 @@ const contentStyle: React.CSSProperties = {
 
 const DashboardPage: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
+  const { userCount } = useUser();
+  const { totalAmountPaid } = usePayment();
+  const { appointmentCounts } = useAppointment();
+  const { postCounts } = usePost();
 
   if (!isAuthenticated || !user) {
     return <Navigate to={"/auth/login"} />;
@@ -59,7 +67,7 @@ const DashboardPage: React.FC = () => {
             size="small"
             title={
               <>
-                <Col span={24} style={{ marginTop: 15 }}>
+                <Col span={24} style={{ marginTop: 15, paddingLeft: 10 }}>
                   <Typography.Title level={3} style={{ marginBottom: 5 }}>
                     Welcome back, {user.firstname} 👋
                   </Typography.Title>
@@ -78,9 +86,7 @@ const DashboardPage: React.FC = () => {
                 <FeatureCard
                   icon={<TbUsersGroup size={24} color="rgb(49, 118, 16)" />}
                   title="Total Users"
-                  // titleIcon={<GrArticle size={24} fontWeight={"bold"} />}
-                  // date="April 2022"
-                  price={`${format.number(50)}`}
+                  price={`${format.number(userCount)}`}
                 />
               </Col>
 
@@ -88,18 +94,14 @@ const DashboardPage: React.FC = () => {
                 <FeatureCard
                   icon={<GiCash size={28} color="rgb(49, 118, 16)" />}
                   title="Total Sales"
-                  // titleIcon={<SiGooglemessages />}
-                  // date="April 2022"
-                  price={`${format.number(20000)} XAF`}
+                  price={`${format.number(totalAmountPaid)} XAF`}
                 />
               </Col>
               <Col sm={8} md={6} span={24}>
                 <FeatureCard
                   icon={<SiGooglemeet size={24} color="rgb(49, 118, 16)" />}
                   title="Appointments"
-                  // titleIcon={<SiGooglemessages />}
-                  // date="April 2022"
-                  price="05"
+                  price={`${appointmentCounts}`}
                 />
               </Col>
 
@@ -107,9 +109,7 @@ const DashboardPage: React.FC = () => {
                 <FeatureCard
                   icon={<GrArticle size={24} color="rgb(49, 118, 16)" />}
                   title="Total Posts"
-                  // titleIcon={<SiGooglemessages />}
-                  // date="April 2022"
-                  price="05"
+                  price={`${postCounts}`}
                 />
               </Col>
             </Row>
@@ -123,7 +123,6 @@ const DashboardPage: React.FC = () => {
             title={
               <>
                 <div style={wrapperStyle}>
-                  {/* <Calendar fullscreen={false} onPanelChange={onPanelChange} /> */}
                   <CalenderComponent />
                 </div>
               </>
