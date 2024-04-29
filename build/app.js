@@ -69,7 +69,7 @@ const user_role_route_1 = __importDefault(require("./presentation/routes/user-ro
 // import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
 const user_specialty_route_1 = __importDefault(require("./presentation/routes/user-specialty.route"));
 const upload_route_1 = __importDefault(require("./presentation/routes/upload.route"));
-debugger;
+const event_route_1 = __importDefault(require("./presentation/routes/event.route"));
 dotenv.config();
 const db = new db_postgres_config_1.PostgresDbConfig();
 /**
@@ -164,6 +164,7 @@ db.connection()
     app.use("/api/user-roles", user_role_route_1.default);
     app.use("/api/user-specialties", user_specialty_route_1.default);
     app.use("/api/uploads", upload_route_1.default);
+    app.use("/api/calendar/events", event_route_1.default);
     // middleware interceptions
     app.use(not_found_middleware_1.notFoundHandler);
     /**

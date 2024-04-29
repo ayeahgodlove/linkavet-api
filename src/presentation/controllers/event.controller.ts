@@ -3,9 +3,9 @@ import { IEvent, IEventResponse, emptyEvent } from "../../domain/models/event";
 import { EventUseCase } from "../../domain/usecases/event.usecase";
 import { EventRepository } from "../../data/repositories/impl/event.repository";
 import { EventMapper } from "../mappers/mapper";
-import { validate } from "class-validator";
-import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
+import { User } from "../../data/entities/user";
+import { nanoid } from "nanoid";
 
 const eventRepository = new EventRepository();
 const eventUseCase = new EventUseCase(eventRepository);
@@ -16,10 +16,15 @@ export class EventsController {
     req: Request,
     res: Response<IEventResponse>
   ): Promise<void> {
-    const dto = new req.body();
+    const dto = req.body;
+    const user = req.user as User;
 
     try {
-      const eventResponse = await eventUseCase.createEvent(dto.toData());
+      const eventResponse = await eventUseCase.createEvent({
+        ...dto,
+        id: nanoid(10),
+        userId: user.dataValues.id,
+      });
 
       res.status(201).json({
         data: eventResponse.toJSON<IEvent>(),
@@ -92,11 +97,14 @@ export class EventsController {
   ): Promise<void> {
     try {
       const id = req.params.id;
+      const user = req.user as User;
+
 
       const obj: IEvent = {
         ...emptyEvent,
         ...req.body,
         id: id,
+        userId: user.dataValues.id,
       };
       const updatedEvent = await eventUseCase.updateEvent(obj);
       const eventDto = eventMapper.toDTO(updatedEvent);

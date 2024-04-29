@@ -12,8 +12,8 @@ export const initialState: IEventState = {
 };
 
 const FETCH_EVENTS = "calendar/fetchEvents";
-const ADD_EVENT = "calendar/addEvent";
-const UPDATE_EVENT = "calendar/updateEvent";
+// const ADD_EVENT = "calendar/addEvent";
+// const UPDATE_EVENT = "calendar/updateEvent";
 const UPDATE_FILTERS = "calendar/updateFilters";
 const UPDATE_ALL_FILTERS = "calendar/updateAllFilters";
 const REMOVE_EVENT = "calendar/removeEvent";
@@ -22,28 +22,28 @@ const SELECT_EVENT = "calendar/selectEvent";
 // Async thunk to fetch events
 export const fetchEvents = createAsyncThunk(
   FETCH_EVENTS,
-  async (calendars: string[]) => async (_, thunkApi) => {
+  async (_, thunkApi) => {
     try {
-      return await EventService.list(calendars);
+      return await EventService.list();
     } catch (error: any) {
       return thunkApi.rejectWithValue({ error: error.data });
     }
   }
 );
 
-export const addEventThunk = createAsyncThunk(
-  ADD_EVENT,
-  async (event: IEvent) => async (_) => {
-    return await EventService.create(event);
-  }
-);
+// export const addEventThunk = createAsyncThunk(
+//   ADD_EVENT,
+//   async (event: IEvent) => async (_) => {
+//     return await EventService.create(event);
+//   }
+// );
 
-export const updateEventThunk = createAsyncThunk(
-  UPDATE_EVENT,
-  async (event: IEvent) => async (_) => {
-    return await EventService.update(event);
-  }
-);
+// export const updateEventThunk = createAsyncThunk(
+//   UPDATE_EVENT,
+//   async (event: IEvent) => async (_) => {
+//     return await EventService.update(event);
+//   }
+// );
 
 export const deleteEventThunk = createAsyncThunk(
   REMOVE_EVENT,
@@ -56,7 +56,7 @@ export const eventSlice = createSlice({
   name: "event",
   initialState,
   reducers: {
-    fetcheventSuccess: (state, action: PayloadAction<IEvent[]>) => {
+    fetchEventSuccess: (state, action: PayloadAction<IEvent[]>) => {
       state.isLoading = false;
       state.initialFetch = false;
       state.events = action.payload;
@@ -101,10 +101,24 @@ export const eventSlice = createSlice({
       return { ...state, selectedCalendars: selected };
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchEvents.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchEvents.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.initialFetch = false;
+      state.events = action.payload.data;
+    });
+    builder.addCase(fetchEvents.rejected, (state, action) => {
+      state.isLoading = false;
+      state.errors = action.payload;
+    });
+  },
 });
 
 export const {
-  fetcheventSuccess,
+  fetchEventSuccess,
   editEventSuccess,
   addEventSuccess,
   setActiveEvent,

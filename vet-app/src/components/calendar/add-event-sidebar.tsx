@@ -8,7 +8,7 @@ import { Button, Input, Form, Modal, Typography, Row, Col, Select } from "antd";
 import { emptyEvent, IEvent } from "../../models/event.model";
 import { useEvent } from "hooks/event.hook";
 import React from "react";
-
+import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 export const isObjEmpty = (obj: IEvent) => Object.keys(obj).length === 0;
 
@@ -134,14 +134,15 @@ const AddEventSidebar: React.FC<IProps> = ({
     useEvent();
   const [form] = Form.useForm();
 
-  const [desc, setDesc] = useState("");
-  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
+  const [url, setUrl] = useState<string>("");
+  const [location, setLocation] = useState<string>("");
+  const [guests, setGuests] = useState<string[]>([]);
   const [allDay, setAllDay] = useState(false);
-  const [endPicker, setEndPicker] = useState(new Date());
-  const [startPicker, setStartPicker] = useState(new Date());
-  const [value, setValue] = useState<
-    { value: string; label: string; badge: string }[]
-  >([{ value: "Travel", label: "Travel", badge: "#C903FF" }]);
+  const [endPicker, setEndPicker] = useState<Date>(new Date());
+  const [startPicker, setStartPicker] = useState<Date>(new Date());
+  const [value, setValue] = useState<string>("Travel");
 
   const options = [
     { value: "Travel", label: "Travel", badge: "#C903FF" },
@@ -161,6 +162,7 @@ const AddEventSidebar: React.FC<IProps> = ({
     }
   };
 
+  console.log("value: ", value);
   // Adds New Event
   const handleAddEvent = () => {
     const obj: IEvent = {
@@ -170,15 +172,16 @@ const AddEventSidebar: React.FC<IProps> = ({
       allDay,
       display: "block",
       extendedProps: {
-        calendar: value[0].label,
+        calendar: value,
         description: desc.length ? desc : `${undefined}`,
-        guests: [],
-        location: "",
+        guests: guests,
+        location: location,
       },
       id: "",
       userId: "",
-      url: ""
+      url: url,
     };
+    debugger;
     addEvent(obj);
     refetchEvents();
     handleCancel();
@@ -189,7 +192,7 @@ const AddEventSidebar: React.FC<IProps> = ({
     setEvent(emptyEvent);
     setTitle("");
     setDesc("");
-    setValue([{ value: "Travel", label: "Travel", badge: "#C903FF" }]);
+    setValue("Travel");
     setStartPicker(new Date());
     setEndPicker(new Date());
     setIsModalVisible(false);
@@ -229,18 +232,31 @@ const AddEventSidebar: React.FC<IProps> = ({
   const handleUpdateEvent = () => {
     const eventToUpdate: IEvent = {
       id: selectedEvent.id,
-      title,
-      allDay,
-      start: startPicker,
-      end: endPicker,
+      title: selectedEvent.title.length > 0 ? selectedEvent.title : title,
+      allDay: selectedEvent.allDay ? selectedEvent.allDay : allDay,
+      start:
+        selectedEvent.start instanceof Date ? selectedEvent.start : startPicker,
+      end: selectedEvent.start instanceof Date ? selectedEvent.end : endPicker,
       extendedProps: {
-        description: desc,
-        calendar: value[0].label,
-        guests: [],
-        location: "",
+        description:
+          selectedEvent.extendedProps.description.length > 0
+            ? selectedEvent.extendedProps.description
+            : desc,
+        calendar:
+          selectedEvent.extendedProps.calendar.length > 0
+            ? selectedEvent.extendedProps.calendar
+            : value,
+        guests:
+          selectedEvent.extendedProps.guests.length > 0
+            ? selectedEvent.extendedProps.guests
+            : guests,
+        location:
+          selectedEvent.extendedProps.location.length > 0
+            ? selectedEvent.extendedProps.location
+            : location,
       },
-      userId: "",
-      url: ""
+      userId: selectedEvent.userId,
+      url: selectedEvent.url.length > 0 ? selectedEvent.url : url,
     };
 
     const propsToUpdate = ["id", "title"];
@@ -274,9 +290,11 @@ const AddEventSidebar: React.FC<IProps> = ({
   return (
     <Modal
       open={isModalVisible}
-      styles={{ header: {
-        borderBottom: "1px solid #f5f5f5"
-      }}}
+      styles={{
+        header: {
+          borderBottom: "1px solid #f5f5f5",
+        },
+      }}
       title={<Typography.Title level={4}>{modalTitle}</Typography.Title>}
       onCancel={() => {
         handleResetInputValues();
@@ -309,7 +327,7 @@ const AddEventSidebar: React.FC<IProps> = ({
       closeIcon={
         <RiCloseFill className="remix-icon text-color-black-100" size={24} />
       }
-      width={416}
+      width={500}
     >
       <Form
         layout="vertical"
@@ -328,45 +346,77 @@ const AddEventSidebar: React.FC<IProps> = ({
           />
         </Form.Item>
 
-        <Form.Item label="From :">
-          <Flatpickr
-            required
-            id="startDate"
-            name="startDate"
-            style={{ width: "100%" }}
-            onChange={(date) => setStartPicker(date[0])}
-            value={startPicker}
-            options={{
-              enableTime: allDay === false,
-              dateFormat: "d M Y - H:i K",
-              static: true,
-            }}
-          />
-        </Form.Item>
+        <Row gutter={[16, 16]}>
+          <Col sm={24} md={12}>
+            <Form.Item label="From :">
+              <Flatpickr
+                required
+                id="startDate"
+                name="startDate"
+                style={{ width: "100%" }}
+                onChange={(date) => setStartPicker(date[0])}
+                value={startPicker}
+                options={{
+                  enableTime: allDay === false,
+                  dateFormat: "d M Y - H:i K",
+                  static: true,
+                }}
+              />
+            </Form.Item>
+          </Col>
+          <Col sm={24} md={12}>
+            <Form.Item label="To :" style={{ width: "100%" }}>
+              <Flatpickr
+                required
+                id="endDate"
+                name="endDate"
+                style={{ width: "100%" }}
+                onChange={(date) => setEndPicker(date[0])}
+                value={endPicker}
+                options={{
+                  enableTime: allDay === false,
+                  dateFormat: "d M Y - H:i K",
+                  static: true,
+                }}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
 
-        <Form.Item label="To :" style={{ width: "100%" }}>
-          <Flatpickr
-            required
-            id="endDate"
-            name="endDate"
-            style={{ width: "100%" }}
-            onChange={(date) => setEndPicker(date[0])}
-            value={endPicker}
-            options={{
-              enableTime: allDay === false,
-              dateFormat: "d M Y - H:i K",
-              static: true,
-            }}
-          />
-        </Form.Item>
+        <Row gutter={[16, 16]}>
+          <Col sm={24} md={12}>
+            <Form.Item label="Event :">
+              <Select
+                id="label"
+                value={value}
+                options={options}
+                allowClear={true}
+                onChange={(value: any) => setValue(value)}
+              />
+            </Form.Item>
+          </Col>
+          <Col sm={24} md={12}>
+            <Form.Item label="Event Location :">
+              <Input
+                id="location"
+                name="location"
+                style={{ width: "100%" }}
+                placeholder="Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </Form.Item>
+          </Col>
+        </Row>
 
-        <Form.Item label="Event :">
-          <Select
-            id="label"
-            value={value}
-            options={options}
-            allowClear={true}
-            onChange={(options: any) => setValue([options!])}
+        <Form.Item label="Event Url :">
+          <Input
+            id="url"
+            name="url"
+            style={{ width: "100%" }}
+            placeholder="Url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
           />
         </Form.Item>
 
@@ -381,6 +431,73 @@ const AddEventSidebar: React.FC<IProps> = ({
             placeholder="Description"
           />
         </Form.Item>
+
+        <Form.List
+          name="guests"
+          rules={[
+            {
+              validator: async (_, guests) => {
+                if (!guests || guests.length < 1) {
+                  return Promise.reject(new Error("At least 3 guests"));
+                } else {
+                  return Promise.resolve(); // Resolve the Promise when validation passes
+                }
+              },
+            },
+          ]}
+        >
+          {(fields, { add, remove }, { errors }) => (
+            <>
+              {fields.map((field, index) => (
+                <Form.Item
+                  label={index === 0 ? "Guests" : ""}
+                  required={false}
+                  key={field.key}
+                  style={{ marginBottom: 10 }}
+                >
+                  <div style={{ display: "flex" }}>
+                    <Form.Item
+                      {...field}
+                      validateTrigger={["onChange", "onBlur"]}
+                      rules={[
+                        {
+                          required: true,
+                          whitespace: true,
+                          message: "Please input guest or delete this field.",
+                        },
+                      ]}
+                      style={{ width: "100%" }}
+                    >
+                      <Input
+                        placeholder="guest"
+                        onChange={(e) => setGuests([e.target.value])}
+                      />
+                    </Form.Item>
+                    {fields.length > 1 ? (
+                      <div style={{ marginLeft: 5 }}>
+                        <MinusCircleOutlined
+                          className="dynamic-delete-button"
+                          onClick={() => remove(field.name)}
+                          style={{ fontSize: 20, opacity: 0.6 }}
+                        />
+                      </div>
+                    ) : null}
+                  </div>
+                </Form.Item>
+              ))}
+              <Form.Item style={{ marginBottom: 15 }}>
+                <Button
+                  type="dashed"
+                  onClick={() => add()}
+                  icon={<PlusOutlined />}
+                >
+                  Add guests
+                </Button>
+                <Form.ErrorList errors={errors} />
+              </Form.Item>
+            </>
+          )}
+        </Form.List>
       </Form>
     </Modal>
   );

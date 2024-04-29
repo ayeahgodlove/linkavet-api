@@ -1,3 +1,4 @@
+import { fetchEvents } from "../event.slice";
 import { fetchBannersAsync } from "../banner.slice";
 import { fetchCategoriesAsync } from "../category.slice";
 import { fetchDocumentsAsync } from "../document.slice";
@@ -21,6 +22,7 @@ export const initialDataAsync = (): AppThunk => async (dispatch) => {
     dispatch(fetchUsersAsync());
     dispatch(fetchDocumentsAsync());
     dispatch(fetchUserRolesAsync())
+    dispatch(fetchEvents())
   } catch (error) {
     console.log(error);
   }

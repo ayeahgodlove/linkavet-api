@@ -18,10 +18,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fullcalendar/daygrid": "^6.1.11",
-    "@fullcalendar/interaction": "^6.1.11",
-    "@fullcalendar/react": "^6.1.11",
-    "@fullcalendar/timegrid": "^6.1.11",
     "@googlemaps/google-maps-services-js": "^3.3.32",
     "@hachther/mesomb": "^1.1.0",
     "@types/connect-redis": "^0.0.20",
