@@ -1,27 +1,19 @@
-import {
-  // Calendar,
-  CalendarProps,
-  Card,
-  Carousel,
-  Col,
-  Row,
-  TabsProps,
-} from "antd";
+import { Card, Carousel, Col, Row, Typography } from "antd";
 import React from "react";
 import "./dashboard.style.scss";
-import { FaHospitalUser } from "react-icons/fa";
-import { LiaSchoolSolid } from "react-icons/lia";
-import { RiReservedFill } from "react-icons/ri";
-import { MdEmergency } from "react-icons/md";
 import { useAuth } from "../../hooks/auth/auth.hook";
 import { Navigate } from "react-router-dom";
-import { Tabs } from "antd";
 import { FloatButton } from "antd";
 import { CommentOutlined } from "@ant-design/icons";
-import useWindowSize from "../../hooks/shared/window-resize.hook";
-import UploadResourceComponent from "../../components/user-docs/upload-resource.component";
-import { Dayjs } from "dayjs";
 import CalenderComponent from "../../components/calendar/calendar.component";
+import FeatureCard from "../../components/dashboard/feature-card.component";
+import { TbUsersGroup } from "react-icons/tb";
+import { GrArticle } from "react-icons/gr";
+import { GiCash } from "react-icons/gi";
+import { SiGooglemeet, SiGooglemessages } from "react-icons/si";
+import { format } from "utils/format";
+import BalanceCard from "components/dashboard/balance-card";
+import ProjectTableEcommerceCard from "components/dashboard/project-table-ecommerce-card";
 
 const contentStyle: React.CSSProperties = {
   height: "75vh",
@@ -34,102 +26,12 @@ const contentStyle: React.CSSProperties = {
   objectPosition: "center",
 };
 
-const onChange = (key: string) => {
-  console.log(key);
-};
-
-const useTabHeaders = (width: number) => {
-  const items: TabsProps["items"] = [
-    {
-      key: "1",
-      label: (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: width > 768 ? "0 3rem" : "0 1rem",
-          }}
-        >
-          <FaHospitalUser size={width > 768 ? 45 : 30} color="#3498db" />
-          <p style={{ fontSize: 12, color: "#333" }}>Consultation</p>
-        </div>
-      ),
-      children: `Content of Tab Pane 1`,
-    },
-    {
-      key: "2",
-      label: (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: width > 768 ? "0 3rem" : "0 1rem",
-          }}
-        >
-          <RiReservedFill size={width > 768 ? 45 : 30} color="#3498db" />
-          <p style={{ fontSize: 12, color: "#333" }}>Appointments</p>
-        </div>
-      ),
-      children: `Content of Tab Pane 2`,
-    },
-    {
-      key: "3",
-      label: (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: width > 768 ? "0 3rem" : "0 1rem",
-          }}
-        >
-          <LiaSchoolSolid size={width > 768 ? 45 : 30} color="#3498db" />
-          <p style={{ fontSize: 12, color: "#333" }}>Resources</p>
-        </div>
-      ),
-      children: (
-        <>
-          <UploadResourceComponent />
-        </>
-      ),
-    },
-    {
-      key: "4",
-      label: (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            padding: width > 768 ? "0 3rem" : "0 1rem",
-          }}
-        >
-          <MdEmergency size={width > 768 ? 45 : 30} color="#3498db" />
-          <p style={{ fontSize: 12, color: "#333" }}>Emmergency</p>
-        </div>
-      ),
-      children: `Content of Tab Pane 4`,
-    },
-  ];
-  return {
-    items,
-  };
-};
-
 const DashboardPage: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
-  const { width } = useWindowSize();
-  const { items } = useTabHeaders(width);
 
   if (!isAuthenticated || !user) {
     return <Navigate to={"/auth/login"} />;
   }
-
-  const onPanelChange = (value: Dayjs, mode: CalendarProps<Dayjs>["mode"]) => {
-    console.log(value.format("YYYY-MM-DD"), mode);
-  };
 
   return (
     <>
@@ -154,7 +56,70 @@ const DashboardPage: React.FC = () => {
       <Row justify={"center"} align={"middle"}>
         <Col xs={22} md={18}>
           <Card
-            bordered={false}
+            size="small"
+            title={
+              <>
+                <Col span={24} style={{ marginTop: 15 }}>
+                  <Typography.Title level={3} style={{ marginBottom: 5 }}>
+                    Welcome back, {user.firstname} 👋
+                  </Typography.Title>
+                  <Typography.Paragraph style={{ fontWeight: "normal" }}>
+                    Your current status and analytics are here
+                  </Typography.Paragraph>
+                </Col>
+              </>
+            }
+            style={{
+              top: "-500px",
+            }}
+          >
+            <Row gutter={[32, 32]}>
+              <Col sm={8} md={6} span={24}>
+                <FeatureCard
+                  icon={<TbUsersGroup size={24} color="rgb(49, 118, 16)" />}
+                  title="Total Users"
+                  // titleIcon={<GrArticle size={24} fontWeight={"bold"} />}
+                  // date="April 2022"
+                  price={`${format.number(50)}`}
+                />
+              </Col>
+
+              <Col sm={8} md={6} span={24}>
+                <FeatureCard
+                  icon={<GiCash size={28} color="rgb(49, 118, 16)" />}
+                  title="Total Sales"
+                  // titleIcon={<SiGooglemessages />}
+                  // date="April 2022"
+                  price={`${format.number(20000)} XAF`}
+                />
+              </Col>
+              <Col sm={8} md={6} span={24}>
+                <FeatureCard
+                  icon={<SiGooglemeet size={24} color="rgb(49, 118, 16)" />}
+                  title="Appointments"
+                  // titleIcon={<SiGooglemessages />}
+                  // date="April 2022"
+                  price="05"
+                />
+              </Col>
+
+              <Col sm={8} md={6} span={24}>
+                <FeatureCard
+                  icon={<GrArticle size={24} color="rgb(49, 118, 16)" />}
+                  title="Total Posts"
+                  // titleIcon={<SiGooglemessages />}
+                  // date="April 2022"
+                  price="05"
+                />
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+        <Col xs={22} md={18}>
+          <Card
+            hoverable
+            bordered={true}
+            size="small"
             title={
               <>
                 <div style={wrapperStyle}>
@@ -164,29 +129,31 @@ const DashboardPage: React.FC = () => {
               </>
             }
             style={{
-              top: "-400px",
-              marginBottom: 25,
+              top: "-470px",
             }}
           />
         </Col>
 
         <Col xs={22} md={18}>
           <Card
-            bordered={false}
-            size="default"
+            size="small"
+            title={<BalanceCard />}
+            style={{
+              top: "-440px",
+              padding: "1.5rem 0",
+            }}
+          />
+        </Col>
+
+        <Col xs={22} md={18}>
+          <Card
+            size="small"
+            title={<ProjectTableEcommerceCard />}
             style={{
               top: "-400px",
+              padding: "1.5rem 0",
             }}
-          >
-            <Tabs
-              centered
-              size="small"
-              defaultActiveKey="1"
-              items={items}
-              onChange={onChange}
-              style={{ padding: 0 }}
-            />
-          </Card>
+          />
         </Col>
       </Row>
 
