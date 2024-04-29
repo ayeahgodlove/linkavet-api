@@ -84,6 +84,7 @@ const useUser = () => {
     return [];
   }
 
+  const userCount = users.length;
   useEffect(() => {
     // loadUsers();
   }, [user, users, isLoading, initialFetch]);
@@ -98,7 +99,8 @@ const useUser = () => {
     setUser,
     getUser,
     getUsersByRole,
-    loadUsers
+    loadUsers,
+    userCount
   };
 };
 

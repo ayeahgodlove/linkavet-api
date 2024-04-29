@@ -65,6 +65,8 @@ const usePost = () => {
     });
   };
 
+  const postCounts = posts.length;
+
   useEffect(() => {
     // loadPosts();
   }, [post, posts, isLoading, initialFetch]);
@@ -77,7 +79,8 @@ const usePost = () => {
     addPost,
     editPost,
     setPost,
-    getPostTags
+    getPostTags,
+    postCounts
   };
 };
 

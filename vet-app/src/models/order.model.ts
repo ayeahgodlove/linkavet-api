@@ -14,6 +14,7 @@ export interface IOrder {
   cellPhone:string;
   address: string;
   products: any[];
+  createdAt?: Date
 }
 
 export const emptyOrder: IOrder = {

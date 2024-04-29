@@ -71,6 +71,7 @@ const useAppointment = () => {
     }
     return appointment;
   }, []);
+  const appointmentCounts = appointments.length;
   useEffect(() => {
     // loadAppointments();
   }, [appointment, appointments, isLoading, initialFetch]);
@@ -84,6 +85,7 @@ const useAppointment = () => {
     editAppointment,
     setAppointment,
     getAppointment,
+    appointmentCounts
   };
 };
 

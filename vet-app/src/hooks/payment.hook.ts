@@ -10,14 +10,18 @@ import {
 } from "../redux/payment.slice";
 import { PaymentService } from "../services/payment.service";
 const usePayment = () => {
-  const payments = useSelector<IRootState, IPayment[]>((state) => state.payment.payments);
+  const payments = useSelector<IRootState, IPayment[]>(
+    (state) => state.payment.payments
+  );
   const isLoading = useSelector<IRootState, boolean>(
     (state) => state.payment.isLoading
   );
   const initialFetch = useSelector<IRootState, boolean>(
     (state) => state.payment.initialFetch
   );
-  const payment = useSelector<IRootState, IPayment>((state) => state.payment.payment);
+  const payment = useSelector<IRootState, IPayment>(
+    (state) => state.payment.payment
+  );
 
   const dispatch = useDispatch();
 
@@ -34,7 +38,7 @@ const usePayment = () => {
         return true;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return false;
       });
   };
@@ -51,11 +55,13 @@ const usePayment = () => {
         return true;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         return false;
       });
   };
 
+  const totalAmountPaid =
+    payments.length < 0 ? 0.00 : payments.reduce((a, b) => a + b.amount, 0);
   useEffect(() => {
     // loadPayments();
   }, [payment, payments, isLoading, initialFetch]);
@@ -68,6 +74,7 @@ const usePayment = () => {
     addPayment,
     editPayment,
     setPayment,
+    totalAmountPaid
   };
 };
 

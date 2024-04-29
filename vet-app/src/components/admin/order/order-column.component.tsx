@@ -1,6 +1,8 @@
 import { ColumnsType } from "antd/es/table";
 import { useUser } from "../../../hooks/user.hook";
 import { IOrder } from "../../../models/order.model";
+import React from "react";
+import { format } from "utils/format";
 
 export const useOrderColumn = () => {
   const { getUser } = useUser();
@@ -10,8 +12,15 @@ export const useOrderColumn = () => {
       title: "ID",
       dataIndex: "id",
       key: "id",
-      // width: '20rem',
       filtered: true,
+      render: (_, record, index) => <span key={record.id}>{index + 1}</span>,
+    },
+    {
+      title: "DATE",
+      dataIndex: "createdAt",
+      key: "createdAt",
+      filtered: true,
+      render: (_, record) => format.date(record.createdAt),
     },
     {
       title: "USERNAME",
