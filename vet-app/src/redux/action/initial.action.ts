@@ -8,7 +8,7 @@ import { fetchReviewsAsync } from "../review.slice";
 import { AppThunk } from "../store";
 import { fetchTagsAsync } from "../tag.slice";
 import { fetchUserRolesAsync } from "../user-role.slice";
-import { fetchUserSpecialtiesAsync } from "../user-specialty.slice";
+import { fetchSpecialtiesAsync } from "../specialty.slice";
 import { fetchUsersAsync } from "../user.slice";
 
 export const initialDataAsync = (): AppThunk => async (dispatch) => {
@@ -34,7 +34,7 @@ export const getConfiguration = (): AppThunk => async (dispatch) => {
     await dispatch(fetchTagsAsync());
     await dispatch(fetchBannersAsync());
     await dispatch(fetchReviewsAsync());
-    await dispatch(fetchUserSpecialtiesAsync());
+    await dispatch(fetchSpecialtiesAsync());
   } catch (error) {
     console.log(error);
   }

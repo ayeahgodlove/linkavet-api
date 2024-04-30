@@ -40,7 +40,7 @@ import AdminRolePage from "../pages/admin/role/role.page";
 import AdminRoleDetailPage from "../pages/admin/role/role-detail.page";
 import AdminUserRolePage from "../pages/admin/user-role/user-role.page";
 import AdminUserRoleDetailPage from "../pages/admin/user-role/user-role-detail.page";
-import AdminUserSpecialtyPage from "../pages/admin/user-specialty/user-specialty.page";
+import AdminSpecialtyPage from "../pages/admin/specialty/specialty.page";
 import ProfilePage from "../pages/auth/profile.page";
 
 export const adminRoutes = [
@@ -280,7 +280,7 @@ export const adminRoutes = [
     path: "/admin/user-specialties",
     private: true,
     exact: true,
-    component: <AdminUserSpecialtyPage />,
+    component: <AdminSpecialtyPage />,
   },
   {
     path: "/admin/roles",

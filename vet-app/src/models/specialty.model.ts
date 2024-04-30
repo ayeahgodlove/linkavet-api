@@ -1,7 +1,7 @@
 import { IBaseState } from "./base-state.model";
 import { IResponseBase } from "./response-base.model";
 
-export interface IUserSpecialty {
+export interface ISpecialty {
   specialty: string;
   userId: string;
   id: string;
@@ -16,7 +16,7 @@ export interface IUserSpecialty {
   title: string;
 }
 
-export const emptyUserSpecialty: IUserSpecialty = {
+export const emptySpecialty: ISpecialty = {
   userId: "",
   id: "",
   specialty: "",
@@ -29,15 +29,15 @@ export const emptyUserSpecialty: IUserSpecialty = {
   yearsOfExperience: 0
 };
 
-export interface IUserSpecialtyState extends IBaseState {
-  readonly userSpecialties: IUserSpecialty[];
-  readonly userSpecialty: IUserSpecialty;
+export interface ISpecialtyState extends IBaseState {
+  readonly specialties: ISpecialty[];
+  readonly specialty: ISpecialty;
 }
 
-export interface IUserSpecialtyResponse extends IResponseBase {
-  data: IUserSpecialty;
+export interface ISpecialtyResponse extends IResponseBase {
+  data: ISpecialty;
 }
 
-export interface IUserSpecialtyResponses extends IResponseBase {
-  data: IUserSpecialty[];
+export interface ISpecialtyResponses extends IResponseBase {
+  data: ISpecialty[];
 }

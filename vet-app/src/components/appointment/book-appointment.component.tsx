@@ -11,7 +11,7 @@ import {
   Row,
   Col,
 } from "antd";
-import { useUserSpecialty } from "../../hooks/user-specialty.hook";
+import { useSpecialty } from "../../hooks/specialty.hook";
 import { useAppointment } from "../../hooks/health/appointment.hook";
 import { IAppointment, emptyAppointment } from "../../models/health/appointment";
 import { useFormInit } from "../../hooks/shared/form-init.hook";
@@ -20,7 +20,7 @@ import { useAuth } from "../../hooks/auth/auth.hook";
 import { useNavigate } from "react-router-dom";
 
 const AppointmentForm: React.FC = () => {
-  const { userSpecialties } = useUserSpecialty();
+  const { specialties } = useSpecialty();
   const { addAppointment, appointment } = useAppointment();
   const { initFormData } = useFormInit();
   const { user } = useAuth();
@@ -115,7 +115,7 @@ const AppointmentForm: React.FC = () => {
           onChange={onSearch}
           onSearch={onSearch}
           filterOption={filterOption}
-          options={userSpecialties.map((r) => {
+          options={specialties.map((r) => {
             return {
               label: `${r.username}`,
               value: r.userId,

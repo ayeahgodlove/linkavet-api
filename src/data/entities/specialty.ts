@@ -6,15 +6,15 @@ import {
   DataType,
   BelongsTo,
 } from "sequelize-typescript";
-import { IUserSpecialty } from "../../domain/models/user-specialty";
+import { ISpecialty } from "../../domain/models/specialty";
 import { User } from "./user";
 
 @Table({
   timestamps: true,
   paranoid: true,
-  tableName: "user-specialty",
+  tableName: "specialty",
 })
-export class UserSpecialty extends Model<IUserSpecialty> {
+export class Specialty extends Model<ISpecialty> {
   @Column({
     type: DataType.STRING(20),
     allowNull: false,

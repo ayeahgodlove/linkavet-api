@@ -36,7 +36,7 @@ import { Quiz } from "../../../data/entities/lms/quiz";
 import { Appointment } from "../../../data/entities/health/appointment";
 import { Consultation } from "../../../data/entities/health/consultation";
 import { Review } from "../../../data/entities/review";
-import { UserSpecialty } from "../../../data/entities/user-specialty";
+import { Specialty } from "../../../data/entities/specialty";
 import { Event } from "../../../data/entities/event";
 
 dotenv.config();
@@ -61,7 +61,6 @@ export class PostgresDbConfig {
         User,
         Role,
         UserRole,
-        UserSpecialty,
         Post,
         DocumentFile,
         Comment,
@@ -89,7 +88,8 @@ export class PostgresDbConfig {
 
         // reviews
         Review,
-        Event
+        Event,
+        Specialty,
       ],
       logging: false,
       pool: {

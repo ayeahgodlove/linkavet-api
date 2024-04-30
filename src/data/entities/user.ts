@@ -13,7 +13,7 @@ import { UserDoc } from "./user-doc";
 import { UserRole } from "./user-role";
 import { Store } from "./store";
 import { UserStore } from "./user-store";
-import { UserSpecialty } from "./user-specialty";
+import { Specialty } from "./specialty";
 @Table({
   timestamps: true,
   paranoid: true,
@@ -105,8 +105,8 @@ export class User extends Model<IUser> {
   userDoc!: UserDoc;
 
   // Define association to UserSpeciality entity
-  @HasMany(() => UserSpecialty)
-  specialty!: UserSpecialty;
+  @HasMany(() => Specialty)
+  specialty!: Specialty;
 
   // Define the many-to-many association with Role
   @BelongsToMany(() => Role, () => UserRole)

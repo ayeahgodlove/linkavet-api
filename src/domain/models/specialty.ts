@@ -1,6 +1,6 @@
 import { IBaseResponse } from "./base-response";
 
-export interface IUserSpecialty {
+export interface ISpecialty {
   id: string;
   userId: string;
   specialty: string;
@@ -13,7 +13,7 @@ export interface IUserSpecialty {
   title: string;
 }
 
-export const emptyUserSpecialty: IUserSpecialty = {
+export const emptySpecialty: ISpecialty = {
   userId: "",
   specialty: "",
   id: "",
@@ -26,6 +26,6 @@ export const emptyUserSpecialty: IUserSpecialty = {
   title: "",
 };
 
-export interface IUserSpecialtyResponse extends IBaseResponse {
-  data: IUserSpecialty | null | IUserSpecialty[];
+export interface ISpecialtyResponse extends IBaseResponse {
+  data: ISpecialty | null | ISpecialty[];
 }

@@ -52,8 +52,8 @@ import { UserRole } from "../../data/entities/user-role";
 import { IUserRole } from "../../domain/models/user-role";
 import { ProductOrder } from "../../data/entities/product-order";
 import { IProductOrder } from "../../domain/models/product-order";
-import { UserSpecialty } from "../../data/entities/user-specialty";
-import { IUserSpecialty } from "../../domain/models/user-specialty";
+import { Specialty } from "../../data/entities/specialty";
+import { ISpecialty } from "../../domain/models/specialty";
 import { IEvent } from "../../domain/models/event";
 import { Event } from "../../data/entities/event";
 
@@ -283,17 +283,17 @@ export class RoleMapper {
   }
 }
 
-export class UserSpecialtyMapper {
-  toDTO(userSpecialty: UserSpecialty): IUserSpecialty {
-    const entity = userSpecialty.toJSON<IUserSpecialty>();
+export class SpecialtyMapper {
+  toDTO(specialty: Specialty): ISpecialty {
+    const entity = specialty.toJSON<ISpecialty>();
     return entity;
   }
-  toDTOs(userSpecialtys: UserSpecialty[]): IUserSpecialty[] {
-    const _userSpecialties = userSpecialtys.map((userSpecialty) => {
-      const entity = userSpecialty.toJSON<IUserSpecialty>();
+  toDTOs(specialtys: Specialty[]): ISpecialty[] {
+    const _specialties = specialtys.map((specialty) => {
+      const entity = specialty.toJSON<ISpecialty>();
       return entity;
     });
-    return _userSpecialties;
+    return _specialties;
   }
 }
 

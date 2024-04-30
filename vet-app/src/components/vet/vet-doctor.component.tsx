@@ -8,7 +8,7 @@ import {
   Button,
   ConfigProvider,
 } from "antd";
-import { useUserSpecialty } from "../../hooks/user-specialty.hook";
+import { useSpecialty } from "../../hooks/specialty.hook";
 import { FaHouseMedicalFlag } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { TeamCard } from "../../components/team/team-card.component";
@@ -16,10 +16,10 @@ import { TeamCard } from "../../components/team/team-card.component";
 const { Title } = Typography;
 
 const VetDoctorsComponent: React.FC = () => {
-  const { loadUserSpecialties, userSpecialties } = useUserSpecialty();
+  const { loadSpecialties, specialties } = useSpecialty();
   const navigate = useNavigate();
   useEffect(() => {
-    loadUserSpecialties();
+    loadSpecialties();
   }, []);
   return (
     <ConfigProvider
@@ -59,7 +59,7 @@ const VetDoctorsComponent: React.FC = () => {
               </p>
             </Typography.Paragraph>
           </Col>
-          {userSpecialties.map((user, index) => (
+          {specialties.map((user, index) => (
             <Col
               key={index}
               xs={24}

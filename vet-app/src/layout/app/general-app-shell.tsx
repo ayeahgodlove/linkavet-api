@@ -6,7 +6,6 @@ import Navbar from "../../components/navbar";
 import "./app-shell.scss";
 import { useTheme } from "../../hooks/shared/theme.hook";
 import { FiArrowUp } from "react-icons/fi";
-import Footer from "rc-footer";
 import { CategoryService } from "../../services/category.service";
 import { ICategory } from "../../models/category.model";
 import { TagService } from "../../services/tag.service";
@@ -20,7 +19,9 @@ import { fetchCategoriesAsync } from "../../redux/category.slice";
 import { fetchTagsAsync } from "../../redux/tag.slice";
 import { fetchBannersAsync } from "../../redux/banner.slice";
 import { fetchReviewsAsync } from "../../redux/review.slice";
-import { fetchUserSpecialtiesAsync } from "../../redux/user-specialty.slice";
+import { fetchSpecialtiesAsync } from "../../redux/specialty.slice";
+import { AppFooter } from "layout/footer/footer";
+import { AppFootnote } from "layout/footnote/footnote";
 
 const { Sider, Content } = Layout;
 const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -60,7 +61,7 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
     dispatch(fetchTagsAsync() as any);
     dispatch(fetchBannersAsync() as any);
     dispatch(fetchReviewsAsync() as any);
-    dispatch(fetchUserSpecialtiesAsync() as any);
+    dispatch(fetchSpecialtiesAsync() as any);
     getCategories();
     getTags();
   }, []);
@@ -121,98 +122,8 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
               />
             </Space>
 
-            <Footer
-              className="app-footer"
-              style={{
-                color: isDarkMode ? "#c4dcec" : "#c4dcec",
-              }}
-              theme={isDarkMode ? "dark" : "light"}
-              columnLayout="space-between"
-              columns={[
-                {
-                  title: <strong>FAQs</strong>,
-                  items: [
-                    {
-                      title: "Discount",
-                      url: "/faqs",
-                    },
-                    {
-                      title: "Wish list",
-                      url: "/faqs",
-                    },
-                    {
-                      title: "How to buy",
-                      url: "/faqs",
-                    },
-                    {
-                      title: "Contact us",
-                      url: "/faqs",
-                    },
-                    {
-                      title: "Purchase fees",
-                      url: "/faqs",
-                    },
-                  ],
-                },
-                {
-                  title: <strong>Browse by Categories</strong>,
-                  items: [
-                    ...categories.map((c) => {
-                      return {
-                        title: c.name,
-                        url: `/browse/?category=${c.name}`,
-                      };
-                    }),
-                  ],
-                },
-                {
-                  title: <strong>Browse by Tags</strong>,
-                  items: [
-                    ...tags.map((c) => {
-                      return {
-                        title: c.name,
-                        url: `/browse/?tag=${c.name}`,
-                      };
-                    }),
-                  ],
-                },
-                {
-                  title: <strong>About Us</strong>,
-                  items: [
-                    {
-                      title: "Privacy Policy",
-                      url: "/about-us/privacy-policy",
-                    },
-                    {
-                      title: "Address",
-                      description: "Buea, South West, Cameroon",
-                    },
-                    {
-                      title: "Telephone Line 1",
-                      description: "tel:+237-673-687-549",
-                    },
-                    {
-                      title: "Telephone Line 2",
-                      description: "tel:+237-680-800-549",
-                    },
-                    {
-                      title: "Contact at LinkaVet",
-                      url: "mailto:ayeahgodlove5@gmail.com",
-                    },
-                  ],
-                },
-              ]}
-              bottom={
-                <>
-                  <Typography.Paragraph style={{ textAlign: "center" }}>
-                    Made by Cumi <Link to={"/dashboard"}>Admin Area</Link>
-                  </Typography.Paragraph>
-                  <p style={{ color: "#333" }}>
-                    Your Trusted Source for Premium Veterinary Care & Products.
-                  </p>
-                </>
-              }
-            />
+            <AppFooter logoPath={"./logo/logo-2-removebg-preview.png"} />
+            <AppFootnote />
           </Layout>
         </Layout>
       </Layout>

@@ -1,5 +1,5 @@
 import { Card, Tabs, TabsProps } from "antd";
-import UserSpecialtyView from "../../components/admin/user-specialty/user-specialty-view.component";
+import UserSpecialtyView from "../../components/admin/specialty/specialty-view.component";
 import SettingComponent from "../../components/auth/setting.component";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";

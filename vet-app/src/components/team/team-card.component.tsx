@@ -3,11 +3,11 @@ import { Card, Image, Space } from "antd";
 import { createFromIconfontCN } from "@ant-design/icons";
 
 import "./member.less";
-import { IUserSpecialty } from "../../models/user-specialty.model";
+import { ISpecialty } from "../../models/specialty.model";
 import { API_URL_UPLOADS_AVATARS } from "../../config/constant";
 
 interface IProp {
-  team: IUserSpecialty;
+  team: ISpecialty;
 }
 export const TeamCard: React.FC<IProp> = ({ team }) => {
   const {

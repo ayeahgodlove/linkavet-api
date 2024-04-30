@@ -1,10 +1,10 @@
 import { ColumnsType } from "antd/es/table";
 import { useUser } from "../../../hooks/user.hook";
-import { IUserSpecialty } from "../../../models/user-specialty.model";
+import { ISpecialty } from "../../../models/specialty.model";
 
-export const useUserSpecialtyColumn = () => {
+export const useSpecialtyColumn = () => {
   const {getUser} = useUser();
-  const userSpecialtyTableColumns: ColumnsType<IUserSpecialty> = [
+  const specialtyTableColumns: ColumnsType<ISpecialty> = [
     {
       title: "ID",
       dataIndex: "id",
@@ -26,6 +26,6 @@ export const useUserSpecialtyColumn = () => {
   ];
 
   return {
-    userSpecialtyTableColumns,
+    specialtyTableColumns,
   };
 };

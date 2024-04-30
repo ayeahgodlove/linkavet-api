@@ -1,27 +1,26 @@
 import { Request, Response } from "express";
 import {
-  IUserSpecialty,
-  IUserSpecialtyResponse,
-  emptyUserSpecialty,
-} from "../../domain/models/user-specialty";
-import { UserSpecialtyUseCase } from "../../domain/usecases/user-specialty.usecase";
-import { UserSpecialtyRepository } from "../../data/repositories/impl/user-specialty.repository";
-import { UserSpecialtyMapper } from "../mappers/mapper";
-import { UserSpecialtyRequestDto } from "../dtos/user-specialty-request.dto";
+  ISpecialty,
+  ISpecialtyResponse,
+} from "../../domain/models/specialty";
+import { SpecialtyUseCase } from "../../domain/usecases/specialty.usecase";
+import { SpecialtyRepository } from "../../data/repositories/impl/specialty.repository";
+import { SpecialtyMapper } from "../mappers/mapper";
+import { SpecialtyRequestDto } from "../dtos/specialty-request.dto";
 import { validate } from "class-validator";
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 
-const userSpecialtyRepository = new UserSpecialtyRepository();
-const userSpecialtyUseCase = new UserSpecialtyUseCase(userSpecialtyRepository);
-const userSpecialtyMapper = new UserSpecialtyMapper();
+const specialtyRepository = new SpecialtyRepository();
+const specialtyUseCase = new SpecialtyUseCase(specialtyRepository);
+const specialtyMapper = new SpecialtyMapper();
 
-export class UserSpecialtyController {
-  async createUserSpecialty(
+export class SpecialtyController {
+  async createSpecialty(
     req: Request,
-    res: Response<IUserSpecialtyResponse>
+    res: Response<ISpecialtyResponse>
   ): Promise<void> {
-    const dto = new UserSpecialtyRequestDto(req.body);
+    const dto = new SpecialtyRequestDto(req.body);
     const validationErrors = await validate(dto);
 
     if (validationErrors.length > 0) {
@@ -33,8 +32,8 @@ export class UserSpecialtyController {
       });
     } else {
       try {
-        const userSpecialtyResponse =
-          await userSpecialtyUseCase.createUserSpecialty({
+        const SpecialtyResponse =
+          await specialtyUseCase.createSpecialty({
             ...dto.toData(),
             fullname: req.body.fullname,
             title: req.body.title,
@@ -43,8 +42,8 @@ export class UserSpecialtyController {
           });
 
         res.status(201).json({
-          data: userSpecialtyResponse.toJSON<IUserSpecialty>(),
-          message: "UserSpecialty created Successfully!",
+          data: SpecialtyResponse.toJSON<ISpecialty>(),
+          message: "Specialty created Successfully!",
           validationErrors: [],
           success: true,
         });
@@ -61,11 +60,11 @@ export class UserSpecialtyController {
 
   async getAll(req: Request, res: Response<any>): Promise<void> {
     try {
-      const userSpecialty = await userSpecialtyUseCase.getAll();
-      const userSpecialtyDTO = userSpecialtyMapper.toDTOs(userSpecialty);
+      const Specialty = await specialtyUseCase.getAll();
+      const SpecialtyDTO = specialtyMapper.toDTOs(Specialty);
 
       res.json({
-        data: userSpecialtyDTO,
+        data: SpecialtyDTO,
         message: "Success",
         validationErrors: [],
         success: true,
@@ -80,20 +79,20 @@ export class UserSpecialtyController {
     }
   }
 
-  async getUserSpecialtyById(
+  async getSpecialtyById(
     req: Request,
-    res: Response<IUserSpecialtyResponse>
+    res: Response<ISpecialtyResponse>
   ): Promise<void> {
     try {
       const id = req.params.id;
 
-      const userSpecialty = await userSpecialtyUseCase.getUserSpecialtyById(id);
-      if (!userSpecialty) {
-        throw new NotFoundException("UserSpecialty", id);
+      const Specialty = await specialtyUseCase.getSpecialtyById(id);
+      if (!Specialty) {
+        throw new NotFoundException("Specialty", id);
       }
-      const userSpecialtyDTO = userSpecialtyMapper.toDTO(userSpecialty);
+      const SpecialtyDTO = specialtyMapper.toDTO(Specialty);
       res.json({
-        data: userSpecialtyDTO,
+        data: SpecialtyDTO,
         message: "Success",
         validationErrors: [],
         success: true,
@@ -108,11 +107,11 @@ export class UserSpecialtyController {
     }
   }
 
-  async updateUserSpecialty(
+  async updateSpecialty(
     req: Request,
-    res: Response<IUserSpecialtyResponse>
+    res: Response<ISpecialtyResponse>
   ): Promise<void> {
-    const dto = new UserSpecialtyRequestDto(req.body);
+    const dto = new SpecialtyRequestDto(req.body);
     const validationErrors = await validate(dto);
 
     if (validationErrors.length > 0) {
@@ -126,7 +125,7 @@ export class UserSpecialtyController {
       try {
         const id = req.params.id;
 
-        const obj: IUserSpecialty = {
+        const obj: ISpecialty = {
           ...req.body,
           id: id,
           fullname: req.body.fullname,
@@ -134,14 +133,14 @@ export class UserSpecialtyController {
           website: req.body.website,
           yearsOfExperience: req.body.yearsOfExperience,
         };
-        const updatedUserSpecialty =
-          await userSpecialtyUseCase.updateUserSpecialty(obj);
-        const userSpecialtyDto =
-          userSpecialtyMapper.toDTO(updatedUserSpecialty);
+        const updatedSpecialty =
+          await specialtyUseCase.updateSpecialty(obj);
+        const SpecialtyDto =
+        specialtyMapper.toDTO(updatedSpecialty);
 
         res.json({
-          data: userSpecialtyDto,
-          message: "UserSpecialty Updated Successfully!",
+          data: SpecialtyDto,
+          message: "Specialty Updated Successfully!",
           validationErrors: [],
           success: true,
         });
@@ -156,14 +155,14 @@ export class UserSpecialtyController {
     }
   }
 
-  async deleteUserSpecialty(
+  async deleteSpecialty(
     req: Request,
-    res: Response<IUserSpecialtyResponse>
+    res: Response<ISpecialtyResponse>
   ): Promise<void> {
     try {
       const id = req.params.id;
 
-      await userSpecialtyUseCase.deleteUserSpecialty(id);
+      await specialtyUseCase.deleteSpecialty(id);
 
       res.status(204).json({
         message: `Operation successfully completed!`,

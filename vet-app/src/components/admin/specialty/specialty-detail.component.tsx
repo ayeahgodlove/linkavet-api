@@ -1,9 +1,9 @@
 import { Card, Col, List, Row, Typography } from "antd";
-import { useUserSpecialty } from "../../../hooks/user-specialty.hook";
+import { useSpecialty } from "../../../hooks/specialty.hook";
 import React from "react";
 
-const UserSpecialtyDetailComponent: React.FC = () => {
-  const { userSpecialty } = useUserSpecialty();
+const SpecialtyDetailComponent: React.FC = () => {
+  const { specialty } = useSpecialty();
   return (
     <Card bordered={false} size="small">
       <List
@@ -11,11 +11,11 @@ const UserSpecialtyDetailComponent: React.FC = () => {
         dataSource={[
           {
             label: "Code",
-            value: userSpecialty.id,
+            value: specialty.id,
           },
           {
             label: "Specialty",
-            value: userSpecialty.specialty,
+            value: specialty.specialty,
           },
         ]}
         renderItem={(item) => (
@@ -35,4 +35,4 @@ const UserSpecialtyDetailComponent: React.FC = () => {
   );
 };
 
-export default UserSpecialtyDetailComponent;
+export default SpecialtyDetailComponent;

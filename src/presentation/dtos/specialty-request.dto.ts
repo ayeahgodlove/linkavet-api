@@ -2,12 +2,12 @@
 
 import { IsNotEmpty, IsString } from "class-validator";
 import {
-  IUserSpecialty,
-  emptyUserSpecialty,
-} from "../../domain/models/user-specialty";
+  ISpecialty,
+  emptySpecialty,
+} from "../../domain/models/specialty";
 import { nanoid } from "nanoid";
 
-export class UserSpecialtyRequestDto {
+export class SpecialtyRequestDto {
   @IsNotEmpty()
   @IsString()
   userId: string;
@@ -28,7 +28,7 @@ export class UserSpecialtyRequestDto {
   @IsString()
   twitter: string;
 
-  constructor(data: IUserSpecialty) {
+  constructor(data: ISpecialty) {
     this.userId = data.userId;
     this.specialty = data.specialty;
     (this.facebook = data.facebook),
@@ -36,9 +36,9 @@ export class UserSpecialtyRequestDto {
       (this.twitter = data.twitter);
   }
 
-  toData(): IUserSpecialty {
+  toData(): ISpecialty {
     return {
-      ...emptyUserSpecialty,
+      ...emptySpecialty,
       id: nanoid(15),
       userId: this.userId,
       specialty: this.specialty,
@@ -48,7 +48,7 @@ export class UserSpecialtyRequestDto {
     };
   }
 
-  toUpdateData(data: IUserSpecialty): IUserSpecialty {
+  toUpdateData(data: ISpecialty): ISpecialty {
     return {
       id: data.id,
       userId: data.userId,

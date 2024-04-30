@@ -36,7 +36,7 @@ import { consultationReducer } from "./health/consultation.slice";
 import { appointmentReducer } from "./health/appointment.slice";
 import { userRoleReducer } from "./user-role.slice";
 import { roleReducer } from "./role.slice";
-import { userSpecialtyReducer } from "./user-specialty.slice";
+import { specialtyReducer } from "./specialty.slice";
 import { imageReducer } from "./shared/image.slice";
 import { eventReducer } from "./event.slice";
 
@@ -75,7 +75,7 @@ export const rootReducer = combineReducers({
   // roles
   userRole: userRoleReducer,
   role: roleReducer,
-  userSpecialty: userSpecialtyReducer,
+  specialty: specialtyReducer,
   event: eventReducer,
 });
 

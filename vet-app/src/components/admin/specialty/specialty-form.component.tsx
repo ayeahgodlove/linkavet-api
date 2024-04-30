@@ -1,11 +1,11 @@
 import { Button, Form, Input, Alert, message, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { FormErrorComponent } from "../../../components/shared/form-error/form-error.component";
+import { FormErrorComponent } from "../../shared/form-error/form-error.component";
 import { useModalContext } from "../../../context/app-modal.context";
-import { useUserSpecialty } from "../../../hooks/user-specialty.hook";
+import { useSpecialty } from "../../../hooks/specialty.hook";
 import { useFormErrors } from "../../../hooks/shared/form-error.hook";
 import { useFormInit } from "../../../hooks/shared/form-init.hook";
-import { IUserSpecialty } from "../../../models/user-specialty.model";
+import { ISpecialty } from "../../../models/specialty.model";
 import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../../hooks/auth/auth.hook";
@@ -15,11 +15,11 @@ type Props = {
   formMode: UpdateMode;
   isTrue: boolean;
 };
-export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
+export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
   const { initFormData } = useFormInit();
   const [form] = useForm();
-  const { userSpecialty, editUserSpecialty, addUserSpecialty } =
-    useUserSpecialty();
+  const { specialty, editSpecialty, addSpecialty } =
+    useSpecialty();
   const { formError } = useFormErrors();
   const { setShow } = useModalContext();
   const { user } = useAuth();
@@ -46,20 +46,20 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
     option?: { label: string; value: string }
   ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-  const onFinish = async (values: IUserSpecialty) => {
+  const onFinish = async (values: ISpecialty) => {
     setSubmitting(true);
     setSubmitted(false);
-    const obj: IUserSpecialty = {
-      ...userSpecialty,
+    const obj: ISpecialty = {
+      ...specialty,
       ...values,
       specialty: values.specialty,
       userId: user.id,
     };
 
     if (formMode === UpdateMode.ADD) {
-      const feedback = await addUserSpecialty(obj);
+      const feedback = await addSpecialty(obj);
       if (feedback) {
-        message.success("UserSpecialty created successfully!");
+        message.success("Specialty created successfully!");
         setShow(false);
       } else {
         message.error("failed to create");
@@ -69,9 +69,9 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
     }
 
     if (formMode === UpdateMode.EDIT) {
-      const feedback = await editUserSpecialty(obj);
+      const feedback = await editSpecialty(obj);
       if (feedback) {
-        message.success("UserSpecialty updated successfully!");
+        message.success("Specialty updated successfully!");
         setShow(false);
       } else {
         message.error("failed to update");
@@ -83,7 +83,7 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
   };
 
   useEffect(() => {
-    initFormData(form, formMode, userSpecialty);
+    initFormData(form, formMode, specialty);
   }, [hasSubmitted]);
 
   return (
@@ -96,7 +96,7 @@ export const UserSpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
       <Form form={form} onFinish={onFinish} layout="vertical">
         <Form.Item
           name="userId"
-          label="User"
+          label=""
           style={{ marginBottom: 10 }}
           rules={[
             {

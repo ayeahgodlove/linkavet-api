@@ -1,46 +1,46 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Card, Col, Input, Table, Typography } from "antd";
+import { Card, Col, Input, Table } from "antd";
 import { useNavigate } from "react-router-dom";
-import { useUserSpecialtyColumn } from "./user-specialty-column.component";
-import { IUserSpecialty } from "../../../models/user-specialty.model";
-import { useUserSpecialty } from "../../../hooks/user-specialty.hook";
-import { NoContent } from "../../../components/shared/no-content/no-content.component";
+import { useSpecialtyColumn } from "./specialty-column.component";
+import { ISpecialty } from "../../../models/specialty.model";
+import { useSpecialty } from "../../../hooks/specialty.hook";
+import { NoContent } from "../../shared/no-content/no-content.component";
 import { useModalContext } from "../../../context/app-modal.context";
 import { useDispatch } from "react-redux";
-import { UserSpecialtyForm } from "./user-specialty-form.component";
+import { SpecialtyForm } from "./specialty-form.component";
 import { UpdateMode } from "../../../models/shared/update-mode.enum";
 import search from "../../../utils/search";
-import { fetchUserSpecialtySuccess } from "../../../redux/user-specialty.slice";
-import { SpinnerComponent } from "../../../components/shared/spinner";
+import { fetchSpecialtySuccess } from "../../../redux/specialty.slice";
+import { SpinnerComponent } from "../../shared/spinner";
 import slugify from "slugify";
 import { API_URL } from "../../../config/constant";
 
 const { Search } = Input;
 
-const UserSpecialtyTable: React.FC = () => {
-  const { userSpecialties, setUserSpecialty, initialFetch } =
-    useUserSpecialty();
+const SpecialtyTable: React.FC = () => {
+  const { specialties, setSpecialty, initialFetch } =
+    useSpecialty();
   const { setContent, setShow, setTitle, setWidth } = useModalContext();
   const router = useNavigate();
-  const { userSpecialtyTableColumns } = useUserSpecialtyColumn();
+  const { specialtyTableColumns } = useSpecialtyColumn();
 
   const [query, setQuery] = useState<string>("");
   const [isLoading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  const createUserSpecialty = () => {
+  const createSpecialty = () => {
     setTitle("Create a Specialty");
     setWidth("35rem");
     setShow(true);
     setContent(
       <>
-        <UserSpecialtyForm formMode={UpdateMode.ADD} isTrue={false} />
+        <SpecialtyForm formMode={UpdateMode.ADD} isTrue={false} />
       </>
     );
   };
 
-  const getUserSpecialtys = useCallback(async (): Promise<IUserSpecialty[]> => {
+  const getSpecialtys = useCallback(async (): Promise<ISpecialty[]> => {
     setLoading(true);
     const response = await fetch(`${API_URL}/api/user-specialties`);
     const { data } = await response.json();
@@ -48,7 +48,7 @@ const UserSpecialtyTable: React.FC = () => {
     return data;
   }, []);
 
-  const resultUserSpecialtys: IUserSpecialty[] = userSpecialties.filter(
+  const resultSpecialtys: ISpecialty[] = specialties.filter(
     (client) => search(client, ["specialty"], query, false)
   );
 
@@ -59,28 +59,29 @@ const UserSpecialtyTable: React.FC = () => {
   const inputRef = useRef(null);
 
   // const route = use
-  const handleRowClick = (userSpecialty: IUserSpecialty) => {
-    setUserSpecialty(userSpecialty);
+  const handleRowClick = (userSpecialty: ISpecialty) => {
+    setSpecialty(userSpecialty);
     router(`/admin/user-specialties/${slugify(userSpecialty.specialty, "-")}`);
   };
 
   useEffect(() => {
     (async () => {
-      const userSpecialtyDATas = await getUserSpecialtys();
-      dispatch(fetchUserSpecialtySuccess([...userSpecialtyDATas]));
+      const userSpecialtyDATas = await getSpecialtys();
+      console.log("userSpecialtyDATas: ", userSpecialtyDATas)
+      dispatch(fetchSpecialtySuccess([...userSpecialtyDATas]));
       setLoading(false);
     })();
   }, []);
 
   if (isLoading) {
     return (
-      <SpinnerComponent message="UserSpecialtys loading..." height="65vh" />
+      <SpinnerComponent message="Specialtys loading..." height="65vh" />
     );
   }
 
   return (
     <>
-      {userSpecialties && userSpecialties.length ? (
+      {specialties && specialties.length ? (
         <Card
           title={
             <Col xs={24} md={10} lg={6}>
@@ -93,17 +94,17 @@ const UserSpecialtyTable: React.FC = () => {
           bordered={false}
           size="small"
         >
-          <Table<IUserSpecialty>
+          <Table<ISpecialty>
             dataSource={
-              resultUserSpecialtys && resultUserSpecialtys.length > 0
-                ? resultUserSpecialtys
-                : userSpecialties
+              resultSpecialtys && resultSpecialtys.length > 0
+                ? resultSpecialtys
+                : specialties
             }
-            columns={userSpecialtyTableColumns}
+            columns={specialtyTableColumns}
             style={{ borderRadius: 0 }}
             size={"small"}
             rowKey={"id"}
-            onRow={(record: IUserSpecialty) => {
+            onRow={(record: ISpecialty) => {
               return {
                 onClick: (e) => {
                   console.log(e);
@@ -118,12 +119,12 @@ const UserSpecialtyTable: React.FC = () => {
         <NoContent
           title="No data for userSpecialty"
           showButton={true}
-          buttonLabel="Add UserSpecialty"
-          handleClick={createUserSpecialty}
+          buttonLabel="Add Specialty"
+          handleClick={createSpecialty}
         />
       )}
     </>
   );
 };
 
-export default UserSpecialtyTable;
+export default SpecialtyTable;
