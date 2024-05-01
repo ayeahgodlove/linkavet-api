@@ -1,7 +1,7 @@
 "use strict";
 // src/presentation/mappers/category-mapper.ts
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.UserSpecialtyMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.EventMapper = exports.CategoryMapper = void 0;
+exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.SpecialtyMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.EventMapper = exports.CategoryMapper = void 0;
 class CategoryMapper {
     toDTO(category) {
         const entity = category.toJSON();
@@ -227,20 +227,20 @@ class RoleMapper {
     }
 }
 exports.RoleMapper = RoleMapper;
-class UserSpecialtyMapper {
-    toDTO(userSpecialty) {
-        const entity = userSpecialty.toJSON();
+class SpecialtyMapper {
+    toDTO(specialty) {
+        const entity = specialty.toJSON();
         return entity;
     }
-    toDTOs(userSpecialtys) {
-        const _userSpecialties = userSpecialtys.map((userSpecialty) => {
-            const entity = userSpecialty.toJSON();
+    toDTOs(specialtys) {
+        const _specialties = specialtys.map((specialty) => {
+            const entity = specialty.toJSON();
             return entity;
         });
-        return _userSpecialties;
+        return _specialties;
     }
 }
-exports.UserSpecialtyMapper = UserSpecialtyMapper;
+exports.SpecialtyMapper = SpecialtyMapper;
 class LessonReviewMapper {
     toDTO(review) {
         const entity = review.toJSON();

@@ -28,7 +28,7 @@ const AdminSpecialtyPage: React.FC = () => {
   return (
     <>
       <div style={{ margin: "1rem" }}>
-        <PageBreadCrumbs items={["s", "Specialty"]} />
+        <PageBreadCrumbs items={["Settings", "Specialty"]} />
         <TitleBar
           title={"Tags"}
           subTitle={"View Specialities"}

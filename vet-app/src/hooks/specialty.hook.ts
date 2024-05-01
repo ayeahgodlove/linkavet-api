@@ -1,10 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect } from "react";
 import { IRootState } from "../redux/store";
-import {
-  ISpecialty,
-  emptySpecialty,
-} from "../models/specialty.model";
+import { ISpecialty, emptySpecialty } from "../models/specialty.model";
 import {
   addSpecialtySuccess,
   editSpecialtySuccess,
@@ -13,7 +10,8 @@ import {
 } from "../redux/specialty.slice";
 import { SpecialtyService } from "../services/specialty.service";
 import { useFormErrors } from "./shared/form-error.hook";
-import { useUser} from "./user.hook";
+import { useUser } from "./user.hook";
+import { UpdateMode } from "models/shared/update-mode.enum";
 
 const useSpecialty = () => {
   const specialties = useSelector<IRootState, ISpecialty[]>(
@@ -50,6 +48,16 @@ const useSpecialty = () => {
       });
   };
 
+  const saveTransaction = async (
+    updateMode: UpdateMode,
+    entity: ISpecialty
+  ) => {
+    if (updateMode === UpdateMode.ADD) {
+      return await addSpecialty(entity);
+    } else {
+      return await editSpecialty(entity);
+    }
+  };
   const setSpecialty = (specialty: ISpecialty) => {
     dispatch(setActiveSpecialty(specialty));
   };
@@ -81,7 +89,7 @@ const useSpecialty = () => {
       return specialty;
     }
     return emptySpecialty;
-  }, []);
+  }, [specialties]);
 
   const getSpecialities = useCallback((): ISpecialty[] => {
     console.log("specialties: ", specialties);
@@ -113,6 +121,7 @@ const useSpecialty = () => {
     setSpecialty,
     getSpeciality,
     loadSpecialties,
+    saveTransaction,
   };
 };
 

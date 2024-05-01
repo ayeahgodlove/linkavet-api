@@ -44,6 +44,14 @@ import { useAuth } from "../../hooks/auth/auth.hook";
 import { GrScheduleNew } from "react-icons/gr";
 import { ROLES } from "../../config/constant";
 import { useUser } from "../../hooks/user.hook";
+import {
+  RiAccountCircleLine,
+  RiServiceLine,
+  RiUserSettingsLine,
+  RiUserStarFill,
+} from "react-icons/ri";
+import { FcCalendar } from "react-icons/fc";
+import { SiGoogleclassroom } from "react-icons/si";
 
 export const useAppShellMenus = () => {
   const [language, setLanguage] = useState("en");
@@ -79,8 +87,8 @@ export const useAppShellMenus = () => {
 
   function filterMenuItemsByRole(items: any["items"], userRoles: string[]) {
     return items
-      .filter((item: any) => item.roles.some((r) => userRoles.includes(r)))
-      .map((item) => {
+      .filter((item: any) => item.roles.some((r: any) => userRoles.includes(r)))
+      .map((item: any) => {
         if (item.children) {
           return {
             ...item,
@@ -91,7 +99,6 @@ export const useAppShellMenus = () => {
       });
   }
   // interface MenuPropsExtend
-  // const items2: MenuProps["items"] = [
   const items2: any["items"] = [
     {
       label: (
@@ -266,12 +273,12 @@ export const useAppShellMenus = () => {
         },
         {
           label: (
-            <Link to="/admin/user-specialties" style={{ padding: 0 }}>
-              User Specialties
+            <Link to="/admin/specialties" style={{ padding: 0 }}>
+              Specialties
             </Link>
           ),
           key: "user-specialties",
-          icon: <FiUserX size={21} color="#08a30a" />,
+          icon: <RiUserStarFill size={21} color="#08a30a" />,
           roles: [ROLES.ADMIN],
         },
       ],
@@ -347,10 +354,69 @@ export const useAppShellMenus = () => {
       ],
       roles: [ROLES.ADMIN, ROLES.CREATOR, ROLES.TRAINER],
     },
+    {
+      label: "Account",
+      key: "account",
+      icon: <RiAccountCircleLine size={21} color="#08a30a" />,
+      children: [
+        {
+          label: (
+            <Link to="/appointments" onClick={() => {}}>
+              My Appointments
+            </Link>
+          ),
+          key: "appointments",
+          icon: <FcCalendar />,
+          roles: [
+            ROLES.ADMIN,
+            ROLES.CREATOR,
+            ROLES.TRAINER,
+            ROLES.DOCTOR,
+            ROLES.PETOWNER,
+          ],
+        },
+        {
+          label: (
+            <Link to="/classroom" onClick={() => {}}>
+              My Classroom
+            </Link>
+          ),
+          key: "classroom",
+          icon: <SiGoogleclassroom />,
+          roles: [
+            ROLES.ADMIN,
+            ROLES.CREATOR,
+            ROLES.TRAINER,
+            ROLES.DOCTOR,
+            ROLES.PETOWNER,
+          ],
+        },
+        {
+          label: <Link to="/profile/personel-information">My Settings</Link>,
+          key: "my-settings",
+          icon: <RiUserSettingsLine />,
+          roles: [
+            ROLES.ADMIN,
+            ROLES.CREATOR,
+            ROLES.TRAINER,
+            ROLES.DOCTOR,
+            ROLES.PETOWNER,
+          ],
+        },
+      ],
+      roles: [
+        ROLES.ADMIN,
+        ROLES.CREATOR,
+        ROLES.TRAINER,
+        ROLES.DOCTOR,
+        ROLES.PETOWNER,
+      ],
+    },
+
     // end configurations
   ];
 
-  const GeneralMenuItemsWithIcons: MenuProps["items"] = [
+  const GeneralMenuItemsWithIcons: any["items"] = [
     {
       label: (
         <NavLink to="/" style={{ padding: 0 }}>
@@ -359,6 +425,15 @@ export const useAppShellMenus = () => {
       ),
       key: "home",
       icon: <FiHome size={21} color="#08a30a" />,
+    },
+    {
+      label: (
+        <NavLink to="/our_services" style={{ padding: 0 }}>
+          Services
+        </NavLink>
+      ),
+      key: "our_services",
+      icon: <RiServiceLine size={21} color="#08a30a" />,
     },
     {
       label: (
@@ -397,15 +472,57 @@ export const useAppShellMenus = () => {
       key: "about-us",
       icon: <FiInfo size={21} color="#08a30a" />,
     },
-    {
-      label: (
-        <NavLink to="/contact-us" style={{ padding: 0 }}>
-          Contact Us
-        </NavLink>
-      ),
-      key: "contact-us",
-      icon: <FiPhoneCall size={21} color="#08a30a" />,
-    },
+
+    isLoggedIn
+      ? {
+          label: "Account",
+          key: "account",
+          icon: <RiAccountCircleLine size={21} color="#08a30a" />,
+          children: [
+            {
+              key: "profile_path",
+              type: "group",
+              children: [
+                {
+                  label: (
+                    <Link to="/appointments" onClick={() => {}}>
+                      My Appointments
+                    </Link>
+                  ),
+                  key: "appointments",
+                },
+                {
+                  label: (
+                    <Link to="/classroom" onClick={() => {}}>
+                      My Classroom
+                    </Link>
+                  ),
+                  key: "classroom",
+                },
+                {
+                  label: (
+                    <Link to="/profile/personel-information">My Settings</Link>
+                  ),
+                  key: "my-settings",
+                },
+              ],
+            },
+          ],
+          style: {
+            display: !isAuthenticated ? "none" : "",
+          },
+        }
+      : {
+          label: (
+            <NavLink to="/contact-us" style={{ padding: 0 }}>
+              Contact Us
+            </NavLink>
+          ),
+          key: "contact-us",
+          icon: <FiPhoneCall size={21} color="#08a30a" />,
+        }, // which is required
+
+    ,
     isLoggedIn
       ? {
           label: (
@@ -422,7 +539,7 @@ export const useAppShellMenus = () => {
             </>
           ),
           key: "logout",
-          icon: <LogoutOutlined />,
+          icon: <LogoutOutlined size={21} color="#08a30a" />,
         }
       : {
           label: (
@@ -688,7 +805,7 @@ export const useAppShellMenus = () => {
             {
               label: (
                 <Link
-                  to="/profile?=settings"
+                  to="/profile/personel-information"
                   // onClick={() => handleRoute('settings')}
                 >
                   My Settings

@@ -27,7 +27,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
   const { items2, filterMenuItemsByRole } = useAppShellMenus();
   const dispatch = useDispatch();
 
-  //sidebar access 
+  //sidebar access
   const hasAccess =
     user.roles.map((r) => r.name).includes(ROLES.ADMIN) ||
     user.roles.map((r) => r.name).includes(ROLES.CREATOR);
@@ -45,7 +45,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      setTimeout(() =>   {
+      setTimeout(() => {
         dispatch(initialDataAsync() as any);
       }, 3000);
     }
@@ -69,7 +69,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
             hasAccess ? (
               <>
                 <Sider
-                  width={200}
+                  width={250}
                   className={`site-layout-background ${
                     show ? "app-shell-sidebar_show" : "app-shell-sidebar_hide"
                   }`}
@@ -93,10 +93,10 @@ const AppShell: React.FC<IProps> = ({ children }) => {
                   closable={true}
                   onClose={onClose}
                   open={show}
-                  width={200}
+                  width={300}
                 >
                   <Sider
-                    width={200}
+                    width={250}
                     className={`site-layout-background ${
                       show ? "app-shell-sidebar_show" : "app-shell-sidebar_hide"
                     }`}
@@ -107,7 +107,10 @@ const AppShell: React.FC<IProps> = ({ children }) => {
                       defaultSelectedKeys={["1"]}
                       defaultOpenKeys={["sub1"]}
                       style={{ height: "100%", borderRight: 0 }}
-                      items={items2}
+                      items={filterMenuItemsByRole(
+                        items2,
+                        user.roles.map((ur) => ur.name)
+                      )}
                     />
                   </Sider>
                 </Drawer>
@@ -129,9 +132,6 @@ const AppShell: React.FC<IProps> = ({ children }) => {
             }}
           >
             {children}
-            {/* <Footer style={{ textAlign: "center" }}>
-                Ant Design ©2018 Created by Ant UED
-              </Footer> */}
           </Content>
         </Layout>
       </Layout>

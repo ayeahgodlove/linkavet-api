@@ -34,7 +34,7 @@ export class Specialty extends Model<ISpecialty> {
   fullname!: string;
 
   @Column({
-    type: DataType.NUMBER,
+    type: DataType.INTEGER,
     allowNull: false,
     unique: false,
   })

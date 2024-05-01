@@ -1,0 +1,22 @@
+.user-profile_container {
+    position: relative;
+}
+.user-profile_hamburger_icon {
+  display: block !important;
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  z-index: 1;
+}
+.user-profile_menu {
+  display: none !important;
+}
+
+@media screen and (min-width: 991px) {
+  .user-profile_hamburger_icon {
+    display: none !important;
+  }
+  .user-profile_menu {
+    display: block !important;
+  }
+}

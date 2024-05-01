@@ -60,11 +60,11 @@ export class SpecialtyController {
 
   async getAll(req: Request, res: Response<any>): Promise<void> {
     try {
-      const Specialty = await specialtyUseCase.getAll();
-      const SpecialtyDTO = specialtyMapper.toDTOs(Specialty);
+      const specialties = await specialtyUseCase.getAll();
+      const specialtiesDTO = specialtyMapper.toDTOs(specialties);
 
       res.json({
-        data: SpecialtyDTO,
+        data: specialtiesDTO,
         message: "Success",
         validationErrors: [],
         success: true,

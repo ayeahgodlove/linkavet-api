@@ -21,7 +21,7 @@ export const AppFootnote = () => {
 					<div className={styles.content_group_text}>
 						<a href='#'>Terms of Use</a>
 						<a href='#'>Privacy Policy</a>
-						<span>All rights reserved © Cumi Inc.</span>
+						<span>All rights reserved © Linkavet</span>
 					</div>
 				</div>
 			</div>

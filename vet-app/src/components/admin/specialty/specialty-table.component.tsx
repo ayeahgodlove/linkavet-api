@@ -42,7 +42,7 @@ const SpecialtyTable: React.FC = () => {
 
   const getSpecialtys = useCallback(async (): Promise<ISpecialty[]> => {
     setLoading(true);
-    const response = await fetch(`${API_URL}/api/user-specialties`);
+    const response = await fetch(`${API_URL}/api/specialties`);
     const { data } = await response.json();
     console.log("data:", response)
     return data;

@@ -16,7 +16,7 @@ const user_doc_1 = require("./user-doc");
 const user_role_1 = require("./user-role");
 const store_1 = require("./store");
 const user_store_1 = require("./user-store");
-const user_specialty_1 = require("./user-specialty");
+const specialty_1 = require("./specialty");
 let User = class User extends sequelize_typescript_1.Model {
     authStrategy;
     firstname;
@@ -137,8 +137,8 @@ __decorate([
     __metadata("design:type", user_doc_1.UserDoc)
 ], User.prototype, "userDoc", void 0);
 __decorate([
-    (0, sequelize_typescript_1.HasMany)(() => user_specialty_1.UserSpecialty),
-    __metadata("design:type", user_specialty_1.UserSpecialty)
+    (0, sequelize_typescript_1.HasMany)(() => specialty_1.Specialty),
+    __metadata("design:type", specialty_1.Specialty)
 ], User.prototype, "specialty", void 0);
 __decorate([
     (0, sequelize_typescript_1.BelongsToMany)(() => role_1.Role, () => user_role_1.UserRole),

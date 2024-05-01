@@ -1,17 +1,12 @@
-import { Drawer, Layout, Menu, Space, Typography } from "antd";
-import React, { useCallback, useEffect, useState } from "react";
+import { Drawer, Layout, Menu, Space } from "antd";
+import React, {useEffect, useState } from "react";
 import { ConfigProvider, theme, FloatButton } from "antd";
 
 import Navbar from "../../components/navbar";
 import "./app-shell.scss";
 import { useTheme } from "../../hooks/shared/theme.hook";
 import { FiArrowUp } from "react-icons/fi";
-import { CategoryService } from "../../services/category.service";
-import { ICategory } from "../../models/category.model";
-import { TagService } from "../../services/tag.service";
-import { ITag } from "../../models/tag.model";
 import "rc-footer/assets/index.css";
-import { Link } from "react-router-dom";
 import { useAppShellMenus } from "./app-shell-menus";
 import { useDispatch } from "react-redux";
 import { fetchUsersAsync } from "../../redux/user.slice";
@@ -32,8 +27,6 @@ interface IProps {
 const GeneralAppShell: React.FC<IProps> = ({ children }) => {
   const [show, setShow] = useState(false);
   const { isDarkMode } = useTheme();
-  const [categories, setCategories] = useState<ICategory[]>([]);
-  const [tags, setTags] = useState<ITag[]>([]);
   const dispatch = useDispatch();
   const { GeneralMenuItemsWithIcons } = useAppShellMenus();
 
@@ -45,16 +38,6 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
     setShow(false);
   };
 
-  const getCategories = useCallback(async () => {
-    const response = await CategoryService.list();
-    setCategories(response.data);
-  }, []);
-
-  const getTags = useCallback(async () => {
-    const response = await TagService.list();
-    setTags(response.data);
-  }, []);
-
   useEffect(() => {
     dispatch(fetchUsersAsync() as any);
     dispatch(fetchCategoriesAsync() as any);
@@ -62,8 +45,6 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
     dispatch(fetchBannersAsync() as any);
     dispatch(fetchReviewsAsync() as any);
     dispatch(fetchSpecialtiesAsync() as any);
-    getCategories();
-    getTags();
   }, []);
 
   return (
@@ -86,7 +67,8 @@ const GeneralAppShell: React.FC<IProps> = ({ children }) => {
             closable={true}
             onClose={onClose}
             open={show}
-            width={200}
+            width={250}
+            footer={null}
           >
             <Sider
               width={200}

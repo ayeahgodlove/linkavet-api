@@ -23,6 +23,7 @@ export const initialDataAsync = (): AppThunk => async (dispatch) => {
     dispatch(fetchDocumentsAsync());
     dispatch(fetchUserRolesAsync())
     dispatch(fetchEvents())
+    await dispatch(fetchSpecialtiesAsync());
   } catch (error) {
     console.log(error);
   }

@@ -56,24 +56,44 @@ const BookAppointmentsPage = () => {
       />
       <div style={{ margin: "3rem 0" }}>
         <Row gutter={[16, 16]} justify={"center"} align={"top"}>
-          <Col xs={22} md={10}>
-            <Card bordered={false}>
-              {/* <Typography.Title level={2}>Book Appointment</Typography.Title> */}
+          <Col xs={22} md={16} lg={12}>
+            <Card
+              bordered={false}
+              title={
+                <Typography.Title
+                  style={{
+                    textAlign: "center",
+                    fontWeight: "lighter",
+                    marginBottom: 0,
+                  }}
+                  level={4}
+                >
+                  Your appointment is a second away
+                </Typography.Title>
+              }
+            >
               <AppointmentForm />
             </Card>
           </Col>
-          <Col xs={22} md={12}>
+          <Col xs={0} md={0}>
             <Card
               bordered={false}
               style={{ borderRadius: 0 }}
-              cover={
-                <img
-                  src="/images/daniel-leone-LXQx98FPPQ4-unsplash.jpg"
-                  alt="a herd of cows"
-                />
-              }
-              bodyStyle={{ padding: 0 }}
-            />
+              // cover={
+
+              // }
+              styles={{ body: { padding: 0 } }}
+            >
+              <img
+                src="/images/daniel-leone-LXQx98FPPQ4-unsplash.jpg"
+                alt="a herd of cows"
+                style={{
+                  // height: "100%",
+                  objectFit: "cover",
+                  overflow: "hidden",
+                }}
+              />
+            </Card>
           </Col>
         </Row>
       </div>

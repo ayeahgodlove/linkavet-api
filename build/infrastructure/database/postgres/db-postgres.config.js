@@ -60,7 +60,7 @@ const quiz_1 = require("../../../data/entities/lms/quiz");
 const appointment_1 = require("../../../data/entities/health/appointment");
 const consultation_1 = require("../../../data/entities/health/consultation");
 const review_1 = require("../../../data/entities/review");
-const user_specialty_1 = require("../../../data/entities/user-specialty");
+const specialty_1 = require("../../../data/entities/specialty");
 const event_1 = require("../../../data/entities/event");
 dotenv.config();
 class PostgresDbConfig {
@@ -83,7 +83,6 @@ class PostgresDbConfig {
                 user_1.User,
                 role_1.Role,
                 user_role_1.UserRole,
-                user_specialty_1.UserSpecialty,
                 post_1.Post,
                 document_1.DocumentFile,
                 comment_1.Comment,
@@ -110,7 +109,8 @@ class PostgresDbConfig {
                 consultation_1.Consultation,
                 // reviews
                 review_1.Review,
-                event_1.Event
+                event_1.Event,
+                specialty_1.Specialty,
             ],
             logging: false,
             pool: {

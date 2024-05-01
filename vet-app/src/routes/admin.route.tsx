@@ -41,7 +41,10 @@ import AdminRoleDetailPage from "../pages/admin/role/role-detail.page";
 import AdminUserRolePage from "../pages/admin/user-role/user-role.page";
 import AdminUserRoleDetailPage from "../pages/admin/user-role/user-role-detail.page";
 import AdminSpecialtyPage from "../pages/admin/specialty/specialty.page";
-import ProfilePage from "../pages/auth/profile.page";
+import ProfilePersonalInformationPage from "../pages/auth/profile-personal-information.page";
+import ProfileActivityPage from "pages/auth/profile-activity.page";
+import ProfilePasswordChangePage from "pages/auth/profile-password-change.page";
+import ProfileProfessionalInformationPage from "pages/auth/profile-professional-information.page";
 
 export const adminRoutes = [
   // admin section
@@ -277,7 +280,7 @@ export const adminRoutes = [
     component: <AdminUserDetailPage />,
   },
   {
-    path: "/admin/user-specialties",
+    path: "/admin/specialties",
     private: true,
     exact: true,
     component: <AdminSpecialtyPage />,
@@ -307,9 +310,27 @@ export const adminRoutes = [
     component: <AdminUserRoleDetailPage />,
   },
   {
-    path: "/profile",
+    path: "/profile/personel-information",
     private: true,
     exact: true,
-    component: <ProfilePage />,
+    component: <ProfilePersonalInformationPage />,
+  },
+  {
+    path: "/profile/activity",
+    private: true,
+    exact: true,
+    component: <ProfileActivityPage />,
+  },
+  {
+    path: "/profile/password-change",
+    private: true,
+    exact: true,
+    component: <ProfilePasswordChangePage />,
+  },
+  {
+    path: "/profile/specialty",
+    private: true,
+    exact: true,
+    component: <ProfileProfessionalInformationPage />,
   },
 ];
