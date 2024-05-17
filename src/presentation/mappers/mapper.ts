@@ -450,3 +450,4 @@ export class ConsultationMapper {
     return _consultations;
   }
 }
+

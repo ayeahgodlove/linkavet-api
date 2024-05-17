@@ -50,7 +50,7 @@ import {
   RiUserSettingsLine,
   RiUserStarFill,
 } from "react-icons/ri";
-import { FcCalendar } from "react-icons/fc";
+import { FcApprove, FcCalendar } from "react-icons/fc";
 import { SiGoogleclassroom } from "react-icons/si";
 
 export const useAppShellMenus = () => {
@@ -359,6 +359,15 @@ export const useAppShellMenus = () => {
       key: "account",
       icon: <RiAccountCircleLine size={21} color="#08a30a" />,
       children: [
+        {
+          label: <Link to="/verification/id-card">Verification</Link>,
+          key: "verification",
+          icon: <FcApprove />,
+          roles: [
+            ROLES.TRAINER,
+            ROLES.DOCTOR,
+          ],
+        },
         {
           label: (
             <Link to="/appointments" onClick={() => {}}>

@@ -31,14 +31,42 @@ export class UserDoc extends Model<IUserDoc> {
     allowNull: false,
     unique: true,
   })
-  scannedIdCard!: string;
+  photo!: string;
 
   @Column({
     type: DataType.STRING(128),
     allowNull: false,
     unique: true,
   })
-  scannedLiscence!: string;
+  idCardFront!: string;
+
+  @Column({
+    type: DataType.STRING(128),
+    allowNull: false,
+    unique: true,
+  })
+  idCardBack!: string;
+
+  @Column({
+    type: DataType.STRING(128),
+    allowNull: false,
+    unique: true,
+  })
+  license!: string;
+
+  @Column({
+    type: DataType.STRING(128),
+    allowNull: false,
+    unique: true,
+  })
+  diploma!: string;
+
+  // verification paramters
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: false,
+  })
+  verified!: boolean;
 
   // relationships
   @BelongsTo(() => User)

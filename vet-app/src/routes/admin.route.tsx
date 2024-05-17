@@ -45,6 +45,10 @@ import ProfilePersonalInformationPage from "../pages/auth/profile-personal-infor
 import ProfileActivityPage from "pages/auth/profile-activity.page";
 import ProfilePasswordChangePage from "pages/auth/profile-password-change.page";
 import ProfileProfessionalInformationPage from "pages/auth/profile-professional-information.page";
+import VerificationPage from "pages/verification/verification-idcard.page";
+import VerificationIdCardPage from "pages/verification/verification-idcard.page";
+import VerificationLicensePage from "pages/verification/verification-license.page";
+import VerificationDiplomaPage from "pages/verification/verification-diploma.page";
 
 export const adminRoutes = [
   // admin section
@@ -332,5 +336,24 @@ export const adminRoutes = [
     private: true,
     exact: true,
     component: <ProfileProfessionalInformationPage />,
+  },
+
+  {
+    path: "/verification/id-card",
+    private: true,
+    exact: true,
+    component: <VerificationIdCardPage />,
+  },
+  {
+    path: "/verification/license",
+    private: true,
+    exact: true,
+    component: <VerificationLicensePage />,
+  },
+  {
+    path: "/verification/diploma",
+    private: true,
+    exact: true,
+    component: <VerificationDiplomaPage />,
   },
 ];

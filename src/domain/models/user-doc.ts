@@ -3,15 +3,23 @@ import { IBaseResponse } from "./base-response";
 export interface IUserDoc {
   id: string;
   userId: string;
-  scannedIdCard: string;
-  scannedLiscence: string;
+  photo: string;
+  idCardFront: string; 
+  idCardBack: string;
+  license: string; 
+  diploma: string; 
+  verified: boolean;
 }
 
 export const emptyUserDoc: IUserDoc = {
   id: "",
   userId: "",
-  scannedIdCard: "",
-  scannedLiscence: "",
+  photo: "",
+  idCardFront: "",
+  idCardBack: "",
+  license: "",
+  diploma: "",
+  verified: false
 };
 
 export interface IUserDocResponse extends IBaseResponse {
