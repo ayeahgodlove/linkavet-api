@@ -10,6 +10,7 @@ import {
 import { IAppointment, emptyAppointment } from "../../models/health/appointment";
 import { useFormErrors } from "../../hooks/shared/form-error.hook";
 import { AppointmentService } from "../../services/health/appointment.service";
+import { useAuth } from "hooks/auth/auth.hook";
 
 const useAppointment = () => {
   const appointments = useSelector<IRootState, IAppointment[]>(
@@ -66,17 +67,26 @@ const useAppointment = () => {
   const getAppointment = useCallback((appointmentId: string) => {
     const appointment = appointments.find((c) => c.id === appointmentId);
 
+
     if (!appointment) {
       return emptyAppointment;
     }
     return appointment;
   }, []);
+
+  const { user} = useAuth()
+  const userAppointments = useCallback(() => {
+    return appointments.filter(app => app.userId === user.id)
+  }, [appointments])
+
+  const userAppointmentCount = userAppointments.length;
+
   const appointmentCounts = appointments.length;
   useEffect(() => {
     // loadAppointments();
   }, [appointment, appointments, isLoading, initialFetch]);
 
-  return {
+  return { 
     appointment,
     appointments,
     isLoading,
@@ -85,7 +95,9 @@ const useAppointment = () => {
     editAppointment,
     setAppointment,
     getAppointment,
-    appointmentCounts
+    appointmentCounts,
+    userAppointments,
+    userAppointmentCount
   };
 };
 

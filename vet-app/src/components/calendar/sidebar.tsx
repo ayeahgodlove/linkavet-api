@@ -37,7 +37,7 @@ const Sidebar: React.FC<IProps> = ({ showModal }) => {
   return (
     <Row justify={"center"} style={{ padding: "30px 15px" }}>
       <Col span={24}>
-        <h3>Calendar</h3>
+        <Typography.Title level={4} style={{ marginBottom: 0}}>Your Calendar Events</Typography.Title>
 
         <Button
           type="primary"
@@ -64,7 +64,7 @@ const Sidebar: React.FC<IProps> = ({ showModal }) => {
           style={{
             display: "flex",
             flexDirection: "column",
-            marginBottom: 180,
+            marginBottom: 18,
           }}
         >
           {filters.length &&
@@ -86,13 +86,13 @@ const Sidebar: React.FC<IProps> = ({ showModal }) => {
         </div>
       </Col>
 
-      <Row
+      {/* <Row
         className="hp-calendar-menu-footer hp-w-100"
         align="bottom"
         justify="center"
       >
         <img src={"/calendar/sidebar.svg"} alt="illustration" />
-      </Row>
+      </Row> */}
     </Row>
   );
 };

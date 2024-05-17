@@ -2,7 +2,6 @@ import { IRoute } from "models/route.model";
 import NotFoundPage from "../pages/404_Page";
 
 import CallbackPage from "../pages/callback.page";
-import DashboardPage from "../pages/dashboard/dashboard.page";
 import PostPage from "../pages/post/index.page";
 import PostDetailPage from "../pages/post/post-detail.page";
 import ProductPage from "../pages/product/index.page";
@@ -32,6 +31,7 @@ import AppointmentListsPage from "../pages/service/appointment_lists.page";
 import AppointmentDetailPage from "../pages/service/appointment_detail.page";
 import ServicesPage from "../pages/service/service.page";
 import ClassRoomPage from "../pages/course/classroom.page";
+import DashboardPage from "pages/dashboard/index.page";
 
 export const routes: IRoute[] = [
   /**

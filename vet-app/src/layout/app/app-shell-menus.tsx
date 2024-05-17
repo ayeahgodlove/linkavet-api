@@ -778,13 +778,13 @@ export const useAppShellMenus = () => {
             {
               label: (
                 <Link to="/dashboard" onClick={() => {}}>
-                  Admin
+                  Dashboard
                 </Link>
               ),
               key: "dashboard",
-              style: {
-                display: !hasAccess ? "none" : "",
-              },
+              // style: {
+              //   display: !hasAccess ? "none" : "",
+              // },
             },
             {
               label: (

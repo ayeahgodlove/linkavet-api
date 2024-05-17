@@ -10,6 +10,7 @@ import { useAuth } from "../../hooks/auth/auth.hook";
 import { useDispatch } from "react-redux";
 import { initialDataAsync } from "../../redux/action/initial.action";
 import { useAppShellMenus } from "./app-shell-menus";
+import { Navigate } from "react-router-dom";
 import { ROLES } from "../../config/constant";
 
 const { defaultAlgorithm, darkAlgorithm } = theme;
@@ -26,11 +27,6 @@ const AppShell: React.FC<IProps> = ({ children }) => {
   const { isAuthenticated, user } = useAuth();
   const { items2, filterMenuItemsByRole } = useAppShellMenus();
   const dispatch = useDispatch();
-
-  //sidebar access
-  const hasAccess =
-    user.roles.map((r) => r.name).includes(ROLES.ADMIN) ||
-    user.roles.map((r) => r.name).includes(ROLES.CREATOR);
 
   const handleShow = () => {
     setShow(true);
@@ -50,6 +46,11 @@ const AppShell: React.FC<IProps> = ({ children }) => {
       }, 3000);
     }
   }, []);
+
+  if (!isAuthenticated || !user) {
+    return <Navigate to={"/auth/login"} />;
+  }
+
   return (
     <ConfigProvider
       theme={{
@@ -64,64 +65,56 @@ const AppShell: React.FC<IProps> = ({ children }) => {
       <Layout className="app-shell-layout">
         <Navbar showMenuIcon handleShow={handleShow} />
         <Layout>
-          {
-            //Display Sidebar when it's admin
-            hasAccess ? (
-              <>
-                <Sider
-                  width={250}
-                  className={`site-layout-background ${
-                    show ? "app-shell-sidebar_show" : "app-shell-sidebar_hide"
-                  }`}
-                  collapsible
-                  collapsed={collapsed}
-                  onCollapse={handleCollapse}
-                  style={{ background: "#fff" }}
-                >
-                  <Menu
-                    mode="inline"
-                    style={{ height: "100vh", borderRight: 0 }}
-                    items={filterMenuItemsByRole(
-                      items2,
-                      user.roles.map((ur) => ur.name)
-                    )}
-                  />
-                </Sider>
-                <Drawer
-                  title="LinkaVet"
-                  placement="left"
-                  closable={true}
-                  onClose={onClose}
-                  open={show}
-                  width={300}
-                >
-                  <Sider
-                    width={250}
-                    className={`site-layout-background ${
-                      show ? "app-shell-sidebar_show" : "app-shell-sidebar_hide"
-                    }`}
-                    style={{ background: "#fff" }}
-                  >
-                    <Menu
-                      mode="inline"
-                      defaultSelectedKeys={["1"]}
-                      defaultOpenKeys={["sub1"]}
-                      style={{ height: "100%", borderRight: 0 }}
-                      items={filterMenuItemsByRole(
-                        items2,
-                        user.roles.map((ur) => ur.name)
-                      )}
-                    />
-                  </Sider>
-                </Drawer>
-              </>
-            ) : (
-              <></>
-            )
-          }
-
+          {/* //Display Sidebar when it's admin */}
+          <>
+            <Sider
+              width={250}
+              className={`site-layout-background ${
+                show ? "app-shell-sidebar_show" : "app-shell-sidebar_hide"
+              }`}
+              collapsible
+              collapsed={collapsed}
+              onCollapse={handleCollapse}
+              style={{ background: "#fff" }}
+            >
+              <Menu
+                mode="inline"
+                style={{ height: "100vh", borderRight: 0 }}
+                items={filterMenuItemsByRole(
+                  items2,
+                  user.roles.map((ur) => ur.name)
+                )}
+              />
+            </Sider>
+            <Drawer
+              title="LinkaVet"
+              placement="left"
+              closable={true}
+              onClose={onClose}
+              open={show}
+              width={300}
+            >
+              <Sider
+                width={250}
+                className={`site-layout-background ${
+                  show ? "app-shell-sidebar_show" : "app-shell-sidebar_hide"
+                }`}
+                style={{ background: "#fff" }}
+              >
+                <Menu
+                  mode="inline"
+                  defaultSelectedKeys={["1"]}
+                  defaultOpenKeys={["sub1"]}
+                  style={{ height: "100%", borderRight: 0 }}
+                  items={filterMenuItemsByRole(
+                    items2,
+                    user.roles.map((ur) => ur.name)
+                  )}
+                />
+              </Sider>
+            </Drawer>
+          </>
           {/* Display no sidebar when it's others */}
-
           <Content
             className="site-layout-background"
             style={{

@@ -105,7 +105,6 @@ const CalenderComponent: React.FC = () => {
         <Card bordered={false}>
           <Row>
             <Sider
-              // theme={customise.theme == "light" ? "light" : "dark"}
               theme="light"
               width={256}
             >

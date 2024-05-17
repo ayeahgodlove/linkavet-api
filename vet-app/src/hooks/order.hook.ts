@@ -11,6 +11,7 @@ import {
 } from "../redux/order.slice";
 import { OrderService } from "../services/order.service";
 import { IProduct } from "../models/product.model";
+import { useAuth } from "./auth/auth.hook";
 const useOrder = () => {
   const orders = useSelector<IRootState, IOrder[]>(
     (state) => state.order.orders
@@ -22,7 +23,9 @@ const useOrder = () => {
     (state) => state.order.initialFetch
   );
   const order = useSelector<IRootState, IOrder>((state) => state.order.order);
-  const productOrders = useSelector<IRootState, IProduct[]>((state) => state.order.productOrders);
+  const productOrders = useSelector<IRootState, IProduct[]>(
+    (state) => state.order.productOrders
+  );
 
   const dispatch = useDispatch();
 
@@ -61,6 +64,11 @@ const useOrder = () => {
       });
   };
 
+  const { user } = useAuth();
+  const userOrders = useCallback(() => {
+    return orders.filter((o) => o.email === user.email);
+  }, [orders]);
+
   const getProductByOrder = async (orderId: string) => {
     return await OrderService.byOrderId(orderId)
       .then((response) => {
@@ -85,7 +93,8 @@ const useOrder = () => {
     editOrder,
     setOrder,
     getProductByOrder,
-    productOrders
+    productOrders,
+    userOrders,
   };
 };
 

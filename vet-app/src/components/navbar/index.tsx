@@ -54,7 +54,7 @@ const Navbar: React.FC<IProps> = ({ handleShow }) => {
                 src="/logo/logo-2-removebg-preview.png"
                 height={width > 768 ? 100 : 90}
                 width={width > 768 ? 90 : 60}
-                alt="honeyman logo"
+                alt="linkavet logo"
                 style={{ aspectRatio: 1 / 1, objectFit: "contain" }}
               />
             </Link>
