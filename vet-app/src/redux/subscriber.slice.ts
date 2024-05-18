@@ -48,6 +48,11 @@ export const subscriberSlice = createSlice({
     setActiveSubscriber: (state, action: PayloadAction<ISubscriber>) => {
       state.subscriber = action.payload;
     },
+    deleteSubscriber: (state, action: PayloadAction<ISubscriber>) => {
+      state.subscribers = state.subscribers.filter(
+        (item) => item.id !== action.payload.id
+      ); // Assuming items have an 'id' property
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchSubscribersAsync.pending, (state) => {
@@ -72,6 +77,7 @@ export const {
   editSubscriberSuccess,
   addSubscriberSuccess,
   setActiveSubscriber,
+  deleteSubscriber
 } = subscriberSlice.actions;
 
 const reducer = subscriberSlice.reducer;

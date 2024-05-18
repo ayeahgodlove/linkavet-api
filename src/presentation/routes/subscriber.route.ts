@@ -7,10 +7,26 @@ const subscriberController = new SubscribersController();
 
 const subscriberRouter = Router();
 
-subscriberRouter.get("", subscriberController.getAll);
-subscriberRouter.get("/:id", subscriberController.getSubscriberById);
-subscriberRouter.post("", isAuthenticatedMiddleware, subscriberController.createSubscriber);
-subscriberRouter.put("/:id", isAuthenticatedMiddleware, subscriberController.updateSubscriber);
-subscriberRouter.delete("/:id", isAuthenticatedMiddleware, subscriberController.deleteSubscriber);
+subscriberRouter.get(
+  "",
+  isAuthenticatedMiddleware,
+  subscriberController.getAll
+);
+subscriberRouter.get(
+  "/:id",
+  isAuthenticatedMiddleware,
+  subscriberController.getSubscriberById
+);
+subscriberRouter.post("", subscriberController.createSubscriber);
+subscriberRouter.put(
+  "/:id",
+  isAuthenticatedMiddleware,
+  subscriberController.updateSubscriber
+);
+subscriberRouter.delete(
+  "/:id",
+  isAuthenticatedMiddleware,
+  subscriberController.deleteSubscriber
+);
 
 export default subscriberRouter;

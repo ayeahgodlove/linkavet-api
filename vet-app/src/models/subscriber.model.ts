@@ -4,11 +4,13 @@ import { IResponseBase } from "./response-base.model";
 export interface ISubscriber {
   id: string;
   email: string;
+  createdAt: Date;
 }
 
 export const emptySubscriber: ISubscriber = {
   id: "",
   email: "",
+  createdAt: new Date(),
 };
 
 export interface ISubscriberState extends IBaseState {

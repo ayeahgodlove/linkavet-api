@@ -19,7 +19,7 @@ const SubscribersPage = () => {
   }, []);
 
   return (
-    <>
+    <div style={{ margin: "1rem" }}>
       <PageBreadCrumbs items={["Mailing Lists", "subscriber"]} />
       <TitleBar
         title={"subscribers"}
@@ -28,7 +28,7 @@ const SubscribersPage = () => {
         icon={<FiPlus />}
       />
       <SubscriberTable />
-    </>
+    </div>
   );
 };
 

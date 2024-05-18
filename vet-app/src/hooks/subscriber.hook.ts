@@ -4,6 +4,7 @@ import { IRootState } from "../redux/store";
 import { ISubscriber, emptySubscriber } from "../models/subscriber.model";
 import {
   addSubscriberSuccess,
+  deleteSubscriber,
   editSubscriberSuccess,
   fetchSubscribersAsync,
   setActiveSubscriber,
@@ -66,6 +67,21 @@ const useSubscriber = () => {
       });
   };
 
+  
+  const delSubscriber = async (subscriber: ISubscriber) => {
+    return await SubscriberService
+      .delete(subscriber)
+      .then((resp) => {
+        console.log("resp: ", resp)
+        dispatch(deleteSubscriber(subscriber));
+        return true;
+      })
+      .catch((error) => {
+        console.log("error: ", error);
+        return false;
+      });
+  };
+
   useEffect(() => {
     // loadSubscribers();
   }, [subscriber, subscribers, isLoading, initialFetch]);
@@ -78,7 +94,8 @@ const useSubscriber = () => {
     addSubscriber,
     editSubscriber,
     setSubscriber,
-    getSubscriber
+    getSubscriber,
+    delSubscriber
   };
 };
 

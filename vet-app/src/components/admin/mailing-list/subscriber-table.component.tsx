@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Card, Col, Input, Table } from "antd";
-import { useNavigate } from "react-router-dom";
 import { ISubscriber } from "../../../models/subscriber.model";
 import { useSubscriber } from "../../../hooks/subscriber.hook";
 import { NoContent } from "../../shared/no-content/no-content.component";
-import slugify from "slugify";
 import { useDispatch } from "react-redux";
 import search from "../../../utils/search";
 import { fetchSubscriberSuccess } from "../../../redux/subscriber.slice";
@@ -13,8 +11,7 @@ import { useSubscriberColumn } from "./subscriber-column.component";
 import { SubscriberService } from "../../../services/subscriber.service";
 
 const SubscriberTable: React.FC = () => {
-  const { subscribers, setSubscriber, initialFetch } = useSubscriber();
-  const router = useNavigate();
+  const { subscribers } = useSubscriber();
   const { subscriberTableColumns } = useSubscriberColumn();
 
   const [query, setQuery] = useState<string>("");
@@ -39,12 +36,6 @@ const SubscriberTable: React.FC = () => {
   };
 
   const inputRef = useRef(null);
-
-  // const route = use
-  const handleRowClick = (subscriber: ISubscriber) => {
-    setSubscriber(subscriber);
-    router(`/admin/subscribers/${slugify(subscriber.email, "-")}`);
-  };
 
   useEffect(() => {
     (async () => {
@@ -81,14 +72,6 @@ const SubscriberTable: React.FC = () => {
             style={{ borderRadius: 0 }}
             size={"small"}
             rowKey={"id"}
-            onRow={(record: ISubscriber) => {
-              return {
-                onClick: (e) => {
-                  console.log(e);
-                  handleRowClick(record);
-                },
-              };
-            }}
             ref={inputRef}
           />
         </Card>

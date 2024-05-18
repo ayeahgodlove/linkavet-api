@@ -8,25 +8,26 @@ import { useAuth } from "../../../hooks/auth/auth.hook";
 import React, { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { fetchMailsAsync } from "../../../redux/mail.slice";
+import { UpdateMode } from "models/shared/update-mode.enum";
 
 const MailingListsPage = () => {
   const { isLoading } = useAuth();
-  useEffect(() => {}, [isLoading]);
-  const { setContent, setTitle, setShow } = useModalContext();
+  const { setContent, setTitle, setShow, setWidth } = useModalContext();
   const dispatch = useDispatch();
 
   const createMail = () => {
-    setContent(<MailingForm />);
+    setWidth("40rem");
+    setContent(<MailingForm formMode={UpdateMode.ADD} />);
     setTitle("Create new mail");
     setShow(true);
   };
 
   useEffect(() => {
     dispatch(fetchMailsAsync() as any);
-  }, []);
+  }, [isLoading]);
 
   return (
-    <>
+    <div style={{ margin: "1rem" }}>
       <PageBreadCrumbs items={["Mailing Lists", "Mails"]} />
       <TitleBar
         title={"Mails"}
@@ -37,7 +38,7 @@ const MailingListsPage = () => {
         icon={<FiPlus />}
       />
       <MailTable />
-    </>
+    </div>
   );
 };
 

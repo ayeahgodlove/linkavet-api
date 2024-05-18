@@ -1,16 +1,35 @@
 import React, { useState } from "react";
-import { Button, ConfigProvider, Input } from "antd";
+import { Button, ConfigProvider, Input, message } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import styles from "./footer.module.css";
 import { Link } from "react-router-dom";
 import { THEME } from "config/constant";
+import { useSubscriber } from "hooks/subscriber.hook";
+import { emptySubscriber } from "models/subscriber.model";
 
 type Props = {
   logoPath: string;
 };
-export const AppFooter: React.FC<Props> = ({ logoPath  }) => {
+export const AppFooter: React.FC<Props> = ({ logoPath }) => {
   const [email, setEmail] = useState("");
+  const [load, setLoad] = useState(false);
+  const { addSubscriber } = useSubscriber();
 
+  const handleSubscribe = async () => {
+    setLoad(true);
+    const feedback = await addSubscriber({
+      ...emptySubscriber,
+      email,
+    });
+
+    if (feedback) {
+      message.success("You have subscribe successfully!");
+      setEmail("");
+    } else {
+      message.error("subscribe failed!");
+    }
+    setLoad(false);
+  };
   return (
     <footer className={`section ${styles.section}`}>
       <div className="container">
@@ -51,9 +70,15 @@ export const AppFooter: React.FC<Props> = ({ logoPath  }) => {
                   addonAfter={
                     <Button
                       type="link"
-                      icon={<ArrowRightOutlined style={{ color: "#81ce89" }} />}
+                      icon={
+                        <ArrowRightOutlined
+                          style={{ color: "#81ce89" }}
+                          onClick={handleSubscribe}
+                        />
+                      }
                     />
                   }
+                  disabled={load}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />

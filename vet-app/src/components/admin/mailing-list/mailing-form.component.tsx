@@ -3,23 +3,36 @@ import {
   Col,
   Form,
   Input,
+  message,
   Row,
   Select,
   Typography,
   Upload,
 } from "antd";
 import UploadButton from "components/shared/upload-button.component";
+import { useModalContext } from "context/app-modal.context";
+import { useMail } from "hooks/mail.hook";
 import { useFormInit } from "hooks/shared/form-init.hook";
 import { useImage } from "hooks/shared/image.hook";
 import { useUpload } from "hooks/shared/upload.hook";
 import { useSubscriber } from "hooks/subscriber.hook";
-import React, { useCallback, useEffect } from "react";
+import { IMail } from "models/mail.model";
+import { UpdateMode } from "models/shared/update-mode.enum";
+import React, { useCallback, useEffect, useState } from "react";
 import { upload } from "utils/upload";
 
-const MailingForm = () => {
+type Props = {
+  formMode: UpdateMode;
+};
+const MailingForm: React.FC<Props> = ({ formMode }) => {
   const { initFormData } = useFormInit();
   const [form] = Form.useForm();
   const { subscribers } = useSubscriber();
+  const { setShow } = useModalContext();
+  const { mail, addMail, editMail } = useMail();
+
+  const [hasSubmitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   const onChange = (value: string) => {
     console.log(`selected ${value}`);
@@ -29,8 +42,40 @@ const MailingForm = () => {
     console.log("search:", value);
   };
 
-  const onFinish = (values) => {
-    console.log(values);
+  const onFinish = async (values: any) => {
+    setSubmitting(true);
+    setSubmitted(false);
+    const obj: IMail = {
+      ...mail,
+      ...values,
+      name: values.name,
+      description: values.description,
+    };
+
+    if (formMode === UpdateMode.ADD) {
+      const feedback = await addMail(obj);
+      if (feedback) {
+        message.success("Mail created successfully!");
+        setShow(false);
+      } else {
+        message.error("failed to create");
+        setShow(true);
+        setSubmitted(true);
+      }
+    }
+
+    if (formMode === UpdateMode.EDIT) {
+      const feedback = await editMail(obj);
+      if (feedback) {
+        message.success("Mail updated successfully!");
+        setShow(false);
+      } else {
+        message.error("failed to update");
+        setSubmitted(true);
+        setShow(true);
+      }
+    }
+    setSubmitting(false);
   };
 
   const { handlePreview, progress, fileList, beforeUpload, onRemove } =
@@ -41,6 +86,7 @@ const MailingForm = () => {
   useEffect(() => {
     form.validateFields();
     form.setFieldValue("media", images);
+    initFormData(form, formMode, mail);
   }, [form, images]);
 
   return (
@@ -68,13 +114,14 @@ const MailingForm = () => {
             </Upload>
             <Form.Item
               name="media"
-              style={{ marginTop: 13 }}
-              rules={[
-                {
-                  required: true,
-                  message: "media are required",
-                },
-              ]}
+              style={{ marginTop: 13, display: "none" }}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "media are required",
+              //   },
+              // ]}
+              // style={{ display: "none" }}
             >
               <Input multiple={true} disabled />
             </Form.Item>
@@ -85,12 +132,12 @@ const MailingForm = () => {
           name="email"
           label="Email"
           style={{ marginBottom: 3 }}
-          rules={[
-            {
-              required: true,
-              message: "Email is required",
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: "Email is required",
+          //   },
+          // ]}
         >
           <Select
             showSearch
@@ -115,12 +162,12 @@ const MailingForm = () => {
           name="headline"
           label="Headline"
           style={{ marginBottom: 3 }}
-          rules={[
-            {
-              required: true,
-              message: "Headline is required",
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: "Headline is required",
+          //   },
+          // ]}
         >
           <Input />
         </Form.Item>
@@ -131,12 +178,12 @@ const MailingForm = () => {
               name="cta"
               label="cta"
               style={{ marginBottom: 3 }}
-              rules={[
-                {
-                  required: true,
-                  message: "cta is required",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "cta is required",
+              //   },
+              // ]}
             >
               <Input />
             </Form.Item>
@@ -146,12 +193,12 @@ const MailingForm = () => {
               name="type"
               label="Type"
               style={{ marginBottom: 3 }}
-              rules={[
-                {
-                  required: true,
-                  message: "Type is required",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Type is required",
+              //   },
+              // ]}
             >
               <Select
                 showSearch
@@ -179,15 +226,15 @@ const MailingForm = () => {
         </Row>
 
         <Form.Item
-          name="ctaDescription"
-          label="CtaDescription"
+          name="description"
+          label="Description"
           style={{ marginBottom: 3 }}
-          rules={[
-            {
-              required: true,
-              message: "CtaDescription is required",
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: "Description is required",
+          //   },
+          // ]}
         >
           <Input.TextArea rows={4} />
         </Form.Item>
