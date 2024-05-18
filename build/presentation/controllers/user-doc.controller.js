@@ -8,39 +8,42 @@ const mapper_1 = require("../mappers/mapper");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
 const user_1 = require("../../data/entities/user");
 const user_doc_2 = require("../../data/entities/user-doc");
-const nanoid_1 = require("nanoid");
+const user_doc_request_dto_1 = require("../dtos/user-doc-request.dto");
+const class_validator_1 = require("class-validator");
+const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const userDocRepository = new user_doc_repository_1.UserDocRepository();
 const userDocUseCase = new user_doc_usecase_1.UserDocUseCase(userDocRepository);
 const userDocMapper = new mapper_1.UserDocMapper();
 class UserDocsController {
     async createUserDoc(req, res) {
-        const user = req.user;
-        //get uploaded files
-        const { scannedIdCard, scannedLiscence } = req.files;
-        if (!req.files) {
-            throw new Error("Please select files!");
-        }
-        try {
-            const userDocResponse = await userDocUseCase.createUserDoc({
-                userId: user.id,
-                scannedIdCard: scannedIdCard[0].filename,
-                scannedLiscence: scannedLiscence[0].filename,
-                id: (0, nanoid_1.nanoid)(10),
-            });
-            res.status(201).json({
-                data: userDocResponse.toJSON(),
-                message: "UserDoc submitted Successfully!",
-                validationErrors: [],
-                success: true,
-            });
-        }
-        catch (error) {
+        const dto = new user_doc_request_dto_1.UserDocRequestDto(req.body);
+        const validationErrors = await (0, class_validator_1.validate)(dto);
+        if (validationErrors.length > 0) {
             res.status(400).json({
-                data: null,
-                message: error.message,
-                validationErrors: [],
+                validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
                 success: false,
+                data: null,
+                message: "Attention!",
             });
+        }
+        else {
+            try {
+                const userDocResponse = await userDocUseCase.createUserDoc(dto.toData());
+                res.status(201).json({
+                    data: userDocResponse.toJSON(),
+                    message: "UserDoc submitted Successfully!",
+                    validationErrors: [],
+                    success: true,
+                });
+            }
+            catch (error) {
+                res.status(400).json({
+                    data: null,
+                    message: error.message,
+                    validationErrors: [],
+                    success: false,
+                });
+            }
         }
     }
     async getAll(req, res) {
@@ -77,11 +80,6 @@ class UserDocsController {
                 throw new not_found_exception_1.NotFoundException("User", `${userDoc.userId}`);
             }
             // Update the user's verification status
-            await user.update({
-                ...user,
-                verified: true,
-            });
-            await user.save();
             res.json({
                 data: userDocDTO,
                 message: "Success",
@@ -99,41 +97,50 @@ class UserDocsController {
         }
     }
     async updateUserDoc(req, res) {
-        try {
-            const id = req.params.id;
-            const userDoc = await user_doc_2.UserDoc.findByPk(id);
-            if (!userDoc) {
-                throw new not_found_exception_1.NotFoundException("userDoc", `${id}`);
-            }
-            // search user by ID
-            const user = await user_1.User.findByPk(userDoc.userId);
-            if (!user) {
-                throw new not_found_exception_1.NotFoundException("User", `${userDoc.userId}`);
-            }
-            const obj = {
-                ...user_doc_1.emptyUserDoc,
-                ...req.body,
-                id: id,
-            };
-            const updatedUserDoc = await userDocUseCase.updateUserDoc(obj);
-            // Update the user's verification status
-            user.verified = true;
-            await user.save();
-            const userDocDto = userDocMapper.toDTO(updatedUserDoc);
-            res.json({
-                data: userDocDto,
-                message: "UserDoc Updated Successfully!",
-                validationErrors: [],
-                success: true,
+        const dto = new user_doc_request_dto_1.UserDocRequestDto(req.body);
+        const validationErrors = await (0, class_validator_1.validate)(dto);
+        if (validationErrors.length > 0) {
+            res.status(400).json({
+                validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
+                success: false,
+                data: null,
+                message: "Attention!",
             });
         }
-        catch (error) {
-            res.status(400).json({
-                data: null,
-                message: error.message,
-                validationErrors: [error],
-                success: false,
-            });
+        else {
+            try {
+                const id = req.params.id;
+                const userDoc = await user_doc_2.UserDoc.findByPk(id);
+                if (!userDoc) {
+                    throw new not_found_exception_1.NotFoundException("userDoc", `${id}`);
+                }
+                // search user by ID
+                const user = await user_1.User.findByPk(userDoc.userId);
+                if (!user) {
+                    throw new not_found_exception_1.NotFoundException("User", `${userDoc.userId}`);
+                }
+                const obj = {
+                    ...user_doc_1.emptyUserDoc,
+                    ...req.body,
+                    id: id,
+                };
+                const updatedUserDoc = await userDocUseCase.updateUserDoc(obj);
+                const userDocDto = userDocMapper.toDTO(updatedUserDoc);
+                res.json({
+                    data: userDocDto,
+                    message: "UserDoc Updated Successfully!",
+                    validationErrors: [],
+                    success: true,
+                });
+            }
+            catch (error) {
+                res.status(400).json({
+                    data: null,
+                    message: error.message,
+                    validationErrors: [error],
+                    success: false,
+                });
+            }
         }
     }
     async deleteUserDoc(req, res) {

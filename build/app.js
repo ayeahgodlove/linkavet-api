@@ -70,6 +70,8 @@ const user_role_route_1 = __importDefault(require("./presentation/routes/user-ro
 const upload_route_1 = __importDefault(require("./presentation/routes/upload.route"));
 const event_route_1 = __importDefault(require("./presentation/routes/event.route"));
 const specialty_route_1 = __importDefault(require("./presentation/routes/specialty.route"));
+const subscriber_route_1 = __importDefault(require("./presentation/routes/subscriber.route"));
+const mail_route_1 = __importDefault(require("./presentation/routes/mail.route"));
 dotenv.config();
 const db = new db_postgres_config_1.PostgresDbConfig();
 /**
@@ -165,6 +167,8 @@ db.connection()
     app.use("/api/specialties", specialty_route_1.default);
     app.use("/api/uploads", upload_route_1.default);
     app.use("/api/calendar/events", event_route_1.default);
+    app.use("/api/subscribers", subscriber_route_1.default);
+    app.use("/api/mails", mail_route_1.default);
     // middleware interceptions
     app.use(not_found_middleware_1.notFoundHandler);
     /**

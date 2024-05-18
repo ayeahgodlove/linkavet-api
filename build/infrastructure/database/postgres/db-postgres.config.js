@@ -62,6 +62,8 @@ const consultation_1 = require("../../../data/entities/health/consultation");
 const review_1 = require("../../../data/entities/review");
 const specialty_1 = require("../../../data/entities/specialty");
 const event_1 = require("../../../data/entities/event");
+const subscriber_1 = require("../../../data/entities/subscriber");
+const mail_1 = require("../../../data/entities/mail");
 dotenv.config();
 class PostgresDbConfig {
     _sequelize;
@@ -111,6 +113,8 @@ class PostgresDbConfig {
                 review_1.Review,
                 event_1.Event,
                 specialty_1.Specialty,
+                subscriber_1.Subscriber,
+                mail_1.Mail
             ],
             logging: false,
             pool: {

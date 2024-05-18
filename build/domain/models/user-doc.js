@@ -4,6 +4,10 @@ exports.emptyUserDoc = void 0;
 exports.emptyUserDoc = {
     id: "",
     userId: "",
-    scannedIdCard: "",
-    scannedLiscence: "",
+    photo: "",
+    idCardFront: "",
+    idCardBack: "",
+    license: "",
+    diploma: "",
+    verified: false
 };

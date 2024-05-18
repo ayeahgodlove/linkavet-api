@@ -1,7 +1,7 @@
 "use strict";
 // src/presentation/mappers/category-mapper.ts
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.SpecialtyMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.EventMapper = exports.CategoryMapper = void 0;
+exports.MailMapper = exports.SubscriberMapper = exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.SpecialtyMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.EventMapper = exports.CategoryMapper = void 0;
 class CategoryMapper {
     toDTO(category) {
         const entity = category.toJSON();
@@ -398,3 +398,31 @@ class ConsultationMapper {
     }
 }
 exports.ConsultationMapper = ConsultationMapper;
+class SubscriberMapper {
+    toDTO(subscriber) {
+        const entity = subscriber.toJSON();
+        return entity;
+    }
+    toDTOs(subscribers) {
+        const _subscribers = subscribers.map((subscriber) => {
+            const entity = subscriber.toJSON();
+            return entity;
+        });
+        return _subscribers;
+    }
+}
+exports.SubscriberMapper = SubscriberMapper;
+class MailMapper {
+    toDTO(mail) {
+        const entity = mail.toJSON();
+        return entity;
+    }
+    toDTOs(mails) {
+        const _mails = mails.map((mail) => {
+            const entity = mail.toJSON();
+            return entity;
+        });
+        return _mails;
+    }
+}
+exports.MailMapper = MailMapper;

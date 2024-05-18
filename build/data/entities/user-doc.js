@@ -14,8 +14,13 @@ const sequelize_typescript_1 = require("sequelize-typescript");
 const user_1 = require("./user");
 let UserDoc = class UserDoc extends sequelize_typescript_1.Model {
     userId;
-    scannedIdCard;
-    scannedLiscence;
+    photo;
+    idCardFront;
+    idCardBack;
+    license;
+    diploma;
+    // verification paramters
+    verified;
     // relationships
     user;
 };
@@ -39,7 +44,7 @@ __decorate([
         unique: true,
     }),
     __metadata("design:type", String)
-], UserDoc.prototype, "scannedIdCard", void 0);
+], UserDoc.prototype, "photo", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING(128),
@@ -47,7 +52,38 @@ __decorate([
         unique: true,
     }),
     __metadata("design:type", String)
-], UserDoc.prototype, "scannedLiscence", void 0);
+], UserDoc.prototype, "idCardFront", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(128),
+        allowNull: false,
+        unique: true,
+    }),
+    __metadata("design:type", String)
+], UserDoc.prototype, "idCardBack", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(128),
+        allowNull: false,
+        unique: true,
+    }),
+    __metadata("design:type", String)
+], UserDoc.prototype, "license", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(128),
+        allowNull: false,
+        unique: true,
+    }),
+    __metadata("design:type", String)
+], UserDoc.prototype, "diploma", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.BOOLEAN,
+        defaultValue: false,
+    }),
+    __metadata("design:type", Boolean)
+], UserDoc.prototype, "verified", void 0);
 __decorate([
     (0, sequelize_typescript_1.BelongsTo)(() => user_1.User),
     __metadata("design:type", user_1.User)
