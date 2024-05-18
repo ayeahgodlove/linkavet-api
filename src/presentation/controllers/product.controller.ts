@@ -35,7 +35,7 @@ export class ProductsController {
         success: false,
         data: null,
         message: "Attention!",
-      });
+      }); 
     } else {
       try {
         const productResponse = await productUseCase.createProduct({

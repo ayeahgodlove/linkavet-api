@@ -3,3 +3,9 @@ export enum STATUS {
   PENDING = "PENDING",
   CANCELED = "CANCELED",
 }
+
+export enum MAIL_STATUS {
+  DRAFT = "DRAFT",
+  SENT = "SENT",
+}
+

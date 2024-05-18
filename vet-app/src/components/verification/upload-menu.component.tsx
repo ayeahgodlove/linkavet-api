@@ -13,6 +13,7 @@ export default function UploadMenu(props: any) {
   const { users } = useUser();
 
   const avatar = users.find((u) => u.id === user.id);
+  console.log("avatar: ", avatar)
 
   return (
     <Col lg={8} className={props.className}>
@@ -32,10 +33,17 @@ export default function UploadMenu(props: any) {
             padding: "0 0 1.5rem 0",
           }}
         >
-          <Avatar
-            src={`${API_URL_UPLOADS_AVATARS}/${avatar?.avatar}`}
-            size={100}
-          />
+          {avatar?.avatar.length ? (
+            <Avatar
+              src={`${API_URL_UPLOADS_AVATARS}/${avatar?.avatar}`}
+              size={100}
+            />
+          ) : (
+            <Avatar
+              src={`/user-placeholder`}
+              size={100}
+            />
+          )}
         </div>
 
         <Menu mode="inline" theme={"light"}>

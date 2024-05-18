@@ -49,6 +49,8 @@ import VerificationPage from "pages/verification/verification-idcard.page";
 import VerificationIdCardPage from "pages/verification/verification-idcard.page";
 import VerificationLicensePage from "pages/verification/verification-license.page";
 import VerificationDiplomaPage from "pages/verification/verification-diploma.page";
+import SubscribersPage from "pages/admin/mailing-list/subscribers.page";
+import MailingListsPage from "pages/admin/mailing-list/mailing-list.page";
 
 export const adminRoutes = [
   // admin section
@@ -232,6 +234,21 @@ export const adminRoutes = [
     exact: true,
     component: <AdminAppointmentDetailPage />,
   },
+
+  // mailing lists
+  {
+    path: "/admin/subscribers",
+    private: true,
+    exact: true,
+    component: <SubscribersPage />,
+  },
+  {
+    path: "/admin/mails",
+    private: true,
+    exact: true,
+    component: <MailingListsPage />,
+  },
+  // end of mailing lists
 
   // business module
   {

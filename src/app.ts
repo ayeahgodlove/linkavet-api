@@ -44,6 +44,8 @@ import userRoleRouter from "./presentation/routes/user-role.route";
 import uploadRouter from "./presentation/routes/upload.route";
 import eventRouter from "./presentation/routes/event.route";
 import specialtyRouter from "./presentation/routes/specialty.route";
+import subscriberRouter from "./presentation/routes/subscriber.route";
+import mailRouter from "./presentation/routes/mail.route";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -161,7 +163,8 @@ db.connection()
     app.use("/api/specialties", specialtyRouter);
     app.use("/api/uploads", uploadRouter);
     app.use("/api/calendar/events", eventRouter);
-
+    app.use("/api/subscribers", subscriberRouter);
+    app.use("/api/mails", mailRouter);
     // middleware interceptions
     app.use(notFoundHandler);
 

@@ -56,6 +56,10 @@ import { Specialty } from "../../data/entities/specialty";
 import { ISpecialty } from "../../domain/models/specialty";
 import { IEvent } from "../../domain/models/event";
 import { Event } from "../../data/entities/event";
+import { Subscriber } from "../../data/entities/subscriber";
+import { ISubscriber } from "../../domain/models/subscriber";
+import { Mail } from "../../data/entities/mail";
+import { IMail } from "../../domain/models/mail";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -451,3 +455,30 @@ export class ConsultationMapper {
   }
 }
 
+export class SubscriberMapper {
+  toDTO(subscriber: Subscriber): ISubscriber {
+    const entity = subscriber.toJSON<ISubscriber>();
+    return entity;
+  }
+  toDTOs(subscribers: Subscriber[]): ISubscriber[] {
+    const _subscribers = subscribers.map((subscriber) => {
+      const entity = subscriber.toJSON<ISubscriber>();
+      return entity;
+    });
+    return _subscribers;
+  }
+}
+
+export class MailMapper {
+  toDTO(mail: Mail): IMail {
+    const entity = mail.toJSON<IMail>();
+    return entity;
+  }
+  toDTOs(mails: Mail[]): IMail[] {
+    const _mails = mails.map((mail) => {
+      const entity = mail.toJSON<IMail>();
+      return entity;
+    });
+    return _mails;
+  }
+}

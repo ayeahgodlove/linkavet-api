@@ -38,6 +38,8 @@ import { Consultation } from "../../../data/entities/health/consultation";
 import { Review } from "../../../data/entities/review";
 import { Specialty } from "../../../data/entities/specialty";
 import { Event } from "../../../data/entities/event";
+import { Subscriber } from "../../../data/entities/subscriber";
+import { Mail } from "../../../data/entities/mail";
 
 dotenv.config();
 
@@ -90,6 +92,8 @@ export class PostgresDbConfig {
         Review,
         Event,
         Specialty,
+        Subscriber,
+        Mail
       ],
       logging: false,
       pool: {

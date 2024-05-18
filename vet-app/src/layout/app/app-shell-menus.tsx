@@ -9,6 +9,7 @@ import {
   MdOutlineLibraryBooks,
   MdOutlineProductionQuantityLimits,
   MdOutlineArticle,
+  MdUnsubscribe,
 } from "react-icons/md";
 import {
   BiCategoryAlt,
@@ -43,7 +44,6 @@ import { useShoppingCart } from "../../hooks/shopping-cart/shopping-cart.hook";
 import { useAuth } from "../../hooks/auth/auth.hook";
 import { GrScheduleNew } from "react-icons/gr";
 import { ROLES } from "../../config/constant";
-import { useUser } from "../../hooks/user.hook";
 import {
   RiAccountCircleLine,
   RiServiceLine,
@@ -51,7 +51,9 @@ import {
   RiUserStarFill,
 } from "react-icons/ri";
 import { FcApprove, FcCalendar } from "react-icons/fc";
-import { SiGoogleclassroom } from "react-icons/si";
+import { SiAmazonsimpleemailservice, SiGoogleclassroom } from "react-icons/si";
+import { LuMails } from "react-icons/lu";
+import { CiMail } from "react-icons/ci";
 
 export const useAppShellMenus = () => {
   const [language, setLanguage] = useState("en");
@@ -68,16 +70,8 @@ export const useAppShellMenus = () => {
     router("/shopping-cart");
   };
   const { logoutUserFunction, isAuthenticated, user } = useAuth();
-  const { users } = useUser();
   const isLoggedIn = isAuthenticated && user;
 
-  // const avatar = isAuthenticated
-  //   ? (users.find((u) => u.id === user.id) as any)
-  //   : null;
-  // console.log("users: ", users, user);
-  // const avatar =
-  //   users.length > 0 ? (users.find((u) => u.id === user.id) as any) : emptyUser;
-  // roles.some(role => user.roles.map(ur => ur.name).includes(role))
   const hasAccess = isAuthenticated
     ? user.roles.map((r) => r.name).includes(ROLES.ADMIN) ||
       user.roles.map((r) => r.name).includes(ROLES.CREATOR) ||
@@ -363,10 +357,7 @@ export const useAppShellMenus = () => {
           label: <Link to="/verification/id-card">Verification</Link>,
           key: "verification",
           icon: <FcApprove />,
-          roles: [
-            ROLES.TRAINER,
-            ROLES.DOCTOR,
-          ],
+          roles: [ROLES.TRAINER, ROLES.DOCTOR],
         },
         {
           label: (
@@ -420,6 +411,36 @@ export const useAppShellMenus = () => {
         ROLES.DOCTOR,
         ROLES.PETOWNER,
       ],
+    },
+
+    // mailing list
+    {
+      label: "Mailing Lists",
+      key: "mailing",
+      icon: <SiAmazonsimpleemailservice size={21} color="#023202" />,
+      children: [
+        {
+          label: (
+            <Link to="/admin/subscribers" style={{ padding: 0 }}>
+              Subscribers
+            </Link>
+          ),
+          key: "subscribers",
+          icon: <MdUnsubscribe size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.CREATOR],
+        },
+        {
+          label: (
+            <Link to="/admin/mails" style={{ padding: 0 }}>
+              Mails
+            </Link>
+          ),
+          key: "mails",
+          icon: <LuMails size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.CREATOR],
+        },
+      ],
+      roles: [ROLES.ADMIN, ROLES.CREATOR],
     },
 
     // end configurations

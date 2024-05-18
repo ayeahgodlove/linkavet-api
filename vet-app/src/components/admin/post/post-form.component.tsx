@@ -147,7 +147,7 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
             >
               <Select
                 showSearch
-                placeholder="Select a person"
+                placeholder="Select a category"
                 optionFilterProp="children"
                 onChange={onChange}
                 onSearch={onSearch}

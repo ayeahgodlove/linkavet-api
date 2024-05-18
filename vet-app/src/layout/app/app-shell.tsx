@@ -26,7 +26,7 @@ const AppShell: React.FC<IProps> = ({ children }) => {
   const { isDarkMode } = useTheme();
   const { isAuthenticated, user } = useAuth();
   const { items2, filterMenuItemsByRole } = useAppShellMenus();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch(); 
 
   const handleShow = () => {
     setShow(true);

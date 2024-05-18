@@ -6,14 +6,12 @@ import {
   ForeignKey,
   HasMany,
   BelongsTo,
-  BelongsToMany,
 } from "sequelize-typescript";
 import { IPost } from "../../domain/models/post";
 import { User } from "./user";
 import { Category } from "./category";
 import { Comment } from "./comment";
-import { PostTag } from "./post-tag";
-import { Tag } from "./tag";
+
 @Table({
   timestamps: true,
   paranoid: true,

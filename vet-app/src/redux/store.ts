@@ -39,6 +39,8 @@ import { roleReducer } from "./role.slice";
 import { specialtyReducer } from "./specialty.slice";
 import { imageReducer } from "./shared/image.slice";
 import { eventReducer } from "./event.slice";
+import { subscriberReducer } from "./subscriber.slice";
+import { mailReducer } from "./mail.slice";
 
 // const middlewares: [any] = [thunkMiddleware];
 
@@ -77,6 +79,8 @@ export const rootReducer = combineReducers({
   role: roleReducer,
   specialty: specialtyReducer,
   event: eventReducer,
+  subscriber: subscriberReducer,
+  mail: mailReducer
 });
 
 const persistConfig = {
