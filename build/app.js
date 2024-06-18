@@ -63,15 +63,14 @@ const product_review_route_1 = __importDefault(require("./presentation/routes/pr
 const lesson_review_route_1 = __importDefault(require("./presentation/routes/lesson-review.route"));
 const appointment_route_1 = __importDefault(require("./presentation/routes/health/appointment.route"));
 const consultation_route_1 = __importDefault(require("./presentation/routes/health/consultation.route"));
-// import { seo } from "./utils/seo";
 // import fs from "fs";
 const user_role_route_1 = __importDefault(require("./presentation/routes/user-role.route"));
-// import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
 const upload_route_1 = __importDefault(require("./presentation/routes/upload.route"));
 const event_route_1 = __importDefault(require("./presentation/routes/event.route"));
 const specialty_route_1 = __importDefault(require("./presentation/routes/specialty.route"));
 const subscriber_route_1 = __importDefault(require("./presentation/routes/subscriber.route"));
 const mail_route_1 = __importDefault(require("./presentation/routes/mail.route"));
+const contact_route_1 = __importDefault(require("./presentation/routes/contact.route"));
 dotenv.config();
 const db = new db_postgres_config_1.PostgresDbConfig();
 /**
@@ -90,23 +89,6 @@ db.connection()
     // Serve static files from the public folder
     app.use(express_1.default.static("public"));
     app.use(express_1.default.static(path_1.default.join(__dirname, "public")));
-    // app.use("/uploads", express.static(path.join(__dirname, "public")));
-    // enable the use of request body parsing middleware
-    // const allowedOrigins = [
-    //   "http://localhost:3000",
-    //   "https://linkavet.com",
-    //   "https://www.linkavet.com",
-    // ];
-    // const corsOptions = {
-    //   origin: function (origin: any, callback: any) {
-    //     if (allowedOrigins.indexOf(origin) !== -1) {
-    //       callback(null, true);
-    //     } else {
-    //       callback(new Error("Not allowed by CORS"));
-    //     }
-    //   },
-    //   credentials: true, // Needed if you're sending cookies or authorization headers
-    // };
     const corsOptions = {
         origin: "*",
         credentials: true,
@@ -142,7 +124,6 @@ db.connection()
     app.use("/api/comments", comment_route_1.default);
     app.use("/api/posts", post_route_1.default);
     app.use("/api/roles", role_route_1.default);
-    app.use("/api/user-documents", user_doc_route_1.default);
     app.use("/api/product-reviews", product_review_route_1.default);
     app.use("/api/lesson-reviews", lesson_review_route_1.default);
     app.use("/api/users", user_route_1.default);
@@ -164,11 +145,13 @@ db.connection()
     app.use("/api/consultations", consultation_route_1.default);
     app.use("/api/reviews", review_route_1.default);
     app.use("/api/user-roles", user_role_route_1.default);
+    app.use("/api/user-docs", user_doc_route_1.default);
     app.use("/api/specialties", specialty_route_1.default);
     app.use("/api/uploads", upload_route_1.default);
     app.use("/api/calendar/events", event_route_1.default);
     app.use("/api/subscribers", subscriber_route_1.default);
     app.use("/api/mails", mail_route_1.default);
+    app.use("/api/contacts", contact_route_1.default);
     // middleware interceptions
     app.use(not_found_middleware_1.notFoundHandler);
     /**

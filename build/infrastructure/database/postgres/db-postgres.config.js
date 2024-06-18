@@ -64,6 +64,7 @@ const specialty_1 = require("../../../data/entities/specialty");
 const event_1 = require("../../../data/entities/event");
 const subscriber_1 = require("../../../data/entities/subscriber");
 const mail_1 = require("../../../data/entities/mail");
+const contact_1 = require("../../../data/entities/contact");
 dotenv.config();
 class PostgresDbConfig {
     _sequelize;
@@ -114,7 +115,8 @@ class PostgresDbConfig {
                 event_1.Event,
                 specialty_1.Specialty,
                 subscriber_1.Subscriber,
-                mail_1.Mail
+                mail_1.Mail,
+                contact_1.Contact
             ],
             logging: false,
             pool: {

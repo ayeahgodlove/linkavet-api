@@ -16,10 +16,6 @@ class CoursesController {
     async createCourse(req, res) {
         const dto = new course_request_dto_1.CourseRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
-        const { filename } = req.file;
-        if (filename === undefined) {
-            throw new Error("Photo not found!");
-        }
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -32,7 +28,7 @@ class CoursesController {
             try {
                 const courseResponse = await courseUseCase.createCourse({
                     ...dto.toData(),
-                    courseImage: filename.toString(),
+                    courseImage: req.body.courseImage,
                     completionDate: req.body.completionDate,
                     startDate: req.body.startDate
                 });

@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.isAuthenticatedMiddleware = void 0;
 const passport_1 = __importDefault(require("passport"));
 const isAuthenticatedMiddleware = (req, res, next) => {
-    passport_1.default.authenticate("jwt", (err, user, info) => {
+    passport_1.default.authenticate("jwt", { session: false }, (err, user) => {
         if (err) {
             return next(err);
         }

@@ -5,8 +5,7 @@ exports.emptyUserDoc = {
     id: "",
     userId: "",
     photo: "",
-    idCardFront: "",
-    idCardBack: "",
+    idCard: "",
     license: "",
     diploma: "",
     verified: false

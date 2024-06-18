@@ -17,16 +17,14 @@ const nanoid_1 = require("nanoid");
 class UserDocRequestDto {
     userId;
     photo;
-    idCardFront;
-    idCardBack;
+    idCard;
     license;
     diploma;
     verified;
     constructor(data) {
         this.userId = data.userId;
         this.photo = data.photo;
-        this.idCardFront = data.idCardFront;
-        this.idCardBack = data.idCardBack;
+        this.idCard = data.idCard;
         this.license = data.license;
         this.diploma = data.diploma;
         this.verified = data.verified;
@@ -37,8 +35,7 @@ class UserDocRequestDto {
             id: (0, nanoid_1.nanoid)(10),
             userId: this.userId,
             photo: this.photo,
-            idCardFront: this.idCardFront,
-            idCardBack: this.idCardBack,
+            idCard: this.idCard,
             license: this.license,
             diploma: this.diploma,
             verified: this.verified,
@@ -49,8 +46,7 @@ class UserDocRequestDto {
             id: data.id,
             userId: data.userId,
             photo: data.photo,
-            idCardFront: data.idCardFront,
-            idCardBack: data.idCardBack,
+            idCard: data.idCard,
             license: data.license,
             diploma: data.diploma,
             verified: data.verified,
@@ -71,12 +67,7 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], UserDocRequestDto.prototype, "idCardFront", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], UserDocRequestDto.prototype, "idCardBack", void 0);
+], UserDocRequestDto.prototype, "idCard", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),

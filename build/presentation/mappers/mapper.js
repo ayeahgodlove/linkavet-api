@@ -1,7 +1,7 @@
 "use strict";
 // src/presentation/mappers/category-mapper.ts
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MailMapper = exports.SubscriberMapper = exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.SpecialtyMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.EventMapper = exports.CategoryMapper = void 0;
+exports.MailMapper = exports.SubscriberMapper = exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.SpecialtyMapper = exports.ContactMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.EventMapper = exports.CategoryMapper = void 0;
 class CategoryMapper {
     toDTO(category) {
         const entity = category.toJSON();
@@ -227,6 +227,20 @@ class RoleMapper {
     }
 }
 exports.RoleMapper = RoleMapper;
+class ContactMapper {
+    toDTO(contact) {
+        const entity = contact.toJSON();
+        return entity;
+    }
+    toDTOs(contacts) {
+        const _contacts = contacts.map((contact) => {
+            const entity = contact.toJSON();
+            return entity;
+        });
+        return _contacts;
+    }
+}
+exports.ContactMapper = ContactMapper;
 class SpecialtyMapper {
     toDTO(specialty) {
         const entity = specialty.toJSON();

@@ -15,8 +15,7 @@ const user_1 = require("./user");
 let UserDoc = class UserDoc extends sequelize_typescript_1.Model {
     userId;
     photo;
-    idCardFront;
-    idCardBack;
+    idCard;
     license;
     diploma;
     // verification paramters
@@ -52,15 +51,7 @@ __decorate([
         unique: true,
     }),
     __metadata("design:type", String)
-], UserDoc.prototype, "idCardFront", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING(128),
-        allowNull: false,
-        unique: true,
-    }),
-    __metadata("design:type", String)
-], UserDoc.prototype, "idCardBack", void 0);
+], UserDoc.prototype, "idCard", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.STRING(128),
