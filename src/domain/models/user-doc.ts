@@ -4,8 +4,7 @@ export interface IUserDoc {
   id: string;
   userId: string;
   photo: string;
-  idCardFront: string; 
-  idCardBack: string;
+  idCard: string;
   license: string; 
   diploma: string; 
   verified: boolean;
@@ -15,8 +14,7 @@ export const emptyUserDoc: IUserDoc = {
   id: "",
   userId: "",
   photo: "",
-  idCardFront: "",
-  idCardBack: "",
+  idCard: "",
   license: "",
   diploma: "",
   verified: false

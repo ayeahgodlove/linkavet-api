@@ -1,6 +1,6 @@
 // src/infrastructure/routes/user-routes.ts
 import { Router } from "express";
-import { fileFilter } from "../../shared/helper/multer.config";
+import { fileFilter, fileFilterPdf } from "../../shared/helper/multer.config";
 import multer from "multer";
 import { UploadControllers } from "../controllers/upload.controller";
 
@@ -15,9 +15,7 @@ function fileStorage(folderName: string) {
     },
     filename: (req, file, cb) => {
       const originalname = file.originalname;
-      const filename = `${Date.now()}-${originalname
-        .replace(/\s+/g, "")
-        .toLowerCase()}`;
+      const filename = `${originalname.replace(/\s+/g, "").toLowerCase()}`;
       cb(null, filename);
     },
   });
@@ -30,21 +28,34 @@ const upload = (folderName: string) =>
     limits: { fileSize: 5 * 1024 * 1024 },
   });
 
+const uploadFile = (folderName: string) =>
+  multer({
+    storage: fileStorage(folderName),
+    fileFilter: fileFilterPdf,
+    limits: { fileSize: 5 * 1024 * 1024 },
+  });
+
 uploadRouter.post(
   "/banners",
   upload("banners").single("image"),
   uploadController.uploadFile
 );
 
-// uploadRouter.post(
-//   "/products",
-//   upload("products").fields([{ name: "productImages", maxCount: 5,  }]),
-//   uploadController.uploadFiles
-// );
+uploadRouter.post(
+  "/user-docs",
+  uploadFile("user-docs").single("document"),
+  uploadController.uploadFile
+);
 
 uploadRouter.post(
   "/products",
   upload("products").single("imageUrl"),
+  uploadController.uploadFile
+);
+
+uploadRouter.post(
+  "/mails",
+  upload("mails").single("attactment"),
   uploadController.uploadFile
 );
 
@@ -62,7 +73,7 @@ uploadRouter.post(
 
 uploadRouter.post(
   "/courses",
-  upload("courses").single("imageUrl"),
+  upload("courses").single("courseImage"),
   uploadController.uploadFile
 );
 

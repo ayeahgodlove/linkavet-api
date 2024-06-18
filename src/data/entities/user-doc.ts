@@ -38,14 +38,7 @@ export class UserDoc extends Model<IUserDoc> {
     allowNull: false,
     unique: true,
   })
-  idCardFront!: string;
-
-  @Column({
-    type: DataType.STRING(128),
-    allowNull: false,
-    unique: true,
-  })
-  idCardBack!: string;
+  idCard!: string;
 
   @Column({
     type: DataType.STRING(128),

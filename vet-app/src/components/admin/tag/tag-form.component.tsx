@@ -88,10 +88,11 @@ export const TagForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Button
+          size="large"
           type="primary"
           htmlType="submit"
           loading={submitting}

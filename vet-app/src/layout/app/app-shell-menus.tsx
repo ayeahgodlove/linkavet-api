@@ -354,7 +354,7 @@ export const useAppShellMenus = () => {
       icon: <RiAccountCircleLine size={21} color="#08a30a" />,
       children: [
         {
-          label: <Link to="/verification/id-card">Verification</Link>,
+          label: <Link to="/verifications">Verification</Link>,
           key: "verification",
           icon: <FcApprove />,
           roles: [ROLES.TRAINER, ROLES.DOCTOR],

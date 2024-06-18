@@ -23,31 +23,31 @@ export const ContactForm = () => {
               <Row gutter={24}>
                 <Col xs={24} md={12}>
                   <Item>
-                    <Input placeholder="Name" />
+                    <Input size="large" placeholder="Name" />
                   </Item>
                 </Col>
                 <Col xs={24} md={12}>
                   <Item>
-                    <Input placeholder="Subject" />
+                    <Input size="large" placeholder="Subject" />
                   </Item>
                 </Col>
               </Row>
               <Row gutter={24}>
                 <Col xs={24} md={12}>
                   <Item>
-                    <Input placeholder="Email" />
+                    <Input size="large" placeholder="Email" />
                   </Item>
                 </Col>
                 <Col xs={24} md={12}>
                   <Item>
-                    <Input placeholder="Budget" />
+                    <Input size="large" placeholder="Budget" />
                   </Item>
                 </Col>
               </Row>
               <Row gutter={24}>
                 <Col span={24}>
                   <Item>
-                    <Input.TextArea rows={5} placeholder="Write Message" />
+                    <Input.TextArea size="large" rows={5} placeholder="Write Message" />
                   </Item>
                 </Col>
               </Row>

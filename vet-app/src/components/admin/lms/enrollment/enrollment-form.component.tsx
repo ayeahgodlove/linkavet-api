@@ -94,6 +94,7 @@ export const EnrollmentForm: React.FC<Props> = ({ formMode }) => {
           ]}
         >
           <Select
+            size="large"
             options={courses.map((c) => {
               return {
                 value: c.id,
@@ -104,6 +105,7 @@ export const EnrollmentForm: React.FC<Props> = ({ formMode }) => {
           />
         </Form.Item>
         <Button
+          size="large"
           type="primary"
           htmlType="submit"
           loading={submitting}

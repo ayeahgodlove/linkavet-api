@@ -11,7 +11,6 @@ const LoginPage: React.FC = () => {
   const { loginUserFunction, isAuthenticated, user } = useAuth();
   const [isSubmitting, setSubmitting] = useState(false);
   const [go, setGo] = useState(false);
-  const { width } = useWindowSize();
 
   const onFinish = async (values: any) => {
     setSubmitting(true);
@@ -64,6 +63,7 @@ const LoginPage: React.FC = () => {
               rules={[{ required: true, message: "Please input your Email!" }]}
             >
               <Input
+                size="large"
                 prefix={<MdEmail className="site-form-item-icon" />}
                 placeholder="Email"
               />
@@ -75,6 +75,7 @@ const LoginPage: React.FC = () => {
               ]}
             >
               <Input
+                size="large"
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
@@ -98,6 +99,7 @@ const LoginPage: React.FC = () => {
             </div>
             <Form.Item style={{ marginBottom: 0 }}>
               <Button
+                size="large"
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"

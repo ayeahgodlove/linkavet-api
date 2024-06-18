@@ -13,10 +13,6 @@ export interface ICourse {
   completionDate: Date;
 }
 
-export interface CourseFormData extends FormData {
-  id: string; // Assuming the ID is a string, adjust the type as needed
-}
-
 export const emptyCourse: ICourse = {
   id: "",
   title: "",

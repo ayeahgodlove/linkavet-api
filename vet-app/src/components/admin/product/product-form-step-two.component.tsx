@@ -27,7 +27,7 @@ const ProductFormStepTwo: React.FC<Props> = ({ form }) => {
             },
           ]}
         >
-          <Input.TextArea />
+          <Input.TextArea  size="large"/>
         </Form.Item>
 
         <Form.Item

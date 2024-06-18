@@ -1,15 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { API_URL } from "config/constant";
 
-// const apiHeaders = {
-//   headers: {
-//     baseURL: API_URL,
-//     Accept: "application/json",
-//     Authorization: "",
-
-//   },
-// };
-
 const api = axios.create({
   baseURL: API_URL,
   headers: {

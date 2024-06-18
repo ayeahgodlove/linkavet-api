@@ -73,11 +73,6 @@ const RegisterPage: React.FC = () => {
         justify={"center"}
         align="middle"
         className="form__container"
-        style={{
-          background: "url(./images/bg-1-removebg-preview.png)",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right",
-        }}
       >
         <Col
           xs={18}
@@ -122,6 +117,7 @@ const RegisterPage: React.FC = () => {
                   ]}
                 >
                   <Input
+                    size="large"
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="firstname"
                   />
@@ -138,6 +134,7 @@ const RegisterPage: React.FC = () => {
                   }}
                 >
                   <Input
+                    size="large"
                     prefix={<UserOutlined className="site-form-item-icon" />}
                     placeholder="lastname"
                   />
@@ -152,6 +149,7 @@ const RegisterPage: React.FC = () => {
               ]}
             >
               <Input
+                size="large"
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 placeholder="Username"
               />
@@ -162,6 +160,7 @@ const RegisterPage: React.FC = () => {
               rules={[{ required: true, message: "Please input your Email!" }]}
             >
               <Input
+                size="large"
                 prefix={<MdEmail className="site-form-item-icon" />}
                 placeholder="Email"
               />
@@ -174,6 +173,7 @@ const RegisterPage: React.FC = () => {
               ]}
             >
               <Input
+                size="large"
                 prefix={<PhoneOutlined className="site-form-item-icon" />}
                 placeholder="PhoneNumber"
               />
@@ -186,6 +186,7 @@ const RegisterPage: React.FC = () => {
               <>
                 <p style={{ marginBottom: 2 }}>what is your role?</p>
                 <Radio.Group
+                  size="large"
                   onChange={onChange}
                   value={value}
                   options={allowedRoles.map((r) => {
@@ -205,6 +206,7 @@ const RegisterPage: React.FC = () => {
               ]}
             >
               <Input
+                size="large"
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
@@ -213,6 +215,7 @@ const RegisterPage: React.FC = () => {
 
             <Form.Item style={{ marginBottom: 0 }}>
               <Button
+                size="large"
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"

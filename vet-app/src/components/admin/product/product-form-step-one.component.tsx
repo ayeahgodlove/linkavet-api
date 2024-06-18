@@ -39,7 +39,7 @@ const ProductFormStepOne: React.FC<Props> = ({ form }) => {
                   },
                 ]}
               >
-                <Input />
+                <Input size="large" />
               </Form.Item>
             </Col>
             <Col xs={24} md={12}>
@@ -55,6 +55,7 @@ const ProductFormStepOne: React.FC<Props> = ({ form }) => {
                 ]}
               >
                 <Select
+                  size="large"
                   showSearch
                   placeholder="Select a person"
                   optionFilterProp="children"
@@ -87,6 +88,7 @@ const ProductFormStepOne: React.FC<Props> = ({ form }) => {
                 ]}
               >
                 <Select
+                  size="large"
                   showSearch
                   placeholder="Select a person"
                   optionFilterProp="children"
@@ -119,7 +121,7 @@ const ProductFormStepOne: React.FC<Props> = ({ form }) => {
                   },
                 ]}
               >
-                <InputNumber style={{ width: "100%" }} />
+                <InputNumber size="large" style={{ width: "100%" }} />
               </Form.Item>
             </Col>
             <Col xs={12} md={12}>
@@ -134,7 +136,7 @@ const ProductFormStepOne: React.FC<Props> = ({ form }) => {
                   },
                 ]}
               >
-                <InputNumber style={{ width: "100%" }} />
+                <InputNumber size="large" style={{ width: "100%" }} />
               </Form.Item>
             </Col>
           </Row>

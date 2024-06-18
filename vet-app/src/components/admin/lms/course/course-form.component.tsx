@@ -8,20 +8,18 @@ import {
   InputNumber,
   Row,
   Space,
-  Upload,
   message,
 } from "antd";
 import React, { useEffect } from "react";
-import { UploadOutlined } from "@ant-design/icons";
 import { useAuth } from "../../../../hooks/auth/auth.hook";
 import { UpdateMode } from "../../../../models/shared/update-mode.enum";
 import { useModalContext } from "../../../../context/app-modal.context";
 import { useFormInit } from "../../../../hooks/shared/form-init.hook";
-import { useUpload } from "../../../../hooks/shared/upload.hook";
 import theme from "../../../../utils/themeConfig";
 import { useCourse } from "../../../../hooks/lms/course.hook";
-import { CourseFormData, ICourse, emptyCourse } from "../../../../models/lms/course";
+import { ICourse, emptyCourse } from "../../../../models/lms/course";
 import useWindowSize from "../../../../hooks/shared/window-resize.hook";
+import UploadImage from "components/shared/upload-image";
 
 type Props = {
   formMode: UpdateMode;
@@ -33,27 +31,22 @@ const CourseForm: React.FC<Props> = ({ formMode }) => {
   const { user } = useAuth();
   const { setShow } = useModalContext();
   const { initFormData } = useFormInit();
-  const { fileList, onChangeUpload, onRemove, beforeUpload, progress } =
-    useUpload();
+
   const { width } = useWindowSize();
 
+  const handleImageUpload = (url: string) => {
+    form.setFieldValue("courseImage", url);
+  };
+
   const onFinish = async (values: ICourse) => {
-    const formData = new FormData();
-    formData.append("id", course.id);
-    formData.append("title", values.title);
-    formData.append("description", values.description);
-    formData.append("authorId", user.id);
-    formData.append("price", values.price.toString());
-    formData.append("startDate", values.startDate.toISOString());
-    formData.append("completionDate", values.completionDate.toISOString());
-
-    // Append the selected file(s) to the FormData object
-    fileList.forEach((file: any) => {
-      formData.append("courseImage", file);
-    });
-
+    const obj1: ICourse = {
+      ...emptyCourse,
+      ...values,
+      id: course.id,
+      authorId: user.id,
+    };
     if (formMode === UpdateMode.ADD) {
-      const feedback = await addCourse(formData);
+      const feedback = await addCourse(obj1);
       if (feedback) {
         message.success("Course created successfully!");
         setShow(false);
@@ -62,13 +55,15 @@ const CourseForm: React.FC<Props> = ({ formMode }) => {
         setShow(true);
       }
     }
-    const obj1: CourseFormData = {
-      ...formData,
+    const obj2: ICourse = {
+      ...course,
+      ...values,
       id: course.id,
+      authorId: user.id,
     };
 
     if (formMode === UpdateMode.EDIT) {
-      const feedback = await editCourse(obj1);
+      const feedback = await editCourse(obj2);
       if (feedback) {
         message.success("Course updated successfully!");
         setShow(false);
@@ -99,7 +94,7 @@ const CourseForm: React.FC<Props> = ({ formMode }) => {
           ]}
           style={{ marginBottom: 10 }}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Row justify={"space-between"} align={"middle"}>
           {
@@ -113,7 +108,7 @@ const CourseForm: React.FC<Props> = ({ formMode }) => {
                 ]}
                 style={{ marginBottom: 10 }}
               >
-                <InputNumber style={{ width: "95%" }} />
+                <InputNumber size="large" style={{ width: "95%" }} />
               </Form.Item>
             </Col>
           }
@@ -128,7 +123,7 @@ const CourseForm: React.FC<Props> = ({ formMode }) => {
               ]}
               style={{ marginBottom: 10 }}
             >
-              <DatePicker style={{ width: "95%" }} />
+              <DatePicker size="large" style={{ width: "95%" }} />
             </Form.Item>
           </Col>
 
@@ -142,7 +137,7 @@ const CourseForm: React.FC<Props> = ({ formMode }) => {
               ]}
               style={{ marginBottom: 10 }}
             >
-              <DatePicker style={{ width: "95%" }} />
+              <DatePicker size="large" style={{ width: "95%" }} />
             </Form.Item>
           </Col>
         </Row>
@@ -156,7 +151,7 @@ const CourseForm: React.FC<Props> = ({ formMode }) => {
           ]}
           style={{ marginBottom: 10 }}
         >
-          <Input.TextArea rows={3} />
+          <Input.TextArea size="large" rows={3} />
         </Form.Item>
 
         <Form.Item
@@ -169,21 +164,16 @@ const CourseForm: React.FC<Props> = ({ formMode }) => {
               message: "Upload is required",
             },
           ]}
-          
         >
-          <Upload
+          <UploadImage
             maxCount={1}
-            beforeUpload={beforeUpload}
-            onChange={onChangeUpload}
-            onRemove={onRemove}
-            progress={progress}
-            fileList={fileList}
-          >
-            <Button icon={<UploadOutlined />}>Select File</Button>
-          </Upload>
+            folderName="courses"
+            onUpload={handleImageUpload}
+            name="courseImage"
+          />
         </Form.Item>
         <Space>
-          <Button type="primary" htmlType="submit">
+          <Button size="large" type="primary" htmlType="submit">
             Save
           </Button>
           <Button htmlType="reset">Reset</Button>

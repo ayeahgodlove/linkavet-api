@@ -1,32 +1,19 @@
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  message,
-  Row,
-  Select,
-  Typography,
-  Upload,
-} from "antd";
+import { Button, Col, Form, Input, message, Row, Select } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { FormErrorComponent } from "../../../components/shared/form-error/form-error.component";
-import UploadButton from "../../../components/shared/upload-button.component";
 import { modules } from "../../../config/constant";
 import { useModalContext } from "../../../context/app-modal.context";
 import { useAuth } from "../../../hooks/auth/auth.hook";
 import { useCategory } from "../../../hooks/category.hook";
 import { usePost } from "../../../hooks/post.hook";
-import { useFormErrors } from "../../../hooks/shared/form-error.hook";
 import { useFormInit } from "../../../hooks/shared/form-init.hook";
-import { useUpload } from "../../../hooks/shared/upload.hook";
 import { useTag } from "../../../hooks/tag.hook";
 import { emptyPost, IPost } from "../../../models/post";
 import { UpdateMode } from "../../../models/shared/update-mode.enum";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { upload } from "../../../utils/upload";
+import UploadImage from "components/shared/upload-image";
 
 type Props = {
   formMode: UpdateMode;
@@ -37,12 +24,8 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
   const { post, editPost, addPost } = usePost();
   const { categories } = useCategory();
   const { tags } = useTag();
-  const { formError } = useFormErrors();
   const { setShow } = useModalContext();
   const { user } = useAuth();
-  // const { beforeUpload, onRemove, normFile, fileList, progress } = useUpload();
-  const { fileList, handlePreview, onRemove, beforeUpload, progress } =
-    useUpload();
 
   const [hasSubmitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -53,6 +36,10 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
 
   const onSearch = (value: string) => {
     console.log("search:", value);
+  };
+
+  const handleImageUpload = (url: string) => {
+    form.setFieldValue("imageUrl", url);
   };
 
   const onFinish = async (values: IPost) => {
@@ -95,7 +82,6 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
     setSubmitting(false);
   };
   initFormData(form, formMode, formMode === UpdateMode.ADD ? emptyPost : post);
-  const formData = new FormData();
   useEffect(() => {}, [hasSubmitted]);
 
   return (
@@ -104,28 +90,6 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
         hasSubmitted={hasSubmitted}
         setSubmitted={setSubmitted}
       />
-
-      <div style={{ marginBottom: 15 }}>
-        <Typography.Title level={5}>Upload Image</Typography.Title>
-        <Upload
-          name="image"
-          maxCount={1}
-          listType="picture-card"
-          beforeUpload={beforeUpload}
-          onRemove={onRemove}
-          progress={progress}
-          fileList={fileList}
-          onPreview={handlePreview}
-          action={useCallback(async () => {
-            formData.append("imageUrl", fileList[0] as any);
-            const response = await upload("posts", formData);
-            form.setFieldValue("imageUrl", response);
-            return response;
-          }, [form, fileList, formData])}
-        >
-          {fileList.length > 1 ? null : <UploadButton />}
-        </Upload>
-      </div>
       <Form
         initialValues={formMode === UpdateMode.ADD ? emptyPost : post}
         form={form}
@@ -146,6 +110,7 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
               ]}
             >
               <Select
+                size="large"
                 showSearch
                 placeholder="Select a category"
                 optionFilterProp="children"
@@ -178,6 +143,7 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
               ]}
             >
               <Select
+                size="large"
                 showSearch
                 placeholder="Select a person"
                 optionFilterProp="children"
@@ -211,7 +177,7 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Form.Item
@@ -225,7 +191,7 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Form.Item
@@ -255,10 +221,16 @@ export const PostForm: React.FC<Props> = ({ formMode }) => {
           ]}
           style={{ marginBottom: 10 }}
         >
-          <Input disabled={true} />
+          <UploadImage
+            maxCount={4}
+            folderName="posts"
+            onUpload={handleImageUpload}
+            name="imageUrl"
+          />
         </Form.Item>
 
         <Button
+          size="large"
           type="primary"
           htmlType="submit"
           loading={submitting}

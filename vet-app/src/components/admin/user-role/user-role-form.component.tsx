@@ -28,8 +28,8 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
   const [currentUser, setCurrentUser] = useState("");
 
   const getCurrentUserRole = useCallback(() => {
-   const userRole = userRoles.find(ur => ur.userId === currentUser )
-  }, [])
+    const userRole = userRoles.find((ur) => ur.userId === currentUser);
+  }, []);
 
   const onClose = useCallback(
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -40,7 +40,7 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
   );
 
   const onChange = (value: string) => {
-    setCurrentUser(value)
+    setCurrentUser(value);
     console.log(`selected ${value}`);
   };
 
@@ -56,7 +56,7 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
       ...values,
     };
 
-    console.log("obj: ", obj)
+    console.log("obj: ", obj);
 
     if (formMode === UpdateMode.ADD) {
       const feedback = await addUserRole(obj);
@@ -108,6 +108,7 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
           ]}
         >
           <Select
+            size="large"
             showSearch
             placeholder="Select a User"
             optionFilterProp="children"
@@ -136,6 +137,7 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
           ]}
         >
           <Select
+            size="large"
             showSearch
             placeholder="Select a Role"
             optionFilterProp="children"
@@ -155,6 +157,7 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
 
         <Space style={{ marginTop: 10 }}>
           <Button
+            size="large"
             type="primary"
             htmlType="submit"
             loading={submitting}
@@ -163,7 +166,7 @@ export const UserRoleForm: React.FC<Props> = ({ formMode }) => {
             Submit
           </Button>
 
-          <Button type="default" htmlType="reset">
+          <Button size="large" type="default" htmlType="reset">
             Reset
           </Button>
         </Space>

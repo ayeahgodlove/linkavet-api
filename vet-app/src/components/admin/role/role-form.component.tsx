@@ -87,7 +87,7 @@ export const RoleForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Button
           type="primary"

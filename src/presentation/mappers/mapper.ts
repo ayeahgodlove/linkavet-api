@@ -60,6 +60,8 @@ import { Subscriber } from "../../data/entities/subscriber";
 import { ISubscriber } from "../../domain/models/subscriber";
 import { Mail } from "../../data/entities/mail";
 import { IMail } from "../../domain/models/mail";
+import { Contact } from "../../data/entities/contact";
+import { IContact } from "../../domain/models/contact";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -284,6 +286,20 @@ export class RoleMapper {
       return entity;
     });
     return _roles;
+  }
+}
+
+export class ContactMapper {
+  toDTO(contact: Contact): IContact {
+    const entity = contact.toJSON<IContact>();
+    return entity;
+  }
+  toDTOs(contacts: Contact[]): IContact[] {
+    const _contacts = contacts.map((contact) => {
+      const entity = contact.toJSON<IContact>();
+      return entity;
+    });
+    return _contacts;
   }
 }
 

@@ -40,6 +40,7 @@ import { Specialty } from "../../../data/entities/specialty";
 import { Event } from "../../../data/entities/event";
 import { Subscriber } from "../../../data/entities/subscriber";
 import { Mail } from "../../../data/entities/mail";
+import { Contact } from "../../../data/entities/contact";
 
 dotenv.config();
 
@@ -93,7 +94,8 @@ export class PostgresDbConfig {
         Event,
         Specialty,
         Subscriber,
-        Mail
+        Mail,
+        Contact
       ],
       logging: false,
       pool: {

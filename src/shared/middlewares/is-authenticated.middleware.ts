@@ -6,7 +6,7 @@ export const isAuthenticatedMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  passport.authenticate("jwt", (err: any, user: any, info: any) => {
+  passport.authenticate("jwt", { session: false }, (err: any, user: any) => {
     if (err) {
       return next(err);
     }

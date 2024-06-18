@@ -5,20 +5,15 @@ import ProductFormStepTwo from "./product-form-step-two.component";
 import ProductFormStepUploads from "./product-form-step-uploads.component";
 import { useForm } from "antd/es/form/Form";
 import { useProduct } from "../../../hooks/product.hook";
-import { useStore } from "../../../hooks/store.hook";
 import { emptyProduct, IProduct } from "../../../models/product.model";
-import { useUpload } from "../../../hooks/shared/upload.hook";
 import { FormErrorComponent } from "../../../components/shared/form-error/form-error.component";
 import { useNavigate } from "react-router-dom";
-import { useImage } from "../../../hooks/shared/image.hook";
 
 const ProductStepForm: React.FC = () => {
   const [current, setCurrent] = useState(0);
   const [form] = useForm();
   const { addProduct } = useProduct();
-  const { fileList, beforeUpload, onRemove } = useUpload();
   const navigate = useNavigate();
-  const { images } = useImage();
 
   const [hasSubmitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -31,7 +26,6 @@ const ProductStepForm: React.FC = () => {
     const formData: IProduct = {
       ...formValues,
       ...values,
-      productImages: images,
     };
 
     const feedback = await addProduct(formData);
@@ -53,16 +47,13 @@ const ProductStepForm: React.FC = () => {
   const prev = () => {
     setCurrent(current - 1);
   };
-
+ 
   const steps = [
     {
       title: "Product Images",
       content: (
         <ProductFormStepUploads
           form={form}
-          fileList={fileList}
-          beforeUpload={beforeUpload}
-          onRemove={onRemove}
         />
       ),
     },
@@ -88,14 +79,12 @@ const ProductStepForm: React.FC = () => {
       />
       <Form
         onValuesChange={(changedValues, allValues) => {
-          // Update formValues state with allValues on each step change
           console.log(changedValues);
           setFormValues({ ...formValues, ...allValues });
         }}
         onFinish={onFinish}
         layout="vertical"
         form={form}
-        // initialValues={{ ...emptyProduct, ...formValues }}
       >
         <div style={contentStyle}>{steps[current].content}</div>
         <div style={{ marginTop: 24 }}>
@@ -129,7 +118,6 @@ export default ProductStepForm;
 
 const contentStyle: React.CSSProperties = {
   lineHeight: "260px",
-  textAlign: "center",
   border: `1px dashed #ddd`,
   marginTop: 16,
 };

@@ -86,7 +86,7 @@ export const ReviewForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Form.Item
           name="description"
@@ -98,10 +98,11 @@ export const ReviewForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Button
+          size="large"
           type="primary"
           htmlType="submit"
           loading={submitting}

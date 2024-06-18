@@ -110,7 +110,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                 },
               ]}
             >
-              <Input />
+              <Input size="large" />
             </Form.Item>
             <Form.Item
               name="url"
@@ -123,7 +123,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                 },
               ]}
             >
-              <Input />
+              <Input size="large" />
             </Form.Item>
             <Row gutter={[8, 8]}>
               <Col xs={24} md={12}>
@@ -137,7 +137,11 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                     },
                   ]}
                 >
-                  <InputNumber name="duration" style={{ width: "100%" }} />
+                  <InputNumber
+                    size="large"
+                    name="duration"
+                    style={{ width: "100%" }}
+                  />
                 </Form.Item>
               </Col>
 
@@ -152,7 +156,11 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                     },
                   ]}
                 >
-                  <Input name="difficulty" style={{ width: "100%" }} />
+                  <Input
+                    size="large"
+                    name="difficulty"
+                    style={{ width: "100%" }}
+                  />
                 </Form.Item>
               </Col>
             </Row>
@@ -168,7 +176,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                 },
               ]}
             >
-              <Input.TextArea rows={7} />
+              <Input.TextArea size="large" rows={7} />
             </Form.Item>
           </Col>
         </Row>
@@ -199,6 +207,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
               style={{ marginBottom: 3 }}
             >
               <Select
+                size="large"
                 options={categories.map((c) => {
                   return {
                     value: c.id,
@@ -217,6 +226,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
               style={{ marginBottom: 3 }}
             >
               <Select
+                size="large"
                 options={[
                   { value: "01", label: "English" },
                   { value: "02", label: "French" },
@@ -233,6 +243,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                 name="author"
                 style={{ width: "100%" }}
                 placeholder="Type to add author"
+                size="large"
               />
             </Form.Item>
           </Col>
@@ -277,7 +288,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                         ]}
                         style={{ width: "100%", marginBottom: 5 }}
                       >
-                        <Input placeholder="prerequisite" />
+                        <Input size="large" placeholder="prerequisite" />
                       </Form.Item>
                       {fields.length > 1 ? (
                         <div style={{ marginLeft: 5 }}>
@@ -296,6 +307,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                     type="dashed"
                     onClick={() => add()}
                     icon={<PlusOutlined />}
+                    size="large"
                   >
                     Add prerequisite
                   </Button>
@@ -342,7 +354,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                         ]}
                         style={{ width: "100%", marginBottom: 5 }}
                       >
-                        <Input placeholder="objectives" />
+                        <Input size="large" placeholder="objectives" />
                       </Form.Item>
                       {fields.length > 1 ? (
                         <div style={{ marginLeft: 5 }}>
@@ -359,6 +371,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                 <Form.Item style={{ marginBottom: 15 }}>
                   <Button
                     type="dashed"
+                    size="large"
                     onClick={() => add()}
                     icon={<PlusOutlined />}
                   >
@@ -407,7 +420,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                         ]}
                         style={{ width: "100%", marginBottom: 5 }}
                       >
-                        <Input placeholder="keywords" />
+                        <Input size="large" placeholder="keywords" />
                       </Form.Item>
                       {fields.length > 1 ? (
                         <div style={{ marginLeft: 5 }}>
@@ -423,6 +436,7 @@ export const LessonForm: React.FC<Props> = ({ formMode }) => {
                 ))}
                 <Form.Item style={{ marginBottom: 15 }}>
                   <Button
+                    size="large"
                     type="dashed"
                     onClick={() => add()}
                     icon={<PlusOutlined />}

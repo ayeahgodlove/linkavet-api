@@ -1,5 +1,8 @@
 import { UploadFile, message, GetProp, UploadProps } from "antd";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useImage } from "./image.hook";
+import { upload } from "utils/upload";
+import { useAuth } from "hooks/auth/auth.hook";
 
 export const useUpload = () => {
   const [fileList, setFileList] = useState<UploadFile<any>[]>([]);
@@ -74,6 +77,43 @@ export const useUpload = () => {
 
   const handleCancel = () => setPreviewOpen(false);
 
+  const { user } = useAuth();
+  const { addImage, images } = useImage();
+  const formData = new FormData();
+
+  const uploadProps = (name: string) => {
+    return {
+      name,
+      action: useCallback(async () => {
+        formData.append(name, fileList[0] as any);
+        const response = await upload("user-docs", formData);
+        addImage(response);
+        return response;
+      }, [fileList, images, formData]),
+      headers: {
+        authorization: "Bearer " + user.token,
+      },
+      onChange(info) {
+        if (info.file.status !== "uploading") {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === "done") {
+          message.success(`${info.file.name} Document uploaded successfully`);
+        } else if (info.file.status === "error") {
+          message.error(`${info.file.name} Document upload failed.`);
+        }
+      },
+      beforeUpload,
+      onRemove,
+      progress,
+      handlePreview,
+      maxCount: 3,
+      fileList,
+      onChangeUpload
+    };
+  };
+
+  useEffect(() => {}, [images, fileList]);
   return {
     fileList,
     progress,
@@ -86,5 +126,6 @@ export const useUpload = () => {
     previewTitle,
     handleCancel,
     fileInfo,
+    uploadProps,
   };
 };

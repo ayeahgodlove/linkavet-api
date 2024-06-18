@@ -18,8 +18,7 @@ type Props = {
 export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
   const { initFormData } = useFormInit();
   const [form] = useForm();
-  const { specialty, editSpecialty, addSpecialty } =
-    useSpecialty();
+  const { specialty, editSpecialty, addSpecialty } = useSpecialty();
   const { formError } = useFormErrors();
   const { setShow } = useModalContext();
   const { user } = useAuth();
@@ -106,6 +105,7 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
           ]}
         >
           <Select
+            size="large"
             showSearch
             disabled={isTrue}
             placeholder="Select Runner Period"
@@ -132,7 +132,7 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Form.Item
@@ -146,7 +146,7 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Form.Item
@@ -160,7 +160,7 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Form.Item
@@ -174,7 +174,7 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Form.Item
@@ -188,7 +188,7 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Form.Item
           name="facebook"
@@ -201,7 +201,7 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Form.Item
           name="linkedin"
@@ -214,7 +214,7 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Form.Item
           name="specialty"
@@ -227,10 +227,11 @@ export const SpecialtyForm: React.FC<Props> = ({ formMode, isTrue }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Button
+          size="large"
           type="primary"
           htmlType="submit"
           loading={submitting}

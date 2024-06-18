@@ -45,10 +45,7 @@ import ProfilePersonalInformationPage from "../pages/auth/profile-personal-infor
 import ProfileActivityPage from "pages/auth/profile-activity.page";
 import ProfilePasswordChangePage from "pages/auth/profile-password-change.page";
 import ProfileProfessionalInformationPage from "pages/auth/profile-professional-information.page";
-import VerificationPage from "pages/verification/verification-idcard.page";
-import VerificationIdCardPage from "pages/verification/verification-idcard.page";
-import VerificationLicensePage from "pages/verification/verification-license.page";
-import VerificationDiplomaPage from "pages/verification/verification-diploma.page";
+import VerificationPage from "pages/verification/verification.page";
 import SubscribersPage from "pages/admin/mailing-list/subscribers.page";
 import MailingListsPage from "pages/admin/mailing-list/mailing-list.page";
 
@@ -356,21 +353,9 @@ export const adminRoutes = [
   },
 
   {
-    path: "/verification/id-card",
+    path: "/verifications",
     private: true,
     exact: true,
-    component: <VerificationIdCardPage />,
-  },
-  {
-    path: "/verification/license",
-    private: true,
-    exact: true,
-    component: <VerificationLicensePage />,
-  },
-  {
-    path: "/verification/diploma",
-    private: true,
-    exact: true,
-    component: <VerificationDiplomaPage />,
+    component: <VerificationPage />,
   },
 ];

@@ -1,27 +1,27 @@
 import { Request, Response } from "express";
-import { CourseRepository } from "../../../data/repositories/impl/lms/course.repository";
-import { CourseUseCase } from "../../../domain/usecases/lms/course.usecase";
-import { CourseMapper } from "../../mappers/mapper";
-import { CourseRequestDto } from "../../dtos/lms/course-request.dto";
-import { displayValidationErrors } from "../../../utils/displayValidationErrors";
 import {
-  ICourse,
-  ICourseResponse,
-  emptyCourse,
-} from "../../../domain/models/lms/course";
+  IContact,
+  IContactResponse,
+  emptyContact,
+} from "../../domain/models/contact";
+import { ContactUseCase } from "../../domain/usecases/contact.usecase";
+import { ContactRepository } from "../../data/repositories/impl/contact.repository";
+import { ContactMapper } from "../mappers/mapper";
+import { ContactRequestDto } from "../dtos/contact-request.dto";
 import { validate } from "class-validator";
-import { NotFoundException } from "../../../shared/exceptions/not-found.exception";
+import { displayValidationErrors } from "../../utils/displayValidationErrors";
+import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 
-const courseRepository = new CourseRepository();
-const courseUseCase = new CourseUseCase(courseRepository);
-const courseMapper = new CourseMapper();
+const contactRepository = new ContactRepository();
+const contactUseCase = new ContactUseCase(contactRepository);
+const contactMapper = new ContactMapper();
 
-export class CoursesController {
-  async createCourse(
+export class ContactsController {
+  async createContact(
     req: Request,
-    res: Response<ICourseResponse>
+    res: Response<IContactResponse>
   ): Promise<void> {
-    const dto = new CourseRequestDto(req.body);
+    const dto = new ContactRequestDto(req.body);
     const validationErrors = await validate(dto);
 
     if (validationErrors.length > 0) {
@@ -33,16 +33,13 @@ export class CoursesController {
       });
     } else {
       try {
-        const courseResponse = await courseUseCase.createCourse({
-          ...dto.toData(),
-          courseImage: req.body.courseImage,
-          completionDate: req.body.completionDate,
-          startDate: req.body.startDate
-        });
+        const contactResponse = await contactUseCase.createContact(
+          dto.toData()
+        );
 
         res.status(201).json({
-          data: courseResponse.toJSON<ICourse>(),
-          message: "Course created Successfully!",
+          data: contactResponse.toJSON<IContact>(),
+          message: "Contact created Successfully!",
           validationErrors: [],
           success: true,
         });
@@ -59,11 +56,11 @@ export class CoursesController {
 
   async getAll(req: Request, res: Response<any>): Promise<void> {
     try {
-      const courses = await courseUseCase.getAll();
-      const coursesDTO = courseMapper.toDTOs(courses);
+      const contactes = await contactUseCase.getAll();
+      const contactesDTO = contactMapper.toDTOs(contactes);
 
       res.json({
-        data: coursesDTO,
+        data: contactesDTO,
         message: "Success",
         validationErrors: [],
         success: true,
@@ -78,20 +75,20 @@ export class CoursesController {
     }
   }
 
-  async getCourseById(
+  async getContactById(
     req: Request,
-    res: Response<ICourseResponse>
+    res: Response<IContactResponse>
   ): Promise<void> {
     try {
       const id = req.params.id;
 
-      const course = await courseUseCase.getCourseById(id);
-      if (!course) {
-        throw new NotFoundException("Course", id);
+      const contact = await contactUseCase.getContactById(id);
+      if (!contact) {
+        throw new NotFoundException("Contact", id);
       }
-      const courseDTO = courseMapper.toDTO(course);
+      const contactDTO = contactMapper.toDTO(contact);
       res.json({
-        data: courseDTO,
+        data: contactDTO,
         message: "Success",
         validationErrors: [],
         success: true,
@@ -106,11 +103,11 @@ export class CoursesController {
     }
   }
 
-  async updateCourse(
+  async updateContact(
     req: Request,
-    res: Response<ICourseResponse>
+    res: Response<IContactResponse>
   ): Promise<void> {
-    const dto = new CourseRequestDto(req.body);
+    const dto = new ContactRequestDto(req.body);
     const validationErrors = await validate(dto);
 
     if (validationErrors.length > 0) {
@@ -124,17 +121,17 @@ export class CoursesController {
       try {
         const id = req.params.id;
 
-        const obj: ICourse = {
-          ...emptyCourse,
+        const obj: IContact = {
+          ...emptyContact,
           ...req.body,
           id: id,
         };
-        const updatedCourse = await courseUseCase.updateCourse(obj);
-        const courseDto = courseMapper.toDTO(updatedCourse);
+        const updatedContact = await contactUseCase.updateContact(obj);
+        const contactDto = contactMapper.toDTO(updatedContact);
 
         res.json({
-          data: courseDto,
-          message: "Course Updated Successfully!",
+          data: contactDto,
+          message: "Contact Updated Successfully!",
           validationErrors: [],
           success: true,
         });
@@ -149,14 +146,14 @@ export class CoursesController {
     }
   }
 
-  async deleteCourse(
+  async deleteContact(
     req: Request,
-    res: Response<ICourseResponse>
+    res: Response<IContactResponse>
   ): Promise<void> {
     try {
       const id = req.params.id;
 
-      await courseUseCase.deleteCourse(id);
+      await contactUseCase.deleteContact(id);
 
       res.status(204).json({
         message: `Operation successfully completed!`,

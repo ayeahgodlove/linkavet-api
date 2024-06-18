@@ -14,11 +14,7 @@ export class UserDocRequestDto {
 
   @IsNotEmpty()
   @IsString()
-  idCardFront: string;
-
-  @IsNotEmpty()
-  @IsString()
-  idCardBack: string;
+  idCard: string;
 
   @IsNotEmpty()
   @IsString()
@@ -34,8 +30,7 @@ export class UserDocRequestDto {
   constructor(data: IUserDoc) {
     this.userId = data.userId;
     this.photo = data.photo;
-    this.idCardFront = data.idCardFront;
-    this.idCardBack = data.idCardBack;
+    this.idCard = data.idCard;
     this.license = data.license;
     this.diploma = data.diploma;
     this.verified = data.verified;
@@ -47,8 +42,7 @@ export class UserDocRequestDto {
       id: nanoid(10),
       userId: this.userId,
       photo: this.photo,
-      idCardFront: this.idCardFront,
-      idCardBack: this.idCardBack,
+      idCard: this.idCard,
       license: this.license,
       diploma: this.diploma,
       verified: this.verified,
@@ -60,8 +54,7 @@ export class UserDocRequestDto {
       id: data.id,
       userId: data.userId,
       photo: data.photo,
-      idCardFront: data.idCardFront,
-      idCardBack: data.idCardBack,
+      idCard: data.idCard,
       license: data.license,
       diploma: data.diploma,
       verified: data.verified,

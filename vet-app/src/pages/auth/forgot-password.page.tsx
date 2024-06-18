@@ -1,6 +1,6 @@
 import React from "react";
-import {  UserOutlined } from "@ant-design/icons";
-import { Button,  Col, Form, Input, Row } from "antd";
+import { UserOutlined } from "@ant-design/icons";
+import { Button, Col, Form, Input, Row } from "antd";
 import "../../styles/login.style.scss";
 import { Link } from "react-router-dom";
 
@@ -11,11 +11,7 @@ const ForgotPasswordPage: React.FC = () => {
 
   return (
     <>
-      <Row
-        justify={"center"}
-        align="middle"
-        className="form__container"
-      >
+      <Row justify={"center"} align="middle" className="form__container">
         <Col
           xs={18}
           sm={12}
@@ -39,6 +35,7 @@ const ForgotPasswordPage: React.FC = () => {
               ]}
             >
               <Input
+                size="large"
                 prefix={<UserOutlined className="site-form-item-icon" />}
                 placeholder="Email"
               />
@@ -46,6 +43,7 @@ const ForgotPasswordPage: React.FC = () => {
 
             <Form.Item style={{ marginBottom: 0 }}>
               <Button
+                size="large"
                 type="primary"
                 htmlType="submit"
                 className="login-form-button"

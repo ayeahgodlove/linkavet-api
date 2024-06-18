@@ -27,6 +27,23 @@ export const fileFilter = (
   }
 };
 
+
+export const fileFilterPdf = (
+  req: Request,
+  file: Express.Multer.File,
+  cb: FileFilterCallback
+): void => {
+  if (
+    file.mimetype === "application/pdf"
+  ) {
+    cb(null, true);
+  } else {
+    return cb(new Error("Invalid image type"));
+  }
+};
+
+
+
 // create a multer instance with the storage engine
 const multerInstance = multer({
   storage: storage,

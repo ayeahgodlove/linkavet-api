@@ -37,15 +37,14 @@ import productReviewRouter from "./presentation/routes/product-review.route";
 import lessonReviewRouter from "./presentation/routes/lesson-review.route";
 import appointmentRouter from "./presentation/routes/health/appointment.route";
 import consultationRouter from "./presentation/routes/health/consultation.route";
-// import { seo } from "./utils/seo";
 // import fs from "fs";
 import userRoleRouter from "./presentation/routes/user-role.route";
-// import { sendPasswordResetEmail, sendRegistrationMail } from "./utils/email";
 import uploadRouter from "./presentation/routes/upload.route";
 import eventRouter from "./presentation/routes/event.route";
 import specialtyRouter from "./presentation/routes/specialty.route";
 import subscriberRouter from "./presentation/routes/subscriber.route";
 import mailRouter from "./presentation/routes/mail.route";
+import contactRouter from "./presentation/routes/contact.route";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -70,26 +69,7 @@ db.connection()
     // Serve static files from the public folder
     app.use(express.static("public"));
     app.use(express.static(path.join(__dirname, "public")));
-    // app.use("/uploads", express.static(path.join(__dirname, "public")));
 
-    // enable the use of request body parsing middleware
-    
-    // const allowedOrigins = [
-    //   "http://localhost:3000",
-    //   "https://linkavet.com",
-    //   "https://www.linkavet.com",
-    // ];
-
-    // const corsOptions = {
-    //   origin: function (origin: any, callback: any) {
-    //     if (allowedOrigins.indexOf(origin) !== -1) {
-    //       callback(null, true);
-    //     } else {
-    //       callback(new Error("Not allowed by CORS"));
-    //     }
-    //   },
-    //   credentials: true, // Needed if you're sending cookies or authorization headers
-    // };
     const corsOptions = {
       origin: "*", // Allow requests from all origins (for development only)
       credentials: true,
@@ -165,6 +145,7 @@ db.connection()
     app.use("/api/calendar/events", eventRouter);
     app.use("/api/subscribers", subscriberRouter);
     app.use("/api/mails", mailRouter);
+    app.use("/api/contacts", contactRouter);
     // middleware interceptions
     app.use(notFoundHandler);
 

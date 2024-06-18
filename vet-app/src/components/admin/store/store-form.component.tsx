@@ -19,6 +19,7 @@ import { useUpload } from "../../../hooks/shared/upload.hook";
 import theme from "../../../utils/themeConfig";
 import { upload } from "../../../utils/upload";
 import UploadButton from "../../../components/shared/upload-button.component";
+import UploadImage from "components/shared/upload-image";
 
 type Props = {
   formMode: UpdateMode;
@@ -30,8 +31,10 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
   const { user } = useAuth();
   const { setShow } = useModalContext();
   const { initFormData } = useFormInit();
-  const { fileList, handlePreview, onRemove, beforeUpload, progress } =
-    useUpload();
+
+  const handleImageUpload = (url: string) => {
+    form.setFieldValue("imageBannerUrl", url);
+  };
 
   const onFinish = async (values: IStore) => {
     const formData: IStore = {
@@ -52,7 +55,7 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
     }
 
     const formData2: IStore = {
-      ...formData,
+      ...store,
       id: store.id,
     };
     if (formMode === UpdateMode.EDIT) {
@@ -76,27 +79,6 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
   const formData = new FormData();
   return (
     <ConfigProvider theme={theme}>
-      <div style={{ marginBottom: 15 }}>
-        <Typography.Title level={5}>Upload Image</Typography.Title>
-        <Upload
-          name="image"
-          maxCount={1}
-          listType="picture-card"
-          beforeUpload={beforeUpload}
-          onRemove={onRemove}
-          progress={progress}
-          fileList={fileList}
-          onPreview={handlePreview}
-          action={useCallback(async () => {
-            formData.append("imageBannerUrl", fileList[0] as any);
-            const response = await upload("stores", formData);
-            form.setFieldValue("imageBannerUrl", response);
-            return response;
-          }, [form, fileList, formData])}
-        >
-          {fileList.length > 1 ? null : <UploadButton />}
-        </Upload>
-      </div>
       <Form
         form={form}
         onFinish={onFinish}
@@ -112,7 +94,7 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
           ]}
           style={{ marginBottom: 10 }}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
         <Form.Item
           name={"location"}
@@ -123,7 +105,7 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
           ]}
           style={{ marginBottom: 10 }}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Form.Item
@@ -137,10 +119,15 @@ const StoreForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Input disabled={true} />
+          <UploadImage
+            maxCount={1}
+            folderName="stores"
+            onUpload={handleImageUpload}
+            name={"imageBannerUrl"}
+          />
         </Form.Item>
         <Space>
-          <Button type="primary" htmlType="submit">
+          <Button size="large" type="primary" htmlType="submit">
             Save
           </Button>
           <Button htmlType="reset">Reset</Button>

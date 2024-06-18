@@ -89,7 +89,7 @@ export const QuizForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <Input />
+          <Input size="large" />
         </Form.Item>
 
         <Form.List
@@ -128,7 +128,7 @@ export const QuizForm: React.FC<Props> = ({ formMode }) => {
                       ]}
                       style={{ width: "100%" }}
                     >
-                      <Input placeholder="answer" />
+                      <Input size="large" placeholder="answer" />
                     </Form.Item>
                     {fields.length > 1 ? (
                       <div style={{ marginLeft: 5 }}>
@@ -144,6 +144,7 @@ export const QuizForm: React.FC<Props> = ({ formMode }) => {
               ))}
               <Form.Item style={{ marginBottom: 15 }}>
                 <Button
+                  size="large"
                   type="dashed"
                   onClick={() => add()}
                   icon={<PlusOutlined />}
@@ -167,9 +168,14 @@ export const QuizForm: React.FC<Props> = ({ formMode }) => {
             },
           ]}
         >
-          <InputNumber name="correctAnswerIndex" style={{ width: "100%" }} />
+          <InputNumber
+            size="large"
+            name="correctAnswerIndex"
+            style={{ width: "100%" }}
+          />
         </Form.Item>
         <Button
+          size="large"
           type="primary"
           htmlType="submit"
           loading={submitting}
