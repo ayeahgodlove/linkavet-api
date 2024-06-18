@@ -48,10 +48,24 @@ import ProfileProfessionalInformationPage from "pages/auth/profile-professional-
 import VerificationPage from "pages/verification/verification.page";
 import SubscribersPage from "pages/admin/mailing-list/subscribers.page";
 import MailingListsPage from "pages/admin/mailing-list/mailing-list.page";
+import AdminContactPage from "pages/admin/contact/contact.page";
+import AdminContactDetailPage from "pages/admin/contact/contact-detail.page";
 
 export const adminRoutes = [
   // admin section
   // private routes
+  {
+    path: "/admin/contacts",
+    private: true,
+    exact: true,
+    component: <AdminContactPage />,
+  },
+  {
+    path: "/admin/contacts/:name",
+    private: true,
+    exact: true,
+    component: <AdminContactDetailPage />,
+  },
   {
     path: "/admin/categories",
     private: true,

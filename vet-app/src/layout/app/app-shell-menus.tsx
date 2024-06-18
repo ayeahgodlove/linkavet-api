@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MenuProps, Avatar, Badge, Space, Divider } from "antd";
 import { TfiGallery } from "react-icons/tfi";
 import { TbPigMoney, TbPlugConnected } from "react-icons/tb";
-import { AiOutlineShoppingCart } from "react-icons/ai";
+import { AiFillContacts, AiOutlineShoppingCart } from "react-icons/ai";
 import { FaBlog, FaRegComments } from "react-icons/fa";
 import { TiDocumentText } from "react-icons/ti";
 import {
@@ -437,6 +437,16 @@ export const useAppShellMenus = () => {
           ),
           key: "mails",
           icon: <LuMails size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN, ROLES.CREATOR],
+        },
+        {
+          label: (
+            <Link to="/admin/contacts" style={{ padding: 0 }}>
+              Contacts
+            </Link>
+          ),
+          key: "contacts",
+          icon: <AiFillContacts size={21} color="#08a30a" />,
           roles: [ROLES.ADMIN, ROLES.CREATOR],
         },
       ],
