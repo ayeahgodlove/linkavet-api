@@ -36,6 +36,7 @@ const UploadImage = ({
   const customRequest = async ({ file, onSuccess }: any) => {
     const formData = new FormData();
     formData.append(name, file);
+    debugger
     const response = await axios.post(
       extra
         ? `${API_URL}/api/uploads/${folderName}/${uri}`
