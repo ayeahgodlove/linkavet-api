@@ -42,6 +42,7 @@ import { eventReducer } from "./event.slice";
 import { subscriberReducer } from "./subscriber.slice";
 import { mailReducer } from "./mail.slice";
 import { contactReducer } from "./contact.slice";
+import { userDocReducer } from "./user-doc.slice";
 
 // const middlewares: [any] = [thunkMiddleware];
 
@@ -82,7 +83,8 @@ export const rootReducer = combineReducers({
   event: eventReducer,
   subscriber: subscriberReducer,
   mail: mailReducer,
-  contact: contactReducer
+  contact: contactReducer,
+  userDoc: userDocReducer
 });
 
 const persistConfig = {
@@ -115,6 +117,8 @@ const persistConfig = {
     "userSpecialty",
     "event",
     "image",
+    "contact",
+    "userDoc"
   ], // Specify the reducers you want to persist
 };
 

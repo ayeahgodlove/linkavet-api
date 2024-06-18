@@ -50,10 +50,24 @@ import SubscribersPage from "pages/admin/mailing-list/subscribers.page";
 import MailingListsPage from "pages/admin/mailing-list/mailing-list.page";
 import AdminContactPage from "pages/admin/contact/contact.page";
 import AdminContactDetailPage from "pages/admin/contact/contact-detail.page";
+import AdminUserDocPage from "pages/admin/user-doc/user-doc.page";
+import AdminUserDocDetailPage from "pages/admin/user-doc/user-doc-detail.page";
 
 export const adminRoutes = [
   // admin section
   // private routes
+  {
+    path: "/admin/user-docs",
+    private: true,
+    exact: true,
+    component: <AdminUserDocPage />,
+  },
+  {
+    path: "/admin/user-docs/:id",
+    private: true,
+    exact: true,
+    component: <AdminUserDocDetailPage />,
+  },
   {
     path: "/admin/contacts",
     private: true,

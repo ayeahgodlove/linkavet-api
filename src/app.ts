@@ -114,7 +114,6 @@ db.connection()
     app.use("/api/comments", commentRouter);
     app.use("/api/posts", postRouter);
     app.use("/api/roles", roleRouter);
-    app.use("/api/user-documents", userDocRouter);
     app.use("/api/product-reviews", productReviewRouter);
     app.use("/api/lesson-reviews", lessonReviewRouter);
     app.use("/api/users", userRouter);
@@ -140,6 +139,7 @@ db.connection()
 
     app.use("/api/reviews", reviewRouter);
     app.use("/api/user-roles", userRoleRouter);
+    app.use("/api/user-docs", userDocRouter);
     app.use("/api/specialties", specialtyRouter);
     app.use("/api/uploads", uploadRouter);
     app.use("/api/calendar/events", eventRouter);

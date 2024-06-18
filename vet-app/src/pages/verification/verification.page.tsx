@@ -11,7 +11,7 @@ const VerificationPage = () => {
         <Col md={15} span={24}>
           <Typography.Title level={4}>Upload ID CARD</Typography.Title>
         </Col>
-        <Divider />
+        <Divider /> 
 
         <UploadDocument />
       </VerificationComponent>

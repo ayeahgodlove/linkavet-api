@@ -12,8 +12,17 @@ interface Prop {
   onUpload: (url: string) => void;
   folderName: string;
   name: string;
+  extra?: boolean;
+  uri?: string;
 }
-const UploadImage = ({ onUpload, maxCount = 1, folderName, name }: Prop) => {
+const UploadImage = ({
+  onUpload,
+  maxCount = 1,
+  folderName,
+  name,
+  extra = false,
+  uri = "",
+}: Prop) => {
   const [fileList, setFileList] = useState<UploadFile[]>([]);
 
   const handleChange = (info: any) => {
@@ -27,9 +36,10 @@ const UploadImage = ({ onUpload, maxCount = 1, folderName, name }: Prop) => {
   const customRequest = async ({ file, onSuccess }: any) => {
     const formData = new FormData();
     formData.append(name, file);
-
     const response = await axios.post(
-      `${API_URL}/api/uploads/${folderName}`,
+      extra
+        ? `${API_URL}/api/uploads/${folderName}/${uri}`
+        : `${API_URL}/api/uploads/${folderName}`,
       formData,
       {
         headers: {

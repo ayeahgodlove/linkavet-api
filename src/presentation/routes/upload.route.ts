@@ -41,12 +41,30 @@ uploadRouter.post(
   uploadController.uploadFile
 );
 
+// user documents
 uploadRouter.post(
   "/user-docs",
-  uploadFile("user-docs").single("document"),
+  upload("user-docs").single("image"),
   uploadController.uploadFile
 );
 
+uploadRouter.post(
+  "/user-docs/id-card",
+  uploadFile("user-docs").single("idCard"),
+  uploadController.uploadFile
+);
+uploadRouter.post(
+  "/user-docs/license",
+  uploadFile("user-docs").single("license"),
+  uploadController.uploadFile
+);
+
+uploadRouter.post(
+  "/user-docs/diploma",
+  uploadFile("user-docs").single("diploma"),
+  uploadController.uploadFile
+);
+// end of user documents
 uploadRouter.post(
   "/products",
   upload("products").single("imageUrl"),

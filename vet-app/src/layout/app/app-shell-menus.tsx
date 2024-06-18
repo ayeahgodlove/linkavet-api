@@ -449,6 +449,16 @@ export const useAppShellMenus = () => {
           icon: <AiFillContacts size={21} color="#08a30a" />,
           roles: [ROLES.ADMIN, ROLES.CREATOR],
         },
+        {
+          label: (
+            <Link to="/admin/user-docs" style={{ padding: 0 }}>
+              User Documents
+            </Link>
+          ),
+          key: "user-docs",
+          icon: <AiFillContacts size={21} color="#08a30a" />,
+          roles: [ROLES.ADMIN],
+        },
       ],
       roles: [ROLES.ADMIN, ROLES.CREATOR],
     },
