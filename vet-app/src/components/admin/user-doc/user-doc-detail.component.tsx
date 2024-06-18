@@ -1,9 +1,10 @@
-import { Card, Col, Image, List, Row, Typography } from "antd";
+import { Button, Card, Col, Image, List, Row, Typography } from "antd";
 import { useUserDoc } from "../../../hooks/user-doc.hook";
 import React from "react";
 import { API_URL_UPLOADS_USER_DOCS } from "config/constant";
 import { useUser } from "hooks/user.hook";
 import PdfViewer from "components/shared/pdf-viewer.componet";
+import { FiDownload } from "react-icons/fi";
 
 const UserDocDetailComponent: React.FC = () => {
   const { userDoc } = useUserDoc();
@@ -32,27 +33,33 @@ const UserDocDetailComponent: React.FC = () => {
           {
             label: "Id Card",
             value: (
-              <PdfViewer
-                pdfName="Id Card"
-                pdfUrl={`${API_URL_UPLOADS_USER_DOCS}/${userDoc.idCard}`}
+              <Button
+                type="default"
+                href={`${API_URL_UPLOADS_USER_DOCS}/${userDoc.idCard}`}
+                download={true}
+                icon={<FiDownload />}
               />
             ),
           },
           {
             label: "Liscense",
             value: (
-              <PdfViewer
-                pdfName="License"
-                pdfUrl={`${API_URL_UPLOADS_USER_DOCS}/${userDoc.license}`}
+              <Button
+                type="default"
+                href={`${API_URL_UPLOADS_USER_DOCS}/${userDoc.license}`}
+                download={true}
+                icon={<FiDownload />}
               />
             ),
           },
           {
             label: "Diploma",
             value: (
-              <PdfViewer
-                pdfName="Diploma"
-                pdfUrl={`${API_URL_UPLOADS_USER_DOCS}/${userDoc.diploma}`}
+              <Button
+                type="default"
+                href={`${API_URL_UPLOADS_USER_DOCS}/${userDoc.diploma}`}
+                download={true}
+                icon={<FiDownload />}
               />
             ),
           },
