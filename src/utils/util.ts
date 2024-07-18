@@ -13,3 +13,15 @@ export function deleteFile(filename: string, folderName: string) {
     return false; // Deletion failed
   }
 }
+
+export function calculateDiscountedPrice(
+  price: number,
+  discountPercentage: number
+): number {
+  return (price * (100 - discountPercentage)) / 100
+}
+
+// Function to calculate total based on discounted price and quantity
+export function calculateTotal(discountedPrice: number, quantity: number): number {
+  return discountedPrice * quantity;
+}

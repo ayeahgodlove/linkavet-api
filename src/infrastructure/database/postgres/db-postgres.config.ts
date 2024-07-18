@@ -41,6 +41,7 @@ import { Subscriber } from "../../../data/entities/subscriber";
 import { Mail } from "../../../data/entities/mail";
 import { Contact } from "../../../data/entities/contact";
 import { Service } from "../../../data/entities/service";
+import { CartItem } from "../../../data/entities/cart-item";
 
 dotenv.config();
 
@@ -96,6 +97,7 @@ export class PostgresDbConfig {
         Mail,
         Contact,
         Service,
+        CartItem
       ],
       logging: false,
       pool: {

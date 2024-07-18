@@ -45,6 +45,7 @@ import subscriberRouter from "./presentation/routes/subscriber.route";
 import mailRouter from "./presentation/routes/mail.route";
 import contactRouter from "./presentation/routes/contact.route";
 import serviceRouter from "./presentation/routes/service.route";
+import cartRouter from "./presentation/routes/cart.route";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -146,6 +147,7 @@ db.connection()
     app.use("/api/mails", mailRouter);
     app.use("/api/contacts", contactRouter);
     app.use("/api/services", serviceRouter);
+    app.use("/api/cart", cartRouter);
     // middleware interceptions
     app.use(notFoundHandler);
 
