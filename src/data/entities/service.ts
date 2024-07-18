@@ -6,16 +6,16 @@ import {
   ForeignKey,
   BelongsTo,
 } from "sequelize-typescript";
-import { IEvent } from "../../domain/models/event";
+import { IService } from "../../domain/models/service";
 import { User } from "./user";
 
 @Table({
   timestamps: true,
   paranoid: true,
-  tableName: "event",
-  modelName: "Event",
+  tableName: "service",
+  modelName: "Service",
 })
-export class Event extends Model<IEvent> {
+export class Service extends Model<IService> {
   @Column({
     type: DataType.STRING(20),
     allowNull: false,
@@ -34,27 +34,30 @@ export class Event extends Model<IEvent> {
     type: DataType.TEXT,
     allowNull: false,
   })
+  short_description!: string;
+
+  @Column({
+    type: DataType.STRING(128),
+    allowNull: false,
+    unique: true,
+  })
+  slug!: string;
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: false,
+  })
   description!: string;
 
   @Column({
     type: DataType.STRING(255),
     allowNull: false,
   })
-  url!: string;
+  fileName!: string;
 
-  @Column({ type: DataType.DATE })
-  start!: Date;
-
-  @Column({ type: DataType.DATE })
-  end!: Date;
- 
-  @ForeignKey(() => User) // foreign key
   @Column({
-    type: DataType.STRING(128),
+    type: DataType.DECIMAL,
     allowNull: false,
   })
-  userId!: string;
-
-  @BelongsTo(() => User, "userId")
-  user!: User;
+  price!: number;
 }

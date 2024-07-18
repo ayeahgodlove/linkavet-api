@@ -67,7 +67,7 @@ uploadRouter.post(
 // end of user documents
 uploadRouter.post(
   "/products",
-  upload("products").single("imageUrl"),
+  upload("products").single("image"),
   uploadController.uploadFile
 );
 
@@ -80,6 +80,12 @@ uploadRouter.post(
 uploadRouter.post(
   "/posts",
   upload("posts").single("imageUrl"),
+  uploadController.uploadFile
+);
+
+uploadRouter.post(
+  "/services",
+  upload("services").single("image"),
   uploadController.uploadFile
 );
 

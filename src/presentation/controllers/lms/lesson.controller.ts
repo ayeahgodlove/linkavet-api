@@ -63,12 +63,7 @@ export class LessonsController {
       const lessons = await lessonUseCase.getAll();
       const lessonsDTO = lessonMapper.toDTOs(lessons);
 
-      res.json({
-        data: lessonsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(lessonsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -81,7 +76,7 @@ export class LessonsController {
 
   async getLessonById(
     req: Request,
-    res: Response<ILessonResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -91,12 +86,7 @@ export class LessonsController {
         throw new NotFoundException("Lesson", id);
       }
       const lessonDTO = lessonMapper.toDTO(lesson);
-      res.json({
-        data: lessonDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(lessonDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

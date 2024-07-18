@@ -59,12 +59,7 @@ export class BranchesController {
       const branches = await branchUseCase.getAll();
       const branchesDTO = branchMapper.toDTOs(branches);
 
-      res.json({
-        data: branchesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(branchesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -77,7 +72,7 @@ export class BranchesController {
 
   async getBranchById(
     req: Request,
-    res: Response<IBranchResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -87,12 +82,7 @@ export class BranchesController {
         throw new NotFoundException("Branch", id);
       }
       const branchDTO = branchMapper.toDTO(branch);
-      res.json({
-        data: branchDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(branchDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

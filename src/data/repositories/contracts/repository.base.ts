@@ -14,6 +14,8 @@ import { Payment } from "../../entities/payment";
 import { IPayment } from "../../../domain/models/payment";
 import { ProductOrder } from "../../entities/product-order";
 import { IProductOrder } from "../../../domain/models/product-order";
+import { IService } from "../../../domain/models/service";
+import { Service } from "../../entities/service";
 
 export interface IRepository<T, U> {
   create(category: T): Promise<U>;
@@ -41,6 +43,11 @@ export interface IProductRepository extends IRepository<IProduct, Product> {
 }
 export interface IPostRepository extends IRepository<IPost, Post> {
   findByTitle(title: string): Promise<Post | null>;
+  findBySlug(slug: string): Promise<Post | null>;
+}
+export interface IServiceRepository extends IRepository<IService, Service> {
+  findByTitle(title: string): Promise<Service | null>;
+  findBySlug(slug: string): Promise<Service | null>;
 }
 export interface IBannerRepository extends IRepository<IBanner, Banner> {
   findByTitle(title: string): Promise<Banner | null>;
@@ -55,6 +62,7 @@ export interface IPaymentRepository extends IRepository<IPayment, Payment> {
   findByOrderId(orderNo: string): Promise<Payment | null>;
 }
 
-export interface IProductOrderRepository extends IRepository<IProductOrder, ProductOrder> {
+export interface IProductOrderRepository
+  extends IRepository<IProductOrder, ProductOrder> {
   createManyOrders(productOrders: IProductOrder[]): Promise<ProductOrder[]>;
 }

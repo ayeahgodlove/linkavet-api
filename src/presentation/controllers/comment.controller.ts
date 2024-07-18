@@ -63,12 +63,7 @@ export class CommentsController {
       const comments = await commentUseCase.getPostComments(postId);
       const commentsDTO = commentMapper.toDTOs(comments);
 
-      res.json({
-        data: commentsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(commentsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

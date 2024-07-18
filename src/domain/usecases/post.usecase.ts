@@ -25,6 +25,10 @@ export class PostUseCase {
     return this.postRepository.findById(id);
   }
 
+  async getPostBySlug(slug: string): Promise<Post | null> {
+    return this.postRepository.findBySlug(slug);
+  }
+  
   async updatePost(post: IPost): Promise<Post> {
     const obj: IPost = {
       ...post,

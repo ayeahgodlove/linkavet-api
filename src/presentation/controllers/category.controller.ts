@@ -59,12 +59,7 @@ export class CategoriesController {
       const categories = await categoryUseCase.getAll();
       const categoriesDTO = categoryMapper.toDTOs(categories);
 
-      res.json({
-        data: categoriesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(categoriesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -77,7 +72,7 @@ export class CategoriesController {
 
   async getCategoryById(
     req: Request,
-    res: Response<ICategoryResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -87,12 +82,7 @@ export class CategoriesController {
         throw new NotFoundException("Category", id);
       }
       const categoryDTO = categoryMapper.toDTO(category);
-      res.json({
-        data: categoryDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(categoryDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

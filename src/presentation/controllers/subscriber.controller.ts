@@ -59,12 +59,7 @@ export class SubscribersController {
       const subscribers = await subscriberUseCase.getAll();
       const subscribersDTO = subscriberMapper.toDTOs(subscribers);
 
-      res.json({
-        data: subscribersDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(subscribersDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -75,10 +70,7 @@ export class SubscribersController {
     }
   }
 
-  async getSubscriberById(
-    req: Request,
-    res: Response<ISubscriberResponse>
-  ): Promise<void> {
+  async getSubscriberById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -87,12 +79,7 @@ export class SubscribersController {
         throw new NotFoundException("Subscriber", id);
       }
       const subscriberDTO = subscriberMapper.toDTO(subscriber);
-      res.json({
-        data: subscriberDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(subscriberDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

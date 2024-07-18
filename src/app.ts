@@ -33,7 +33,6 @@ import courseRouter from "./presentation/routes/lms/course.route";
 import lessonRouter from "./presentation/routes/lms/lesson.route";
 import enrollmentRouter from "./presentation/routes/lms/enrollment.route";
 import quizRouter from "./presentation/routes/lms/quiz.route";
-import productReviewRouter from "./presentation/routes/product-review.route";
 import lessonReviewRouter from "./presentation/routes/lesson-review.route";
 import appointmentRouter from "./presentation/routes/health/appointment.route";
 import consultationRouter from "./presentation/routes/health/consultation.route";
@@ -45,6 +44,7 @@ import specialtyRouter from "./presentation/routes/specialty.route";
 import subscriberRouter from "./presentation/routes/subscriber.route";
 import mailRouter from "./presentation/routes/mail.route";
 import contactRouter from "./presentation/routes/contact.route";
+import serviceRouter from "./presentation/routes/service.route";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -114,7 +114,6 @@ db.connection()
     app.use("/api/comments", commentRouter);
     app.use("/api/posts", postRouter);
     app.use("/api/roles", roleRouter);
-    app.use("/api/product-reviews", productReviewRouter);
     app.use("/api/lesson-reviews", lessonReviewRouter);
     app.use("/api/users", userRouter);
     app.use("/api/products", productRouter);
@@ -142,10 +141,11 @@ db.connection()
     app.use("/api/user-docs", userDocRouter);
     app.use("/api/specialties", specialtyRouter);
     app.use("/api/uploads", uploadRouter);
-    app.use("/api/calendar/events", eventRouter);
+    app.use("/api/events", eventRouter);
     app.use("/api/subscribers", subscriberRouter);
     app.use("/api/mails", mailRouter);
     app.use("/api/contacts", contactRouter);
+    app.use("/api/services", serviceRouter);
     // middleware interceptions
     app.use(notFoundHandler);
 

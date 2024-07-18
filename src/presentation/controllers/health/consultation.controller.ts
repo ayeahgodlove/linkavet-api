@@ -59,12 +59,7 @@ export class ConsultationsController {
       const consultationes = await consultationUseCase.getAll();
       const consultationesDTO = consultationMapper.toDTOs(consultationes);
 
-      res.json({
-        data: consultationesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(consultationesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -77,7 +72,7 @@ export class ConsultationsController {
 
   async getConsultationById(
     req: Request,
-    res: Response<IConsultationResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -87,12 +82,7 @@ export class ConsultationsController {
         throw new NotFoundException("Consultation", id);
       }
       const consultationDTO = consultationMapper.toDTO(consultation);
-      res.json({
-        data: consultationDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(consultationDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

@@ -61,12 +61,7 @@ export class StoresController {
       const stores = await storeUseCase.getAll();
       const storesDTO = storeMapper.toDTOs(stores);
 
-      res.json({
-        data: storesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(storesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -79,7 +74,7 @@ export class StoresController {
 
   async getStoreById(
     req: Request,
-    res: Response<IStoreResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -89,12 +84,7 @@ export class StoresController {
         throw new NotFoundException("Store", id);
       }
       const storeDTO = storeMapper.toDTO(store);
-      res.json({
-        data: storeDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(storeDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

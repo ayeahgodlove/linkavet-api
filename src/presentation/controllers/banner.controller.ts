@@ -68,12 +68,7 @@ export class BannersController {
       const banners = await bannerUseCase.getAll();
       const bannersDTO = bannerMapper.toDTOs(banners);
 
-      res.json({
-        data: bannersDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(bannersDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -84,10 +79,7 @@ export class BannersController {
     }
   }
 
-  async getBannerById(
-    req: Request,
-    res: Response<IBannerResponse>
-  ): Promise<void> {
+  async getBannerById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -96,12 +88,7 @@ export class BannersController {
         throw new NotFoundException("Banner", id);
       }
       const bannerDTO = bannerMapper.toDTO(banner);
-      res.json({
-        data: bannerDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(bannerDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

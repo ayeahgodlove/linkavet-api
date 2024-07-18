@@ -10,7 +10,7 @@ import { nanoid } from "nanoid";
 const eventRepository = new EventRepository();
 const eventUseCase = new EventUseCase(eventRepository);
 const eventMapper = new EventMapper();
-
+ 
 export class EventsController {
   async createEvent(
     req: Request,
@@ -47,12 +47,7 @@ export class EventsController {
       const events = await eventUseCase.getAll();
       const eventsDTO = eventMapper.toDTOs(events);
 
-      res.json({
-        data: eventsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(eventsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -63,10 +58,7 @@ export class EventsController {
     }
   }
 
-  async getEventById(
-    req: Request,
-    res: Response<IEventResponse>
-  ): Promise<void> {
+  async getEventById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -75,12 +67,7 @@ export class EventsController {
         throw new NotFoundException("Event", id);
       }
       const eventDTO = eventMapper.toDTO(event);
-      res.json({
-        data: eventDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(eventDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -98,7 +85,6 @@ export class EventsController {
     try {
       const id = req.params.id;
       const user = req.user as User;
-
 
       const obj: IEvent = {
         ...emptyEvent,

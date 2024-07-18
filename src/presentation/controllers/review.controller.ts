@@ -62,12 +62,7 @@ export class ReviewsController {
       const reviewes = await reviewUseCase.getAll();
       const reviewesDTO = reviewMapper.toDTOs(reviewes);
 
-      res.json({
-        data: reviewesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(reviewesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -80,7 +75,7 @@ export class ReviewsController {
 
   async getReviewById(
     req: Request,
-    res: Response<IReviewResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -90,12 +85,7 @@ export class ReviewsController {
         throw new NotFoundException("Review", id);
       }
       const reviewDTO = reviewMapper.toDTO(review);
-      res.json({
-        data: reviewDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(reviewDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

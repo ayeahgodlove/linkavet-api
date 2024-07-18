@@ -56,12 +56,7 @@ export class QuizesController {
       const quizes = await quizUseCase.getAll();
       const quizesDTO = quizMapper.toDTOs(quizes);
 
-      res.json({
-        data: quizesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(quizesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -72,7 +67,7 @@ export class QuizesController {
     }
   }
 
-  async getQuizById(req: Request, res: Response<IQuizResponse>): Promise<void> {
+  async getQuizById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -81,12 +76,7 @@ export class QuizesController {
         throw new NotFoundException("Quiz", id);
       }
       const quizDTO = quizMapper.toDTO(quiz);
-      res.json({
-        data: quizDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(quizDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

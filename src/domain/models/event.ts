@@ -6,14 +6,8 @@ export interface IEvent {
   title: string;
   start: Date;
   end: Date;
-  allDay: boolean;
-  display?: string;
-  extendedProps: {
-    calendar: string;
-    guests: string[];
-    location: string;
-    description: string;
-  };
+  description: string;
+  url: string;
 }
 
 export const emptyEvent: IEvent = {
@@ -22,13 +16,8 @@ export const emptyEvent: IEvent = {
   userId: "",
   start: new Date(),
   end: new Date(),
-  allDay: false,
-  extendedProps: {
-    calendar: "",
-    guests: [],
-    location: "",
-    description: "",
-  },
+  description: "",
+  url: "",
 };
 
 export interface IEventResponse extends IBaseResponse {

@@ -58,6 +58,12 @@ export class Post extends Model<IPost> {
   imageUrl!: string;
 
   @Column({
+    type: DataType.STRING(128),
+    allowNull: true,
+  })
+  readTime!: string;
+
+  @Column({
     type: DataType.DATE,
     // allowNull: false,
   })

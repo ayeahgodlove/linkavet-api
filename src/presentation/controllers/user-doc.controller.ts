@@ -62,12 +62,7 @@ export class UserDocsController {
       const userDocs = await userDocUseCase.getAll();
       const userDocsDTO = userDocMapper.toDTOs(userDocs);
 
-      res.json({
-        data: userDocsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(userDocsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -78,10 +73,7 @@ export class UserDocsController {
     }
   }
 
-  async getUserDocById(
-    req: Request,
-    res: Response<IUserDocResponse>
-  ): Promise<void> {
+  async getUserDocById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -99,12 +91,7 @@ export class UserDocsController {
       }
       // Update the user's verification status
 
-      res.json({
-        data: userDocDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(userDocDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

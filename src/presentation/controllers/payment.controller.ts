@@ -56,16 +56,11 @@ export class PaymentsController {
     }
   }
 
-  async getAll(req: Request, res: Response<IPaymentResponse>): Promise<void> {
+  async getAll(req: Request, res: Response<any>): Promise<void> {
     try {
       const payments = await paymentUseCase.getAll();
       const paymentsDTO = paymentMapper.toDTOs(payments);
-      res.json({
-        data: paymentsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(paymentsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -76,10 +71,7 @@ export class PaymentsController {
     }
   }
 
-  async getPaymentById(
-    req: Request,
-    res: Response<IPaymentResponse>
-  ): Promise<void> {
+  async getPaymentById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -90,12 +82,7 @@ export class PaymentsController {
       }
       const paymentDTO = paymentMapper.toDTO(payment);
 
-      res.json({
-        data: paymentDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(paymentDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

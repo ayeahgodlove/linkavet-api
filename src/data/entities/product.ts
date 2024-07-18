@@ -3,14 +3,12 @@ import {
   Model,
   Column,
   DataType,
-  HasMany,
   BelongsTo,
   ForeignKey,
   BelongsToMany,
 } from "sequelize-typescript";
 import { IProduct } from "../../domain/models/product";
 import { Category } from "./category";
-import { ProductReview } from "./product-review";
 import { Order } from "./order";
 import { ProductOrder } from "./product-order";
 
@@ -82,9 +80,25 @@ export class Product extends Model<IProduct> {
   })
   tags!: string[];
 
+  
+  @Column({
+    type: DataType.STRING(128),
+    allowNull: false,
+  })
+  availabilityStatus!: string;
 
-  @HasMany(() => ProductReview)
-  productReviews!: ProductReview[];
+  @Column({
+    type: DataType.DECIMAL,
+    allowNull: false,
+  })
+  rating!: number;
+
+  
+  @Column({
+    type: DataType.DECIMAL,
+    allowNull: false,
+  })
+  discountPercentage!: number;
 
   // relationships
 

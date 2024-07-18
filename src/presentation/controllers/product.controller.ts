@@ -35,7 +35,7 @@ export class ProductsController {
         success: false,
         data: null,
         message: "Attention!",
-      }); 
+      });
     } else {
       try {
         const productResponse = await productUseCase.createProduct({
@@ -44,13 +44,8 @@ export class ProductsController {
           productImages,
         });
 
-        const obj: IProduct = {
-          ...productResponse.toJSON<IProduct>(),
-          reviews: [],
-        };
-
         res.status(201).json({
-          data: obj,
+          data: productResponse.toJSON<IProduct>(),
           message: "Product created Successfully!",
           validationErrors: [],
           success: true,
@@ -75,12 +70,7 @@ export class ProductsController {
       const products = await productUseCase.getAll();
       const productsDTO = productMapper.toDTOs(products);
 
-      res.json({
-        data: productsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(productsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -97,12 +87,7 @@ export class ProductsController {
       const products = await productUseCase.search(`${searchTerm}`);
       const productsDTO = productMapper.toDTOs(products);
 
-      res.json({
-        data: productsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(productsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -113,10 +98,7 @@ export class ProductsController {
     }
   }
 
-  async getProductById(
-    req: Request,
-    res: Response<IProductResponse>
-  ): Promise<void> {
+  async getProductById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -125,12 +107,7 @@ export class ProductsController {
         throw new NotFoundException("Product", id);
       }
       const productDTO = productMapper.toDTO(product);
-      res.json({
-        data: productDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(productDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

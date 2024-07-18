@@ -7,6 +7,7 @@ export interface IReview {
   comment: string;
   createdAt: Date;
   updatedAt: Date;
+  toggle: boolean;
 }
 
 export const emptyReview: IReview = {
@@ -15,6 +16,7 @@ export const emptyReview: IReview = {
   comment: "",
   createdAt: new Date(),
   updatedAt: new Date(),
+  toggle: false,
 };
 
 export interface IReviewResponse extends IBaseResponse {

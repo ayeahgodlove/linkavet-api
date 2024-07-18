@@ -1,25 +1,23 @@
 import { Request, Response } from "express";
-import { IPost, IPostResponse, emptyPost } from "../../domain/models/post";
-import { PostUseCase } from "../../domain/usecases/post.usecase";
-import { PostRepository } from "../../data/repositories/impl/post.repository";
-import { PostMapper } from "../mappers/mapper";
-import { PostRequestDto } from "../dtos/post-request.dto";
+import { IService, IServiceResponse, emptyService } from "../../domain/models/service";
+import { ServiceUseCase } from "../../domain/usecases/service.usecase";
+import { ServiceRepository } from "../../data/repositories/impl/service.repository";
+import { ServiceMapper } from "../mappers/mapper";
+import { ServiceRequestDto } from "../dtos/service-request.dto";
 import { validate } from "class-validator";
 import { displayValidationErrors } from "../../utils/displayValidationErrors";
 import { NotFoundException } from "../../shared/exceptions/not-found.exception";
 import { User } from "../../data/entities/user";
 import { deleteFile } from "../../utils/util";
 
-const postRepository = new PostRepository();
-const postUseCase = new PostUseCase(postRepository);
-const postMapper = new PostMapper();
+const serviceRepository = new ServiceRepository();
+const serviceUseCase = new ServiceUseCase(serviceRepository);
+const serviceMapper = new ServiceMapper();
 
-export class PostsController {
-  async createPost(req: Request, res: Response<IPostResponse>): Promise<void> {
-    const dto = new PostRequestDto(req.body);
+export class ServicesController {
+  async createService(req: Request, res: Response<IServiceResponse>): Promise<void> {
+    const dto = new ServiceRequestDto(req.body);
     const validationErrors = await validate(dto);
-    const user = req.user as User;
-    const tags = req.body.tags;
 
     if (validationErrors.length > 0) {
       res.status(400).json({
@@ -30,16 +28,13 @@ export class PostsController {
       });
     } else {
       try {
-        const postResponse = await postUseCase.createPost({
+        const serviceResponse = await serviceUseCase.createService({
           ...dto.toData(),
-          authorId: user.id,
-          imageUrl: req.body.imageUrl,
-          tags,
         });
 
         res.status(201).json({
-          data: postResponse.toJSON<IPost>(),
-          message: "Post created Successfully!",
+          data: serviceResponse.toJSON<IService>(),
+          message: "Service created Successfully!",
           validationErrors: [],
           success: true,
         });
@@ -56,10 +51,10 @@ export class PostsController {
 
   async getAll(req: Request, res: Response<any>): Promise<void> {
     try {
-      const posts = await postUseCase.getAll();
-      const postsDTO = postMapper.toDTOs(posts);
+      const services = await serviceUseCase.getAll();
+      const servicesDTO = serviceMapper.toDTOs(services);
 
-      res.json(postsDTO);
+      res.json(servicesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -70,16 +65,16 @@ export class PostsController {
     }
   }
 
-  async getPostById(req: Request, res: Response<any>): Promise<void> {
+  async getServiceById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
-      const post = await postUseCase.getPostById(id);
-      if (!post) {
-        throw new NotFoundException("Post", id);
+      const service = await serviceUseCase.getServiceById(id);
+      if (!service) {
+        throw new NotFoundException("Service", id);
       }
-      const postDTO = postMapper.toDTO(post);
-      res.json(postDTO);
+      const serviceDTO = serviceMapper.toDTO(service);
+      res.json(serviceDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -91,16 +86,16 @@ export class PostsController {
   }
 
   
-  async getPostBySlug(req: Request, res: Response<any>): Promise<void> {
+  async getServiceBySlug(req: Request, res: Response<any>): Promise<void> {
     try {
       const slug = req.params.slug;
 
-      const post = await postUseCase.getPostBySlug(slug);
-      if (!post) {
-        throw new NotFoundException("Post", slug);
+      const service = await serviceUseCase.getServiceBySlug(slug);
+      if (!service) {
+        throw new NotFoundException("Service", slug);
       }
-      const postDTO = postMapper.toDTO(post);
-      res.json(postDTO);
+      const serviceDTO = serviceMapper.toDTO(service);
+      res.json(serviceDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -112,8 +107,8 @@ export class PostsController {
   }
 
 
-  async updatePost(req: Request, res: Response<IPostResponse>): Promise<void> {
-    const dto = new PostRequestDto(req.body);
+  async updateService(req: Request, res: Response<IServiceResponse>): Promise<void> {
+    const dto = new ServiceRequestDto(req.body);
     const validationErrors = await validate(dto);
     const user = req.user as User;
 
@@ -128,20 +123,20 @@ export class PostsController {
       try {
         const id = req.params.id;
 
-        const obj: IPost = {
-          ...emptyPost,
+        const obj: IService = {
+          ...emptyService,
           ...req.body,
           id: id,
           imageUrl: req.body.imageUrl,
           authorId: user.id,
         };
-        const updatedPost = await postUseCase.updatePost(obj);
-        const postDto = postMapper.toDTO(updatedPost);
+        const updatedService = await serviceUseCase.updateService(obj);
+        const serviceDto = serviceMapper.toDTO(updatedService);
 
         res.json({
-          data: postDto,
+          data: serviceDto,
           success: true,
-          message: "Post Updated Successfully!",
+          message: "Service Updated Successfully!",
           validationErrors: [],
         });
       } catch (error: any) {
@@ -155,16 +150,16 @@ export class PostsController {
     }
   }
 
-  async deletePost(req: Request, res: Response<IPostResponse>): Promise<void> {
+  async deleteService(req: Request, res: Response<IServiceResponse>): Promise<void> {
     try {
       const id = req.params.id;
 
-      const post = await postUseCase.getPostById(id);
+      const service = await serviceUseCase.getServiceById(id);
 
-      if (post) {
-        deleteFile(post.dataValues.imageUrl, "posts");
+      if (service) {
+        deleteFile(service.dataValues.fileName, "services");
       }
-      await postUseCase.deletePost(id);
+      await serviceUseCase.deleteService(id);
 
       res.status(204).json({
         message: `Operation successfully completed!`,

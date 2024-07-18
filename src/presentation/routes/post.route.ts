@@ -9,6 +9,7 @@ const postRouter = Router();
 
 postRouter.get("", postController.getAll);
 postRouter.get("/:id", postController.getPostById);
+postRouter.get("/slugs/:slug", postController.getPostBySlug);
 postRouter.post("", isAuthenticatedMiddleware, postController.createPost);
 postRouter.put("/:id", isAuthenticatedMiddleware, postController.updatePost);
 postRouter.delete("/:id", isAuthenticatedMiddleware, postController.deletePost);

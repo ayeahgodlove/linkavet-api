@@ -59,12 +59,7 @@ export class UserRolesController {
       const userRoles = await userRoleUseCase.getAll();
       const userRolesDTO = userRoleMapper.toDTOs(userRoles);
 
-      res.json({
-        data: userRolesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(userRolesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -77,7 +72,7 @@ export class UserRolesController {
 
   async getUserRoleById(
     req: Request,
-    res: Response<IUserRoleResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -87,12 +82,7 @@ export class UserRolesController {
         throw new NotFoundException("UserRole", id);
       }
       const userRoleDTO = userRoleMapper.toDTO(userRole);
-      res.json({
-        data: userRoleDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(userRoleDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

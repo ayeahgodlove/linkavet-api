@@ -29,13 +29,17 @@ export class ProductRequestDto {
   @IsString()
   categoryId: string
 
-  // @IsNotEmpty()
-  // @IsString()
-  // storeId: string
+  @IsNotEmpty()
+  @IsString()
+  availabilityStatus: string
 
-  // @IsNotEmpty()
-  // @IsArray()
-  // productImages: string[];
+  @IsNotEmpty()
+  @IsNumber()
+  discountPercentage: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  rating: number;
 
 
   constructor(data: IProduct) {
@@ -45,7 +49,9 @@ export class ProductRequestDto {
     this.amount = data.amount;
     this.qtty = data.qtty;
     this.categoryId = data.categoryId;
-    // this.storeId = data.storeId;
+    this.availabilityStatus = data.availabilityStatus;
+    this.discountPercentage = data.discountPercentage;
+    this.rating = data.rating
   }
 
   toData(): IProduct {
@@ -58,7 +64,9 @@ export class ProductRequestDto {
       amount: this.amount,
       qtty: this.qtty,
       categoryId: this.categoryId,
-      // storeId: this.storeId,
+      availabilityStatus: this.availabilityStatus,
+      discountPercentage: this.discountPercentage,
+      rating: this.rating,
     };
   }
 
@@ -72,9 +80,10 @@ export class ProductRequestDto {
       qtty: data.qtty,
       categoryId: data.categoryId,
       productImages: data.productImages,
-      reviews: data.reviews,
       tags: data.tags,
-      orders: data.orders,
+      availabilityStatus: data.availabilityStatus,
+      discountPercentage: data.discountPercentage,
+      rating: data.rating
     };
   }
 }

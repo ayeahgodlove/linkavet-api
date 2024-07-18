@@ -41,6 +41,13 @@ export class Review extends Model<IReview> {
   })
   rating!: number;
 
+  @Column({
+    type: DataType.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  })
+  toggle!: boolean;
+
   @BelongsTo(() => User)
   user!: User;
 }

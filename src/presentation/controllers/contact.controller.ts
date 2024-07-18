@@ -57,14 +57,9 @@ export class ContactsController {
   async getAll(req: Request, res: Response<any>): Promise<void> {
     try {
       const contactes = await contactUseCase.getAll();
-      const contactesDTO = contactMapper.toDTOs(contactes);
+      const contactsDTO = contactMapper.toDTOs(contactes);
 
-      res.json({
-        data: contactesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(contactsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -75,10 +70,7 @@ export class ContactsController {
     }
   }
 
-  async getContactById(
-    req: Request,
-    res: Response<IContactResponse>
-  ): Promise<void> {
+  async getContactById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -87,12 +79,7 @@ export class ContactsController {
         throw new NotFoundException("Contact", id);
       }
       const contactDTO = contactMapper.toDTO(contact);
-      res.json({
-        data: contactDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(contactDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

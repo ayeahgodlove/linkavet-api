@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
-import {
-  ITag,
-  ITagResponse,
-  emptyTag,
-} from "../../domain/models/tag";
+import { ITag, ITagResponse, emptyTag } from "../../domain/models/tag";
 import { TagUseCase } from "../../domain/usecases/tag.usecase";
 import { TagRepository } from "../../data/repositories/impl/tag.repository";
 import { TagMapper } from "../mappers/mapper";
@@ -17,10 +13,7 @@ const tagUseCase = new TagUseCase(tagRepository);
 const tagMapper = new TagMapper();
 
 export class TagsController {
-  async createTag(
-    req: Request,
-    res: Response<ITagResponse>
-  ): Promise<void> {
+  async createTag(req: Request, res: Response<ITagResponse>): Promise<void> {
     const dto = new TagRequestDto(req.body);
     const validationErrors = await validate(dto);
 
@@ -33,9 +26,7 @@ export class TagsController {
       });
     } else {
       try {
-        const tagResponse = await tagUseCase.createTag(
-          dto.toData()
-        );
+        const tagResponse = await tagUseCase.createTag(dto.toData());
 
         res.status(201).json({
           data: tagResponse.toJSON<ITag>(),
@@ -59,12 +50,7 @@ export class TagsController {
       const tags = await tagUseCase.getAll();
       const tagsDTO = tagMapper.toDTOs(tags);
 
-      res.json({
-        data: tagsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(tagsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -75,10 +61,7 @@ export class TagsController {
     }
   }
 
-  async getTagById(
-    req: Request,
-    res: Response<ITagResponse>
-  ): Promise<void> {
+  async getTagById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -87,12 +70,7 @@ export class TagsController {
         throw new NotFoundException("Tag", id);
       }
       const tagDTO = tagMapper.toDTO(tag);
-      res.json({
-        data: tagDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(tagDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -103,10 +81,7 @@ export class TagsController {
     }
   }
 
-  async updateTag(
-    req: Request,
-    res: Response<ITagResponse>
-  ): Promise<void> {
+  async updateTag(req: Request, res: Response<ITagResponse>): Promise<void> {
     const dto = new TagRequestDto(req.body);
     const validationErrors = await validate(dto);
 
@@ -146,10 +121,7 @@ export class TagsController {
     }
   }
 
-  async deleteTag(
-    req: Request,
-    res: Response<ITagResponse>
-  ): Promise<void> {
+  async deleteTag(req: Request, res: Response<ITagResponse>): Promise<void> {
     try {
       const id = req.params.id;
 

@@ -2,7 +2,6 @@
 
 import { Branch } from "../../data/entities/branch";
 import { Category } from "../../data/entities/category";
-import { ProductReview } from "../../data/entities/product-review";
 import { Role } from "../../data/entities/role";
 import { Tag } from "../../data/entities/tag";
 import { User } from "../../data/entities/user";
@@ -33,7 +32,6 @@ import { IOrder } from "../../domain/models/order";
 import { Payment } from "../../data/entities/payment";
 import { IPayment } from "../../domain/models/payment";
 import { LessonReview } from "../../data/entities/lesson-review";
-import { IProductReview } from "../../domain/models/product-review";
 import { Course } from "../../data/entities/lms/course";
 import { ICourse } from "../../domain/models/lms/course";
 import { Lesson } from "../../data/entities/lms/lesson";
@@ -62,6 +60,8 @@ import { Mail } from "../../data/entities/mail";
 import { IMail } from "../../domain/models/mail";
 import { Contact } from "../../data/entities/contact";
 import { IContact } from "../../domain/models/contact";
+import { Service } from "../../data/entities/service";
+import { IService } from "../../domain/models/service";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -90,6 +90,22 @@ export class EventMapper {
     return _events;
   }
 }
+
+
+export class ServiceMapper {
+  toDTO(service: Service): IService {
+    const entity = service.toJSON<IService>();
+    return entity;
+  }
+  toDTOs(services: Service[]): IService[] {
+    const _services = services.map((service) => {
+      const entity = service.toJSON<IService>();
+      return entity;
+    });
+    return _services;
+  }
+}
+
 
 export class BannerMapper {
   toDTO(banner: Banner): IBanner {
@@ -341,19 +357,6 @@ export class ProductOrderMapper {
       return entity;
     });
     return _orders;
-  }
-}
-export class ProductReviewMapper {
-  toDTO(review: ProductReview): IProductReview {
-    const entity = review.toJSON<IProductReview>();
-    return entity;
-  }
-  toDTOs(reviews: ProductReview[]): IProductReview[] {
-    const _reviews = reviews.map((review) => {
-      const entity = review.toJSON<IProductReview>();
-      return entity;
-    });
-    return _reviews;
   }
 }
 

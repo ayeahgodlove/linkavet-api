@@ -54,12 +54,7 @@ export class MailsController {
       const mails = await mailUseCase.getAll();
       const mailsDTO = mailMapper.toDTOs(mails);
 
-      res.json({
-        data: mailsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(mailsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -70,7 +65,7 @@ export class MailsController {
     }
   }
 
-  async getMailById(req: Request, res: Response<IMailResponse>): Promise<void> {
+  async getMailById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -79,12 +74,7 @@ export class MailsController {
         throw new NotFoundException("Mail", id);
       }
       const mailDTO = mailMapper.toDTO(mail);
-      res.json({
-        data: mailDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(mailDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

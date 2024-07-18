@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
-import {
-  IRole,
-  IRoleResponse,
-  emptyRole,
-} from "../../domain/models/role";
+import { IRole, IRoleResponse, emptyRole } from "../../domain/models/role";
 import { RoleUseCase } from "../../domain/usecases/role.usecase";
 import { RoleRepository } from "../../data/repositories/impl/role.repository";
 import { RoleMapper } from "../mappers/mapper";
@@ -17,10 +13,7 @@ const roleUseCase = new RoleUseCase(roleRepository);
 const roleMapper = new RoleMapper();
 
 export class RolesController {
-  async createRole(
-    req: Request,
-    res: Response<IRoleResponse>
-  ): Promise<void> {
+  async createRole(req: Request, res: Response<IRoleResponse>): Promise<void> {
     const dto = new RoleRequestDto(req.body);
     const validationErrors = await validate(dto);
 
@@ -33,9 +26,7 @@ export class RolesController {
       });
     } else {
       try {
-        const roleResponse = await roleUseCase.createRole(
-          dto.toData()
-        );
+        const roleResponse = await roleUseCase.createRole(dto.toData());
 
         res.status(201).json({
           data: roleResponse.toJSON<IRole>(),
@@ -59,12 +50,7 @@ export class RolesController {
       const roles = await roleUseCase.getAll();
       const rolesDTO = roleMapper.toDTOs(roles);
 
-      res.json({
-        data: rolesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(rolesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -75,10 +61,7 @@ export class RolesController {
     }
   }
 
-  async getRoleById(
-    req: Request,
-    res: Response<IRoleResponse>
-  ): Promise<void> {
+  async getRoleById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -87,12 +70,7 @@ export class RolesController {
         throw new NotFoundException("Role", id);
       }
       const roleDTO = roleMapper.toDTO(role);
-      res.json({
-        data: roleDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(roleDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -103,10 +81,7 @@ export class RolesController {
     }
   }
 
-  async updateRole(
-    req: Request,
-    res: Response<IRoleResponse>
-  ): Promise<void> {
+  async updateRole(req: Request, res: Response<IRoleResponse>): Promise<void> {
     const dto = new RoleRequestDto(req.body);
     const validationErrors = await validate(dto);
 
@@ -146,10 +121,7 @@ export class RolesController {
     }
   }
 
-  async deleteRole(
-    req: Request,
-    res: Response<IRoleResponse>
-  ): Promise<void> {
+  async deleteRole(req: Request, res: Response<IRoleResponse>): Promise<void> {
     try {
       const id = req.params.id;
 

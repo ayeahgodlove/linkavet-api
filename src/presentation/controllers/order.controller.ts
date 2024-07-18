@@ -80,17 +80,12 @@ export class OrdersController {
     }
   }
 
-  async getAll(req: Request, res: Response<IOrderResponse>): Promise<void> {
+  async getAll(req: Request, res: Response<any>): Promise<void> {
     try {
       const orders = await orderUseCase.getAll();
       const ordersDTO = orderMapper.toDTOs(orders);
 
-      res.json({
-        data: ordersDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(ordersDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -101,10 +96,7 @@ export class OrdersController {
     }
   }
 
-  async getOrderById(
-    req: Request,
-    res: Response<IOrderResponse>
-  ): Promise<void> {
+  async getOrderById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -114,12 +106,7 @@ export class OrdersController {
         throw new NotFoundException("Order", id);
       }
       const orderDTO = orderMapper.toDTO(order);
-      res.json({
-        data: orderDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(orderDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

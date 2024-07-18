@@ -10,7 +10,8 @@ export interface IPost {
   publishedAt: Date;
   authorId: string; //foreign key to user table
   categoryId: string; //foreign key to user table
-  tags: string[];
+  tags: string[]; 
+  readTime: string;
 }
 
 export const emptyPost: IPost = {
@@ -24,6 +25,7 @@ export const emptyPost: IPost = {
   categoryId: "",
   summary: "",
   tags: [],
+  readTime: ""
 };
 
 export interface IPostResponse extends IBaseResponse {

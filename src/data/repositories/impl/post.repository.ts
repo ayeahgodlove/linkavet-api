@@ -57,6 +57,15 @@ export class PostRepository implements IPostRepository {
     }
   }
 
+  async findBySlug(slug: string): Promise<Post | null> {
+    try {
+      const post = await Post.findOne({ where: { slug } });
+      return post;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   /*
    * Returns an array of Post
    */

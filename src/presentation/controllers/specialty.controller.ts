@@ -63,12 +63,7 @@ export class SpecialtyController {
       const specialties = await specialtyUseCase.getAll();
       const specialtiesDTO = specialtyMapper.toDTOs(specialties);
 
-      res.json({
-        data: specialtiesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(specialtiesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -81,7 +76,7 @@ export class SpecialtyController {
 
   async getSpecialtyById(
     req: Request,
-    res: Response<ISpecialtyResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -90,13 +85,8 @@ export class SpecialtyController {
       if (!Specialty) {
         throw new NotFoundException("Specialty", id);
       }
-      const SpecialtyDTO = specialtyMapper.toDTO(Specialty);
-      res.json({
-        data: SpecialtyDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      const specialtyDTO = specialtyMapper.toDTO(Specialty);
+      res.json(specialtyDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

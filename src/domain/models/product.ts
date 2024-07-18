@@ -1,6 +1,6 @@
 import { IBaseResponse } from "./base-response";
 import { IOrder } from "./order";
-import { ILessonReview } from "./lesson-review";
+import { IReview } from "./review";
 
 export interface IProduct {
   id: string;
@@ -11,9 +11,11 @@ export interface IProduct {
   shortDescription: string;
   productImages: string[];
   qtty: number;
-  reviews: ILessonReview[]
   tags: string[]
-  orders: IOrder[]
+  
+  availabilityStatus: string;
+  rating: number;
+  discountPercentage: number;
 }
 
 export const emptyProduct: IProduct = {
@@ -25,9 +27,11 @@ export const emptyProduct: IProduct = {
   productImages: [],
   shortDescription: "",
   qtty: 0,
-  reviews: [],
   tags: [],
-  orders: []
+
+  availabilityStatus: "",
+  rating: 0,
+  discountPercentage: 0
 };
 
 export interface IProductResponse extends IBaseResponse {

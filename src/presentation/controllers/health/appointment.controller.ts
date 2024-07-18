@@ -60,12 +60,7 @@ export class AppointmentsController {
       const appointmentes = await appointmentUseCase.getAll();
       const appointmentesDTO = appointmentMapper.toDTOs(appointmentes);
 
-      res.json({
-        data: appointmentesDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(appointmentesDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -78,7 +73,7 @@ export class AppointmentsController {
 
   async getAppointmentById(
     req: Request,
-    res: Response<IAppointmentResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -88,12 +83,7 @@ export class AppointmentsController {
         throw new NotFoundException("Appointment", id);
       }
       const appointmentDTO = appointmentMapper.toDTO(appointment);
-      res.json({
-        data: appointmentDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(appointmentDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

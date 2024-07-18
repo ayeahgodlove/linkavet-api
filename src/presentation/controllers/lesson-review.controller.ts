@@ -59,12 +59,7 @@ export class LessonReviewsController {
       const reviews = await lessonReviewUseCase.getAll();
       const reviewsDTO = lessonReviewMapper.toDTOs(reviews);
 
-      res.json({
-        data: reviewsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(reviewsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -75,10 +70,7 @@ export class LessonReviewsController {
     }
   }
 
-  async getReviewById(
-    req: Request,
-    res: Response<ILessonReviewResponse>
-  ): Promise<void> {
+  async getReviewById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -87,12 +79,7 @@ export class LessonReviewsController {
         throw new NotFoundException("Review", id);
       }
       const reviewDTO = lessonReviewMapper.toDTO(review);
-      res.json({
-        data: reviewDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(reviewDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

@@ -65,12 +65,7 @@ export class DocumentsController {
       const documents = await documentUseCase.getAll();
       const documentsDTO = documentMapper.toDTOs(documents);
 
-      res.json({
-        data: documentsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(documentsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -81,10 +76,7 @@ export class DocumentsController {
     }
   }
 
-  async getDocumentById(
-    req: Request,
-    res: Response<IDocumentResponse>
-  ): Promise<void> {
+  async getDocumentById(req: Request, res: Response<any>): Promise<void> {
     try {
       const id = req.params.id;
 
@@ -93,12 +85,7 @@ export class DocumentsController {
         throw new NotFoundException("Document", id);
       }
       const documentDTO = documentMapper.toDTO(document);
-      res.json({
-        data: documentDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(documentDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,

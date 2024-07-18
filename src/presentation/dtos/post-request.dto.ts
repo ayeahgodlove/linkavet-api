@@ -23,6 +23,7 @@ export class PostRequestDto {
   @IsString()
   categoryId: string;
 
+
   constructor(data: IPost) {
     this.title = data.title;
     this.content = data.content;
@@ -54,6 +55,7 @@ export class PostRequestDto {
       slug: data.slug,
       summary: data.summary,
       tags: data.tags,
+      readTime: data.readTime
     };
   }
 }

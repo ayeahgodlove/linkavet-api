@@ -11,7 +11,6 @@ import * as dotenv from "dotenv";
 import { User } from "../../../data/entities/user";
 import { Role } from "../../../data/entities/role";
 import { LessonReview } from "../../../data/entities/lesson-review";
-import { ProductReview } from "../../../data/entities/product-review";
 import { UserDoc } from "../../../data/entities/user-doc";
 import { Branch } from "../../../data/entities/branch";
 import { Store } from "../../../data/entities/store";
@@ -41,6 +40,7 @@ import { Event } from "../../../data/entities/event";
 import { Subscriber } from "../../../data/entities/subscriber";
 import { Mail } from "../../../data/entities/mail";
 import { Contact } from "../../../data/entities/contact";
+import { Service } from "../../../data/entities/service";
 
 dotenv.config();
 
@@ -74,7 +74,6 @@ export class PostgresDbConfig {
         Store,
         Product,
         UserStore,
-        ProductReview,
         Banner,
         Order,
         Payment,
@@ -95,7 +94,8 @@ export class PostgresDbConfig {
         Specialty,
         Subscriber,
         Mail,
-        Contact
+        Contact,
+        Service,
       ],
       logging: false,
       pool: {

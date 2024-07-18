@@ -61,12 +61,7 @@ export class EnrollmentsController {
       const enrollments = await enrollmentUseCase.getAll();
       const enrollmentsDTO = enrollmentMapper.toDTOs(enrollments);
 
-      res.json({
-        data: enrollmentsDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(enrollmentsDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
@@ -79,7 +74,7 @@ export class EnrollmentsController {
 
   async getEnrollmentById(
     req: Request,
-    res: Response<IEnrollmentResponse>
+    res: Response<any>
   ): Promise<void> {
     try {
       const id = req.params.id;
@@ -89,12 +84,7 @@ export class EnrollmentsController {
         throw new NotFoundException("Enrollment", id);
       }
       const enrollmentDTO = enrollmentMapper.toDTO(enrollment);
-      res.json({
-        data: enrollmentDTO,
-        message: "Success",
-        validationErrors: [],
-        success: true,
-      });
+      res.json(enrollmentDTO);
     } catch (error: any) {
       res.status(400).json({
         data: null,
