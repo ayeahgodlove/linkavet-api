@@ -56,7 +56,7 @@
     "sequelize-typescript": "^2.1.5",
     "sequelize-typescript-migration-lts": "^3.2.5",
     "slugify": "^1.6.5",
-    "socket.io": "^4.7.2",
+    "socket.io": "^4.7.5",
     "tsconfig-paths": "^4.1.2",
     "uuid": "^9.0.0",
     "uuidv4": "^6.2.13",

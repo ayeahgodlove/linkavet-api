@@ -20,4 +20,10 @@ cartRouter.delete(
   cartController.removeCartItem
 );
 
+cartRouter.delete(
+  "/clear",
+  isAuthenticatedMiddleware,
+  cartController.clearCartItems
+);
+
 export default cartRouter;

@@ -31,12 +31,12 @@ export class CartController {
           cartItem.quantity += quantity;
           //   calculate discounted price
           const discountedPrice = calculateDiscountedPrice(
-            product.amount,
-            product.discountPercentage
+            product.dataValues.amount,
+            product.dataValues.discountPercentage
           );
           const total = calculateTotal(discountedPrice, cartItem.quantity);
 
-          cartItem.discountPercentage = product.discountPercentage;
+          cartItem.discountPercentage = product.dataValues.discountPercentage;
           cartItem.discountedPrice = discountedPrice;
           cartItem.total = total;
 
@@ -44,8 +44,8 @@ export class CartController {
         } else {
           //   calculate discounted price
           const discountedPrice = calculateDiscountedPrice(
-            product.amount,
-            product.discountPercentage
+            product.dataValues.amount,
+            product.dataValues.discountPercentage
           );
           const total = calculateTotal(discountedPrice, quantity);
 
@@ -56,7 +56,7 @@ export class CartController {
             productId,
             quantity,
             discountedPrice,
-            discountPercentage: product.discountPercentage,
+            discountPercentage: product.dataValues.discountPercentage,
             total,
           });
         }
@@ -126,6 +126,30 @@ export class CartController {
         message: error.message,
         validationErrors: [],
         success: false,
+      });
+    }
+  }
+
+  async clearCartItems(req: Request, res: Response<any>): Promise<void> {
+    const user = req.user as User;
+    const userId = user.id;
+
+    try {
+      await CartItem.destroy({
+        where: { userId },
+      });
+      res.json({
+        message: "Cart cleared",
+        success: true,
+        data: null,
+        validationErrors: [],
+      });
+    } catch (error) {
+      res.status(500).json({
+        message: "Internal server error",
+        success: false,
+        data: null,
+        validationErrors: [],
       });
     }
   }

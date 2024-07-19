@@ -46,6 +46,8 @@ import mailRouter from "./presentation/routes/mail.route";
 import contactRouter from "./presentation/routes/contact.route";
 import serviceRouter from "./presentation/routes/service.route";
 import cartRouter from "./presentation/routes/cart.route";
+import { createServer } from "http";
+import { Server } from "socket.io";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -62,6 +64,13 @@ const PORT: number = parseInt(process.env.PORT as string, 10);
 db.connection()
   .then(() => {
     const app: Express = express();
+    const server = createServer(app);
+    const io = new Server(server, {
+      cors: {
+        origin: "*",
+        credentials: true,
+      },
+    });
 
     /**
      *  App Configuration
@@ -101,6 +110,14 @@ db.connection()
 
     app.use(errorHandler);
 
+    // socket on
+    io.on("connection", (socket) => {
+      console.log("A user connected");
+
+      socket.on("disconnect", () => {
+        console.log("User disconnected");
+      });
+    });
     // authentication
     app.use("/auth", authRoutes);
 
@@ -147,7 +164,7 @@ db.connection()
     app.use("/api/mails", mailRouter);
     app.use("/api/contacts", contactRouter);
     app.use("/api/services", serviceRouter);
-    app.use("/api/cart", cartRouter);
+    app.use("/api/cart", cartRouter); // pass io to the controller function
     // middleware interceptions
     app.use(notFoundHandler);
 
