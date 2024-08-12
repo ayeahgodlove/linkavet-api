@@ -16,6 +16,8 @@ import { ProductOrder } from "../../entities/product-order";
 import { IProductOrder } from "../../../domain/models/product-order";
 import { IService } from "../../../domain/models/service";
 import { Service } from "../../entities/service";
+import { Faq } from "../../entities/faq";
+import { IFaq } from "../../../domain/models/faq";
 
 export interface IRepository<T, U> {
   create(category: T): Promise<U>;
@@ -51,6 +53,10 @@ export interface IServiceRepository extends IRepository<IService, Service> {
 }
 export interface IBannerRepository extends IRepository<IBanner, Banner> {
   findByTitle(title: string): Promise<Banner | null>;
+}
+
+export interface IFaqRepository extends IRepository<IFaq, Faq> {
+  findByQuestion(title: string): Promise<Faq | null>;
 }
 
 export interface IOrderRepository extends IRepository<IOrder, Order> {

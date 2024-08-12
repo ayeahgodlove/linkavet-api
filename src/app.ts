@@ -28,7 +28,7 @@ import Passport from "./shared/middlewares/authz.middleware";
 import bannerRouter from "./presentation/routes/banner.route";
 import orderRouter from "./presentation/routes/order.route";
 import paymentRouter from "./presentation/routes/payment.route";
-import processPaymentRouter from "./presentation/routes/payment/process-payments.route";
+// import processPaymentRouter from "./presentation/routes/payment/process-payments.route";
 import courseRouter from "./presentation/routes/lms/course.route";
 import lessonRouter from "./presentation/routes/lms/lesson.route";
 import enrollmentRouter from "./presentation/routes/lms/enrollment.route";
@@ -48,6 +48,8 @@ import serviceRouter from "./presentation/routes/service.route";
 import cartRouter from "./presentation/routes/cart.route";
 import { createServer } from "http";
 import { Server } from "socket.io";
+import faqRouter from "./presentation/routes/faq.route";
+import tranzakRouter from "./presentation/routes/payment/tranzak.route";
 
 dotenv.config();
 const db = new PostgresDbConfig();
@@ -61,63 +63,54 @@ if (!process.env.PORT) {
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
 
+const app: Express = express();
+const server = createServer(app);
+
+// Serve static files from the public folder
+app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+
+const corsOptions = {
+  origin: "*", // Allow requests from all origins (for development only)
+  credentials: true,
+};
+export const io = new Server(server, {
+  cors: corsOptions,
+});
+
+// app.set("io", io);
+/**
+ *  App Configuration
+ */
+
+app.use(cors(corsOptions));
+app
+  .use(
+    express.urlencoded({
+      extended: true,
+    })
+  )
+  .use(express.json({ limit: "50kb" }))
+  .use(cookieParser())
+  .use(helmet())
+  .use(
+    session({
+      // store: store,
+      secret: `${process.env.SESSION_SECRET}`,
+      resave: false,
+      saveUninitialized: false,
+      cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 },
+    })
+  )
+  .use(Passport.initialize())
+  .use(Passport.authenticate("session"))
+  .use(Passport.session());
+
+app.use(errorHandler);
+
+// crud operations
 db.connection()
   .then(() => {
-    const app: Express = express();
-    const server = createServer(app);
-    const io = new Server(server, {
-      cors: {
-        origin: "*",
-        credentials: true,
-      },
-    });
-
-    /**
-     *  App Configuration
-     */
-
-    // Serve static files from the public folder
-    app.use(express.static("public"));
-    app.use(express.static(path.join(__dirname, "public")));
-
-    const corsOptions = {
-      origin: "*", // Allow requests from all origins (for development only)
-      credentials: true,
-    };
-
-    app.use(cors(corsOptions));
-    app
-      .use(
-        express.urlencoded({
-          extended: true,
-        })
-      )
-      .use(express.json({ limit: "50kb" }))
-      .use(cookieParser())
-      .use(helmet())
-      .use(
-        session({
-          // store: store,
-          secret: `${process.env.SESSION_SECRET}`,
-          resave: false,
-          saveUninitialized: false,
-          cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 },
-        })
-      )
-      .use(Passport.initialize())
-      .use(Passport.authenticate("session"))
-      .use(Passport.session());
-
-    app.use(errorHandler);
-
-    // socket on
-    io.on("connection", (socket) => {
-      console.log("A user connected");
-
-      socket.on("disconnect", () => {
-        console.log("User disconnected");
-      });
-    });
     // authentication
     app.use("/auth", authRoutes);
 
@@ -142,7 +135,7 @@ db.connection()
     app.use("/api/payments", paymentRouter);
 
     //only for test purposes
-    app.use("/api/process-payments", processPaymentRouter);
+    app.use("/api/process-payments", tranzakRouter);
 
     //course module
     app.use("/api/courses", courseRouter);
@@ -164,14 +157,25 @@ db.connection()
     app.use("/api/mails", mailRouter);
     app.use("/api/contacts", contactRouter);
     app.use("/api/services", serviceRouter);
-    app.use("/api/cart", cartRouter); // pass io to the controller function
+    app.use("/api/faqs", faqRouter);
+    app.use("/api/carts", cartRouter(io));
+
+    io.on("connection", (socket) => {
+      socket.on("disconnect", () => {
+        console.log("User disconnected");
+      });
+    });
     // middleware interceptions
     app.use(notFoundHandler);
 
     /**
      * Server Activation
      */
-    app.listen(PORT, () => {
+    // app.listen(PORT, () => {
+    //   console.log(`⚡️[server]: Listening on port ${PORT}`);
+    // });
+
+    server.listen(PORT, () => {
       console.log(`⚡️[server]: Listening on port ${PORT}`);
     });
   })

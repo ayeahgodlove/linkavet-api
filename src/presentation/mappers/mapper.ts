@@ -62,6 +62,8 @@ import { Contact } from "../../data/entities/contact";
 import { IContact } from "../../domain/models/contact";
 import { Service } from "../../data/entities/service";
 import { IService } from "../../domain/models/service";
+import { Faq } from "../../data/entities/faq";
+import { IFaq } from "../../domain/models/faq";
 
 export class CategoryMapper {
   toDTO(category: Category): ICategory {
@@ -91,6 +93,19 @@ export class EventMapper {
   }
 }
 
+export class FaqMapper {
+  toDTO(faq: Faq): IFaq {
+    const entity = faq.toJSON<IFaq>();
+    return entity;
+  }
+  toDTOs(faqs: Faq[]): IFaq[] {
+    const _faqs = faqs.map((faq) => {
+      const entity = faq.toJSON<IFaq>();
+      return entity;
+    });
+    return _faqs;
+  }
+}
 
 export class ServiceMapper {
   toDTO(service: Service): IService {
@@ -105,7 +120,6 @@ export class ServiceMapper {
     return _services;
   }
 }
-
 
 export class BannerMapper {
   toDTO(banner: Banner): IBanner {
