@@ -55,6 +55,15 @@ class PostRepository {
             throw error;
         }
     }
+    async findBySlug(slug) {
+        try {
+            const post = await post_1.Post.findOne({ where: { slug } });
+            return post;
+        }
+        catch (error) {
+            throw error;
+        }
+    }
     /*
      * Returns an array of Post
      */

@@ -12,7 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Product = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
 const category_1 = require("./category");
-const product_review_1 = require("./product-review");
 const order_1 = require("./order");
 const product_order_1 = require("./product-order");
 let Product = class Product extends sequelize_typescript_1.Model {
@@ -24,7 +23,9 @@ let Product = class Product extends sequelize_typescript_1.Model {
     qtty;
     productImages;
     tags;
-    productReviews;
+    availabilityStatus;
+    rating;
+    discountPercentage;
     // relationships
     // one-to-one relationships
     category;
@@ -102,9 +103,26 @@ __decorate([
     __metadata("design:type", Array)
 ], Product.prototype, "tags", void 0);
 __decorate([
-    (0, sequelize_typescript_1.HasMany)(() => product_review_1.ProductReview),
-    __metadata("design:type", Array)
-], Product.prototype, "productReviews", void 0);
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(128),
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Product.prototype, "availabilityStatus", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DECIMAL,
+        allowNull: false,
+    }),
+    __metadata("design:type", Number)
+], Product.prototype, "rating", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DECIMAL,
+        allowNull: false,
+    }),
+    __metadata("design:type", Number)
+], Product.prototype, "discountPercentage", void 0);
 __decorate([
     (0, sequelize_typescript_1.BelongsTo)(() => category_1.Category),
     __metadata("design:type", category_1.Category)

@@ -48,12 +48,7 @@ class LessonReviewsController {
         try {
             const reviews = await lessonReviewUseCase.getAll();
             const reviewsDTO = lessonReviewMapper.toDTOs(reviews);
-            res.json({
-                data: reviewsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(reviewsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -72,12 +67,7 @@ class LessonReviewsController {
                 throw new not_found_exception_1.NotFoundException("Review", id);
             }
             const reviewDTO = lessonReviewMapper.toDTO(review);
-            res.json({
-                data: reviewDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(reviewDTO);
         }
         catch (error) {
             res.status(400).json({

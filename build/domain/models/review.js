@@ -7,4 +7,5 @@ exports.emptyReview = {
     comment: "",
     createdAt: new Date(),
     updatedAt: new Date(),
+    toggle: false,
 };

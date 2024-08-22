@@ -9,69 +9,74 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductReview = void 0;
+exports.Service = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-const user_1 = require("./user");
-const product_1 = require("./product");
-let ProductReview = class ProductReview extends sequelize_typescript_1.Model {
-    productId;
-    userId;
-    comment;
-    rating;
-    user;
-    product;
+let Service = class Service extends sequelize_typescript_1.Model {
+    title;
+    short_description;
+    slug;
+    description;
+    fileName;
+    price;
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING(50),
+        type: sequelize_typescript_1.DataType.STRING(20),
         allowNull: false,
         primaryKey: true,
     }),
     __metadata("design:type", String)
-], ProductReview.prototype, "id", void 0);
+], Service.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.ForeignKey)(() => product_1.Product),
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING(50),
+        type: sequelize_typescript_1.DataType.STRING(255),
         allowNull: false,
+        unique: true,
     }),
     __metadata("design:type", String)
-], ProductReview.prototype, "productId", void 0);
-__decorate([
-    (0, sequelize_typescript_1.ForeignKey)(() => user_1.User),
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING(50),
-        allowNull: false,
-    }),
-    __metadata("design:type", String)
-], ProductReview.prototype, "userId", void 0);
+], Service.prototype, "title", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.TEXT,
         allowNull: false,
     }),
     __metadata("design:type", String)
-], ProductReview.prototype, "comment", void 0);
+], Service.prototype, "short_description", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER,
+        type: sequelize_typescript_1.DataType.STRING(128),
+        allowNull: false,
+        unique: true,
+    }),
+    __metadata("design:type", String)
+], Service.prototype, "slug", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.TEXT,
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Service.prototype, "description", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Service.prototype, "fileName", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.DECIMAL,
         allowNull: false,
     }),
     __metadata("design:type", Number)
-], ProductReview.prototype, "rating", void 0);
-__decorate([
-    (0, sequelize_typescript_1.BelongsTo)(() => user_1.User),
-    __metadata("design:type", user_1.User)
-], ProductReview.prototype, "user", void 0);
-__decorate([
-    (0, sequelize_typescript_1.BelongsTo)(() => product_1.Product, "productId"),
-    __metadata("design:type", product_1.Product)
-], ProductReview.prototype, "product", void 0);
-ProductReview = __decorate([
+], Service.prototype, "price", void 0);
+Service = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: true,
         paranoid: true,
-        tableName: "product_review",
+        tableName: "service",
+        modelName: "Service",
     })
-], ProductReview);
-exports.ProductReview = ProductReview;
+], Service);
+exports.Service = Service;

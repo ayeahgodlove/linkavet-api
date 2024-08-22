@@ -1,21 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PaymentsController = void 0;
-const payment_1 = require("../../domain/models/payment");
-const payment_usecase_1 = require("../../domain/usecases/payment.usecase");
-const payment_request_dto_1 = require("../dtos/payment-request.dto");
+exports.ServicesController = void 0;
+const service_1 = require("../../domain/models/service");
+const service_usecase_1 = require("../../domain/usecases/service.usecase");
+const service_repository_1 = require("../../data/repositories/impl/service.repository");
+const mapper_1 = require("../mappers/mapper");
+const service_request_dto_1 = require("../dtos/service-request.dto");
 const class_validator_1 = require("class-validator");
-const payment_repository_1 = require("../../data/repositories/impl/payment.repository");
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
-const mapper_1 = require("../mappers/mapper");
-const email_1 = require("../../utils/email");
-const paymentRepository = new payment_repository_1.PaymentRepository();
-const paymentUseCase = new payment_usecase_1.PaymentUseCase(paymentRepository);
-const paymentMapper = new mapper_1.PaymentMapper();
-class PaymentsController {
-    async createPayment(req, res) {
-        const dto = new payment_request_dto_1.PaymentRequestDto(req.body);
+const util_1 = require("../../utils/util");
+const serviceRepository = new service_repository_1.ServiceRepository();
+const serviceUseCase = new service_usecase_1.ServiceUseCase(serviceRepository);
+const serviceMapper = new mapper_1.ServiceMapper();
+class ServicesController {
+    async createService(req, res) {
+        const dto = new service_request_dto_1.ServiceRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         if (validationErrors.length > 0) {
             res.status(400).json({
@@ -27,11 +27,12 @@ class PaymentsController {
         }
         else {
             try {
-                const paymentResponse = await paymentUseCase.createPayment(dto.toData());
-                await (0, email_1.sendPaymentSuccess)(paymentResponse.dataValues.email);
+                const serviceResponse = await serviceUseCase.createService({
+                    ...dto.toData(),
+                });
                 res.status(201).json({
-                    data: paymentResponse.toJSON(),
-                    message: "Payment created Successfully!",
+                    data: serviceResponse.toJSON(),
+                    message: "Service created Successfully!",
                     validationErrors: [],
                     success: true,
                 });
@@ -40,7 +41,7 @@ class PaymentsController {
                 res.status(400).json({
                     data: null,
                     message: error.message,
-                    validationErrors: [error],
+                    validationErrors: [],
                     success: false,
                 });
             }
@@ -48,9 +49,9 @@ class PaymentsController {
     }
     async getAll(req, res) {
         try {
-            const payments = await paymentUseCase.getAll();
-            const paymentsDTO = paymentMapper.toDTOs(payments);
-            res.json(paymentsDTO);
+            const services = await serviceUseCase.getAll();
+            const servicesDTO = serviceMapper.toDTOs(services);
+            res.json(servicesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -61,15 +62,15 @@ class PaymentsController {
             });
         }
     }
-    async getPaymentById(req, res) {
+    async getServiceById(req, res) {
         try {
             const id = req.params.id;
-            const payment = await paymentUseCase.getPaymentById(id);
-            if (!payment) {
-                throw new not_found_exception_1.NotFoundException("Payment", id);
+            const service = await serviceUseCase.getServiceById(id);
+            if (!service) {
+                throw new not_found_exception_1.NotFoundException("Service", id);
             }
-            const paymentDTO = paymentMapper.toDTO(payment);
-            res.json(paymentDTO);
+            const serviceDTO = serviceMapper.toDTO(service);
+            res.json(serviceDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -80,9 +81,29 @@ class PaymentsController {
             });
         }
     }
-    async updatePayment(req, res) {
-        const dto = new payment_request_dto_1.PaymentRequestDto(req.body);
+    async getServiceBySlug(req, res) {
+        try {
+            const slug = req.params.slug;
+            const service = await serviceUseCase.getServiceBySlug(slug);
+            if (!service) {
+                throw new not_found_exception_1.NotFoundException("Service", slug);
+            }
+            const serviceDTO = serviceMapper.toDTO(service);
+            res.json(serviceDTO);
+        }
+        catch (error) {
+            res.status(400).json({
+                data: null,
+                message: error.message,
+                validationErrors: [error],
+                success: false,
+            });
+        }
+    }
+    async updateService(req, res) {
+        const dto = new service_request_dto_1.ServiceRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
+        const user = req.user;
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -95,22 +116,19 @@ class PaymentsController {
             try {
                 const id = req.params.id;
                 const obj = {
-                    ...payment_1.emptyPayment,
+                    ...service_1.emptyService,
                     ...req.body,
-                    ...dto,
                     id: id,
+                    imageUrl: req.body.imageUrl,
+                    authorId: user.id,
                 };
-                const payment = await paymentUseCase.getPaymentById(id);
-                if (!payment) {
-                    throw new not_found_exception_1.NotFoundException("Payment", id);
-                }
-                const updatedPayment = await paymentUseCase.updatePayment(obj);
-                const paymentDto = paymentMapper.toDTO(updatedPayment);
+                const updatedService = await serviceUseCase.updateService(obj);
+                const serviceDto = serviceMapper.toDTO(updatedService);
                 res.json({
-                    data: paymentDto,
-                    message: "Payment Updated Successfully!",
-                    validationErrors: [],
+                    data: serviceDto,
                     success: true,
+                    message: "Service Updated Successfully!",
+                    validationErrors: [],
                 });
             }
             catch (error) {
@@ -123,14 +141,14 @@ class PaymentsController {
             }
         }
     }
-    async deletePayment(req, res) {
+    async deleteService(req, res) {
         try {
             const id = req.params.id;
-            const payment = await paymentUseCase.getPaymentById(id);
-            if (!payment) {
-                throw new not_found_exception_1.NotFoundException("Payment", id);
+            const service = await serviceUseCase.getServiceById(id);
+            if (service) {
+                (0, util_1.deleteFile)(service.dataValues.fileName, "services");
             }
-            await paymentUseCase.deletePayment(id);
+            await serviceUseCase.deleteService(id);
             res.status(204).json({
                 message: `Operation successfully completed!`,
                 validationErrors: [],
@@ -148,4 +166,4 @@ class PaymentsController {
         }
     }
 }
-exports.PaymentsController = PaymentsController;
+exports.ServicesController = ServicesController;

@@ -35,7 +35,6 @@ const dotenv = __importStar(require("dotenv"));
 const user_1 = require("../../../data/entities/user");
 const role_1 = require("../../../data/entities/role");
 const lesson_review_1 = require("../../../data/entities/lesson-review");
-const product_review_1 = require("../../../data/entities/product-review");
 const user_doc_1 = require("../../../data/entities/user-doc");
 const branch_1 = require("../../../data/entities/branch");
 const store_1 = require("../../../data/entities/store");
@@ -65,6 +64,9 @@ const event_1 = require("../../../data/entities/event");
 const subscriber_1 = require("../../../data/entities/subscriber");
 const mail_1 = require("../../../data/entities/mail");
 const contact_1 = require("../../../data/entities/contact");
+const service_1 = require("../../../data/entities/service");
+const cart_item_1 = require("../../../data/entities/cart-item");
+const faq_1 = require("../../../data/entities/faq");
 dotenv.config();
 class PostgresDbConfig {
     _sequelize;
@@ -96,7 +98,6 @@ class PostgresDbConfig {
                 store_1.Store,
                 product_1.Product,
                 user_store_1.UserStore,
-                product_review_1.ProductReview,
                 banner_1.Banner,
                 order_1.Order,
                 payment_1.Payment,
@@ -116,7 +117,10 @@ class PostgresDbConfig {
                 specialty_1.Specialty,
                 subscriber_1.Subscriber,
                 mail_1.Mail,
-                contact_1.Contact
+                contact_1.Contact,
+                service_1.Service,
+                faq_1.Faq,
+                cart_item_1.CartItem,
             ],
             logging: false,
             pool: {

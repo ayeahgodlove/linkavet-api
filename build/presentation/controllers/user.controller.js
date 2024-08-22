@@ -79,12 +79,7 @@ class UsersController {
         try {
             const users = await userUseCase.getAll();
             const usersDTO = userMapper.toDTOs(users);
-            res.json({
-                data: usersDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(usersDTO);
         }
         catch (error) {
             res.status(400).json({

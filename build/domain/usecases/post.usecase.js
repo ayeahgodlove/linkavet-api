@@ -26,6 +26,9 @@ class PostUseCase {
     async getPostById(id) {
         return this.postRepository.findById(id);
     }
+    async getPostBySlug(slug) {
+        return this.postRepository.findBySlug(slug);
+    }
     async updatePost(post) {
         const obj = {
             ...post,

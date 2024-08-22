@@ -70,12 +70,7 @@ class OrdersController {
         try {
             const orders = await orderUseCase.getAll();
             const ordersDTO = orderMapper.toDTOs(orders);
-            res.json({
-                data: ordersDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(ordersDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -94,12 +89,7 @@ class OrdersController {
                 throw new not_found_exception_1.NotFoundException("Order", id);
             }
             const orderDTO = orderMapper.toDTO(order);
-            res.json({
-                data: orderDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(orderDTO);
         }
         catch (error) {
             res.status(400).json({

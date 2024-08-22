@@ -1,21 +1,22 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductReviewsController = void 0;
-const product_review_usecase_1 = require("../../domain/usecases/product-review.usecase");
-const product_review_repository_1 = require("../../data/repositories/impl/product-review.repository");
+exports.FaqsController = void 0;
+const faq_1 = require("../../domain/models/faq");
+const faq_usecase_1 = require("../../domain/usecases/faq.usecase");
+const faq_repository_1 = require("../../data/repositories/impl/faq.repository");
 const mapper_1 = require("../mappers/mapper");
-const product_review_request_dto_1 = require("../dtos/product-review-request.dto");
+const faq_request_dto_1 = require("../dtos/faq-request.dto");
 const class_validator_1 = require("class-validator");
 const displayValidationErrors_1 = require("../../utils/displayValidationErrors");
 const not_found_exception_1 = require("../../shared/exceptions/not-found.exception");
-const product_review_1 = require("../../domain/models/product-review");
-const productReviewRepository = new product_review_repository_1.ProductReviewRepository();
-const reviewUseCase = new product_review_usecase_1.ProductReviewUseCase(productReviewRepository);
-const productReviewMapper = new mapper_1.ProductReviewMapper();
-class ProductReviewsController {
-    async createReview(req, res) {
-        const dto = new product_review_request_dto_1.ProductReviewRequestDto(req.body);
+const faqRepository = new faq_repository_1.FaqRepository();
+const faqUseCase = new faq_usecase_1.FaqUseCase(faqRepository);
+const faqMapper = new mapper_1.FaqMapper();
+class FaqsController {
+    async createFaq(req, res) {
+        const dto = new faq_request_dto_1.FaqRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
+        const user = req.user;
         if (validationErrors.length > 0) {
             res.status(400).json({
                 validationErrors: (0, displayValidationErrors_1.displayValidationErrors)(validationErrors),
@@ -26,10 +27,12 @@ class ProductReviewsController {
         }
         else {
             try {
-                const reviewResponse = await reviewUseCase.createProductReview(dto.toData());
+                const faqResponse = await faqUseCase.createFaq({
+                    ...dto.toData(),
+                });
                 res.status(201).json({
-                    data: reviewResponse.toJSON(),
-                    message: "Review created Successfully!",
+                    data: faqResponse.toJSON(),
+                    message: "Faq created Successfully!",
                     validationErrors: [],
                     success: true,
                 });
@@ -46,14 +49,9 @@ class ProductReviewsController {
     }
     async getAll(req, res) {
         try {
-            const reviews = await reviewUseCase.getAll();
-            const reviewsDTO = productReviewMapper.toDTOs(reviews);
-            res.json({
-                data: reviewsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            const faqs = await faqUseCase.getAll();
+            const faqsDTO = faqMapper.toDTOs(faqs);
+            res.json(faqsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -64,20 +62,15 @@ class ProductReviewsController {
             });
         }
     }
-    async getReviewById(req, res) {
+    async getFaqById(req, res) {
         try {
             const id = req.params.id;
-            const review = await reviewUseCase.getProductReviewById(id);
-            if (!review) {
-                throw new not_found_exception_1.NotFoundException("Review", id);
+            const faq = await faqUseCase.getFaqById(id);
+            if (!faq) {
+                throw new not_found_exception_1.NotFoundException("Faq", id);
             }
-            const reviewDTO = productReviewMapper.toDTO(review);
-            res.json({
-                data: reviewDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            const faqDTO = faqMapper.toDTO(faq);
+            res.json(faqDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -88,8 +81,8 @@ class ProductReviewsController {
             });
         }
     }
-    async updateReview(req, res) {
-        const dto = new product_review_request_dto_1.ProductReviewRequestDto(req.body);
+    async updateFaq(req, res) {
+        const dto = new faq_request_dto_1.FaqRequestDto(req.body);
         const validationErrors = await (0, class_validator_1.validate)(dto);
         if (validationErrors.length > 0) {
             res.status(400).json({
@@ -103,15 +96,15 @@ class ProductReviewsController {
             try {
                 const id = req.params.id;
                 const obj = {
-                    ...product_review_1.emptyProductReview,
+                    ...faq_1.emptyFaq,
                     ...req.body,
                     id: id,
                 };
-                const updatedReview = await reviewUseCase.updateProductReview(obj);
-                const reviewDto = productReviewMapper.toDTO(updatedReview);
+                const updatedFaq = await faqUseCase.updateFaq(obj);
+                const faqDto = faqMapper.toDTO(updatedFaq);
                 res.json({
-                    data: reviewDto,
-                    message: "Review Updated Successfully!",
+                    data: faqDto,
+                    message: "Faq Updated Successfully!",
                     validationErrors: [],
                     success: true,
                 });
@@ -126,10 +119,13 @@ class ProductReviewsController {
             }
         }
     }
-    async deleteReview(req, res) {
+    async deleteFaq(req, res) {
         try {
             const id = req.params.id;
-            await reviewUseCase.deleteProductReview(id);
+            const faq = await faqUseCase.getFaqById(id);
+            if (faq) {
+                await faqUseCase.deleteFaq(id);
+            }
             res.status(204).json({
                 message: `Operation successfully completed!`,
                 validationErrors: [],
@@ -147,4 +143,4 @@ class ProductReviewsController {
         }
     }
 }
-exports.ProductReviewsController = ProductReviewsController;
+exports.FaqsController = FaqsController;

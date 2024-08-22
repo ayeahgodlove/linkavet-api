@@ -53,12 +53,7 @@ class CoursesController {
         try {
             const courses = await courseUseCase.getAll();
             const coursesDTO = courseMapper.toDTOs(courses);
-            res.json({
-                data: coursesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(coursesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -77,12 +72,7 @@ class CoursesController {
                 throw new not_found_exception_1.NotFoundException("Course", id);
             }
             const courseDTO = courseMapper.toDTO(course);
-            res.json({
-                data: courseDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(courseDTO);
         }
         catch (error) {
             res.status(400).json({

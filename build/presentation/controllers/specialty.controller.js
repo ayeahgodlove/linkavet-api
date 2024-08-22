@@ -53,12 +53,7 @@ class SpecialtyController {
         try {
             const specialties = await specialtyUseCase.getAll();
             const specialtiesDTO = specialtyMapper.toDTOs(specialties);
-            res.json({
-                data: specialtiesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(specialtiesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -76,13 +71,8 @@ class SpecialtyController {
             if (!Specialty) {
                 throw new not_found_exception_1.NotFoundException("Specialty", id);
             }
-            const SpecialtyDTO = specialtyMapper.toDTO(Specialty);
-            res.json({
-                data: SpecialtyDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            const specialtyDTO = specialtyMapper.toDTO(Specialty);
+            res.json(specialtyDTO);
         }
         catch (error) {
             res.status(400).json({

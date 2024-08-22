@@ -50,12 +50,7 @@ class QuizesController {
         try {
             const quizes = await quizUseCase.getAll();
             const quizesDTO = quizMapper.toDTOs(quizes);
-            res.json({
-                data: quizesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(quizesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -74,12 +69,7 @@ class QuizesController {
                 throw new not_found_exception_1.NotFoundException("Quiz", id);
             }
             const quizDTO = quizMapper.toDTO(quiz);
-            res.json({
-                data: quizDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(quizDTO);
         }
         catch (error) {
             res.status(400).json({

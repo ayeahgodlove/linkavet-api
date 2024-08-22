@@ -10,7 +10,8 @@ exports.emptyProduct = {
     productImages: [],
     shortDescription: "",
     qtty: 0,
-    reviews: [],
     tags: [],
-    orders: []
+    availabilityStatus: "",
+    rating: 0,
+    discountPercentage: 0
 };

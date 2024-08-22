@@ -1,5 +1,5 @@
 "use strict";
-// src/presentation/dtos/productReview-request.dto.ts
+// src/presentation/dtos/faq-request.dto.ts
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -10,52 +10,42 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductReviewRequestDto = void 0;
+exports.FaqRequestDto = void 0;
 const class_validator_1 = require("class-validator");
-const product_review_1 = require("../../domain/models/product-review");
+const faq_1 = require("../../domain/models/faq");
 const nanoid_1 = require("nanoid");
-class ProductReviewRequestDto {
-    userId;
-    rating;
-    comment;
+class FaqRequestDto {
+    question;
+    answer;
     constructor(data) {
-        this.userId = data.userId;
-        this.rating = data.rating;
-        this.comment = data.comment;
+        this.question = data.question;
+        this.answer = data.answer;
     }
     toData() {
         return {
-            ...product_review_1.emptyProductReview,
+            ...faq_1.emptyFaq,
             id: (0, nanoid_1.nanoid)(10),
-            comment: this.comment,
-            rating: this.rating,
-            userId: this.userId,
+            question: this.question,
+            answer: this.answer,
         };
     }
     toUpdateData(data) {
         return {
             id: data.id,
-            comment: data.comment,
-            rating: data.rating,
-            userId: data.userId,
-            createdAt: data.createdAt,
-            updatedAt: data.updatedAt,
+            question: data.question,
+            answer: data.answer,
         };
     }
 }
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
+    (0, class_validator_1.Length)(10, 255),
     __metadata("design:type", String)
-], ProductReviewRequestDto.prototype, "userId", void 0);
-__decorate([
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
-], ProductReviewRequestDto.prototype, "rating", void 0);
+], FaqRequestDto.prototype, "question", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], ProductReviewRequestDto.prototype, "comment", void 0);
-exports.ProductReviewRequestDto = ProductReviewRequestDto;
+], FaqRequestDto.prototype, "answer", void 0);
+exports.FaqRequestDto = FaqRequestDto;

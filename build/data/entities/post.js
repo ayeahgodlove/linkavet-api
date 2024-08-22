@@ -20,6 +20,7 @@ let Post = class Post extends sequelize_typescript_1.Model {
     slug;
     content;
     imageUrl;
+    readTime;
     publishedAt;
     authorId;
     categoryId;
@@ -72,6 +73,13 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], Post.prototype, "imageUrl", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(128),
+        allowNull: true,
+    }),
+    __metadata("design:type", String)
+], Post.prototype, "readTime", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.DATE,

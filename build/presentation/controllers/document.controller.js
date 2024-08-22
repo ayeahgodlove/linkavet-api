@@ -55,12 +55,7 @@ class DocumentsController {
         try {
             const documents = await documentUseCase.getAll();
             const documentsDTO = documentMapper.toDTOs(documents);
-            res.json({
-                data: documentsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(documentsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -79,12 +74,7 @@ class DocumentsController {
                 throw new not_found_exception_1.NotFoundException("Document", id);
             }
             const documentDTO = documentMapper.toDTO(document);
-            res.json({
-                data: documentDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(documentDTO);
         }
         catch (error) {
             res.status(400).json({

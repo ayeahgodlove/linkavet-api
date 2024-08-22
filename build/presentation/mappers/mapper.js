@@ -1,7 +1,7 @@
 "use strict";
 // src/presentation/mappers/category-mapper.ts
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MailMapper = exports.SubscriberMapper = exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductReviewMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.SpecialtyMapper = exports.ContactMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.EventMapper = exports.CategoryMapper = void 0;
+exports.MailMapper = exports.SubscriberMapper = exports.ConsultationMapper = exports.AppointmentMapper = exports.QuizMapper = exports.EnrollmentMapper = exports.LessonMapper = exports.CourseMapper = exports.PaymentMapper = exports.OrderMapper = exports.ProductOrderMapper = exports.LessonReviewMapper = exports.SpecialtyMapper = exports.ContactMapper = exports.RoleMapper = exports.UserDocMapper = exports.ProductMapper = exports.StoreMapper = exports.ReviewMapper = exports.BranchMapper = exports.TagMapper = exports.DocumentMapper = exports.CommentMapper = exports.UserRoleMapper = exports.UserMapper = exports.PostMapper = exports.SubCategoryMapper = exports.BannerMapper = exports.ServiceMapper = exports.FaqMapper = exports.EventMapper = exports.CategoryMapper = void 0;
 class CategoryMapper {
     toDTO(category) {
         const entity = category.toJSON();
@@ -30,6 +30,34 @@ class EventMapper {
     }
 }
 exports.EventMapper = EventMapper;
+class FaqMapper {
+    toDTO(faq) {
+        const entity = faq.toJSON();
+        return entity;
+    }
+    toDTOs(faqs) {
+        const _faqs = faqs.map((faq) => {
+            const entity = faq.toJSON();
+            return entity;
+        });
+        return _faqs;
+    }
+}
+exports.FaqMapper = FaqMapper;
+class ServiceMapper {
+    toDTO(service) {
+        const entity = service.toJSON();
+        return entity;
+    }
+    toDTOs(services) {
+        const _services = services.map((service) => {
+            const entity = service.toJSON();
+            return entity;
+        });
+        return _services;
+    }
+}
+exports.ServiceMapper = ServiceMapper;
 class BannerMapper {
     toDTO(banner) {
         const entity = banner.toJSON();
@@ -283,20 +311,6 @@ class ProductOrderMapper {
     }
 }
 exports.ProductOrderMapper = ProductOrderMapper;
-class ProductReviewMapper {
-    toDTO(review) {
-        const entity = review.toJSON();
-        return entity;
-    }
-    toDTOs(reviews) {
-        const _reviews = reviews.map((review) => {
-            const entity = review.toJSON();
-            return entity;
-        });
-        return _reviews;
-    }
-}
-exports.ProductReviewMapper = ProductReviewMapper;
 class OrderMapper {
     toDTO(order) {
         const entity = order.toJSON();

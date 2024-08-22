@@ -48,12 +48,7 @@ class AppointmentsController {
         try {
             const appointmentes = await appointmentUseCase.getAll();
             const appointmentesDTO = appointmentMapper.toDTOs(appointmentes);
-            res.json({
-                data: appointmentesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(appointmentesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -72,12 +67,7 @@ class AppointmentsController {
                 throw new not_found_exception_1.NotFoundException("Appointment", id);
             }
             const appointmentDTO = appointmentMapper.toDTO(appointment);
-            res.json({
-                data: appointmentDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(appointmentDTO);
         }
         catch (error) {
             res.status(400).json({

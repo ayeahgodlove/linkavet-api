@@ -14,11 +14,10 @@ const sequelize_typescript_1 = require("sequelize-typescript");
 const user_1 = require("./user");
 let Event = class Event extends sequelize_typescript_1.Model {
     title;
+    description;
+    url;
     start;
     end;
-    allDay;
-    display;
-    extendedProps;
     userId;
     user;
 };
@@ -39,6 +38,20 @@ __decorate([
     __metadata("design:type", String)
 ], Event.prototype, "title", void 0);
 __decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.TEXT,
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Event.prototype, "description", void 0);
+__decorate([
+    (0, sequelize_typescript_1.Column)({
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: false,
+    }),
+    __metadata("design:type", String)
+], Event.prototype, "url", void 0);
+__decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DATE }),
     __metadata("design:type", Date)
 ], Event.prototype, "start", void 0);
@@ -46,18 +59,6 @@ __decorate([
     (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.DATE }),
     __metadata("design:type", Date)
 ], Event.prototype, "end", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.BOOLEAN }),
-    __metadata("design:type", Boolean)
-], Event.prototype, "allDay", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.STRING(50) }),
-    __metadata("design:type", String)
-], Event.prototype, "display", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({ type: sequelize_typescript_1.DataType.JSONB }),
-    __metadata("design:type", Object)
-], Event.prototype, "extendedProps", void 0);
 __decorate([
     (0, sequelize_typescript_1.ForeignKey)(() => user_1.User) // foreign key
     ,

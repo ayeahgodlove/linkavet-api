@@ -33,7 +33,7 @@ class PostsController {
                     ...dto.toData(),
                     authorId: user.id,
                     imageUrl: req.body.imageUrl,
-                    tags
+                    tags,
                 });
                 res.status(201).json({
                     data: postResponse.toJSON(),
@@ -56,12 +56,7 @@ class PostsController {
         try {
             const posts = await postUseCase.getAll();
             const postsDTO = postMapper.toDTOs(posts);
-            res.json({
-                data: postsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(postsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -80,12 +75,26 @@ class PostsController {
                 throw new not_found_exception_1.NotFoundException("Post", id);
             }
             const postDTO = postMapper.toDTO(post);
-            res.json({
-                data: postDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
+            res.json(postDTO);
+        }
+        catch (error) {
+            res.status(400).json({
+                data: null,
+                message: error.message,
+                validationErrors: [error],
+                success: false,
             });
+        }
+    }
+    async getPostBySlug(req, res) {
+        try {
+            const slug = req.params.slug;
+            const post = await postUseCase.getPostBySlug(slug);
+            if (!post) {
+                throw new not_found_exception_1.NotFoundException("Post", slug);
+            }
+            const postDTO = postMapper.toDTO(post);
+            res.json(postDTO);
         }
         catch (error) {
             res.status(400).json({

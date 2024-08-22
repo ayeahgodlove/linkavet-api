@@ -36,6 +36,7 @@ export class ReviewRequestDto {
       userId: data.userId,
       createdAt: data.createdAt,
       updatedAt: data.updatedAt,
+      toggle: data.toggle
     };
   }
 }

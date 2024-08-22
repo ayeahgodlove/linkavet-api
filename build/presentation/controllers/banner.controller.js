@@ -55,12 +55,7 @@ class BannersController {
         try {
             const banners = await bannerUseCase.getAll();
             const bannersDTO = bannerMapper.toDTOs(banners);
-            res.json({
-                data: bannersDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(bannersDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -79,12 +74,7 @@ class BannersController {
                 throw new not_found_exception_1.NotFoundException("Banner", id);
             }
             const bannerDTO = bannerMapper.toDTO(banner);
-            res.json({
-                data: bannerDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(bannerDTO);
         }
         catch (error) {
             res.status(400).json({

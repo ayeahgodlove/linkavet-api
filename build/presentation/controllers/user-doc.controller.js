@@ -50,12 +50,7 @@ class UserDocsController {
         try {
             const userDocs = await userDocUseCase.getAll();
             const userDocsDTO = userDocMapper.toDTOs(userDocs);
-            res.json({
-                data: userDocsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(userDocsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -80,12 +75,7 @@ class UserDocsController {
                 throw new not_found_exception_1.NotFoundException("User", `${userDoc.userId}`);
             }
             // Update the user's verification status
-            res.json({
-                data: userDocDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(userDocDTO);
         }
         catch (error) {
             res.status(400).json({

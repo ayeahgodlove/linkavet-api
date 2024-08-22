@@ -47,13 +47,8 @@ class ContactsController {
     async getAll(req, res) {
         try {
             const contactes = await contactUseCase.getAll();
-            const contactesDTO = contactMapper.toDTOs(contactes);
-            res.json({
-                data: contactesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            const contactsDTO = contactMapper.toDTOs(contactes);
+            res.json(contactsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -72,12 +67,7 @@ class ContactsController {
                 throw new not_found_exception_1.NotFoundException("Contact", id);
             }
             const contactDTO = contactMapper.toDTO(contact);
-            res.json({
-                data: contactDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(contactDTO);
         }
         catch (error) {
             res.status(400).json({

@@ -22,12 +22,9 @@ class ProductRequestDto {
     // @IsNumber()
     qtty;
     categoryId;
-    // @IsNotEmpty()
-    // @IsString()
-    // storeId: string
-    // @IsNotEmpty()
-    // @IsArray()
-    // productImages: string[];
+    availabilityStatus;
+    discountPercentage;
+    rating;
     constructor(data) {
         this.name = data.name;
         this.description = data.description;
@@ -35,7 +32,9 @@ class ProductRequestDto {
         this.amount = data.amount;
         this.qtty = data.qtty;
         this.categoryId = data.categoryId;
-        // this.storeId = data.storeId;
+        this.availabilityStatus = data.availabilityStatus;
+        this.discountPercentage = data.discountPercentage;
+        this.rating = data.rating;
     }
     toData() {
         return {
@@ -47,7 +46,9 @@ class ProductRequestDto {
             amount: this.amount,
             qtty: this.qtty,
             categoryId: this.categoryId,
-            // storeId: this.storeId,
+            availabilityStatus: this.availabilityStatus,
+            discountPercentage: this.discountPercentage,
+            rating: this.rating,
         };
     }
     toUpdateData(data) {
@@ -60,9 +61,10 @@ class ProductRequestDto {
             qtty: data.qtty,
             categoryId: data.categoryId,
             productImages: data.productImages,
-            reviews: data.reviews,
             tags: data.tags,
-            orders: data.orders,
+            availabilityStatus: data.availabilityStatus,
+            discountPercentage: data.discountPercentage,
+            rating: data.rating
         };
     }
 }
@@ -99,4 +101,19 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], ProductRequestDto.prototype, "categoryId", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], ProductRequestDto.prototype, "availabilityStatus", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], ProductRequestDto.prototype, "discountPercentage", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
+], ProductRequestDto.prototype, "rating", void 0);
 exports.ProductRequestDto = ProductRequestDto;

@@ -48,12 +48,7 @@ class RolesController {
         try {
             const roles = await roleUseCase.getAll();
             const rolesDTO = roleMapper.toDTOs(roles);
-            res.json({
-                data: rolesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(rolesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -72,12 +67,7 @@ class RolesController {
                 throw new not_found_exception_1.NotFoundException("Role", id);
             }
             const roleDTO = roleMapper.toDTO(role);
-            res.json({
-                data: roleDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(roleDTO);
         }
         catch (error) {
             res.status(400).json({

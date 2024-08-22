@@ -40,12 +40,7 @@ class EventsController {
         try {
             const events = await eventUseCase.getAll();
             const eventsDTO = eventMapper.toDTOs(events);
-            res.json({
-                data: eventsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(eventsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -64,12 +59,7 @@ class EventsController {
                 throw new not_found_exception_1.NotFoundException("Event", id);
             }
             const eventDTO = eventMapper.toDTO(event);
-            res.json({
-                data: eventDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(eventDTO);
         }
         catch (error) {
             res.status(400).json({

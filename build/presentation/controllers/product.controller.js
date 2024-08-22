@@ -35,12 +35,8 @@ class ProductsController {
                     tags: req.body.tags,
                     productImages,
                 });
-                const obj = {
-                    ...productResponse.toJSON(),
-                    reviews: [],
-                };
                 res.status(201).json({
-                    data: obj,
+                    data: productResponse.toJSON(),
                     message: "Product created Successfully!",
                     validationErrors: [],
                     success: true,
@@ -63,12 +59,7 @@ class ProductsController {
         try {
             const products = await productUseCase.getAll();
             const productsDTO = productMapper.toDTOs(products);
-            res.json({
-                data: productsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(productsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -84,12 +75,7 @@ class ProductsController {
             const searchTerm = req.query.searchTerm;
             const products = await productUseCase.search(`${searchTerm}`);
             const productsDTO = productMapper.toDTOs(products);
-            res.json({
-                data: productsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(productsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -108,12 +94,7 @@ class ProductsController {
                 throw new not_found_exception_1.NotFoundException("Product", id);
             }
             const productDTO = productMapper.toDTO(product);
-            res.json({
-                data: productDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(productDTO);
         }
         catch (error) {
             res.status(400).json({

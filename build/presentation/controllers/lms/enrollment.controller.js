@@ -52,12 +52,7 @@ class EnrollmentsController {
         try {
             const enrollments = await enrollmentUseCase.getAll();
             const enrollmentsDTO = enrollmentMapper.toDTOs(enrollments);
-            res.json({
-                data: enrollmentsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(enrollmentsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -76,12 +71,7 @@ class EnrollmentsController {
                 throw new not_found_exception_1.NotFoundException("Enrollment", id);
             }
             const enrollmentDTO = enrollmentMapper.toDTO(enrollment);
-            res.json({
-                data: enrollmentDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(enrollmentDTO);
         }
         catch (error) {
             res.status(400).json({

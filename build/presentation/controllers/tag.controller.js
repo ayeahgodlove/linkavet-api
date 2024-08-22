@@ -48,12 +48,7 @@ class TagsController {
         try {
             const tags = await tagUseCase.getAll();
             const tagsDTO = tagMapper.toDTOs(tags);
-            res.json({
-                data: tagsDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(tagsDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -72,12 +67,7 @@ class TagsController {
                 throw new not_found_exception_1.NotFoundException("Tag", id);
             }
             const tagDTO = tagMapper.toDTO(tag);
-            res.json({
-                data: tagDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(tagDTO);
         }
         catch (error) {
             res.status(400).json({

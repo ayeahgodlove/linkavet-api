@@ -48,12 +48,7 @@ class BranchesController {
         try {
             const branches = await branchUseCase.getAll();
             const branchesDTO = branchMapper.toDTOs(branches);
-            res.json({
-                data: branchesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(branchesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -72,12 +67,7 @@ class BranchesController {
                 throw new not_found_exception_1.NotFoundException("Branch", id);
             }
             const branchDTO = branchMapper.toDTO(branch);
-            res.json({
-                data: branchDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(branchDTO);
         }
         catch (error) {
             res.status(400).json({

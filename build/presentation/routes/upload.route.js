@@ -39,9 +39,10 @@ uploadRouter.post("/user-docs/id-card", uploadFile("user-docs").single("idCard")
 uploadRouter.post("/user-docs/license", uploadFile("user-docs").single("license"), uploadController.uploadFile);
 uploadRouter.post("/user-docs/diploma", uploadFile("user-docs").single("diploma"), uploadController.uploadFile);
 // end of user documents
-uploadRouter.post("/products", upload("products").single("imageUrl"), uploadController.uploadFile);
+uploadRouter.post("/products", upload("products").single("image"), uploadController.uploadFile);
 uploadRouter.post("/mails", upload("mails").single("attactment"), uploadController.uploadFile);
 uploadRouter.post("/posts", upload("posts").single("imageUrl"), uploadController.uploadFile);
+uploadRouter.post("/services", upload("services").single("image"), uploadController.uploadFile);
 uploadRouter.post("/documents", upload("documents").single("image"), uploadController.uploadFile);
 uploadRouter.post("/courses", upload("courses").single("courseImage"), uploadController.uploadFile);
 uploadRouter.post("/stores", upload("stores").single("imageBannerUrl"), uploadController.uploadFile);

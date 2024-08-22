@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.emptyEvent = void 0;
-exports.emptyEvent = {
+exports.emptyService = void 0;
+exports.emptyService = {
     id: "",
     title: "",
-    userId: "",
-    start: new Date(),
-    end: new Date(),
     description: "",
-    url: "",
+    fileName: "",
+    price: 0,
+    slug: "",
+    short_description: ""
 };

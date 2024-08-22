@@ -12,4 +12,5 @@ exports.emptyPost = {
     categoryId: "",
     summary: "",
     tags: [],
+    readTime: ""
 };

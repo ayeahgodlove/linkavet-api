@@ -48,12 +48,7 @@ class CategoriesController {
         try {
             const categories = await categoryUseCase.getAll();
             const categoriesDTO = categoryMapper.toDTOs(categories);
-            res.json({
-                data: categoriesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(categoriesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -72,12 +67,7 @@ class CategoriesController {
                 throw new not_found_exception_1.NotFoundException("Category", id);
             }
             const categoryDTO = categoryMapper.toDTO(category);
-            res.json({
-                data: categoryDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(categoryDTO);
         }
         catch (error) {
             res.status(400).json({

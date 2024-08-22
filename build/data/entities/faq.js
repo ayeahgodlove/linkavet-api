@@ -9,63 +9,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Review = void 0;
+exports.Faq = void 0;
 const sequelize_typescript_1 = require("sequelize-typescript");
-const user_1 = require("./user");
-let Review = class Review extends sequelize_typescript_1.Model {
-    userId;
-    comment;
-    rating;
-    toggle;
-    user;
+let Faq = class Faq extends sequelize_typescript_1.Model {
+    question;
+    answer;
 };
 __decorate([
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING(50),
+        type: sequelize_typescript_1.DataType.STRING(20),
         allowNull: false,
         primaryKey: true,
     }),
     __metadata("design:type", String)
-], Review.prototype, "id", void 0);
+], Faq.prototype, "id", void 0);
 __decorate([
-    (0, sequelize_typescript_1.ForeignKey)(() => user_1.User),
     (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.STRING(50),
-        allowNull: true,
+        type: sequelize_typescript_1.DataType.STRING(255),
+        allowNull: false,
+        unique: true,
     }),
     __metadata("design:type", String)
-], Review.prototype, "userId", void 0);
+], Faq.prototype, "question", void 0);
 __decorate([
     (0, sequelize_typescript_1.Column)({
         type: sequelize_typescript_1.DataType.TEXT,
         allowNull: false,
     }),
     __metadata("design:type", String)
-], Review.prototype, "comment", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.INTEGER,
-        allowNull: false,
-    }),
-    __metadata("design:type", Number)
-], Review.prototype, "rating", void 0);
-__decorate([
-    (0, sequelize_typescript_1.Column)({
-        type: sequelize_typescript_1.DataType.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
-    }),
-    __metadata("design:type", Boolean)
-], Review.prototype, "toggle", void 0);
-__decorate([
-    (0, sequelize_typescript_1.BelongsTo)(() => user_1.User),
-    __metadata("design:type", user_1.User)
-], Review.prototype, "user", void 0);
-Review = __decorate([
+], Faq.prototype, "answer", void 0);
+Faq = __decorate([
     (0, sequelize_typescript_1.Table)({
         timestamps: true,
         paranoid: true,
-        tableName: "review",
+        tableName: "faq",
+        modelName: "Faq",
     })
-], Review);
-exports.Review = Review;
+], Faq);
+exports.Faq = Faq;

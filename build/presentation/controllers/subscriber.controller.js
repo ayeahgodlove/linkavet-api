@@ -48,12 +48,7 @@ class SubscribersController {
         try {
             const subscribers = await subscriberUseCase.getAll();
             const subscribersDTO = subscriberMapper.toDTOs(subscribers);
-            res.json({
-                data: subscribersDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(subscribersDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -72,12 +67,7 @@ class SubscribersController {
                 throw new not_found_exception_1.NotFoundException("Subscriber", id);
             }
             const subscriberDTO = subscriberMapper.toDTO(subscriber);
-            res.json({
-                data: subscriberDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(subscriberDTO);
         }
         catch (error) {
             res.status(400).json({

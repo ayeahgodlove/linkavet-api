@@ -55,12 +55,7 @@ class StoresController {
         try {
             const stores = await storeUseCase.getAll();
             const storesDTO = storeMapper.toDTOs(stores);
-            res.json({
-                data: storesDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(storesDTO);
         }
         catch (error) {
             res.status(400).json({
@@ -79,12 +74,7 @@ class StoresController {
                 throw new not_found_exception_1.NotFoundException("Store", id);
             }
             const storeDTO = storeMapper.toDTO(store);
-            res.json({
-                data: storeDTO,
-                message: "Success",
-                validationErrors: [],
-                success: true,
-            });
+            res.json(storeDTO);
         }
         catch (error) {
             res.status(400).json({
