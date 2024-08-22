@@ -19,7 +19,7 @@ const getAuthToken = async () => {
     }
   );
 
-  return response.data;
+  return response.data.data;
 };
 
 const initiateMomoPayment = async (
@@ -48,7 +48,7 @@ const initiateMomoPayment = async (
     }
   );
 
-  return response.data;
+  return response.data.data;
 };
 
 const getPaymentHistory = async () => {
@@ -77,7 +77,7 @@ tranzakRouter.post(
       const response = await initiateMomoPayment(
         amount,
         description,
-        returnUrl
+        returnUrl 
       );
       res.status(200).json({ data: response, success: true });
     } catch (error: any) {

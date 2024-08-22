@@ -16,7 +16,7 @@ const cartRouter = (io: any) => {
     "/items",
     isAuthenticatedMiddleware,
     async (req: Request, res: Response<any>): Promise<void> => {
-      const user = req. user as User;
+      const user = req.user as User;
       const userId = user.id;
 
       try {
@@ -88,7 +88,7 @@ const cartRouter = (io: any) => {
 
       try {
         const cartItem = await CartItem.findByPk(itemId);
-        if (!cartItem || cartItem.userId !== userId) {
+        if (!cartItem || cartItem.dataValues.userId !== userId) {
           res.status(404).json({
             message: "Item not found in cart",
             success: false,
@@ -96,7 +96,7 @@ const cartRouter = (io: any) => {
             validationErrors: [],
           });
         } else {
-          await cartItem.destroy();
+          await cartItem.destroy({ force: true });
           res.json({
             message: "Item removed from cart",
             success: true,
