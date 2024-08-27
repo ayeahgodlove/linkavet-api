@@ -2,7 +2,7 @@ import request from "supertest";
 import http, { Server } from "http";
 
 import * as app from "../../app";
-let server: Server<any, any> = http.createServer();
+let server: Server<any, any> = http.createServer(app as any);
 
 
 describe("Server checks", function(){
